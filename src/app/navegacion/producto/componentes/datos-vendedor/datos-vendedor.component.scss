@@ -1,0 +1,150 @@
+.contenidoPersona{
+    width: 95%;
+    height:160px;
+    margin: auto;
+    border: 1px solid #e1e0dd;
+    border-radius: 5px;
+    position: relative;
+    margin-top: 30px;
+    margin-left: 25px;
+}
+.img1{
+    position: relative;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    margin: 27px 45px 40px 35px;
+    cursor: pointer;
+    transition: .2s;
+    &:hover{
+        opacity: 0.93;
+    }
+}
+.img2{
+    top: 22px;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 110px;
+    cursor: pointer;
+}
+/*-------------- 2 -----------*/
+.seccion2{
+    width: 80%;
+}
+
+.seccion2 h2{
+    color: #555;
+    font-size: 22px;
+    margin: 22px 0 20px 0;
+    font-family: 'font-uno';
+    font-weight: 500;
+    padding-left: 8%;
+}
+.seccion2 .numSeguidores{
+    color: #6a6a6a;
+    font-size: 14px;
+    font-family: 'font-uno';
+    font-weight: 450;
+    padding-left: 10px;
+    word-spacing: 6px;
+}
+.seccion2 .seguidores{
+    color: #888;
+    font-size: 12px;
+    font-weight: 450;
+}
+.seccion2 > p{
+    margin-top: 10px;
+    color: #555;
+    font-size: 15px;
+    letter-spacing: 1px;
+} 
+/*-------------- 3 -----------*/
+
+.seccion3{
+    display: flex;
+    margin-top: 15px;
+    width: 100%;
+}
+.seccion3 .ventas{
+    width: 25%;
+    border-right: 1px solid #e1e0dd;
+    height: 65px;
+}
+.seccion3 .ventas p:nth-child(1){
+    margin: 0 15px 2px 15px;
+    font-size: 23px;
+    font-weight: 450;
+    letter-spacing: 2px;
+    color: #FFAA5A;
+    font-family: 'font-uno';
+    text-align: center;
+     
+}
+.seccion3 .ventas p:nth-child(2){
+    margin: 2px;
+    letter-spacing: 1px;
+    color: #333;
+    font-size: 13.5px;
+    font-family: 'font-uno';
+    text-align: center;
+}
+.seccion3 .atencion{
+    height: 65px;
+    width: 24%;
+    padding: 0 10px;
+    border-right: 1px solid #e1e0dd;
+    text-align: center;
+}
+.seccion3 .atencion ng-icon{
+    margin: 0 1px;
+    font-size: 28px;
+    color: #FFAA5A;
+    text-align: center;
+}
+.seccion3 .atencion p{
+    margin: 0px;
+    font-size: 13px;
+    font-family: 'font-uno';
+    letter-spacing: 1px;
+    color: #333;
+}
+
+.seccion3 .btnSaberMas{
+    width: 110px;
+    height: 30px;
+    background:rgba(255, 160, 50, .0);
+    border: 1px solid #FFAA5A;
+    position: absolute;
+    border-radius: 5px;
+    cursor: pointer;
+    right: 15px;
+    bottom: 15px;
+} 
+.seccion3 .btnSaberMas:hover{
+    background:rgba(255, 160, 50, .08);
+} 
+.seccion3 .btnSaberMas p{
+    position: absolute;
+    width: 100%;
+    top: -15px;
+    text-align: center;
+    color: #FFAA5A;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+ng-icon.ver-perfil{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 25px;
+    color: #ffbd80;
+    transition: .2s;
+    cursor: pointer;
+    &:hover{
+        color: #FFAA5A;
+        font-size: 27px;
+    }
+}

@@ -1,0 +1,18 @@
+<div class="body"></div>
+<app-menu-simple></app-menu-simple>
+<div class="contenidoTotalPasos">
+	<!--------------------------------PASOS--------------------------------->
+	<div class="formulario">
+        <div id="menu">
+            <ul>
+                <li><p id="paso1" [ngClass]="{'active': getPaso(1)}">Paso 1</p></li>
+                <li><p id="paso2" [ngClass]="{'active': getPaso(2)}">Paso 2</p></li>
+                <li><p id="paso3" [ngClass]="{'active': getPaso(3)}">Paso 3</p></li>
+                <li><p id="paso4" [ngClass]="{'active': getPaso(4)}">Paso 4</p></li>
+                <li><p id="paso4" [ngClass]="{'active': getPaso(5)}">Paso 5</p></li>
+                <li><p id="paso5" [ngClass]="{'active': getPaso(6)}">Publicar</p></li>
+            </ul>
+    </div>
+    <!----------------------------------------------------------------------->
+	<router-outlet></router-outlet>
+</div>

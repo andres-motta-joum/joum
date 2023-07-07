@@ -1,0 +1,100 @@
+form.paso2{
+	width: 1150px;
+	height: 450px;
+	margin: 40px auto;
+}
+
+form.paso2 h1{
+	color: #555;
+	font-size: 36px;
+	text-align: center;
+}
+
+form.paso2 p{
+	color: #555;
+	width: 90%;
+	font-size: 25px;
+	margin: auto;
+	text-align: center;
+}
+
+form.paso2 div.field-container{
+	width: 50%;
+	margin: 50px auto;
+}
+
+form.paso2 div.field-container input{
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #FFAA5A;
+	height: 10px;
+	padding: 15px;
+	outline: none;
+	color: #444;
+	letter-spacing: 1px;
+}
+form.paso2 div.field-container input::placeholder{
+	font-size: 15px;
+}
+
+form.paso2 div.linea{
+	width: 100%;
+	border-bottom: 2px solid #ddd;
+}
+
+
+.btn2inactive{
+	width: 30%;
+	float: right;
+	background:white;
+	height: 40px;
+	border:1px solid #777;
+	color: #888;
+	border-radius: 6px;
+	font-size: 16px;
+	margin: 32px 40px;
+	text-align: center;
+}
+
+.btn2active{
+	width: 30%;
+	float: right;
+	background: #FFAA5A;
+	height: 40px;
+	border: none;
+	color: white;
+	border-radius: 6px;
+	font-size: 16px;
+	margin: 32px 40px;
+	text-align: center;
+  cursor: pointer;
+}
+
+#btn-anterior{
+	float: left;
+	background: #FFAA5A;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
+@media (max-width: 1270px){
+
+			form.paso1{
+			width: 98%;
+			}
+
+
+			form.paso2{
+			width: 98%;
+			}
+
+			form.paso3{
+			width: 98%;
+			}
+
+			#formularios, #menu{
+			width: 98%;
+			}
+
+		}

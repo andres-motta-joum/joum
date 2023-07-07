@@ -1,0 +1,30 @@
+.total{
+	width: 80%;
+	margin: auto;
+}
+.linea{
+	border-bottom: 1px solid #ccc;
+	width: 100%
+}
+
+.cabeza h2{
+	font-size: 28px;
+}
+.cabeza p{
+	margin-top: -15px;
+}
+.categoria p{
+	color: #888;
+	margin: 15px 0;
+	cursor: pointer;
+}
+.categoria p:hover{
+	color: #dd9011;
+}
+.categoria p:hover b{
+	color: #dd9011;
+}
+.categoria b{
+	color: #444;
+	font-weight: 450;
+}

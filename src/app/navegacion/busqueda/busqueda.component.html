@@ -1,0 +1,19 @@
+
+<div class="body">
+    <app-barra-menu></app-barra-menu>
+    <div class="contenidoTotal">
+        <div class="izquierda">
+            <app-seccion-izquierda></app-seccion-izquierda>
+        </div>
+        <div class="derecho">
+            <div class="encabezado">
+                <app-encabezado (listadoCuadradosOut)="getCuadradoList($event)" (listadoLineadoOut)="getLineadoList($event)"></app-encabezado>
+            </div>
+            <div class="productos">
+                <app-productos [listadoCuadradosInp]="listadoCuadrados" [listadoLineadoInp]="listadoLineado"></app-productos>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>
+

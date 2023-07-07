@@ -1,0 +1,47 @@
+<form [formGroup]='form' (submit)='irPaso4($event)' id="form_session3" class="paso3" novalidate>
+
+	<h1>Datos principales</h1>
+	<p>intenta brindar la información más completa posible de tu producto, y ten en cuenta que los valores que pongas aqui no podrán modificarse cuando subas tu producto a la venta.</p>
+
+	<div class="inputs">
+
+	    <div class="input">
+	        <label for="">Fabricante:</label>
+	        <input formControlName='fabricante' type="text" class="field" placeholder="Ejemplo: Tu o alguna empresa" id="Fabricante"> <br/>
+	    </div>
+
+	    <div class="input">
+	        <label for=""><b class="option">(opcional) </b> Marca:</label>
+	        <input formControlName='marca' type="text" class="field" placeholder="Ejemplo: Arne Jacobsen" id="Marca"> <br/>
+	    </div>
+
+	    <div class="input">
+	        <label for="">Condición:</label>
+	        <select formControlName='condicion' name="" id="Condicion" >
+	            <option style="display: none;" value="" disable selected>No has seleccionado nada</option>
+	            <option value="Nuevo">Nuevo</option>
+	            <option value="Usado">Usado</option>
+	        </select>
+	    </div>
+
+	</div>
+
+
+	<div class="linea"></div>
+
+	<div class="center-content">
+	    <input (click)='irPaso2()' type="button" class="btn3" value="Anterior" name="boton" id="btn-anterior2">
+	</div>
+
+	<div class="center-content">
+	    <input
+        type="submit"
+        class="btn3"
+        value="Siguiente"
+        name="boton"
+        [ngClass]="{'btn3': form.invalid, 'btn3active': form.valid}"
+        [disabled]='form.invalid'
+        id="btn-Siguiente3">
+	</div>
+
+</form>

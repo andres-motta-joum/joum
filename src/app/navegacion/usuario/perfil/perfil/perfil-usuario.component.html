@@ -1,0 +1,58 @@
+<div class="informacion todo perfil">
+    <div class="mainPerfilMenu">
+        <div style="margin: 20px 100px 0px 36px; display:flex;">
+            <img src="../../../../../../assets/img/usuarios/user.svg" class="picPerfil" alt="Image">
+            <img class="levelPerfilMenu" src="../../../../../../assets/img/level/user-junior.svg" alt="Image">
+            <div (click)='cambiarFoto()' class="btnCambiarFoto"><p>Cambiar foto</p></div>
+        </div>
+        <div>
+            <p class="nombre nombreCompletoPerfil">Andres Yesid Motta</p>
+            <p class="nivelUsuario">Usuario <b>Junior</b></p>
+            <div class="contenidoSeguidores">
+                <p class="numeroSeguidores">{{seguidores}}</p>
+                <p class="Seguidores">Seguidores</p>
+            </div>
+        </div>
+        <div class="contenidoSeguir">
+            <p>Seguir</p>
+        </div>
+        <div class="circulo"></div>
+    </div>
+  
+    <!-------------Contenido PERFIL---------------------->
+  
+    <div class="contenidoPerfil">
+        <div [ngClass]='{"classAddContenidoPerfil": state === "info"}' (click)='cambiarEstado("info"); navegar(["abcd/perfil/informacion"], $event)' class="opcionContenido">
+            <p>Información</p>
+        </div>
+        <div [ngClass]='{"classAddContenidoPerfil": state === "producto"}' (click)='cambiarEstado("producto"); navegar(["abcd/perfil/productos"], $event)' class="opcionContenido">
+            <p>Productos</p>
+        </div>
+        <div  [ngClass]='{"classAddContenidoPerfil": state === "video"}' (click)='cambiarEstado("video"); navegar(["abcd/perfil/videos"], $event)' class="opcionContenido">
+            <p>Videos</p>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <div [ngStyle]='{"display": stateFoto === "active" ? "block" : "none"}' class="sombraFoto" id="sombraFoto"></div>
+    
+    <div [ngStyle]='{"display": stateFoto === "active" ? "block" : "none"}' class="contenidoNewFoto" id="contenidoNuevaFoto">
+        <label class="contenedor" for="file">
+            <input #fileInput (change)='getFoto(fileInput)' type="file" accept="image/*" id="file">
+             <img src="../../../../assets/img/ilustraciones/userPhoto.png">
+             <p id="valorFile">{{ photoText }}</p>
+             <label for="file" id="botonSeleccionar" class="botonSeleccionar"><p>Seleccionar</p></label>
+        </label>
+        <div (click)='salirFoto()'
+          [ngClass]='{
+            "botonSubir": true,
+            "botonSubirNewClass": photoText !== "Arrastra aquí tu foto"
+          }'
+          id="subirFoto"><p>Subir</p></div>
+        <div class="equis" id="equis" (click)="salirFoto()"><p>X</p></div>
+    </div>
+  
+  
+</div>
+  

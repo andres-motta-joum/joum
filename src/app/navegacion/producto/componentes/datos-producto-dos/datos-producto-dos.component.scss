@@ -1,0 +1,41 @@
+
+.contenidoDatosProducto{
+    margin-top: 30px;
+    position: relative;
+    border: 1px solid #e1e0dd;
+    width: 100%;
+    transform: translateX(3%);
+    border-radius: 5px;
+}
+.contenido{
+    width: 88%;
+    margin-left: 6%;
+    padding-bottom: 40px;
+}
+.contenidoDatosProducto h2{
+    color: #4f4f4f;
+    font-family: 'font-uno';
+    font-size: 18px;
+    margin: 23px 0 25px 0;
+    letter-spacing: 1px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+.contenidoDatosProducto h3{
+    color: #4f4f4f;
+    font-family: 'font-uno';
+    font-size: 15px;
+    margin: 18px 0 10px 0;
+    letter-spacing: .5px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+.img-big{
+    height: 20px;
+    margin-top: 5px;
+}
+img{
+    height: 30px;
+    margin-left: 10px;
+    margin-right: 5px;
+}

@@ -1,0 +1,26 @@
+<div class="contenidoPersona">
+    <div style="display: flex;">
+        <div>
+            <img (click)="navegar(['abcd/perfil/informacion'],$event)" class="img1" src="{{ usuario.fotoPerfil }}" alt="">
+            <img (click)="navegar(['abcd/perfil/informacion'],$event)" class="img2" src="../../../../../../assets/img/level/user-junior.svg" alt="">
+        </div>
+        <div class="seccion2">
+            <h2>{{ usuario.nombreCliente }} {{ usuario.apellidoCliente }}<span class="numSeguidores">• 102 <span class="seguidores">Seguidores</span></span></h2>
+            <div class="seccion3">
+                <div class="ventas">
+                    <p>27</p>
+                    <p>Ventas</p>
+                </div>
+                <div class="atencion">
+                    <ng-icon name="heroChatBubbleLeft"></ng-icon>
+                    <p>Buena atención</p>
+                </div>
+                <div class="atencion">
+                    <ng-icon name="heroTruck"></ng-icon>
+                    <p>Entrega de productos</p>
+                </div>
+            </div>
+        </div>
+        <ng-icon (click)="navegar(['abcd/perfil/informacion'],$event)" class="ver-perfil" name="matPlagiarism"></ng-icon>
+    </div>
+</div>

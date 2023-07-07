@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 560 557" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M0 278.5C0 124.689 125.36 0 280 0C434.64 0 560 124.689 560 278.5C560 432.311 434.64 557 280 557C125.36 557 0 432.311 0 278.5Z" id="Fill"/>
+</defs>
+<g id="Capa-2" vectornator:layerName="Capa 2">
+<use fill="#5a9cff" fill-rule="nonzero" opacity="0.999523" stroke="none" vectornator:layerName="Óvalo 1" xlink:href="#Fill"/>
+<clipPath clip-rule="nonzero" id="ClipPath">
+<use xlink:href="#Fill"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<path d="M136.618 365.631L311.834 556.363C412.761 561.564 509.845 513.091 546.196 390.226L476.508 309.557L382.246 229.815C382.246 229.815 349.881 229.815 344.032 189.737C340.477 165.376 136.618 365.631 136.618 365.631Z" fill="#4f90f1" fill-rule="nonzero" opacity="0.999523" stroke="none" vectornator:layerName="Curva 1"/>
+</g>
+</g>
+<g id="Capa-3" vectornator:layerName="Capa 3">
+<path d="M153.229 173.299L328.084 173.299C336.936 173.299 344.076 181.46 344.032 191.527L341.378 371.854C341.364 375.167 338.99 377.853 336.076 377.853L153.229 377.77C144.377 377.77 137.201 369.609 137.201 359.542L137.201 191.527C137.201 181.46 144.377 173.299 153.229 173.299Z" fill="#ffffff" fill-rule="nonzero" opacity="0.999523" stroke="none" vectornator:layerName="Rectángulo 1"/>
+<path d="M167.14 378.111C167.14 352.011 187.812 330.853 213.312 330.853C238.812 330.853 259.484 352.011 259.484 378.111C259.484 404.21 238.812 425.368 213.312 425.368C187.812 425.368 167.14 404.21 167.14 378.111Z" fill="#5191f2" fill-rule="nonzero" opacity="0.999523" stroke="none" vectornator:layerName="Óvalo 2"/>
+<path d="M185.785 377.197C185.785 362.15 198.109 349.953 213.312 349.953C228.515 349.953 240.84 362.15 240.84 377.197C240.84 382.839 239.106 388.081 236.138 392.43C231.191 399.677 222.814 404.441 213.312 404.441C198.109 404.441 185.785 392.244 185.785 377.197Z" fill="#ffffff" fill-rule="nonzero" opacity="0.999523" stroke="none" vectornator:layerName="Óvalo 4"/>
+<path d="M358.085 244.815C358.085 236.53 363.603 229.815 370.41 229.815L410.167 229.815C420.288 230.465 473.357 302.782 473.508 308.927L473.508 362.78C473.508 371.064 467.99 377.78 461.183 377.78L363.47 377.395C359.358 377.536 357.454 375.638 357.179 371.541" fill="#ffffff" fill-rule="nonzero" opacity="0.999523" stroke="none" vectornator:layerName="Rectángulo 2"/>
+<path d="M371.975 379.894C371.975 354.603 391.392 334.101 415.344 334.101C439.296 334.101 458.712 354.603 458.712 379.894C458.712 405.184 439.296 425.686 415.344 425.686C391.392 425.686 371.975 405.184 371.975 379.894Z" fill="#5191f2" fill-rule="nonzero" opacity="0.999523" stroke="none" vectornator:layerName="Óvalo 3"/>
+<path d="M389.094 377.536C389.094 363.332 400.846 351.818 415.344 351.818C429.841 351.818 441.594 363.332 441.594 377.536C441.594 385.129 438.234 391.954 432.893 396.661C428.243 400.759 422.09 403.253 415.344 403.253C400.846 403.253 389.094 391.739 389.094 377.536Z" fill="#ffffff" fill-rule="nonzero" opacity="0.999523" stroke="none" vectornator:layerName="Óvalo 5"/>
+</g>
+</svg>

@@ -1,0 +1,49 @@
+.header3{
+	width: 100%;
+	height: 45px;
+	z-index: 20;
+}
+.menu3 ul{
+	margin: 0;
+	list-style: none;
+	padding: 0;
+}
+.ContenidoMenu3{
+	display: flex;
+	max-width: 1400px;
+	margin: auto;
+	height: 100%;
+}
+.menu3 li{
+	padding: 16px 32px 10px 0;
+}
+.menu3 li a{
+	display: block;
+	color: #555;
+	text-decoration: none;
+	font-size: 18px;
+	flex-grow:1;
+	position: relative;
+	padding-left: 23px;
+}
+.menu3 li a ng-icon{
+	font-size: 20px;
+	position: absolute;
+	left: -5px;
+}
+.menu3 li a ng-icon.devoluciones-icono{
+	font-size: 18px; 
+	top: 1px; 
+	left: -1px;
+}
+
+.menu3 li a:hover{
+	transition: .2s;
+	color: #ed8e2f;
+}
+@media screen and (max-width: 1450px){
+	.menu3 li a{
+		margin-top: -4px;
+		padding-left: 21px;
+	}
+}

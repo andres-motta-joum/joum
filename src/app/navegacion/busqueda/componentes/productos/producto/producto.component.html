@@ -1,0 +1,78 @@
+<div  *ngIf="listadoCuadradosInp" class="cuadro" (mouseenter) ="mostrarCorazon() "  (mouseleave) ="mostrarCorazon()">
+    <div class="corazones">
+        <div class="fondo-corazon" [ngClass]="{'corazon-visible': corazonOver == true || corazonClick == true }">
+            <ng-icon class="corazon" name="heroHeart" (click)="agregarFavorito()"></ng-icon>
+            <ng-icon class="corazon-full" name="heroHeartSolid" [class.corazon-click] = "corazonClick == true"></ng-icon>
+        </div>
+    </div>
+    
+    <div (click)="navegar(['prod/',producto.nombre], $event)" >
+        <picture>
+        <img [src]="producto.foto">
+        </picture>
+        <div style="height: 100px; position: relative;">
+            <p class="slick-Titulo">{{ producto.nombre }}</p>
+            <p *ngIf="producto.descuento !== 0" class="slick-precio">{{ producto.precio | currency:'$':'symbol':'1.0-0' }}</p>
+            <div class="precios" style="display: flex; margin: 0 0 6px 0">
+                <p class="slick-precio-rebaja">{{ producto.precio - producto.descuento | currency:'$':'symbol':'1.0-0' }}</p>
+                <p *ngIf="producto.descuento !== 0" class="slick-text-porcent">{{ producto.descuento / producto.precio | percent }} OFF</p>
+            </div>
+            <div class="estrellas">
+                <div class="starts-over">
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                </div>
+                <div class="starts">
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                </div>
+            </div>
+            <p class="numVotos">25</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="listadoLineadoInp" class="lineado" (mouseenter) ="mostrarCorazon() "  (mouseleave) ="mostrarCorazon()">
+
+    <div class="corazones-lin">
+        <div class="fondo-corazon-lin" [ngClass]="{'corazon-visible': corazonOver == true || corazonClick == true }">
+            <ng-icon class="corazon-lin" name="heroHeart" (click)="agregarFavorito()"></ng-icon>
+            <ng-icon class="corazon-full-lin" name="heroHeartSolid" [class.corazon-click] = "corazonClick == true"></ng-icon>
+        </div>
+    </div>
+    <picture (click)="navegar(['prod/abcd'], $event)">
+    <img [src]="producto.foto">
+    </picture>
+    <content (click)="navegar(['prod/abcd'], $event)">
+        <div style="height: 100px;">
+            <p class="slick-Titulo2">{{ producto.nombre }}</p>
+            <p class="slick-precio2">{{ producto.precio | currency:'$':'symbol':'1.0-0' }}</p>
+            <p class="slick-precio-rebaja2">{{ producto.precio - producto.descuento | currency:'$':'symbol':'1.0-0' }}</p>
+            <p class="slick-text-porcent2">{{ producto.descuento / producto.precio | percent }} OFF</p>
+            <i [ngClass]="{'fa': true,  'heart1': true,}"></i>
+            <div class="estrellas-lineado">
+                <div class="starts-over">
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                </div>
+                <div class="starts">
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <ng-icon name="matStarRound"></ng-icon>
+                    <p class="numVotos">(25)</p>
+                </div>
+            </div>
+        </div>
+    </content>
+</div>

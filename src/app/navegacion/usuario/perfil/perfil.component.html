@@ -1,0 +1,62 @@
+
+<div #body class="body">
+    <div class="sombraMenuSmall"  *ngIf='screenWidth < 2140' [ngStyle]='{"left": mouseInMenu ? "0" : "-100%", "opacity": mouseInMenu ? "100" : "0"}'>
+    </div>
+    <app-barra-menu></app-barra-menu>
+    <div class="contenidoUsuario"> 
+        <div>
+            <nav [ngStyle]='{"height": screenHeight - 90}' class="headercuenta">
+                <ul #principalUL [ngStyle]='{"height": screenHeight - 90}' class="principalUL" id="ul">
+                    <div class="contenidoHeader4">
+                        <img src="../../../../../assets/img/usuarios/user.svg" class=" IdPicUser4 fotoPerfil" alt="Image">
+                    </div>
+                    <li class="titleMenu">
+                        <span class="menuSmall" id="nombreContenidoUsuario">Andres Motta</span>
+                    </li>
+
+                    <li><a (click)='navegar(["abcd/perfil/informacion"], $event)' class="perfil-a">
+                        <ng-icon name="heroUserCircleSolid"></ng-icon><span class="menuSmall">Perfil</span></a>
+                    </li>
+                    <li (click)='desplegarSubmenu(0); scroll();' class="item-submenu-compras" menu="1">
+                        <p>
+                            <ng-icon name="heroShoppingCartSolid"></ng-icon><span class="texto">Compras</span><ng-icon class="icono-submenu" name="heroChevronDown"></ng-icon>
+                        </p>
+                        <span class="menuSmall">
+                            <ul [@subMenu]='stateSubMenu[0]' class="submenu-compras">
+                                <li><a (click)='navegar(["abcd/compras"], $event);'><ng-icon name="heroShoppingCart"></ng-icon>Compras</a></li>
+                                <li><a (click)='navegar(["abcd/favoritos"], $event)'><ng-icon name="heroStar"></ng-icon>Favoritos</a></li>
+                                <li><a (click)='navegar(["abcd/opiniones"], $event)'><ng-icon name="heroDocumentCheck"></ng-icon>opiniones</a></li>
+                                <li><a (click)='navegar(["abcd/preguntas-comprador"], $event)'><ng-icon name="heroChatBubbleBottomCenterText"></ng-icon>Preguntas</a></li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li (click)='desplegarSubmenu(1); scroll();' class="item-submenu-ventas" menu="2">
+                        <p>
+                            <ng-icon name="heroCurrencyDollarSolid"></ng-icon><span class="texto">Ventas</span><ng-icon class="icono-submenu" name="heroChevronDown"></ng-icon>
+                        </p>
+                        <span class="menuSmall">
+                            <ul [@subMenu]='stateSubMenu[1]' class="submenu-ventas">
+                                <li><a (click)='navegar(["/abcd/resumen"], $event);'><ng-icon name="heroRectangleGroup"></ng-icon>Resumen</a></li>
+                                <li><a (click)='navegar(["/abcd/novedades"], $event)'><ng-icon name="heroBell"></ng-icon>Novedades</a></li>
+                                <li><a (click)='navegar(["/abcd/publicaciones"], $event)'><ng-icon name="heroBuildingStorefront"></ng-icon>Publicaciones</a></li>
+                                <li><a (click)='navegar(["/abcd/preguntas-vendedor"], $event)'><ng-icon name="heroChatBubbleLeftRight"></ng-icon>Preguntas</a></li>
+                                <li><a (click)='navegar(["/abcd/ventas"], $event)'><ng-icon name="heroCurrencyDollar"></ng-icon>Ventas</a></li>
+                                <li><a (click)='navegar(["/abcd/metricas"], $event)'><ng-icon name="heroChartPie"></ng-icon>Metricas</a></li>
+                                <li><a (click)='navegar(["/abcd/reputacion"], $event)'><ng-icon name="heroArrowTrendingUp"></ng-icon>Reputación</a></li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li><a (click)='navegar(["/abcd/facturacion"], $event)' class="facturacion-a"><ng-icon name="heroDocumentTextSolid"></ng-icon><span class="menuSmall">Facturación</span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="contenidoInfoUsuario">
+            <div class="contenido2">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+
+    </div>
+    <app-footer (footerHeight)='getFooterHeight($event)' (footer)='getFooter($event)' #footer></app-footer>
+</div>

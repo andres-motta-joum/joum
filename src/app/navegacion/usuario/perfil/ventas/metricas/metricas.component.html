@@ -1,0 +1,15 @@
+
+<div class="informacion inUser">  
+    <div class="NoUser"> 
+            <img src="../../../../../../../assets/img/ilustraciones/ilustración1.jpg" >
+        <div>
+            <h2>Métricas</h2>
+            <p class="p">Estará disponible muy pronto.</p>
+        </div>
+        <div class="circulo"></div>
+    </div> 
+</div>
+<button (click)="navegar(['abcd/metricas/negocio'], $event)">Negocio</button>
+<button (click)="navegar(['abcd/metricas/atencion-compradores'], $event)">Atención compradores</button>
+<button (click)="navegar(['abcd/metricas/stock'], $event)">stock</button>
+<router-outlet></router-outlet>

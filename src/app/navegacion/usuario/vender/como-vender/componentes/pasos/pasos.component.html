@@ -1,0 +1,17 @@
+<div class="contenidoTotal">
+
+    <h1 style="text-align: center; font-size: 35px; color: #555;">Que tienes que hacer?</h1>
+    <div *ngFor='let titulo of pasos; index as i;' [ngClass]='{"pasos2": i % 2 === 0, "pasos1": i % 2 !== 0}'>
+        <div *ngIf='i % 2 === 0'>
+            <img src="../../../../../../assets/img/categoria/cuadros/4.jpg" alt="Image">
+        </div>
+        <div class="text">
+            <h2> {{ i + 1 }}. {{ titulo }} </h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni sint culpa dolor, repellendus, maiores modi, enim animi accusamus, sit pariatur aperiam autem! Cupiditate porro tempore ad unde dicta, ipsam illo!</p>
+        </div>
+        <div *ngIf='i % 2 !== 0'>
+            <img src="../../../../../../assets/img/categoria/cuadros/4.jpg" alt="Image">
+        </div>
+    </div>
+
+</div>

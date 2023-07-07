@@ -1,0 +1,91 @@
+.body{
+    background-color: #f4f4f4;
+    width: 100%;
+    min-height: 100vh;
+    min-width: 880px;
+    position: relative;
+	padding-bottom: 430px;
+	overflow: hidden;
+}
+.contenido-compra{
+    position: relative;
+    max-width: 1200px;
+    width: 95%;
+    display: flex;
+    margin: auto;
+    margin-top: 73px;
+    padding-bottom: 140px;
+}
+.titulo{
+    position: absolute;
+    top: -36px;
+    h1{
+        font-size: 22px;
+        margin: 0 0 0 4px;
+        font-family: 'font-uno';
+        font-weight: 500;
+        color: #333;
+    }
+}
+.izquierda{
+    min-width: 500px;
+    width: 66%;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    padding: 35px;
+}
+.derecha{
+    min-width: 260px;
+    width: 32%;
+    margin-left: 2%;
+    height: 500px;
+    background-color: #fefefe;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    button{
+        margin-top: 30px;
+        margin-bottom: 25px;
+        background-color: #ffcf9f;
+        color: #f9fafb;
+        border: none;
+        border-radius: 5px;
+        padding: 12px;
+        width: 84%;
+        margin-left: 8%;
+        letter-spacing: 1.5px;
+        font-size: 17.5px;
+        font-weight: 600;
+        font-family: 'font-uno';
+        word-spacing: 2px;
+    }
+    div{
+        position: relative;
+        width: 83%;
+        margin-left: 8.5%;
+        display: flex;
+        p{
+            font-family: 'font-uno';
+            font-size: 16px;
+            font-weight: 400;
+            color: #444;
+            margin: 6px 0;
+        }
+        p:nth-child(2){
+            position: absolute;
+            right: 0;
+            font-weight: 400;
+            font-size: 17px;
+        }
+    }
+    div:nth-child(5){
+        p{
+            font-size: 18px;
+            font-weight: 500;
+        }
+    }
+    div.linea{
+        margin: 13px 8%;
+        border-bottom: 1px solid #ddd;
+    }
+}

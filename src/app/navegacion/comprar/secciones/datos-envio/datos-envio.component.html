@@ -1,0 +1,82 @@
+<h1 class="titulo">Detalle de envio </h1>
+<div class="datos-envio-contenedor">
+    <div>
+        <div>
+            <label>Nombres y apellidos</label>
+            <input type="text">
+            <p>Tal cual figure en el documento</p>
+        </div>
+        <div>
+            <label>Telefono</label>
+            <input type="text">
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <label>Tipo de identidad</label>
+            <Select>
+                <option value="">CC</option>
+                <option value="">TI</option>
+            </Select>
+        </div>
+        <div>
+            <label>Numero de identificación</label>
+            <input type="text">
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <label>Municipio / Localidad</label>
+            <Select>
+                <option value="">Suba</option>
+                <option value="">Chapinero</option>
+                <option value="">Bosa</option>
+            </Select>
+            <p>Recuerda que joum en el momento está habilitado únicamente en Bogotá</p>
+        </div>
+        <div>
+            <label>Barrio</label>
+            <input type="text">
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <label>Tipo calle</label>
+            <Select>
+                <option value="">Calle</option>
+                <option value="">Avenida Calle</option>
+                <option value="">Avenida</option>
+            </Select>
+        </div>
+        <div>
+            <label>Calle</label>
+            <input type="text">
+        </div>
+        <div>
+            <label>Numero</label>
+            <input type="text">
+        </div>
+        <div>
+            <input type="text">
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <label>Detalle: apt / piso / casa</label>
+            <input type="text">
+        </div>
+        <div>
+            <label>Indicaciones adicionales (opcional)</label>
+            <input type="text">
+        </div>
+    </div>
+    <content class="direccion-predeterminada">
+        <p><ng-icon name="heroMapPin"></ng-icon> Dirección predeterminada</p>
+        <input type="checkbox">
+    </content>
+    <button (click)="navegar(['comprar/checkout/payment'], $event)" class="boton-continuar">Continuar</button>
+</div>

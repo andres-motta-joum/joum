@@ -1,0 +1,221 @@
+.contenidoDatosProducto{
+    margin-top: 30px;
+    position: relative;
+    border: 1px solid #e1e0dd;
+    width: 100%;
+    transform: translateX(3%);
+    border-radius: 5px;
+}
+
+.contenido{
+    position: relative;
+    width: 86%;
+    margin-left: 7%;
+}
+.usuario img{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    right: -10px;
+    top: 10px;
+}
+
+.texto1{
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.tituloProducto{
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+    padding-right: 10%;
+    font-weight: 600;
+    font-family: 'font-uno';
+}
+/*----------------- ESTRELLAS -----------------*/
+
+.opiniones{
+    width: 15px;
+    margin-top: -34px;
+    margin-left: 106px;
+    color: #ed8619;
+    letter-spacing: 1px;
+    font-family: 'font-uno';
+    font-size: 15px;
+    font-weight: 600;
+    position: absolute;
+    cursor: pointer;
+    transition: .1s;
+    &:hover{
+        color: #ff9b31;
+        font-size: 16px;
+        margin-top: -35px;
+    }
+}
+.estrellas{
+    position: relative;
+    width: 100px;
+    margin-bottom: 18px;
+}
+.starts{
+    margin-top: 0;
+    height: 20px;
+    display: flex;
+    position: relative;
+}
+.starts ng-icon{
+    font-size: 20px;
+    color: #ccc;
+    margin: 2px 0;
+}
+.starts-over{
+    width: 70%;
+    overflow: hidden;
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+}
+.starts-over ng-icon{
+    font-size: 20px;
+    color: #fc9c43;
+    margin: 2px 0;
+}
+
+ /*----------------- PRECIOS -----------------*/
+ .contenidoPrecios{
+    height: 70px;
+ }
+
+ .precio-descuento{
+    display: flex; 
+    height: 18px;
+ }
+ .contenidoPrecios div p:nth-child(1){
+    color: #888;
+    font-size: 16px;
+    font-weight: 100;
+    text-decoration:line-through;
+    font-weight: 400;
+    margin: 0;
+    font-family: 'font-uno';
+    padding-left: 0;
+}
+.contenidoPrecios h2{
+    font-size: 33px;
+    margin: 5px 0 60px 0;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #333;
+    font-family: 'font-uno';
+}
+.contenidoPrecios p{
+    color: #1779ea;
+    margin-top: -2px;
+    padding-left: 10px;
+    letter-spacing: 1px;
+    font-family: 'font-uno';
+    font-weight: 500;
+    font-size: 17px;
+}
+
+/*----------------- Recibelo entre -----------------*/
+
+.recibelo{
+    position: relative;
+    font-size: 15px;
+    font-family: 'font-uno';
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.recibelo span{
+    top: 3px;
+    position: absolute;
+    font-weight: 500;
+    color: #1779ea;
+    letter-spacing: .5px;
+}
+.recibelo ng-icon{
+    color: #1779ea;
+    font-size:21px;
+    padding-right: 6px;
+}
+.entre{
+    font-size: 14px;
+    font-family: 'font-uno';
+    margin-top: 0;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+.entre span{
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+/*----------------- Unidades -----------------*/
+.linea-Menu{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 26px;
+}
+
+.session3 label{
+    font-size: 14px;
+    color: #333;
+    letter-spacing: .5px;
+    padding-right: 6px;
+    font-weight: 500;
+    font-family: 'font-uno';
+}
+.session3 select{
+    border: none;
+    font-size: 14px;
+    color: #222;
+    letter-spacing: .8px;
+    font-family: 'font-uno';
+    font-weight: 600;
+    cursor: pointer;
+}
+.session3 p{
+    margin-top: -18px;
+    margin-left: 178px;
+    font-size: 13px;
+    color: #777;
+    letter-spacing: .5px;
+    margin-bottom: 20px;
+    font-family: 'font-uno';
+}
+.session3 p span{
+    font-weight: 500;
+    padding-left: 1px;
+}
+
+/*----------------- PAGAR -----------------*/
+.btnComprar{
+    width: 100%;
+    height: 43px;
+    border-radius: 5px;
+    background: #ffa148;
+    margin: 20px auto;
+    position: relative;
+    cursor: pointer;
+    transition: .2s;
+    &:hover{
+        background: #ff9027;
+    }
+}
+.btnComprar p{
+    position: relative;
+    padding-top: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+    color: white;
+    font-family: 'font-uno';
+    font-weight: 600;
+    word-spacing: 2px;
+}

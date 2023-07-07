@@ -1,0 +1,58 @@
+.contenidoTotal{
+    display: flex;
+}
+.seccionIzquierda{
+    width: 6%;
+    height: 450px;
+    position: relative;
+    z-index: 10;
+    margin-top: 35px;
+    margin-left: 5px;
+}
+.seccionIzquierda div{
+    width: 65px;
+    height: 65px;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    display: flex;
+    align-items: center;
+    object-position: center;
+}
+.seccionIzquierda div img{
+    margin: auto;
+    width: 59px;
+    height: 59px;
+    border-radius: 3px;
+    object-fit: cover;
+}
+.seccionDerecha{
+    width: 88%;
+    height: 450px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    object-position: center;
+    margin-top: 25px;
+    margin-left: 6%;
+}
+.seccionDerecha div{
+    position: absolute;
+    width: 97%;
+    height: 97%;
+    display: flex;
+    align-items: center;
+    object-position: center;
+    right: 0;
+}
+.seccionDerecha div img{
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 40%;
+    min-height: 90%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 3px;
+}

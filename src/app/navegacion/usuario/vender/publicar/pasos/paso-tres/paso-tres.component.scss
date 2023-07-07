@@ -1,0 +1,135 @@
+form.paso3{
+	width: 1150px;
+	height: 450px;
+	margin: 40px auto;
+}
+
+form.paso3 h1{
+	color: #555;
+	font-size: 36px;
+	text-align: center;
+}
+
+form.paso3 p{
+	color: #555;
+	width: 90%;
+	font-size: 25px;
+	margin: auto;
+	text-align: center;
+}
+
+form.paso3 div.inputs{
+	width: 100%;
+	margin: 45px 0px;
+}
+
+form.paso3 div.inputs div.input{
+
+	display:flex;
+	margin: 20px auto;
+	width: 70%;
+}
+
+form.paso3 div.input input{
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #999;
+	padding: 11px;
+}
+
+form.paso3 div.input input::placeholder{
+	font-size: 15px;
+}
+
+form.paso3 div.input select{
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #999;
+	color: #777;
+	font-size: 15px;
+	height: 40px;
+	margin-left: -5px;
+}
+
+form.paso3 div.input select:focus{
+	border: 1px solid #FFAA5A;
+}
+
+form.paso3 div.input input:focus{
+	border: 1px solid #FFAA5A;
+}
+
+form.paso3 div.input label{
+	font-size: 20px;
+	padding: 5px 15px 0px 0px;
+	width: 180px;
+	text-align: right;
+
+}
+form.paso3 div.input label b{
+	font-size: 16px;
+	font-weight: 500;
+	margin: 0px 2px 0px 0px;
+}
+
+form.paso3 div.linea{
+	width: 100%;
+	border-bottom: 2px solid #ddd;
+}
+
+
+.btn3 {
+	width: 30%;
+	float: right;
+	background:white;
+	height: 40px;
+	border:1px solid #777;
+	color: #888;
+	border-radius: 6px;
+	font-size: 16px;
+	margin: 32px 40px;
+	text-align: center;
+}
+
+.btn3active {
+	width: 30%;
+	float: right;
+	background:#FFAA5A;
+	height: 40px;
+	color: white;
+    border: none;
+	border-radius: 6px;
+	font-size: 16px;
+	margin: 32px 40px;
+	text-align: center;
+  cursor: pointer;
+}
+
+#btn-anterior2{
+	float: left;
+	background: #FFAA5A;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
+@media (max-width: 1270px){
+
+	form.paso1{
+	width: 98%;
+	}
+
+
+	form.paso2{
+	width: 98%;
+	}
+
+	form.paso3{
+	width: 98%;
+	}
+
+	#formularios, #menu{
+	width: 98%;
+	}
+
+}

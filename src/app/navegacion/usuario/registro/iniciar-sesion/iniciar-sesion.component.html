@@ -1,0 +1,33 @@
+<div id="formularios">
+    <form (ngSubmit)='ingresar($event)' [formGroup]='form' id="form_register" style="display: block;">
+        <p>Correo electrónico</p>
+        <div class="field-container">
+            <ng-icon name="heroEnvelopeSolid"></ng-icon>   
+            <input formControlName='correo' type="text" class="field" placeholder="user@example.com" id="Correo2">
+            <br/>
+        </div>
+
+        <p>Contraseña</p>
+        <div class="field-container">
+            <ng-icon name="heroLockClosedSolid"></ng-icon>
+            <input formControlName='contrasena' type="password" class="field" placeholder="****" id="Contraseña2">
+            <br/>
+        </div><br>
+        <a class="recuperarContraseña" routerLink='/cliente/iniciar-sesion'> Olvide mi contraseña </a>
+        <div class="center-content">
+            <input
+                type="submit"
+                value="Iniciar sesión"
+                id="btn-Iniciar"
+                [ngStyle]='{
+                    "background": (form.invalid || btnDisabled) ? "white" : "#FFAA5A",
+                    "border": (form.invalid || btnDisabled) ? "1px solid #777" : "none",
+                    "color": (form.invalid || btnDisabled) ? "#888" : "white",
+                    "cursor": (form.invalid || btnDisabled) ? "auto" : "pointer"
+                }'
+                [disabled]='(form.invalid || btnDisabled)'>
+            <p *ngIf="btnDisabled">Procesando Información</p>
+            <br/><br/>
+        </div>
+    </form>
+</div>

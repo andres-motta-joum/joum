@@ -1,0 +1,138 @@
+.Carousel{
+    width: 100%;
+}
+/* images */
+
+.slick-list{
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 38vh;
+    margin: 0px auto;
+    width: 100%;
+	max-width: 1400px;
+    overflow: hidden;
+	max-height: 290px;
+
+}
+.slick-track{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    transition: .2s ease-in-out;
+}
+.slick{
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+}
+.slick img{
+    object-fit: cover;
+	height: 38vh;
+	max-height: 265px;
+    border-radius: 7px 7px 0px 0px;
+}
+
+
+
+/* buttons */
+
+.botones{
+    border-radius: 30px;
+    background-color: #fff;
+    position: absolute;
+    z-index: 4;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+    border: 0;
+    cursor: pointer;
+}
+.botones:focus{
+    outline: 0;
+}
+.botones svg{
+    width: 12px;
+    height: 100%;
+    color: rgba(0,0,0,.7);
+}
+.boton-prev{
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    background:white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 45px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 40%;
+    font-family: monospace;
+    cursor: pointer;
+}
+.boton-next{
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 40px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 45%;
+    font-family: monospace;
+    cursor: pointer;
+	padding-top: 3px;
+	padding-left: 8px;
+}
+
+.boton-prev:hover{
+    background: #FFAA5A;
+	&:hover ng-icon{
+		color: white;
+	}
+}
+
+.boton-next:hover{
+    background: #FFAA5A;
+	&:hover ng-icon{
+		color: white;
+	}
+}
+
+.slick-text{
+    text-align: center;
+    font-size: 23px;
+    margin-top: 5px; 
+    color: #222;
+    height: 14px;
+}
+ng-icon{
+	margin-top: 7px;
+}
+
+@media screen and (max-width: 1450px){
+	.botones{
+		width: 43px;
+		height: 43px;
+	}
+	ng-icon{
+		font-size: 25px;
+		margin-top: 4px;
+	}
+	.boton-prev{
+		left: 15px;
+	}
+	.boton-next{
+		right: 15px;
+	}
+}

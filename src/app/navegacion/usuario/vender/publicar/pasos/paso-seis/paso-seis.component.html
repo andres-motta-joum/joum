@@ -1,0 +1,31 @@
+<form [formGroup]='formPaso6' id="form_session4" class="paso4">
+
+    <h1 id="tituloPaso4">Sube tu producto</h1>
+	    <p>Para terminar, define el valor que pagarán tus clientes por tu producto, y las unidades que tienes disponibles</p>
+	    <div class="inputs" id="inputs">
+	    	<p class="precio">¿Cuál es el precio?</p>
+	    	<label for="">COP</label>
+	    	<input
+	    	    class="input1"
+	    		type="text"
+	    		maxlength="11"
+	    		formControlName='precio'
+	    		[ngClass]="{
+	    			'activado': formPaso6.valid
+	    		}"
+	    		required>
+
+	    </div>
+    <div class="linea"></div>
+
+    <div class="center-content">
+        <input (click)='irPaso5()' type="button" class="btn3" value="Anterior" id="btn-anterior3">
+        <input
+          type="submit"
+          [ngClass]="{'btn3': formPaso6.invalid, 'btn3active': formPaso6.valid}"
+          value="Siguiente"
+          name="boton"
+          [disabled]='formPaso6.invalid'>
+    </div>
+
+</form>

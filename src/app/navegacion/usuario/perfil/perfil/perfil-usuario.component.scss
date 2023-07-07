@@ -1,0 +1,367 @@
+@use 'sass:math';
+.todo{
+    width: 100%;
+}
+/*------------------------------------- SECCION DERECHA---------------------------------------*/
+
+.mainPerfilMenu{
+	display: flex;
+	width: 100%;
+	height: 190px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	background: white;
+	overflow: hidden;
+	position: relative;
+}
+
+.nombre{
+	font-size: 28px;
+	font-weight: 500;
+	letter-spacing: 2px;
+	color: #444;
+	width: 800px;
+}
+
+.picPerfil{
+	object-fit: cover;
+	width: 130px;
+	height: 130px;
+	border-radius: 50%;
+}
+
+
+.btnCambiarFoto{
+	position: absolute;
+	top: 86%;
+	width: 125px;
+	height: 100px;
+	left: 44px;
+	border-radius: 7px;
+	background: #5a9cff;
+    transition: .1s;
+	cursor: pointer;
+    &:hover{
+        top: 85%;
+	    background: #518ffa;
+    }
+}
+.btnCambiarFoto p{
+	margin-top: 4px;
+	color: white;
+	font-size: 15px;
+	letter-spacing: 1px;
+	font-family: cursive;
+	text-align: center;
+	width: 100%;
+}
+
+
+.levelPerfilMenu{
+	width: 45px;
+	height: 45px;
+	margin-left: -36px;
+	position: relative;
+}
+.nivelUsuario{
+	color: #333;
+	font-size: 17px;
+	letter-spacing: 1px;
+	font-weight: 400;
+	margin-top: -13px;
+}
+
+.contenidoSeguidores{
+	margin-top: 38px;
+	background: #FFAA5A;
+	width: 160px;
+	height: 60px;
+	border-radius: 8px;
+	position: relative;
+}
+.numeroSeguidores{
+	color: #fff;
+	text-align: center;
+    padding-top: 5px;
+	font-size: 20px;
+	font-weight: 500;
+	font-family: Verdana;
+    margin-bottom: -18px;
+}
+.Seguidores{
+	color: #fff;
+	text-align: center;
+	font-size: 17px;
+	letter-spacing: 1px;
+	font-weight: 400;
+	font-family: Verdana;
+}
+
+.circulo{
+	width: math.div(160px,1px) * .16%;
+	position: relative;
+	height:  math.div(250px,1px) * .7%;
+	background: #ffad60;
+	margin-top: -10px;
+	border-radius: 50%;
+	position: absolute;
+	right: -130px;
+}
+/*---------------------------------------*/
+.contenidoSeguir{
+	margin-top: 160px;
+	background: #5a9cff;
+	width: 100px;
+	height: 80px;
+	border-radius: 8px;
+	left: 530px;
+	transition: .2s;
+	cursor: pointer;
+	position: absolute;
+    &:hover{
+        margin-top: 155px;
+        background: #5191ff;
+        border-radius: 10px;
+    }
+}
+.contenidoSeguir p{
+	color: #fff;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 4px;
+	font-family: Verdana;
+    letter-spacing: 1px;
+}
+
+
+/*-------------------------- CONTENIDO PERFIL ------------------------------------------------------------------*/
+
+.contenidoPerfil{
+	margin-top: 40px;
+	display: flex;
+	width: 100%;
+	height: 40px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	background: white;
+	overflow: hidden;
+	position: relative;
+}
+.opcionContenido{
+	background: #fff;
+	height: 40px;
+	flex-grow: 1;
+	cursor: pointer;
+	border-right: 1px solid #ddd;
+	flex-grow: 1;
+}
+
+.opcionContenido p{
+	margin-top: 10px;
+	color: #666;
+	font-size: 16px;
+	letter-spacing: 1px;
+	font-weight: 580;
+	font-family: Verdana;
+	text-align: center;
+	position: relative;
+}
+
+.classAddContenidoPerfil{
+	z-index: 1;
+	background: #FFAA5A;
+	box-shadow: 0px 0px 10px #FFAA5A;
+	p {
+		color: white;
+		font-size: 18px;
+	}
+}
+
+/*----------------------------------------------------------- SUBIR FOTOOOOO ----------------------------------------------------------------------------------*/
+.contenidoNewFoto{
+	position: fixed;
+	background: white;
+	border-radius: 25px;
+	z-index: 610;
+	left: 25%;
+	width: 50%;
+	top: 25%;
+	height: 50%;
+	align-items: center;
+	flex-direction: column;
+	display: none;
+	justify-content: center;
+}
+
+.contenidoNewFoto .contenedor{
+	display: flex;
+	position: absolute;
+	background: #f5f5f5;
+	z-index: 500;
+	left: 10%;
+	width: 80%;
+	top: 10%;
+	height: 60%;
+	border-radius: 15px;
+	border: 2px solid #ddd;
+	align-items: center;
+	flex-direction: column;
+}
+.contenidoNewFoto .contenedor > p{
+	position: absolute;
+	top: 40%;
+	font-size: 23px;
+	letter-spacing: 2px;
+	color: #444;
+}
+
+.contenidoNewFoto .contenedor img{
+	width: 80px;
+	height: 90px;
+	margin-top: 10px;
+}
+
+
+
+.botonSeleccionar{
+	position: absolute;
+	top: 70%;
+	width: 180px;
+	height: 15%;
+	background: #FFAA5A;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	color: white;
+	text-align: center;
+	z-index: 650;
+}
+
+.botonSeleccionar:hover{
+	background: #FFAA5A;
+}
+
+.botonSeleccionar p{
+	color: white;
+	text-align: center;
+	font-size: 22px;
+	width: 100%;
+}
+
+.botonSubir{
+	position: absolute;
+	top: 80%;
+	width: 200px;
+	height: 10%;
+	background: #bbb;
+	border-radius: 10px;
+	border: none;
+	display: flex;
+	align-items: center;
+	cursor: default;
+	left: 39%;
+}
+
+@media (max-width: 1700px){
+	.botonSubir{
+		left: 37%;
+	}
+}
+@media (max-width: 1500px){
+	.botonSubir{
+		left: 35%;
+	}
+}
+@media (max-width: 1200px){
+	.botonSubir{
+		left: 32%;
+	}
+}
+@media (max-width: 900px){
+	.botonSubir{
+		left: 29%;
+	}
+}
+.botonSubirNewClass {
+  background: #FFAA5A;
+  cursor: pointer;
+  &:hover {
+    background: #f89d47 !important;
+  }
+}
+
+.botonSubir p{
+	color: white;
+	font-size: 22px;
+	letter-spacing: 2px;
+	text-align: center;
+	width: 100%;
+}
+
+
+.sombraFoto{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	display: none;
+	top: 0;
+	left: 0;
+	z-index: 600;
+}
+
+.equis{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #FFB56F;
+	display: flex;
+	position: absolute;
+	right: 0;
+	align-items: center;
+	margin: 10px;
+	cursor: pointer;
+}
+.equis:hover{
+	background: #FFAA5A;
+}
+.equis p{
+	color: white;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+}
+
+.newClassContenidoFoto{
+	animation-name: cuadroFoto;
+	animation-duration: .4s;
+}
+#file{
+	display: flex;
+	position: absolute;
+	background: red;
+	z-index: 530;
+	width: 100%;
+	height: 100%;
+	border-radius: 15px;
+	border: 2px solid #ddd;
+	align-items: center;
+	flex-direction: column;
+	opacity: 0%;
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+
+@keyframes cuadroFoto{
+	0%{
+		opacity: 0%;
+	}
+	100%{
+		opacity: 100%;
+	}
+}
+

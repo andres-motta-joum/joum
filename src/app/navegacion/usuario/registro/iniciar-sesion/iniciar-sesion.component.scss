@@ -1,0 +1,118 @@
+form{
+    background-color: white;
+    border-radius: 0 0 3px 3px;
+    color: #555;
+    font-size: 0.8em;
+    margin: 0 auto;
+    width: 490px;
+}
+form p{
+    color: #444;
+    font-size: 18px;
+    margin: 20px 0px 8px 0px;
+    font-weight: 500;
+}
+form a{
+    color: #777;
+    font-size: 17px;
+    font-weight: 500;
+
+}
+
+input, textarea{
+    border: 0;
+    outline: none;
+
+    width: 280px;
+}
+
+.field{
+    border: solid 1px #ccc;
+    border-radius: 0 4px 4px 0; 
+    padding: 10px;
+    width: 427px;
+    height: 18px;
+    margin-left: 32px;
+}
+
+.field:focus{
+    border-color: #FFAA5A;
+}
+.center-content {
+    margin:30px 0px 0px 0px;
+}
+
+.center-content input{
+    width: 100%;
+    background:white;
+    height: 40px;
+    border:1px solid #777;
+    color: #888;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 50px;
+}
+.center-content input:hover{
+    background-color: #ee9022;
+    border-radius: 7px;
+}
+.field-container{
+    position: relative;
+}
+.field-container div{
+    display: inline-block;
+    vertical-align: top;
+}
+.field-container div:focus{
+    border-color: #FFAA5A;
+}
+
+.field-container ng-icon{
+    position: absolute;
+    background-color: #eee;
+    border-radius: 4px 0 0 4px; 
+    color: #888;
+    padding: 8px 6px 13px 6px;
+    border: solid 1px #ccc;
+    height: 17px;
+    margin-right: -5px;
+    font-size: 20px;
+}
+
+.columns >div{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: -4px;
+}
+.columns .field{
+    width: 182px;
+}
+
+#form_register{
+    display: none;
+}
+
+form input.Check{
+    float: left;
+    width: 20px;
+    height: 30px;
+    padding: 5px;
+    margin: 25px 5px 5px 0px;
+}
+form label.label{
+    float: right;
+    margin: -32px 0px 40px 30px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+form label.label a{
+    color: #FFAA5A;
+    font-size: 18px;
+    text-decoration: none;
+}
+form label.label a:hover{
+    color: #dd8011;
+    text-decoration: underline;
+}

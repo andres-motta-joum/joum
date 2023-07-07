@@ -1,0 +1,409 @@
+.header1{
+	width: 100%;
+	background: #3f3e3d;
+	height: 60px;
+	position: fixed;
+	z-index: 500;
+}
+
+nav{
+	height: 100%;
+}
+
+.btn-menu{
+	width: 80px;
+	background: #555;
+	border: none;
+	color: white;
+	font-size: 17px;
+	margin-top: -9px;
+}
+
+/*--- Iconos barra ---*/
+ng-icon.menu-icon{
+    margin-top: -5px;
+	font-size: 30px;
+}
+ng-icon.ventas{
+	font-size: 23px;
+    color: #fff;
+    position: absolute;
+    left: 35px;
+}
+ng-icon.search{
+	font-size: 23px;
+    color: #fff;
+    margin-top: 5px;
+}
+ng-icon.user{
+	font-size: 23px;
+    margin-top: -2.5px;
+}
+ng-icon.cart{
+	font-size: 23px;
+    margin-top: -2.5px;
+}
+
+/*---- Logo ----*/
+.logo{
+	width: 125px;
+	padding: 8px 0 0 25px;
+}
+
+/*---- Buscador ----*/
+.btn-menu .text-menu{
+	margin-top: -24px;
+	font-size: 15px;
+	padding: 0;
+}
+.btn-menu:hover{
+	background: rgba(240,240,240,0.4);
+	cursor: pointer;
+}
+.Buscador{
+	padding: 15px 20px;
+	width: 680px;
+	height: 5px;
+	margin: 11px 0px 10px 40px;
+	border: 1px solid #fff;
+	border-radius: 4px 0px 0px 4px;
+	color: #000;
+	font-size: 16px;
+	font-weight: 500;
+}
+.Buscador:focus{
+	border: 1px solid #FFAA5A;
+	outline: none;
+}
+.Buscador::placeholder{
+	font-weight: 400;
+}
+.Buscar{
+	padding: 0;
+	width: 55px;
+	height: 36.5px;
+	margin: 11px 40px 10px 0px;
+	background: #FFAA5A;
+	border: 1px solid #FFAA5A;
+	border-radius: 0px 4px 4px 0px; 
+	font-size: 20px;
+	color: white;
+	outline: none;
+	cursor: pointer;
+}
+
+.Buscar:hover{
+	background: #f59828;
+}
+
+/*---- Estilo base contenido del menú ----*/
+.menu{
+	height: 100%;
+}
+.menu ul{
+	margin: 0;
+	list-style: none;
+	padding: 0;
+	height: 100%;
+	height: 100%;
+}
+.menu li{
+	flex-grow:1;
+	text-align: center;
+}
+.menu li a{
+	display: block;
+	color: #fff;
+	margin-top: -7px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 18px;
+}
+.ContenidoMenu > li:hover{
+	background: rgba(240,240,240,0.3);
+	
+	}
+	
+	.menu li a{
+		display: block;
+		color: #fff;
+		margin-top: -7px;
+		text-decoration: none;
+		text-align: center;
+		font-size: 18px;
+	}
+
+.ContenidoMenu{
+	display: flex;
+	max-width: 1400px;
+	margin: auto;
+	height: 100%;
+}
+
+.ContenidoMenu > li:hover{
+background: rgba(240,240,240,0.3);
+
+}
+
+.MenuInvisible{
+	width: 100%;
+	height: 60px;
+}
+
+/*---- Sección derecha menú ----*/
+.uno p{
+    position: relative;
+    margin-top: 16px;
+}
+#dos button{
+	margin: 10px 6px 0px 6px;
+	width: 130px;
+	height: 40px;
+	border-radius: 5px;
+	font-size: 15px;
+	cursor: pointer;
+	background: #FFAA5A;
+	color: white;
+	border: none;
+	transition: .3s;
+	padding: 0;
+}
+#dos button:hover{
+	background: white;
+	color: #FFAA5A;
+	border: 1px #FFAA5A solid;
+}
+.botones a{
+	cursor:default;
+}
+#dos .botones{
+	display: flex;
+	margin: 10px 12px 10px 12px;
+}
+
+#dos ul{
+	margin-top: -13px;
+	margin-left: -100px;
+	position: fixed;
+	display: none;
+	flex-direction: column;
+	height: auto;
+	width: 310px;
+	padding: 0;
+	background: white;
+	border-bottom-right-radius: 10px; 
+	border-bottom-left-radius: 10px; 
+	z-index: 100;
+}
+#dos:hover ul{
+	display: block;
+
+}
+#dos li{
+	display: flex;
+	&:hover{	
+		background: rgba(0,0,0,0.05);	
+		a{
+			color: #000;
+		}
+	}
+}
+
+#dos li a{
+	display: block;
+	margin-top: 1px;
+	padding: 7px 20px;
+	font-size: 18px;
+	font-weight: 200;
+	text-decoration: none;
+	color: #666;
+	width: 100%;
+	text-align: left;
+}
+#dos li a ng-icon{
+	margin: 0px 35px 0px 25px;
+	height: 100%;
+}
+#dos:hover .menu4-gray2{
+	background: rgba(0,0,0,0.3);
+	width: 100%;
+}
+.menu4-gray2:hover{
+	display: none;
+}
+.menu4-gray2{
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 0%;
+	height: 100vh;
+	background: rgba(0,0,0,0.0);
+	z-index: 10;
+	position: fixed;
+}
+.menu li.tres a span{
+	margin-top: 10px;
+	font-size: 21px;
+}
+.menu li.tres a .text-tres{
+	margin-top: -24px;
+}
+#dos a i.fa{
+	padding: 0px 20px;
+	font-size: 21px;
+}
+#dos a .text-dos{
+	margin-top: -24px;
+}
+.contentUser{
+	display: flex;
+}
+.contentUser img{
+	width: 54px;
+	height: 54px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin: 16px 15px 10px 26px;
+	cursor: pointer;
+}
+.contentUser img:hover{
+	filter: brightness(70%);
+}
+.contentUser div{
+	margin-top: 10px;
+}
+.contentUser p{
+	text-align: left;
+	color: #666;
+	margin: 10px;
+	font-size: 16px;
+	cursor: pointer;
+}
+.contentUser p:nth-child(2) {
+	color: #555;
+	font-size: 17px;
+	font-weight: 660;
+
+}
+.contentUser p:hover{
+	color: #ee8000;
+}
+.linea-Menu{
+    border-bottom: 1px solid #ccc;
+    margin:7px 6px;
+}
+
+/*-------------------------- MENU 2 -------------------------*/
+.header2{
+	width: 100%;
+	background: #ffad60;
+	height: 30px;
+	position: relative;
+	z-index: 400;
+	min-width: 870px;
+}
+.menu2 ul{
+	display: flex;
+	margin: auto;
+	height: 30px;
+	width: 100%;
+	max-width: 1400px;
+	padding-left: 0;
+}
+
+.menu2 li{
+	list-style:none;
+}
+
+.menu2 li p{
+	margin-top: 6.5px;
+	display: block;
+	color: #fff;
+	padding: 0;
+	margin-right: 24px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 14px;
+	font-family: 'font-uno';
+	font-weight: 500;
+	letter-spacing: .5px;
+	cursor: pointer;
+	&:hover{
+		color: #555;
+	}
+}
+
+
+@media screen and (max-width: 370px){
+	.menu4 ul{
+	
+	width: 100%;
+	}
+}
+
+@media screen and (max-width: 1450px){
+	#contenidoTotal{
+	width: 90%;
+	margin: auto;
+	}
+	.menu2 ul{
+		padding-left: 40px;
+	}
+}
+@media screen and (max-width: 1390px){
+	.menu li.uno{
+		display: none;
+	}
+}
+@media screen and (max-width: 1284px){
+
+	.menu li.tres a span{
+	font-size: 30px;
+	padding: 4px 20px;
+	}
+	.menu li.tres a .text-tres{
+		display: none;
+	}
+	ng-icon.menu-icon{
+        margin-top: 5px;
+        font-size: 35px;
+    }
+    ng-icon.user{
+        font-size: 30px;
+        margin-top: 5px;
+        padding:0 20px 9px 20px;
+    }
+    ng-icon.cart{
+        font-size: 30px;
+        margin-top: 5px;
+        padding:0 20px 9px 20px;
+    }
+	#dos a .text-dos{
+		display: none;
+	}
+	.btn-menu .text-menu{
+	display: none;
+	}
+	.btn-menu i.fa{
+	font-size: 30px;
+	margin-top: 5px;
+	}
+	#dos ul{
+	margin-left: -130px;
+	}
+}
+@media screen and (max-width: 1250px){
+	#dos ul{
+	margin-left: -170px;
+	}
+}
+@media screen and (max-width: 1030px){
+	.header3{
+	display: none;
+	}
+}
+@media screen and (max-width: 1000px){
+	#dos{
+	display: none;
+	}
+}

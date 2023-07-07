@@ -1,0 +1,25 @@
+<form [formGroup]='form' (submit)='irPaso3($event)' class="paso2" novalidate>
+
+    <h1>Elige el titulo de tu producto</h1>
+    <p>Ten en cuenta que el titulo que elijas no podrá cambiarse luego de que subas tu producto, y va a ser por el cual las personas encontrarán tu producto en la tienda.</p>
+
+    <div class="field-container">
+        <input formControlName='titulo' type="text" class="field" placeholder="Ejemplo: Estante de 4 campos" id="Titulo"> <br/>
+    </div>
+
+    <div class="linea"></div>
+
+    <div class="center-content">
+        <input (click)='irPaso1()' type="button" class="btn2active" value="Anterior" id="btn-anterior">
+    </div>
+
+    <div class="center-content">
+      <input
+        type="submit"
+        [ngClass]='{"btn2inactive": form.invalid, "btn2active": form.valid}'
+        value="Siguiente"
+        name="boton"
+        [disabled]='form.invalid'>
+    </div>
+
+</form>

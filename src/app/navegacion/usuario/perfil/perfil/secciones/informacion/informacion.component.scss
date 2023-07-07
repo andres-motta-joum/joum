@@ -1,0 +1,87 @@
+@use 'sass:math';
+/*--------------- INFORMACIÓN ----------------------*/
+.contenidoInformacion{
+	margin-top: 20px;
+	position: relative;
+	width: 100%;
+	height: 590px;
+	display: flex;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	background: white;
+    overflow: hidden;
+}
+.contenidoInformacion .contenido{
+	position: absolute;
+	left: 10%;
+	width: 90%;
+	top: 17%;
+}
+
+.contenidoInformacion .contenidoDescrip{
+	display: flex;
+	flex-wrap: wrap;
+}
+.contenidoInformacion .descripcionInformacion{
+	padding: 0 100px 50px 0;
+}
+.contenidoInformacion .descripcionInformacion h3{
+	margin: 0 0 10px 0;
+	color: #666;
+	font-size: 29px;
+	font-weight: bold;
+	text-align: left;
+}
+.contenidoInformacion .descripcionInformacion p{
+	margin: 0;
+	color: #444;
+	font-size: 20px;
+	text-align: left;
+}
+.contenidoInformacion .contenidoDescrip .descripciónSmall{
+	padding: 10px 150px 50px 0;
+}
+.contenidoInformacion .contenidoDescrip .descripciónSmall h2{
+	margin: 0;
+	padding: 5px 0;
+	color: #666;
+	font-size: 26px;
+	font-weight: bold;
+	text-align: left;
+}
+.contenidoInformacion .contenidoDescrip .descripciónSmall p{
+	margin: 0;
+	color: #444;
+	font-size: 20px;
+	text-align: left;
+}
+
+.circuloInformacion{
+	width: 350px;
+	position: relative;
+	height: 320px;
+	background: rgb(255,194,124);
+	background: linear-gradient(156deg, rgba(255,194,124,1) 0%, rgb(255, 177, 87) 100%);
+	top: 80%;
+	border-radius: 50%;
+	position: absolute;
+	right: -240px;
+}
+.circuloInformacion2{
+	width: math.div(120px,1px) * .3%;
+	position: absolute;
+	height: math.div(150px,1px) * .35%;
+	background: #FFAA5A;
+	top: -235px;
+	border-radius: 50%;
+	position: absolute;
+	left: -200px;
+}
+.configuracion{
+	position: absolute;
+	color: #FFAA5A;
+	font-size: 40px;
+	top: 30px;
+	right: 40px;
+	cursor: pointer;
+}

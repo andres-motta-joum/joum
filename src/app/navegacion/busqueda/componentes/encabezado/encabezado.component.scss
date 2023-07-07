@@ -1,0 +1,88 @@
+.contenidoTotal{
+	display: flex;
+    position: relative;
+}
+
+.seccion1{
+	display: flex;
+}
+.seccion1 div{
+	display: flex;
+	margin: 0 0 0 25px;
+	cursor: pointer;
+}
+.seccion1 div ng-icon{
+	margin: 15px 5px;
+	color: #666;
+    font-size: 20px;
+}
+.seccion2 div ng-icon{
+	margin: 15px 0 17px 5px;
+	color: #666;
+    font-size: 20px;
+}
+
+.seccion2{
+	display: flex;
+	position: absolute;
+    right: 20px;
+}
+.seccion2 div{
+	display: flex;
+	margin: 0 10px;
+	cursor: pointer;
+}
+.seccion2 > ng-icon:nth-child(2){
+	margin: 12px 8px 10px 10px;
+	padding: 0 0 0 20px;
+	font-size: 25px;
+	color: #FFAA5A;
+}
+.seccion2 > ng-icon:nth-child(3){
+	margin: 8px 8px;
+	font-size: 33px;
+	color: #777;
+}
+.seccion2 > ng-icon:hover{
+	cursor: pointer;
+	color: #f8982a;
+}
+.seccion1 div p{
+	color: #555;
+	font-size: 17px;
+	letter-spacing: 1px;
+	margin: 15px 0;
+}
+.seccion2 div p{
+	color: #555;
+	font-size: 17px;
+	letter-spacing: 1px;
+	margin-top: 14px;
+}
+
+@media (max-width: 1110px){
+	.seccion1 div ng-icon{
+		font-size: 16px;
+	}
+	.seccion2 div ng-icon{
+		font-size: 16px;
+	}
+	.seccion1 div{
+		margin: 0 0 0 10px;
+	}
+	.seccion1 div:nth-child(1){
+		margin: 0 0 0 16px;
+	}
+    .seccion1 div p{
+		font-size: 15px;
+	}
+	.seccion2 div p{
+		font-size: 15px;
+	}
+	.seccion2 > ng-icon:nth-child(2){
+		margin: 12px 8px 10px -15px;
+	}
+	.seccion2 > ng-icon:nth-child(3){
+		margin: 8px 0 8px 5px;
+	}
+}

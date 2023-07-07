@@ -1,0 +1,161 @@
+.opiniones-contenedor{
+    width: 95%;
+    padding-left: 30px;
+}
+
+h1{
+    color: #508df1;
+    font-size: 51px;
+    padding-right: 25px;
+    font-family: 'font-uno';
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+/*----------------- ESTRELLAS -----------------*/
+.estrellas{
+    position: relative;
+    width: 150px;
+    margin-top: 58px;
+}
+.estrellas .starts{
+    margin-top: 0;
+    height: 20px;
+    display: flex;
+    position: relative;
+}
+.estrellas .starts ng-icon{
+    font-size: 25px;
+    color: #ccc;
+    margin: 2px 6px 2px 0;
+}
+.estrellas .starts-over{
+    width: 90%;
+    overflow: hidden;
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+}
+.estrellas .starts-over ng-icon{
+    font-size: 25px;
+    color: #5495ff;
+    margin: 2px 6px 2px 0;
+}/*---------------*/
+p.calificaciones{
+    margin-top: 10px;
+    padding-left: 5px;
+    font-size: 14px;
+    font-family: 'font-uno';
+    letter-spacing: 1px;
+    word-spacing: 4px;
+}/*-----------------*/
+
+.barras{
+    margin-bottom: 30px;
+}
+.linea{
+    display: flex;
+    height: 30px;
+    position: relative;
+}
+.linea p{
+    margin:-5px;
+    margin-left: 10px;
+    font-family: 'font-uno';
+}
+.linea ng-icon{
+    margin:-5px;
+    margin-left: 10px;
+    color: #FFAA5A;
+    font-size: 19px;
+    position: absolute;
+    left: 435px;
+}
+
+.linea-span{
+    position: relative;
+    width: 420px;
+    background-color: #ddd;
+    border-radius: 4px;
+    height: 8px;
+}
+.fondo-span{
+    position: absolute;
+    width: 70%;
+    background-color: #888;
+    border-radius: 4px;
+    height: 8px;
+}
+/*---------- CALIFICACIÓN ---------------*/
+
+select{
+    font-family: 'font-uno';
+    color: #4688d9;
+	padding: 10px;
+	border:1px solid #86a3c7;
+	border-radius: 5px;
+	&:hover{
+		background: rgba(#4688d9, .1);
+	}
+}
+
+
+
+/*----------------- ESTRELLAS - OPINION -----------------*/
+.estrellas-opinion{
+    position: relative;
+    width: 90px;
+    margin-top:20px;
+}
+.estrellas-opinion .starts{
+    margin-top: 0;
+    height: 20px;
+    display: flex;
+    position: relative;
+}
+.estrellas-opinion .starts ng-icon{
+    font-size: 17px;
+    color: #ccc;
+    margin: 2px 2px 2px 0;
+}
+.estrellas-opinion .starts-over{
+    width: 65%;
+    overflow: hidden;
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+}
+.estrellas-opinion .starts-over ng-icon{
+    font-size: 17px;
+    color: #5495ff;
+    margin: 2px 2px 2px 0;
+}
+
+/*-------------*/
+.opinion{
+    font-family: 'font-uno';
+    position: relative;
+}
+.opinion div p{
+    position: absolute;
+    right: 0;
+    font-size: 13px;
+    color: #777;
+    top: 15px;
+}
+.texto-opinion{
+    margin-top: 10px;
+    letter-spacing: .2px;
+    line-height: 21px;
+    font-size: 14.5px;
+}
+
+.linea-opinion{
+    margin-top: 25px;
+    margin-bottom: 5px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}

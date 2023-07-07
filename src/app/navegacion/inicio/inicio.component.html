@@ -1,0 +1,102 @@
+<div class="body">
+    <app-barra-menu></app-barra-menu>
+    <div id="contenidoTotal">
+    <app-sub-menu></app-sub-menu>
+    </div>
+    <app-slider [elements]="slider"></app-slider>
+    <div id="contenidoTotal">
+        <!-- CAROUSEL 1 -->
+        <br><br><br>
+        <app-carrusel [carousel]='1' [elements]="carouselCategorias">
+            <h3 class="titulos categoria">Categorías</h3>
+        </app-carrusel>
+        <br>
+        <div class="Linea"></div>
+
+
+        <!-- PRIMER ITEM --> 
+
+        <br><br><br>
+        <h3 class="titulos">Quiza te interese 🔥</h3>
+        <div class="contenido1">
+            <div class="item">
+                <div class="item-text">
+                    <h1>Conjunto de cuadros decorativos</h1>
+                    <button>Ver más</button>
+                </div>
+                <img src="../../../../assets/img/categoria/cuadros/6.jpg" class="item-img" ><br>
+            </div>
+            <div class="item-2">
+                <div class="item-text">
+                    <h1>vinilos de cualquier tamaño</h1>
+                    <button>Ver más</button>
+                </div>
+                <img src="../../../../assets/img/categoria/vinilos/7.jpg" class="item-img"><br>
+            </div>
+        </div>
+
+        <div id="imagenanuncio1" class="Anuncio">
+            <a href="#"><img src="../../../../assets/img/anuncios/productosdemarca.png"></a>
+        </div>
+        <br><br>
+
+
+        <!-- CAROUSEL 2 -->
+
+        <app-carrusel [carousel]='2' [elements]="carouselOfertas">
+            <h3 class="titulos categoria" style="font-size: 25px;">Lo más destacado hoy</h3>
+        </app-carrusel>
+        <br><br>
+
+        <!-- ITEMS 2 -->
+
+        <h3 class="titulos">Quizá te interese</h3>
+        <div class="contenido1">
+            <div class="item">
+                <div class="item-text">
+                    <h1>Encuentra las macetas al diseño de tu agrado</h1>
+                    <button>Ver más</button>
+                </div>
+                <img src="../../../../assets/img/categoria/macetas/5.jpg" class="item-img"><br>
+            </div>
+            <div class="item-2">
+                <div class="item-text">
+                    <h1>Conjunto de cuadros decorativos</h1>
+                    <button>Ver más</button>
+                </div>
+                <img src="../../../../assets/img/categoria/cuadros/9.jpg" class="item-img" style="object-position: 0px -15px"><br>
+            </div>
+        </div>
+
+        <br><br>
+        <!-- CAROUSEL 3 -->
+
+        <app-carrusel [carousel]='2' [elements]="carouselOfertas">
+        <h3 class="titulos categoria" style="font-size: 25px;">Ofertas para tu hogar</h3>
+        </app-carrusel>
+        <br><br>
+        <!-- CAROUSEL 4 -->
+
+        <app-carrusel [carousel]='2' [elements]="carouselOfertas">
+        <h3 class="titulos categoria" style="font-size: 25px;">Lo más destacado</h3>
+        </app-carrusel>
+
+    </div>
+    <br>
+
+    <div class="wave">
+        <div style="height: 250px; overflow: hidden;" >
+            <svg viewBox="0 0 370 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                <path
+                    d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: #ddd;">
+                </path>
+            </svg>
+            <h2 style="display: flex;">
+                Crea tu cuenta joum
+                <a (click)="navegar(['cuenta/crear-cuenta'], $event)"><button>Aquí</button></a>
+            </h2>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

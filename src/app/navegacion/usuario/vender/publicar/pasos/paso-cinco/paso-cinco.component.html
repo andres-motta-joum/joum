@@ -1,0 +1,37 @@
+<form #formPaso5='ngForm' (submit)='irPaso6(formPaso5, inputFoto)' enctype="multipart/form-data" id="form_session4" class="paso4">
+
+    <h1 id="tituloPaso4">Descripción de tu producto</h1>
+    <p>Al momento de subir la foto de tu producto, procura qu tenga la mejor calidad que puedas darle.
+    No es necesario que la foto del producto tenga fondo blanco</p>
+
+    <div class="inputs" id="inputs">
+    	<textarea name="descripcion" id="comments" [(ngModel)]='descripcion' required>Descripción de tu producto...</textarea>
+      <label class="anadirFoto" for="añadirFoto">{{ textFoto }}</label>
+      <input
+        #inputFoto
+        (change)='getFoto(inputFoto)'
+        type="file"
+        name="foto"
+        accept="image/*"
+        id="file"
+        id="añadirFoto"
+        class="fotoDesable"
+        ngModel
+        required>
+    </div>
+    <br><br><br><br><br><br><br><br>
+
+    <div class="linea"></div>
+
+    <div class="center-content">
+        <input (click)='irPaso4()' type="button" class="btn3" value="Anterior" id="btn-anterior3">
+        <input
+          type="submit"
+          [ngClass]="{'btn3': formPaso5.invalid, 'btn3active': formPaso5.valid}"
+          value="Siguiente"
+          name="boton"
+          [disabled]='formPaso5.invalid'
+          id="btn-Siguiente4">
+    </div>
+
+</form>

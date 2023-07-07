@@ -1,0 +1,115 @@
+<div class="header1">
+    <nav class="menu">
+      <ul>
+        <div class="ContenidoMenu">
+            <button (click)='menuLateral.animarMenu()' class="btn-menu" id="button-menu">
+              <p><ng-icon class="menu-icon" name="heroBars3Solid"></ng-icon><p class="text-menu">Todo</p>
+            </button>
+            <a (click)='navegar([""], $event)'><img src="../../../../assets/img/logo/logocompleto.svg" alt="" class="logo"></a>
+            <input class="Buscador"  placeholder='Buscar' type="text" #busqueda>
+            <button (click)="navegar(['busqueda/',busqueda.value], $event)" class="Buscar"><ng-icon class="search" name="heroMagnifyingGlassMini"></ng-icon></button>
+            
+            <li class="uno"><a (click)="navegar(['abcd/ventas'], $event)"><p><ng-icon class="ventas" name="heroCurrencyDollarMini"></ng-icon><br>Ventas</p></a></li>
+
+            <li id="dos" class="Interruptor">
+            <a><p><ng-icon class="user" name="heroUserCircleSolid"></ng-icon><p class="text-dos">Cuenta</p></a>
+            <ul class="User-submenu">
+            <!--
+              <div class="botones">
+                <a><button (click)="navegar(['cuenta/iniciar-sesion],$event)" class="iniciar">Iniciar Sesion</button></a>
+                <a><button (click)="navegar(['cuenta/crear-cuenta'], $event)" class="crear">crear cuenta</button></a>
+              </div>
+            -->
+              <div class="contentUser">
+                <img
+                (click)='navegar(["abcd/perfil/informacion"], $event)'
+                  id="picUser"
+                  src="../../../../assets/img/usuarios/user.svg"
+                  class="fotoPerfil"
+                  alt="Image">
+                <div>
+                  <p (click)='navegar(["abcd/perfil/informacion"], $event)' id="nameUser2"> Andres Motta </p>
+                  <p (click)='navegar(["abcd/perfil/informacion"], $event)'>Vendedor Junior</p>
+                </div>
+              </div>
+              <div  class="linea-Menu"></div>
+              <li >
+                <a (click)='navegar(["abcd/compras"], $event)'>
+                  <ng-icon name="heroShoppingCart"></ng-icon> Compras
+                </a>
+              </li>
+              <li>
+                <a (click)='navegar(["abcd/opiniones"], $event)'>
+                  <ng-icon name="heroDocumentCheck"></ng-icon> Opiniones
+                </a>
+              </li>
+              <li>
+                <a (click)='navegar(["abcd/preguntas-comprador"], $event)'>
+                  <ng-icon name="heroChatBubbleBottomCenterText"></ng-icon> Preguntas
+                </a>
+              </li>
+
+              <div class="linea-Menu"></div>
+              <li>
+                <a (click)='navegar(["vender"], $event)'>
+                  <ng-icon name="heroBanknotes"></ng-icon> Vender
+                </a>
+              </li>
+              <li>
+                <a (click)='navegar(["abcd/resumen"], $event)'>
+                  <ng-icon name="heroRectangleGroup"></ng-icon> Resumen
+                </a>
+              </li>
+              <li>
+                <a (click)='navegar(["abcd/novedades"], $event)'>
+                  <ng-icon name="heroBell"></ng-icon> Novedades
+                </a>
+              </li>
+              <li>
+                <a (click)='navegar(["abcd/publicaciones"], $event)'>
+                  <ng-icon name="heroBuildingStorefront"></ng-icon> Publicaciones
+                </a>
+              </li>
+
+              <div class="linea-Menu"></div>
+              <li>
+                <a (click)='navegar(["abcd/facturacion"], $event)'>
+                  <ng-icon name="heroDocumentText"></ng-icon> Facturacion
+                </a>
+              </li>
+
+              <div class="linea-Menu"></div>
+              <li class="cerrarSesion">
+                  <a (click)='navegar([""], $event)'>
+                    <ng-icon name="heroArrowRightOnRectangle"></ng-icon> Salir
+                  </a>
+              </li>
+              <br>
+            
+            </ul>
+            <nav class="menu4-gray2"></nav>
+          </li>
+          <li class="tres">
+            <a (click)="navegar([''],$event)"><p><ng-icon class="cart" name="matShoppingCart"></ng-icon><p class="text-tres">Carrito</p></a>
+          </li>
+        </div>
+      </ul>
+    </nav>
+  </div>
+  <nav class="MenuInvisible"></nav>
+  
+  <!----------------------------------------------MENU 2------------------------------------------->
+  <div class="header2">
+    <nav class="menu2">
+      <ul>
+        <li><p (click)="navegar(['busqueda/ofertas-del-dia'],$event)">Ofertas del Día</p></li>
+        <li><p (click)="navegar(['busqueda/solo-hoy'],$event)">Solo hoy</p></li>
+        <li><p (click)="navegar([''],$event)">Historial</p></li>
+        <li><p (click)="navegar(['vender'],$event)">vender</p></li>
+        <li><p (click)="navegar(['busqueda/para-ti'],$event)">Para ti</p></li>
+        <li><p (click)="navegar([''],$event)">Ayuda</p></li>
+      </ul>
+    </nav>
+  </div>
+
+<app-menu-lateral ></app-menu-lateral>

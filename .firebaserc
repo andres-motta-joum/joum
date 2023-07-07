@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "joum-b86f6": {
+      "hosting": {
+        "joum": [
+          "joum"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "joum-b86f6"
+  }
+}

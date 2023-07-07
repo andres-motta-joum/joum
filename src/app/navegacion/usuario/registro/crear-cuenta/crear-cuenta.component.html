@@ -1,0 +1,103 @@
+<div id="formularios">
+    <form
+        [formGroup]='form'
+        (ngSubmit)='guardar($event)'
+        method="POST"
+        id="form_session">
+
+        <div class="columns">
+            <div class="field-container">
+                <p> Nombre</p>
+                <ng-icon name="heroUserCircleSolid"></ng-icon>  
+                <input
+                    formControlName='nombre'
+                    type="text"
+                    class="field"
+                    placeholder="Ejemplo: Felipe"
+                    id="Nombre"
+                    name="nombrecliente"> <br/>
+            </div>
+            <div class="field-container">
+                <p> Apellido</p>
+                <ng-icon name="heroUserCircleSolid"></ng-icon>    
+                <input
+                    formControlName='apellido'
+                    type="text"
+                    class="field"
+                    placeholder="Ejemplo: Ramirez"
+                    id="Apellido" name="apellidocliente">
+                <br/>
+            </div>
+
+        </div>
+        
+        <p>Correo electrónico</p>
+        <div class="field-container">
+            <ng-icon name="heroEnvelopeSolid"></ng-icon>    
+            <input
+                formControlName='correo'
+                type="text"
+                class="field"
+                placeholder="user@example.com"
+                id="Correo"
+                name="correocliente">
+            <br/>
+        </div>
+
+        <p>Contraseña</p>
+        <div class="field-container">
+            <ng-icon name="heroLockClosedSolid"></ng-icon>  
+            <input
+                formControlName='contrasena'
+                type="password"
+                class="field"
+                placeholder="****"
+                id="Contraseña"
+                name="clavecliente">
+            <br/>
+        </div>
+
+        <p>Telefono</p>
+        <div class="field-container">
+            <ng-icon name="heroPhoneSolid"></ng-icon>  
+            <input
+                formControlName='telefono'
+                type="number"
+                class="field"
+                placeholder="+52 55..."
+                id="Telefono"
+                name="telefonocliente">
+        </div>
+
+        <input
+            formControlName='terminosAceptados'
+            type="checkbox"
+            id="Declaracion"
+            name="registration[acceptTerms]"
+            required="required"
+            class="Check"
+            ng-model="acceptTerms"
+            value="1">
+        <label for="Declaracion" class="label">
+        Declaro que he leído y acepto la nueva <a href="/sp/privacidad" target="_blank">Política de Privacidad</a> y los <a href="/sp/terminos" target="_blank">Términos y Condiciones</a> de joum.
+        </label>
+
+
+        <div class="center-content">
+            <input
+                type="submit"
+                class="btn"
+                value="crear cuenta"
+                name="boton" 
+                id="btn-crear"
+                [ngStyle]='{
+                    "background": (form.invalid || btnDisabled) ? "white" : "#FFAA5A",
+                    "border": (form.invalid || btnDisabled) ? "1px solid #777" : "none",
+                    "color": (form.invalid || btnDisabled) ? "#888" : "white",
+                    "cursor": (form.invalid || btnDisabled) ? "auto" : "pointer"
+                }'
+                [disabled]='(form.invalid || btnDisabled)'>
+            <p *ngIf="btnDisabled">Procesando Información</p>
+        </div>
+    </form>
+</div>

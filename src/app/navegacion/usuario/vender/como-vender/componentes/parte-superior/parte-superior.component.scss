@@ -1,0 +1,70 @@
+.contenidoTotal1{
+	max-width: 1400px;
+	margin: auto;
+	padding: 0px 20px 50px 50px ;
+}
+
+.contenidoTotal{
+	max-width: 1100px;
+	margin: auto;
+	padding: 0;
+}
+
+.contenido1{
+	margin: 70px 0px 0px 0px;
+	display: flex;
+}
+
+.textcontenido1{
+	width: 71.45%;
+}
+
+.textcontenido1 h1{
+	font-size: 45px;
+	color: #555;
+	margin-right: 50px;
+	padding-bottom: 20px;
+}
+.textcontenido1 p{
+	font-size: 19px;
+	color: #666;
+	margin-top: -40px;
+	margin-bottom: 30px;
+}
+.textcontenido1 a{
+	background: #FFAA5A;
+	border: none;
+	padding: 10px;
+	color: white;
+	border-radius: 10px;
+	font-size: 19px;
+	text-decoration: none;
+}
+/*-------------------- Sección Dos -------------------------*/
+
+.contenido2{
+	max-width: 1500px;
+	display: flex;
+	margin: auto;
+	padding: 0px 0px 30px 0px ;
+	border-top: 4px solid #FFAA5A;
+}
+
+.contenido2 .textContenido2{
+	width: 50%;
+	background: #efefef;
+}
+.contenido2 .textContenido2 h1, .text2Contenido2 h1{
+	text-align: center;
+}
+.contenido2 .textContenido2 p, .text2Contenido2 p{
+	margin: 0px 20px 30px 60px;
+}
+
+
+.contenido2 .text2Contenido2{
+	width: 50%;
+	background: #ddd;
+	text-align: center;
+}
+

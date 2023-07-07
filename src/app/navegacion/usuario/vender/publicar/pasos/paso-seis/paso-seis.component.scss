@@ -1,0 +1,183 @@
+form.paso4{
+	width: 1150px;
+	height: 450px;
+	margin: 40px auto;
+}
+
+form.paso4 h1{
+	color: #555;
+	font-size: 36px;
+	text-align: center;
+}
+
+form.paso4 p{
+	color: #555;
+	width: 64%;
+	font-size: 25px;
+	margin: auto;
+	text-align: center;
+}
+
+form.paso4 div.inputs div{
+	width: 102%;
+	margin: 45px 0px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+form.paso4 div.inputs div.input{
+
+	display:flex;
+	margin: 20px 1% 20px 0px;
+	width: 100%;
+
+}
+
+form.paso4 div.input input{
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #999;
+	min-width: 450px !important;
+	margin-left: 70px;
+	padding: 10px;
+	outline: none;
+	height: 100px;
+}
+
+form.paso4 div.input input::placeholder{
+	color: #777;
+	font-size: 15px;
+}
+
+form.paso4 div.input input:focus{
+	border: 1px solid #FFAA5A;
+}
+
+
+form.paso4 div.linea{
+	width: 100%;
+	border-bottom: 2px solid #ddd;
+}
+
+form.paso4 div.input select{
+	border-radius: 5px;
+	border: 1px solid #999;
+	width: 245px;
+	color: #777;
+	height: 40px;
+	font-size: 15px;
+}
+
+form.paso4 div.input select:focus{
+	border: 1px solid #FFAA5A;
+}
+
+form.paso4 div.input label{
+	font-size: 20px;
+	padding: 7px 10px 0px 5px;
+	width: 205px;
+	text-align: right;
+	margin-left: 10%;
+
+}
+
+
+.btn3{
+	width: 30%;
+	float: right;
+	background:white;
+	height: 40px;
+	border:1px solid #777;
+	color: #888;
+	border-radius: 6px;
+	font-size: 16px;
+	margin: 30px 40px;
+	text-align: center;
+}
+
+.btn3active {
+	width: 30%;
+	float: right;
+	background:#FFAA5A;
+	height: 40px;
+	border:1px solid #777;
+	color: white;
+    border: none;
+	border-radius: 6px;
+	font-size: 16px;
+	margin: 32px 40px;
+	text-align: center;
+  cursor: pointer;
+}
+
+#btn-anterior3{
+	float: left;
+	background: #FFAA5A;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
+//-----------------------------------------------------------------------------
+.precio{
+	font-size: 20px !important;
+	padding: 0 20px 0 0;
+}
+.unidades{
+	font-size: 20px !important;
+	padding: 0 5px 0 0;
+	position: absolute;
+	left: -10px;
+}
+.inputs{
+	width: 55%;
+	display: flex;
+	margin-left: 19%;
+	position: relative;
+}
+label{
+	margin-top: 47px;
+	font-size: 20px;
+	letter-spacing: 1px;
+	font-weight: 500;
+	padding: 0px 10px;
+	border-bottom: 2px solid #FFAA5A;
+	color: #555;
+	height: 30px;
+}
+.input1{
+	margin: 50px 10px;
+	width: 400px;
+	border: none;
+	border-bottom: 1px solid #aaa;
+	padding: 10px;
+	outline: none;
+	height: 8px;
+	font-size: 19px;
+	font-weight: 0;
+	color: #555;
+}
+.input2{
+	margin: 0px 180px 50px 300px;
+	width: 100px;
+	border: none;
+	border-bottom: 1px solid #aaa;
+	padding: 10px;
+	outline: none;
+	height: 13px;
+	font-size: 19px;
+	font-weight: 0;
+	color: #555;
+}
+input:active{
+	border-bottom: 2px solid #aaa;
+}
+input:focus{
+	border-bottom: 2px solid #aaa;
+}
+.activado{
+	border-bottom: 2px solid #FFAA5A;
+	&:focus, &:active {
+		border-bottom: 2px solid #FFAA5A;
+	}
+}

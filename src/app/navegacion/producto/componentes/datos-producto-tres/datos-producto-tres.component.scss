@@ -1,0 +1,78 @@
+
+.contenidoDatosProducto{
+    margin-top: 30px;
+    position: relative;
+    border: 1px solid #e1e0dd;
+    width: 100%;
+    transform: translateX(3%);
+    border-radius: 5px;
+}
+.contenido{
+    width: 88%;
+    margin-left: 6%;
+    padding-bottom: 40px;
+}
+.contenidoDatosProducto .titulo{
+    color: #4f4f4f;
+    font-family: 'font-uno';
+    font-size: 18px;
+    margin: 23px 0 15px 0;
+    letter-spacing: 1px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+.sub-titulo{
+    font-size: 15px;
+    font-weight: 450;
+    letter-spacing: .5px;
+    color: #333;
+    font-family: 'font-uno';
+    margin: 23px 0 8px 0;
+    padding-left: 10px;
+}
+.tabla{
+    border-radius: 6px;
+    overflow: hidden;
+    opacity: .8;
+    border: 1px solid #ececec;
+}
+table{
+    border-collapse: collapse;
+    padding: 5px;
+    font-family: 'font-uno';
+    font-size: 14px;
+}
+
+table th{
+    height: 55px;
+    text-align: left;
+    width: 40%;
+    font-weight: 600;
+    padding-left: 10px;
+    min-width: 130px;
+}
+table td{
+    text-align: left;
+    width: 60%;
+    font-weight: 450;
+    height: 55px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+table tr:nth-child(even){
+    th{
+        background-color: #f7f7f7;
+    }
+    td{
+        background-color: #fbfbfb;
+    }
+}
+table tr:nth-child(odd){
+    th{
+        background-color: #f1f1f1;
+    }
+    td{
+        background-color: #f7f7f7;
+    }
+}

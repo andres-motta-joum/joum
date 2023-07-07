@@ -1,0 +1,136 @@
+form.paso1{
+	width: 1170px;
+	height: 450px;
+	margin: 40px auto;
+}
+
+form.paso1 .container{
+	display: flex;
+	height: 436px;
+	border-bottom: 3px solid #f3f3f3;
+}
+
+form.paso1 .text{
+	width: 33%;
+	margin: 0px 20px 0px 0px;
+	background: #fafafa;
+	padding: 20px 10px;
+}
+
+form.paso1 .seleccion{
+	width: 67%;
+	overflow-y: scroll;
+	display: flex;
+	padding: 5px 0px 0px 0px;
+	flex-wrap: wrap;
+}
+form.paso1 .seleccion::-webkit-scrollbar{
+	width: 9px;}
+form.paso1 .seleccion::-webkit-scrollbar-thumb{
+	background-color: #f3a955;
+	border-radius: 4px;}
+form.paso1 .seleccion::-webkit-scrollbar-track{
+	background-color: #eaeaea;
+	border-radius: 5px;}
+
+form.paso1 h1{
+	color: #555;
+	font-size: 34px;
+	padding: 0 10px ;
+}
+form.paso1 .text p{
+	font-size: 20px;
+	padding: 0 10px ;
+}
+
+.center-content input.btn1{
+	width: 30%;
+	float: right;
+	height: 40px;
+	border:1px solid #777;
+	border-radius: 6px;
+	font-size: 16px;
+	margin: 32px 40px;
+}
+
+form input.Check{
+	display: none;
+}
+
+form .box{
+	width: 140px;
+	height: 180px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 0px 10px 30px 25px;
+	flex-wrap: wrap;
+	background: #fafafa;
+}
+form .box img{
+	border-radius: 5px 5px 0 0;
+}
+
+@for $i from 1 through 9 {
+	.check#{$i} {
+		#check#{$i}:checked ~ & {
+			background:#FFAA5A;
+			border: 1px solid #FFAA5A;
+			box-shadow: 0px 0px 15px #FFAA5A;
+			p{
+				color: white;
+			}
+		}
+    input#check#{$i}[type=radio][checked] ~ & {
+			background:#FFAA5A;
+			border: 1px solid #FFAA5A;
+			box-shadow: 0px 0px 15px #FFAA5A;
+			p{
+				color: white;
+			}
+		}
+	}
+}
+
+form .box img{
+	width: 100%;
+	height: 140px;
+	object-fit: cover;
+}
+form .box p{
+	margin-top: 5px;
+	font-size: 20px;
+	height: 40px;
+	text-align: center;
+	color: #666;
+}
+@media (max-width: 1360px){
+
+	form.paso1{
+	width: 84.6%;
+	}
+
+	#formularios, #menu{
+	width: 84.6%;
+	}
+
+	form .box{
+		width: 19.5%;
+		height: 170px;
+		margin: 0px 5px 30px 25px;
+	}
+	form .box img{
+		height: 130px;
+	}
+}
+@media (max-width: 1140px){
+
+	form .box{
+		width: 26.5%;
+		height: 170px;
+		margin: 0px 5px 30px 25px;
+	}
+	form .box img{
+		height: 130px;
+	}
+}
