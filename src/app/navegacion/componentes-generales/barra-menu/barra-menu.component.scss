@@ -28,7 +28,8 @@ ng-icon.ventas{
 	font-size: 23px;
     color: #fff;
     position: absolute;
-    left: 35px;
+    left: 42px;
+	top: -2px;
 }
 ng-icon.search{
 	font-size: 23px;
@@ -46,8 +47,8 @@ ng-icon.cart{
 
 /*---- Logo ----*/
 .logo{
-	width: 125px;
-	padding: 8px 0 0 25px;
+	width: 126px;
+	padding: 4px 0 0 25px;
 }
 
 /*---- Buscador ----*/
@@ -72,7 +73,7 @@ ng-icon.cart{
 	font-weight: 500;
 }
 .Buscador:focus{
-	border: 1px solid #FFAA5A;
+	border: 1px solid #FFA963;
 	outline: none;
 }
 .Buscador::placeholder{
@@ -83,8 +84,8 @@ ng-icon.cart{
 	width: 55px;
 	height: 36.5px;
 	margin: 11px 40px 10px 0px;
-	background: #FFAA5A;
-	border: 1px solid #FFAA5A;
+	background: #FFA963;
+	border: 1px solid #FFA963;
 	border-radius: 0px 4px 4px 0px; 
 	font-size: 20px;
 	color: white;
@@ -117,7 +118,7 @@ ng-icon.cart{
 	margin-top: -7px;
 	text-decoration: none;
 	text-align: center;
-	font-size: 18px;
+	font-size: 10px;
 }
 .ContenidoMenu > li:hover{
 	background: rgba(240,240,240,0.3);
@@ -127,10 +128,11 @@ ng-icon.cart{
 	.menu li a{
 		display: block;
 		color: #fff;
-		margin-top: -7px;
+		margin-top: -4px;
 		text-decoration: none;
 		text-align: center;
-		font-size: 18px;
+		font-size: 16px;
+		font-weight: 500;
 	}
 
 .ContenidoMenu{
@@ -162,7 +164,7 @@ background: rgba(240,240,240,0.3);
 	border-radius: 5px;
 	font-size: 15px;
 	cursor: pointer;
-	background: #FFAA5A;
+	background: #FFA963;
 	color: white;
 	border: none;
 	transition: .3s;
@@ -170,8 +172,8 @@ background: rgba(240,240,240,0.3);
 }
 #dos button:hover{
 	background: white;
-	color: #FFAA5A;
-	border: 1px #FFAA5A solid;
+	color: #FFA963;
+	border: 1px #FFA963 solid;
 }
 .botones a{
 	cursor:default;
@@ -213,8 +215,8 @@ background: rgba(240,240,240,0.3);
 	display: block;
 	margin-top: 1px;
 	padding: 7px 20px;
-	font-size: 18px;
-	font-weight: 200;
+	font-size: 16px;
+	font-weight: 400;
 	text-decoration: none;
 	color: #666;
 	width: 100%;
@@ -223,6 +225,7 @@ background: rgba(240,240,240,0.3);
 #dos li a ng-icon{
 	margin: 0px 35px 0px 25px;
 	height: 100%;
+	font-size: 17px;
 }
 #dos:hover .menu4-gray2{
 	background: rgba(0,0,0,0.3);
@@ -246,14 +249,11 @@ background: rgba(240,240,240,0.3);
 	font-size: 21px;
 }
 .menu li.tres a .text-tres{
-	margin-top: -24px;
-}
-#dos a i.fa{
-	padding: 0px 20px;
-	font-size: 21px;
+	margin-top: -20px;
 }
 #dos a .text-dos{
-	margin-top: -24px;
+	margin-top: -20px;
+	margin-bottom: 21px;
 }
 .contentUser{
 	display: flex;
@@ -276,13 +276,13 @@ background: rgba(240,240,240,0.3);
 	text-align: left;
 	color: #666;
 	margin: 10px;
-	font-size: 16px;
+	font-size: 14px;
 	cursor: pointer;
 }
-.contentUser p:nth-child(2) {
+.contentUser p:nth-child(1) {
 	color: #555;
 	font-size: 17px;
-	font-weight: 660;
+	font-weight: 500;
 
 }
 .contentUser p:hover{
@@ -296,7 +296,7 @@ background: rgba(240,240,240,0.3);
 /*-------------------------- MENU 2 -------------------------*/
 .header2{
 	width: 100%;
-	background: #ffad60;
+	background: #FFA963;
 	height: 30px;
 	position: relative;
 	z-index: 400;
@@ -382,14 +382,14 @@ background: rgba(240,240,240,0.3);
 		display: none;
 	}
 	.btn-menu .text-menu{
-	display: none;
+		display: none;
 	}
 	.btn-menu i.fa{
-	font-size: 30px;
-	margin-top: 5px;
+		font-size: 30px;
+		margin-top: 5px;
 	}
 	#dos ul{
-	margin-left: -130px;
+		margin-left: -130px;
 	}
 }
 @media screen and (max-width: 1250px){

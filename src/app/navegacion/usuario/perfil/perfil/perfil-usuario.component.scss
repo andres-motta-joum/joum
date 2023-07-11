@@ -7,7 +7,7 @@
 .mainPerfilMenu{
 	display: flex;
 	width: 100%;
-	height: 190px;
+	height: 155px;
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	background: white;
@@ -16,122 +16,106 @@
 }
 
 .nombre{
-	font-size: 28px;
+	font-size: 26px;
 	font-weight: 500;
-	letter-spacing: 2px;
+	word-spacing: 3px;
 	color: #444;
 	width: 800px;
+}
+.seguidores{
+	font-size: 15px;
+	color: #666;
+	font-weight: 550;
+	span{
+		font-weight: 450;
+		padding-left: 5px;
+		font-size: 13;
+	}
 }
 
 .picPerfil{
 	object-fit: cover;
-	width: 130px;
-	height: 130px;
+	width: 114px;
+	height: 114px;
 	border-radius: 50%;
 }
 
 
-.btnCambiarFoto{
+.cambiar-foto-icono{
 	position: absolute;
-	top: 86%;
-	width: 125px;
-	height: 100px;
-	left: 44px;
-	border-radius: 7px;
-	background: #5a9cff;
-    transition: .1s;
-	cursor: pointer;
-    &:hover{
-        top: 85%;
-	    background: #518ffa;
-    }
-}
-.btnCambiarFoto p{
-	margin-top: 4px;
-	color: white;
-	font-size: 15px;
-	letter-spacing: 1px;
-	font-family: cursive;
+	padding-top: 34px;
+	width: 114px;
+	height: 80px;
+	border-radius: 50%;
+	background: rgba($color: #000000, $alpha: .45);
+	font-weight: 500;
 	text-align: center;
-	width: 100%;
+	opacity: 0;
+	color: #fff;
+	font-size: 45px;
+	cursor: pointer;
+	transition: .2s;
+	&:hover{
+		opacity: 1;
+    }
 }
 
 
 .levelPerfilMenu{
-	width: 45px;
-	height: 45px;
-	margin-left: -36px;
+	width: 38px;
+	height: 38px;
+	margin-left: -30px;
 	position: relative;
+	z-index: 10;
 }
 .nivelUsuario{
-	color: #333;
-	font-size: 17px;
+	color: #555;
+	font-size: 15px;
 	letter-spacing: 1px;
-	font-weight: 400;
-	margin-top: -13px;
-}
-
-.contenidoSeguidores{
-	margin-top: 38px;
-	background: #FFAA5A;
-	width: 160px;
-	height: 60px;
-	border-radius: 8px;
-	position: relative;
-}
-.numeroSeguidores{
-	color: #fff;
-	text-align: center;
-    padding-top: 5px;
-	font-size: 20px;
 	font-weight: 500;
-	font-family: Verdana;
-    margin-bottom: -18px;
-}
-.Seguidores{
-	color: #fff;
-	text-align: center;
-	font-size: 17px;
-	letter-spacing: 1px;
-	font-weight: 400;
-	font-family: Verdana;
+	margin-top: -13px;
+	span{
+		font-weight: 650;
+	}
 }
 
-.circulo{
-	width: math.div(160px,1px) * .16%;
-	position: relative;
-	height:  math.div(250px,1px) * .7%;
-	background: #ffad60;
-	margin-top: -10px;
-	border-radius: 50%;
-	position: absolute;
-	right: -130px;
+
+.carrito{
+    border-radius: 50%;
+    position: absolute;
+    right: 3.8%;
+    top: 28px;
+    font-size: 35px;
+    color: #888;
+    cursor: pointer;
+    z-index: 5;
+    &:hover{
+        color: #555
+    }
+}
+.carrito-click{
+    animation: carrito .4s;
+    color: #4f9bff !important;
+}
+.carrito-click-over{
+    opacity: 0.01;
+}
+.carrito-full{
+    position: absolute;
+    right: 4%;
+    top: 27px;
+    font-size: 39px;
+    color: #fff;
+    z-index: 4;
 }
 /*---------------------------------------*/
 .contenidoSeguir{
-	margin-top: 160px;
-	background: #5a9cff;
-	width: 100px;
-	height: 80px;
-	border-radius: 8px;
-	left: 530px;
-	transition: .2s;
-	cursor: pointer;
+	margin-top: 35px;
+	right: 13%;
 	position: absolute;
     &:hover{
-        margin-top: 155px;
-        background: #5191ff;
-        border-radius: 10px;
+        background: #5694ff;
     }
-}
-.contenidoSeguir p{
-	color: #fff;
-	text-align: center;
-	font-size: 15px;
-	font-weight: bold;
-	margin-top: 4px;
-	font-family: Verdana;
-    letter-spacing: 1px;
 }
 
 
@@ -149,32 +133,38 @@
 	position: relative;
 }
 .opcionContenido{
-	background: #fff;
+	background-color: rgb(248, 248, 248);
 	height: 40px;
 	flex-grow: 1;
 	cursor: pointer;
 	border-right: 1px solid #ddd;
 	flex-grow: 1;
+	transition: .2s;
+	&:hover{
+		p{
+			color: #222;
+		}
+	}
 }
 
 .opcionContenido p{
 	margin-top: 10px;
-	color: #666;
+	color: #777;
 	font-size: 16px;
 	letter-spacing: 1px;
-	font-weight: 580;
-	font-family: Verdana;
+	font-weight: 550;
 	text-align: center;
 	position: relative;
 }
 
 .classAddContenidoPerfil{
 	z-index: 1;
-	background: #FFAA5A;
-	box-shadow: 0px 0px 10px #FFAA5A;
+	background-color: #fff;
 	p {
-		color: white;
-		font-size: 18px;
+		margin-top: 9px;
+		transition: .2s;
+		color: #484848;
+		font-weight: 650;
 	}
 }
 
@@ -229,7 +219,7 @@
 	top: 70%;
 	width: 180px;
 	height: 15%;
-	background: #FFAA5A;
+	background: #FFA963;
 	border-radius: 10px;
 	border: none;
 	cursor: pointer;
@@ -241,7 +231,7 @@
 }
 
 .botonSeleccionar:hover{
-	background: #FFAA5A;
+	background: #FFA963;
 }
 
 .botonSeleccionar p{
@@ -286,7 +276,7 @@
 	}
 }
 .botonSubirNewClass {
-  background: #FFAA5A;
+  background: #FFA963;
   cursor: pointer;
   &:hover {
     background: #f89d47 !important;
@@ -326,7 +316,7 @@
 	cursor: pointer;
 }
 .equis:hover{
-	background: #FFAA5A;
+	background: #FFA963;
 }
 .equis p{
 	color: white;

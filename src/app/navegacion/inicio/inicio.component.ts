@@ -19,7 +19,7 @@ export class InicioComponent{
     { img: '../../../../assets/img/categoria/estantes/3.jpg', name: 'Estantes' },
     { img: '../../../../assets/img/categoria/lamparas/6.jpg', name: 'Lámparas' },
     { img: '../../../../assets/img/categoria/macetas/1.jpg', name: 'Macetas' },
-    { img: '../../../../assets/img/categoria/relojespared/4.jpg', name: 'Relojes de Pared' },
+    { img: '../../../../assets/img/categoria/relojespared/4.jpg', name: 'Relojes' },
     { img: '../../../../assets/img/categoria/tapetes/1.jpg', name: 'Tapetes' },
     { img: '../../../../assets/img/categoria/vinilos/3.jpg', name: 'Vinilos' },
     { img: '../../../../assets/img/categoria/macetas/2.jpg', name: 'Adornos' }

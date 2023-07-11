@@ -8,14 +8,14 @@
             <nav [ngStyle]='{"height": screenHeight - 90}' class="headercuenta">
                 <ul #principalUL [ngStyle]='{"height": screenHeight - 90}' class="principalUL" id="ul">
                     <div class="contenidoHeader4">
-                        <img src="../../../../../assets/img/usuarios/user.svg" class=" IdPicUser4 fotoPerfil" alt="Image">
+                        <img src="../../../../../assets/img/usuarios/usuario2.png" class=" IdPicUser4 fotoPerfil" alt="Image">
                     </div>
                     <li class="titleMenu">
-                        <span class="menuSmall" id="nombreContenidoUsuario">Andres Motta</span>
+                        <span class="menuSmall" id="nombreContenidoUsuario">Deividcat</span>
                     </li>
 
                     <li><a (click)='navegar(["abcd/perfil/informacion"], $event)' class="perfil-a">
-                        <ng-icon name="heroUserCircleSolid"></ng-icon><span class="menuSmall">Perfil</span></a>
+                        <ng-icon style="font-size: 20px;" name="heroUserCircleSolid"></ng-icon><span style="position: absolute; margin-top: 3px;" class="menuSmall">Perfil</span></a>
                     </li>
                     <li (click)='desplegarSubmenu(0); scroll();' class="item-submenu-compras" menu="1">
                         <p>

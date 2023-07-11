@@ -17,6 +17,7 @@
 	padding-right: 28px;
     min-width: 750px;
     margin: 36px auto 20px auto;
+	margin-top: 25px !important;
 	display: flex;
 	width: 1600px;
 }
@@ -68,7 +69,7 @@
 	.headercuenta .principalUL li.title-menu ng-icon{
 		margin: 25px 0px 22px 0px;
 		font-size: 20px;
-		color: #ff9011;
+		color: #FFA663;
 		padding: 24 0px;
 
 	}
@@ -174,7 +175,7 @@
 			display: none;
 		}
 		.IdPicUser4 {
-			margin-top: 20px;
+			margin-top: 27px;
 			transition: .3s;
 			object-fit: cover;
 			@include picUser4();
@@ -251,10 +252,10 @@
 .headercuenta .principalUL li.titleMenu{
 	padding: 10px 0px 20px 0px;
 	background: #fcfcfc;
-	color: #ff9011;
+	color: #555;
 	font-size: 20px;
 	text-align: center;
-	font-weight: 700;
+	font-weight: 600;
 }
 .headercuenta .principalUL ng-icon{
 	margin-right: 14px;
@@ -264,17 +265,17 @@
 .headercuenta .principalUL a{
 	display: block;
 	padding: 20px;
-	font-size: 18px;
-	font-weight: 200;
+	font-size: 16px;
+	font-weight: 450;
 	text-decoration: none;
-	color: #444;
+	color: #555;
 	margin: 0;
 }
 .headercuenta .principalUL li.item-submenu-compras p{
 	padding: 20px;
-	font-size: 18px;
-	font-weight: 200;
-	color: #444;
+	font-size: 16px;
+	font-weight: 450;
+	color: #555;
 	cursor: pointer;
 	margin:0;
 	position: relative;
@@ -300,9 +301,9 @@
 }
 .headercuenta .principalUL li.item-submenu-ventas p{
 	padding: 20px;
-	font-size: 18px;
-	font-weight: 200;
-	color: #444;
+	font-size: 16px;
+	font-weight: 450;
+	color: #555;
 	cursor: pointer;
 	margin:0;
 	position: relative;

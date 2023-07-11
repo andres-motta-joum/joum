@@ -13,7 +13,6 @@ import { heroShoppingCart } from '@ng-icons/heroicons/outline';
 import { heroStar } from '@ng-icons/heroicons/outline'; 
 import { heroDocumentCheck } from '@ng-icons/heroicons/outline';
 import { heroChatBubbleBottomCenterText } from '@ng-icons/heroicons/outline';
-import { heroBanknotes } from '@ng-icons/heroicons/outline';
 
 /*----------- Iconos Ventas ----------*/
 import { heroRectangleGroup } from '@ng-icons/heroicons/outline'; 

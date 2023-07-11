@@ -58,20 +58,26 @@
 }
 .item-text h1{
 	text-align: center;
+	font-size: 25px;
 	color: #444;
+	line-height: 40px;
+	margin-top: 40px;
 }
 .item-text button{
-	margin-top: 20px;
-	margin-left: 10%;
+	margin-top: 45px;
+	margin-left: 25%;
 	color: #ffffff;
 	font-weight: 600;
 	letter-spacing: 1px;
-	width: 100px;
+	width: 50%;
 	height: 39px;
-	background: #FFAA5A;
+	background: #FFA963;
 	border: none;
 	cursor: pointer;
 	border-radius: 6px;
+	&:hover{
+		background-color:#ff9939;
+	}
 }
 
 .item-img{
@@ -92,16 +98,15 @@
 	margin-top: -80px; 
 	margin-left: 36%;
 	font-weight: 500;
+	font-size: 25px;
 }
 .wave h2 a button{
-	margin-top: 4px; 
+	margin-top:0; 
 	margin-left: 20px;
 	border:none;
-	background:#FFAA5A;
-	width: 110px;
-	height: 32px;
+	background:#FFA963;
+	padding: 6px 24px;
 	border-radius: 6px;
-	color: #444;
 	transition: .3s;
 	color: #444;
 	font-size: 18px;

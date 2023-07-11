@@ -50,7 +50,7 @@ form.paso4 div.input input::placeholder{
 }
 
 form.paso4 div.input input:focus{
-	border: 1px solid #FFAA5A;
+	border: 1px solid #FFA963;
 }
 
 
@@ -69,7 +69,7 @@ form.paso4 div.input select{
 }
 
 form.paso4 div.input select:focus{
-	border: 1px solid #FFAA5A;
+	border: 1px solid #FFA963;
 }
 
 form.paso4 div.input label{
@@ -98,7 +98,7 @@ form.paso4 div.input label{
 .btn3active {
 	width: 30%;
 	float: right;
-	background:#FFAA5A;
+	background:#FFA963;
 	height: 40px;
 	color: white;
     border: none;
@@ -111,7 +111,7 @@ form.paso4 div.input label{
 
 #btn-anterior3{
 	float: left;
-	background: #FFAA5A;
+	background: #FFA963;
 	border: none;
 	color: white;
 	cursor: pointer;
@@ -140,7 +140,7 @@ textarea{
 .anadirFoto{
 	position: absolute;
 	padding: 40px 376px;
-	border: 1px dashed #FFAA5A;
+	border: 1px dashed #FFA963;
 	cursor: pointer;
 	left: 9.1%;
 	top: 211px;
@@ -148,7 +148,7 @@ textarea{
 
 }
 .anadirFoto:hover{
-	border: 2px solid #FFAA5A;
+	border: 2px solid #FFA963;
 	top: 210px;
 	left: 9%;
 }

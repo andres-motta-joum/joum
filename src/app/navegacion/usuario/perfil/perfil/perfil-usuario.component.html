@@ -1,22 +1,19 @@
 <div class="informacion todo perfil">
     <div class="mainPerfilMenu">
-        <div style="margin: 20px 100px 0px 36px; display:flex;">
-            <img src="../../../../../../assets/img/usuarios/user.svg" class="picPerfil" alt="Image">
+        <div style="margin: 20px 46px 0px 36px; display:flex;">
+            <img src="../../../../../../assets/img/usuarios/usuario2.png" class="picPerfil" alt="Image">
             <img class="levelPerfilMenu" src="../../../../../../assets/img/level/user-junior.svg" alt="Image">
-            <div (click)='cambiarFoto()' class="btnCambiarFoto"><p>Cambiar foto</p></div>
+            <ng-icon (click)='cambiarFoto()' name="matCameraAlt" class="cambiar-foto-icono"></ng-icon>
         </div>
         <div>
-            <p class="nombre nombreCompletoPerfil">Andres Yesid Motta</p>
-            <p class="nivelUsuario">Usuario <b>Junior</b></p>
-            <div class="contenidoSeguidores">
-                <p class="numeroSeguidores">{{seguidores}}</p>
-                <p class="Seguidores">Seguidores</p>
-            </div>
-        </div>
-        <div class="contenidoSeguir">
-            <p>Seguir</p>
+            <p class="nombre nombreCompletoPerfil">Deividcat</p>
+            <p class="nivelUsuario">Usuario <span>Junior</span></p>
+            <p class="seguidores">102 <span>seguidores</span></p>
         </div>
         <div class="circulo"></div>
+
+        <ng-icon class="carrito" name="matPersonAddAlt" [class.carrito-click-over] = "carritoClick == true"  (click)="agregarFavorito()"></ng-icon>
+        <ng-icon class="carrito-full" name="matPerson" [class.carrito-click] = "carritoClick == true"></ng-icon>
     </div>
   
     <!-------------Contenido PERFIL---------------------->

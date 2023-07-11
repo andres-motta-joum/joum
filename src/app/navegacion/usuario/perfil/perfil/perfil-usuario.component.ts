@@ -1,14 +1,20 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { provideIcons } from '@ng-icons/core';
+import { matCameraAlt } from '@ng-icons/material-icons/baseline';
+import { matPersonAddAlt } from '@ng-icons/material-icons/baseline';
+import { matPerson } from '@ng-icons/material-icons/baseline';
 
 @Component({
   selector: 'app-perfil-usuario',
   templateUrl: './perfil-usuario.component.html',
-  styleUrls: ['./perfil-usuario.component.scss']
+  styleUrls: ['./perfil-usuario.component.scss'],
+  providers: [provideIcons({matCameraAlt, matPersonAddAlt, matPerson})]
 })
 export class PerfilUsuarioComponent
 {
+  public carritoClick: boolean = false;
   public seguidores: number;
   public state: string;
   private subscriptions: Subscription[] = [];
@@ -43,6 +49,10 @@ export class PerfilUsuarioComponent
   }
   salirFoto():any{
     this.stateFoto = 'inactive';
+  }
+
+  agregarFavorito(){
+    this.carritoClick = !this.carritoClick;
   }
 
 }
