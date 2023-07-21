@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M0 512C0 229.23 229.23 0 512 0C794.77 0 1024 229.23 1024 512C1024 794.77 794.77 1024 512 1024C229.23 1024 0 794.77 0 512Z" id="Fill"/>
+</defs>
+<clipPath id="ArtboardFrame">
+<rect height="1024" width="1024" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Capa-1" vectornator:layerName="Capa 1">
+<use fill="#ff9e57" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.0959189" vectornator:layerName="Óvalo 4" xlink:href="#Fill"/>
+<clipPath clip-rule="nonzero" id="ClipPath">
+<use xlink:href="#Fill"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<path d="M517.988 1024C517.988 1024 920.798 1044.24 1006.03 646.094C954.522 588.583 826.399 453.738 826.399 453.738C826.399 453.738 654.474 400.432 487.325 460.748C252.603 545.448 209.578 744.834 209.578 744.834C277.139 800.445 517.988 1024 517.988 1024Z" fill="#ef904a" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 3"/>
+<path d="M209.973 744.834C209.973 744.834 182.776 433.81 579.576 372.442L578.935 291.98C578.643 255.341 600.403 245.599 627.537 270.221L816.373 441.57C829.821 453.773 829.729 473.455 816.167 485.532L629.549 651.719C602.186 676.086 580.538 666.142 581.196 629.508L582.621 550.192C582.621 550.192 314.105 463.735 209.973 744.834Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 4"/>
+</g>
+</g>
+</svg>

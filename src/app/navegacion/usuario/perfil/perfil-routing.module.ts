@@ -9,32 +9,28 @@ import { PerfilUsuarioComponent } from './perfil/perfil-usuario.component';
   import { EditarDatosComponent } from '../perfil/perfil/secciones/editar-datos/editar-datos.component';
 
 import { ComprasComponent } from './compras/compras/compras.component';
+  import { DetalleCompraComponent } from './compras/compras/detalle-compra/detalle-compra.component';
 import { FavoritosComponent } from './compras/favoritos/favoritos.component';
 import { OpinionesComponent } from './compras/opiniones/opiniones.component';
-import { PreguntasCompradorComponent } from './compras/preguntas-comprador/preguntas-comprador.component';
-
 import { MetricasComponent } from './ventas/metricas/metricas.component';
 /*---------  Secciones Métricas  -----------*/
   import { NegocioComponent } from './ventas/metricas/secciones/negocio/negocio.component';
   import { AtencionCompradoresComponent } from './ventas/metricas/secciones/atencion-compradores/atencion-compradores.component';
   import { StockComponent } from './ventas/metricas/secciones/stock/stock.component';
+  import { PuntosComponent } from './ventas/metricas/secciones/puntos/puntos.component';
 import { NovedadesComponent } from './ventas/novedades/novedades.component';
-import { PreguntasVendedorComponent } from './ventas/preguntas-vendedor/preguntas-vendedor.component';
 import { PublicacionesComponent } from './ventas/publicaciones/publicaciones.component';
 import { ReputacionComponent } from './ventas/reputacion/reputacion.component';
 import { ResumenComponent } from './ventas/resumen/resumen.component';
 import { VentasComponent } from './ventas/ventas/ventas.component';
-/*---------  Secciones Ventas  -----------*/
-  import { EnviarMensajeComponent } from './ventas/ventas/enviar-mensaje/enviar-mensaje.component';
-  import { DetalleVentaComponent } from './ventas/ventas/detalle-venta/detalle-venta.component';
-
+import { TuDineroComponent } from './perfil/secciones/tu-dinero/tu-dinero.component';
 
 import { FacturacionComponent } from './facturacion/facturacion.component';
 /*---------  Secciones facturación  -----------*/
-  import { SaldosPendientesComponent } from './facturacion/secciones/saldos-pendientes/saldos-pendientes.component';
-  import { ResumenFacturacionComponent } from './facturacion/secciones/resumen-facturacion/resumen-facturacion.component';
   import { FacturasReportesComponent } from './facturacion/secciones/facturas-reportes/facturas-reportes.component';
-export const routes: Routes = [
+  import { RetencionesComponent } from './facturacion/secciones/retenciones/retenciones.component';
+
+  export const routes: Routes = [
   {
     path: ':id',
     component: PerfilComponent,
@@ -70,17 +66,17 @@ export const routes: Routes = [
         component: ComprasComponent
       },
       {
+        path: 'compras/detalle-compra',
+        component: DetalleCompraComponent
+      },
+      {
         path: 'favoritos',
         component: FavoritosComponent
       },
       {
         path: 'opiniones',
         component: OpinionesComponent
-      },
-      {
-        path: 'preguntas-comprador',
-        component: PreguntasCompradorComponent
-      },
+      },/*-----------------------------------------*/
       {
         path: 'metricas',
         component: MetricasComponent,
@@ -97,15 +93,15 @@ export const routes: Routes = [
             path: 'stock',
             component: StockComponent
           },
+          {
+            path: 'puntos',
+            component: PuntosComponent
+          },
         ]
       },
       {
         path: 'novedades',
         component: NovedadesComponent
-      },
-      {
-        path: 'preguntas-vendedor',
-        component: PreguntasVendedorComponent
       },
       {
         path: 'publicaciones',
@@ -119,6 +115,10 @@ export const routes: Routes = [
         path: 'resumen',
         component: ResumenComponent
       },
+      {
+        path: 'tu-dinero',
+        component: TuDineroComponent
+      },
 
       /*------- Seccion Ventas-------*/
       {
@@ -131,12 +131,12 @@ export const routes: Routes = [
         component: FacturacionComponent
       },
       {
-        path: 'facturacion/resumen-facturacion',
-        component: ResumenFacturacionComponent
-      },
-      {
         path: 'facturacion/facturas-reportes',
         component: FacturasReportesComponent
+      },
+      {
+        path: 'facturacion/retenciones',
+        component: RetencionesComponent
       }
 
     ]

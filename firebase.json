@@ -2,6 +2,11 @@
   "hosting": {
     "site": "joum",
     "public": "dist/joum",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",

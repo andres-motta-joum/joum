@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M0 512C0 229.23 229.23 0 512 0C794.77 0 1024 229.23 1024 512C1024 794.77 794.77 1024 512 1024C229.23 1024 0 794.77 0 512Z" id="Fill"/>
+</defs>
+<clipPath id="ArtboardFrame">
+<rect height="1024" width="1024" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Capa-1" vectornator:layerName="Capa 1">
+<use fill="#ff7757" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.0959189" vectornator:layerName="Óvalo 4" xlink:href="#Fill"/>
+<clipPath clip-rule="nonzero" id="ClipPath">
+<use xlink:href="#Fill"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<path d="M523 1020.89C523 1020.89 896.439 1080.78 1024 675.003C972.49 617.492 713.54 387.986 713.54 387.986L639.447 829.699L366.617 818.997L523 1020.89Z" fill="#ee6848" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 5"/>
+</g>
+</g>
+<g id="Capa-2" vectornator:layerName="Capa 2">
+<path d="M357.216 164.467C348.465 165.122 340.337 171.6 337.02 181.58L326.305 213.651L721.075 371.524L731.229 338.669C735.38 325.244 729.36 310.63 717.765 306.011L366.023 165.839C363.125 164.684 360.133 164.248 357.216 164.467ZM313.458 386.166L357.496 801.693C360.888 833.669 389.743 859.588 421.898 859.588L610.56 859.588C643.519 859.587 673.064 833.061 676.588 800.291L721.075 386.896L313.458 386.166ZM508.724 437.834C521.748 437.736 532.365 449.582 532.475 464.314L534.829 778.383C534.939 793.114 524.476 805.14 511.452 805.237C498.428 805.334 487.756 793.489 487.646 778.757L485.346 464.688C485.236 449.957 495.699 437.931 508.724 437.834ZM394.953 438.561C408.039 437.71 419.413 449.021 420.376 463.823L440.898 779.404C441.861 794.206 432.062 806.885 418.976 807.736C405.889 808.588 394.461 797.276 393.499 782.475L372.977 466.893C372.014 452.091 381.866 439.412 394.953 438.561ZM631.086 438.561C644.188 439.413 654.052 452.107 653.088 466.926L632.488 782.875C631.525 797.694 620.137 809.018 607.036 808.166C593.934 807.314 584.124 794.62 585.088 779.801L605.634 463.852C606.598 449.033 617.985 437.709 631.086 438.561Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 3"/>
+</g>
+</svg>

@@ -6,13 +6,11 @@ import { ComponentesGeneralesModule } from 'src/app/navegacion/componentes-gener
 import { routes } from '../../perfil-routing.module';
 import { RouterModule } from '@angular/router';
 import { VentasComponent } from './ventas.component';
-import { EnviarMensajeComponent } from './enviar-mensaje/enviar-mensaje.component';
 import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
 
 @NgModule({
   declarations: [
     VentasComponent,
-    EnviarMensajeComponent,
     DetalleVentaComponent
   ],
   imports: [
@@ -21,7 +19,6 @@ import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
     RouterModule.forChild(routes)
   ],
   exports: [
-    EnviarMensajeComponent,
     DetalleVentaComponent
   ]
 })

@@ -1,11 +1,37 @@
+<h1>Compras</h1>
+<div class="encabezado">
+    <p>3 Compras</p>
+    <div>
+        <input type="text" placeholder="Buscar ">
+        <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+        <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+        <select id="">
+            <option value="">Todas</option>
+            <option value="">compra tipo1</option>
+        </select>
+    </div>
+</div>
 
-<div class="informacion inUser">  
-    <div class="NoUser"> 
-            <img src="../../../../../../../assets/img/ilustraciones/ilustración1.jpg" >
-        <div>
-            <h2>Compras</h2>
-            <p class="p">Estará disponible muy pronto.</p>
+<div *ngFor="let compra of compras" class="contenedor">
+    <img src="{{compra.imagen}}">
+    <div>
+        <h3>14 Junio</h3>
+        <p>Cuadro para sala 60 x 120 decorativo moderno</p>
+        <p>ver producto</p>
+    </div>
+    <div>
+        <div (click)="navegar(['abcd/perfil/informacion'], $event)">
+            <img src="../../../../../../assets/img/usuarios/user.svg"><p> Andres Yesid</p>
         </div>
-        <div class="circulo"></div>
-    </div> 
+        <div (click)="navegar(['abcd/abcd/enviar-mensaje'], $event)">
+            <img src="../../../../../../assets/img/logo/iconos/Msg-full.svg"><p>Enviar mensaje</p>
+        </div>
+        <div (click)="navegar(['abcd/compras/detalle-compra'], $event)">
+            <img src="../../../../../../assets/img/logo/iconos/In-time.svg"><p>En camino</p>
+        </div>
+    </div>
+    <div>
+        <button (click)="navegar(['abcd/compras/detalle-compra'], $event)">Ver detalle</button>
+        <button (click)="navegar(['prod/volver-a-comprar'], $event)">Volver a comprar</button>
+    </div>
 </div>

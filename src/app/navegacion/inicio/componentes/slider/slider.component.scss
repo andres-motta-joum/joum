@@ -13,7 +13,6 @@
 	max-width: 1400px;
     overflow: hidden;
 	max-height: 290px;
-
 }
 .slick-track{
     position: relative;
@@ -21,7 +20,7 @@
     left: 0;
     display: flex;
     justify-content: center;
-    transition: .2s ease-in-out;
+    transition: .4s ease-in-out;
 }
 .slick{
     width: 100%;
@@ -61,10 +60,10 @@
     color: rgba(0,0,0,.7);
 }
 .boton-prev{
-    left: 10px;
-    width: 50px;
-    height: 50px;
-    background:white;
+    left: 15px;
+    width: 37px;
+    height: 38px;
+    background:#fff;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -75,17 +74,22 @@
     border-radius: 40%;
     font-family: monospace;
     cursor: pointer;
+    transition: .2s;
+    ng-icon{
+        color: #555;
+        font-size: 25px;
+        transform: translate(-1px, -6px);
+    }
 }
 .boton-next{
-    right: 10px;
-    width: 50px;
-    height: 50px;
-    background: white;
+    right: 15px;
+    width: 37px;
+    height: 38px;
+    background: #fff;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     line-height: 40px;
-    font-size: 30px;
     font-weight: bold;
     text-align: center;
     border-radius: 45%;
@@ -93,17 +97,23 @@
     cursor: pointer;
 	padding-top: 3px;
 	padding-left: 8px;
+    transition: .2s;
+    ng-icon{
+        color: #555;
+        font-size: 25px;
+        transform: translate(-1px, -6px);
+    }
 }
 
 .boton-prev:hover{
-    background: #FFA963;
+    background: #FF9E57;
 	&:hover ng-icon{
 		color: white;
 	}
 }
 
 .boton-next:hover{
-    background: #FFA963;
+    background: #FF9E57;
 	&:hover ng-icon{
 		color: white;
 	}
@@ -118,21 +128,4 @@
 }
 ng-icon{
 	margin-top: 7px;
-}
-
-@media screen and (max-width: 1450px){
-	.botones{
-		width: 43px;
-		height: 43px;
-	}
-	ng-icon{
-		font-size: 25px;
-		margin-top: 4px;
-	}
-	.boton-prev{
-		left: 15px;
-	}
-	.boton-next{
-		right: 15px;
-	}
 }

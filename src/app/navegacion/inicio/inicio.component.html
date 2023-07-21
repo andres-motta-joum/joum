@@ -6,79 +6,75 @@
     <app-slider [elements]="slider"></app-slider>
     <div id="contenidoTotal">
         <!-- CAROUSEL 1 -->
-        <br><br><br>
+        <br><br>
         <app-carrusel [carousel]='1' [elements]="carouselCategorias">
             <h3 class="titulos categoria">Categorías</h3>
         </app-carrusel>
-        <br>
+        <br><br>
         <div class="Linea"></div>
 
+        <!-- CAROUSEL 2 -->
+        <br><br><br>
+        <app-carrusel [carousel]='2' [elements]="carouselOfertas">
+            <h3 class="titulos categoria">Lo más destacado hoy</h3>
+        </app-carrusel>
+        <br><br><br>
 
         <!-- PRIMER ITEM --> 
-
-        <br><br><br>
-        <h3 class="titulos">Quiza te interese 🔥</h3>
-        <div class="contenido1">
+        <h3 class="titulos">Quiza te interese</h3>
+        <div class="contenido-publicitario">
             <div class="item">
                 <div class="item-text">
-                    <h1>Conjunto de cuadros decorativos</h1>
+                    <h1>Cuadros para tu sala</h1>
                     <button>Ver más</button>
                 </div>
                 <img src="../../../../assets/img/categoria/cuadros/6.jpg" class="item-img" ><br>
             </div>
             <div class="item-2">
                 <div class="item-text">
-                    <h1>vinilos de cualquier tamaño</h1>
+                    <h1>Vinilos inspitativos</h1>
                     <button>Ver más</button>
                 </div>
                 <img src="../../../../assets/img/categoria/vinilos/7.jpg" class="item-img"><br>
             </div>
         </div>
 
-        <div id="imagenanuncio1" class="Anuncio">
-            <a href="#"><img src="../../../../assets/img/anuncios/productosdemarca.png"></a>
-        </div>
-        <br><br>
-
-
         <!-- CAROUSEL 2 -->
-
+        <br><br><br><br>
         <app-carrusel [carousel]='2' [elements]="carouselOfertas">
-            <h3 class="titulos categoria" style="font-size: 25px;">Lo más destacado hoy</h3>
+            <h3 class="titulos categoria">Lo más destacado hoy</h3>
         </app-carrusel>
-        <br><br>
 
         <!-- ITEMS 2 -->
-
+        <br><br><br><br>
         <h3 class="titulos">Quizá te interese</h3>
-        <div class="contenido1">
+        <div class="contenido-publicitario">
             <div class="item">
                 <div class="item-text">
-                    <h1>Encuentra las macetas al diseño de tu agrado</h1>
+                    <h1>Encuentra las mejores macetas</h1>
                     <button>Ver más</button>
                 </div>
                 <img src="../../../../assets/img/categoria/macetas/5.jpg" class="item-img"><br>
             </div>
             <div class="item-2">
                 <div class="item-text">
-                    <h1>Conjunto de cuadros decorativos</h1>
+                    <h1>Cuadros para tu sala</h1>
                     <button>Ver más</button>
                 </div>
                 <img src="../../../../assets/img/categoria/cuadros/9.jpg" class="item-img" style="object-position: 0px -15px"><br>
             </div>
         </div>
 
-        <br><br>
         <!-- CAROUSEL 3 -->
-
+        <br><br><br><br>
         <app-carrusel [carousel]='2' [elements]="carouselOfertas">
-        <h3 class="titulos categoria" style="font-size: 25px;">Ofertas para tu hogar</h3>
+        <h3 class="titulos categoria">Ofertas para tu hogar</h3>
         </app-carrusel>
-        <br><br>
+        
         <!-- CAROUSEL 4 -->
-
+        <br><br><br><br>
         <app-carrusel [carousel]='2' [elements]="carouselOfertas">
-        <h3 class="titulos categoria" style="font-size: 25px;">Lo más destacado</h3>
+        <h3 class="titulos categoria">Lo más destacado</h3>
         </app-carrusel>
 
     </div>

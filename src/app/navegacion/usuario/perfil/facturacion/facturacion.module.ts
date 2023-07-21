@@ -5,15 +5,12 @@ import { routes } from '../perfil-routing.module';
 import { RouterModule } from '@angular/router';
 import { FacturacionComponent } from './facturacion.component';
 import { FacturasReportesComponent } from './secciones/facturas-reportes/facturas-reportes.component';
-import { ResumenFacturacionComponent } from './secciones/resumen-facturacion/resumen-facturacion.component';
-import { SaldosPendientesComponent } from './secciones/saldos-pendientes/saldos-pendientes.component';
-
+import { RetencionesComponent } from './secciones/retenciones/retenciones.component';
 @NgModule({
   declarations: [
     FacturacionComponent,
     FacturasReportesComponent,
-    ResumenFacturacionComponent,
-    SaldosPendientesComponent
+    RetencionesComponent
   ],
   imports: [
     CommonModule,
@@ -21,8 +18,7 @@ import { SaldosPendientesComponent } from './secciones/saldos-pendientes/saldos-
   ],
   exports: [
     FacturasReportesComponent,
-    ResumenFacturacionComponent,
-    SaldosPendientesComponent
+    RetencionesComponent
   ]
 })
 export class FacturacionModule { }

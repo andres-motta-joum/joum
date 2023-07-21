@@ -1,0 +1,72 @@
+<h1>Detalle de compra</h1>
+<div class="contenido">
+
+    <div class="left">
+        <div class="encabezado">
+            <img src="../../../../../../../assets/img/usuarios/user.svg">
+            <div>
+                <h3>Andres Yesid Motta</h3>
+                <p>CC 1000320938</p>
+            </div>
+            <div>
+                <img src="../../../../../../../assets/img/logo/iconos/Msg.svg">
+                <img (click)="navegar(['abcd/abcd/enviar-mensaje'], $event)" src="../../../../../../../assets/img/logo/iconos/Msg-full.svg">
+            </div>
+        </div> 
+        <div class="producto">
+            <img src="../../../../../../../assets/img/categoria/macetas/12.jpg">
+            <div>
+                <h4>Conjunto de macetas de decoración para el hogar. 20 cm de alto</h4>
+                <p>Color: Blanco</p>
+                <p>$ 120.000</p>
+            </div>
+            <p>2 Unidades</p>
+            <div>
+                <button>Devolver</button>
+                <button (click)="navegar(['prod/abcd'], $event)">Volver a comprar</button>
+            </div>
+        </div>
+        <div class="envio">
+            <h4>Día de entrega: Del 4 al 8 de Julio</h4>
+            <span><ng-icon name="matQuestionMark"></ng-icon></span>
+            <div class="info-entrega">
+                <ng-icon name="matMoveToInbox"></ng-icon>
+                <ng-icon name="heroTruckSolid"></ng-icon>
+                <ng-icon name="heroCheckCircleSolid"></ng-icon>
+
+                <div class="linea"></div>
+                <div class="linea-color"></div>
+                <div class="en-preparacion"></div>
+                <div class="en-camino"></div>
+                <div class="entregado"></div>
+            </div>
+            <div class="textos">
+                <div>
+                    <h5>En preparación</h5>
+                    <p>16 junio 9:45</p>
+                </div>
+                <div>
+                    <h5>En preparación</h5>
+                    <p>16 junio 9:45</p>
+                </div>
+                <div>
+                    <h5>En preparación</h5>
+                    <p>16 junio 9:45</p>
+                </div>
+            </div>
+        </div>
+        <button>¿Dudas sobre la compra?</button>
+    </div>
+
+    <div class="right">
+        <div class="encabezado">
+            <p>Compra: 14 de julio 15:20</p>
+        </div>
+        <h5>Detalles de pago</h5>
+        <div class="precios">
+            <div>Producto</div><div>$ 120.000</div>
+            <div>Envío</div><div>$ 15.000</div>
+            <div>Total</div><div>$ 135.000</div>
+        </div>
+    </div>
+</div>

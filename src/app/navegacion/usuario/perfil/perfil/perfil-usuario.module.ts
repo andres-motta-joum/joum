@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
     ProductosComponent,
     VideosComponent,
     PerfilUsuarioComponent,
-    EditarDatosComponent
+    EditarDatosComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +28,7 @@ import { RouterModule } from '@angular/router';
     EditarDatosComponent,
     InformacionComponent,
     ProductosComponent,
-    VideosComponent,
+    VideosComponent
   ]
 })
 export class PerfilUsuarioModule { }

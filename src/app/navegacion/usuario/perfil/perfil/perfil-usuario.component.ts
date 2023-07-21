@@ -5,16 +5,20 @@ import { provideIcons } from '@ng-icons/core';
 import { matCameraAlt } from '@ng-icons/material-icons/baseline';
 import { matPersonAddAlt } from '@ng-icons/material-icons/baseline';
 import { matPerson } from '@ng-icons/material-icons/baseline';
+import { heroBuildingStorefrontSolid } from '@ng-icons/heroicons/solid';
+import { heroDocumentTextSolid } from '@ng-icons/heroicons/solid';
+import { heroPlaySolid } from '@ng-icons/heroicons/solid';
+import { heroShareSolid } from '@ng-icons/heroicons/solid';
 
 @Component({
   selector: 'app-perfil-usuario',
   templateUrl: './perfil-usuario.component.html',
   styleUrls: ['./perfil-usuario.component.scss'],
-  providers: [provideIcons({matCameraAlt, matPersonAddAlt, matPerson})]
+  providers: [provideIcons({matCameraAlt, matPersonAddAlt, matPerson, heroBuildingStorefrontSolid, heroDocumentTextSolid, heroPlaySolid, heroShareSolid})]
 })
 export class PerfilUsuarioComponent
 {
-  public carritoClick: boolean = false;
+  public seguirClick: boolean = false;
   public seguidores: number;
   public state: string;
   private subscriptions: Subscription[] = [];
@@ -52,7 +56,7 @@ export class PerfilUsuarioComponent
   }
 
   agregarFavorito(){
-    this.carritoClick = !this.carritoClick;
+    this.seguirClick = !this.seguirClick;
   }
 
 }

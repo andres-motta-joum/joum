@@ -74,17 +74,17 @@ form .box img{
 @for $i from 1 through 9 {
 	.check#{$i} {
 		#check#{$i}:checked ~ & {
-			background:#FFA963;
-			border: 1px solid #FFA963;
-			box-shadow: 0px 0px 15px #FFA963;
+			background:#FF9E57;
+			border: 1px solid #FF9E57;
+			box-shadow: 0px 0px 15px #FF9E57;
 			p{
 				color: white;
 			}
 		}
     input#check#{$i}[type=radio][checked] ~ & {
-			background:#FFA963;
-			border: 1px solid #FFA963;
-			box-shadow: 0px 0px 15px #FFA963;
+			background:#FF9E57;
+			border: 1px solid #FF9E57;
+			box-shadow: 0px 0px 15px #FF9E57;
 			p{
 				color: white;
 			}

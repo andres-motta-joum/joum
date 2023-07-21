@@ -1,37 +1,43 @@
 <div class="informacion todo perfil">
     <div class="mainPerfilMenu">
+        <div class="circulo"></div>
         <div style="margin: 20px 46px 0px 36px; display:flex;">
-            <img src="../../../../../../assets/img/usuarios/usuario2.png" class="picPerfil" alt="Image">
-            <img class="levelPerfilMenu" src="../../../../../../assets/img/level/user-junior.svg" alt="Image">
+            <img src="../../../../../../assets/img/usuarios/user.svg" class="picPerfil" alt="Image">
             <ng-icon (click)='cambiarFoto()' name="matCameraAlt" class="cambiar-foto-icono"></ng-icon>
         </div>
         <div>
-            <p class="nombre nombreCompletoPerfil">Deividcat</p>
+            <p class="nombre nombreCompletoPerfil">Deividcat <img class="nivel" src="../../../../../assets/img/nivel/nivel.svg" alt=""></p>
+            
             <p class="nivelUsuario">Usuario <span>Junior</span></p>
             <p class="seguidores">102 <span>seguidores</span></p>
         </div>
-        <div class="circulo"></div>
-
-        <ng-icon class="carrito" name="matPersonAddAlt" [class.carrito-click-over] = "carritoClick == true"  (click)="agregarFavorito()"></ng-icon>
-        <ng-icon class="carrito-full" name="matPerson" [class.carrito-click] = "carritoClick == true"></ng-icon>
+        <div class="new-follow">
+            <ng-icon class="seguir" name="matPersonAddAlt" [class.seguir-click-over] = "seguirClick == true"  (click)="agregarFavorito()"></ng-icon>
+            <ng-icon class="seguir-full" name="matPerson" [class.seguir-click] = "seguirClick == true"></ng-icon>
+        </div>
+        <div class="mas"><p>···</p></div>
+        <div class="share">
+            <ng-icon name="heroShareSolid"></ng-icon>
+        </div>
     </div>
   
     <!-------------Contenido PERFIL---------------------->
   
     <div class="contenidoPerfil">
         <div [ngClass]='{"classAddContenidoPerfil": state === "info"}' (click)='cambiarEstado("info"); navegar(["abcd/perfil/informacion"], $event)' class="opcionContenido">
-            <p>Información</p>
+            <ng-icon name="heroDocumentTextSolid"></ng-icon><p>Información</p>
         </div>
         <div [ngClass]='{"classAddContenidoPerfil": state === "producto"}' (click)='cambiarEstado("producto"); navegar(["abcd/perfil/productos"], $event)' class="opcionContenido">
-            <p>Productos</p>
+            <ng-icon name="heroBuildingStorefrontSolid"></ng-icon><p>Productos</p>
         </div>
         <div  [ngClass]='{"classAddContenidoPerfil": state === "video"}' (click)='cambiarEstado("video"); navegar(["abcd/perfil/videos"], $event)' class="opcionContenido">
-            <p>Videos</p>
+            <ng-icon name="heroPlaySolid"></ng-icon><p>Videos</p>
         </div>
     </div>
 
     <router-outlet></router-outlet>
 
+    <!------------- Nueva foto ---------------------->
     <div [ngStyle]='{"display": stateFoto === "active" ? "block" : "none"}' class="sombraFoto" id="sombraFoto"></div>
     
     <div [ngStyle]='{"display": stateFoto === "active" ? "block" : "none"}' class="contenidoNewFoto" id="contenidoNuevaFoto">
@@ -49,7 +55,6 @@
           id="subirFoto"><p>Subir</p></div>
         <div class="equis" id="equis" (click)="salirFoto()"><p>X</p></div>
     </div>
-  
   
 </div>
   

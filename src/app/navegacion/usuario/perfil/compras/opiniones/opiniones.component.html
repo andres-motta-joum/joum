@@ -1,10 +1,26 @@
-<div class="informacion inUser">  
-    <div class="NoUser"> 
-            <img src="../../../../../../../assets/img/ilustraciones/ilustración1.jpg" >
-        <div>
-            <h2>Opiniones</h2>
-            <p class="p">Estará disponible muy pronto.</p>
-        </div>
-        <div class="circulo"></div>
-    </div> 
+<h1>Opiniones</h1>
+
+<div class="encabezado">
+    <div>
+        <select id="">
+            <option value="">Todas</option>
+            <option value="">compra tipo1</option>
+        </select>
+    </div>
+    <p>2 / 7 opiniones</p>
+</div>
+
+<div *ngFor="let compra of compras" class="contenedor">
+    <img src="{{compra.imagen}}">
+    <div>
+        <p>Cuadro para sala 60 x 120 decorativo moderno</p>
+        <p>14 junio</p>
+    </div>
+    <div>
+        <ng-icon name="heroStar"></ng-icon>
+        <ng-icon name="heroStar"></ng-icon>
+        <ng-icon name="heroStar"></ng-icon>
+        <ng-icon name="heroStar"></ng-icon>
+        <ng-icon name="heroStar"></ng-icon>
+    </div>
 </div>

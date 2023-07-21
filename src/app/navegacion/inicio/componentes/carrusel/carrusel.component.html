@@ -33,12 +33,12 @@
                         <img [src]='element.img' alt="Image">
                     </picture>
                     <div style="height: 100px;">
-                        <p class="slick-precio-rebaja">{{ element.precioRebaja | currency:'$ ':'symbol':'0.0' }}</p>
+                        <p class="precio-final">{{ element.precioFinal | currency:'$ ':'symbol':'0.0' }}</p>
                         <div style="display: flex;">
-                            <p class="slick-precio">{{ element.precioNormal | currency:'$ ':'code':'0.0' }}</p>
-                            <p class="slick-text-porcent">- {{ element.descuento | percent }} OFF</p>
+                            <p class="precio-anterior">{{ element.precioAnterior | currency:'$ ':'code':'0.0' }}</p>
+                            <p class="porcentaje-rebaja">- {{ element.descuento | percent }} OFF</p>
                         </div>
-                        <p class="slick-Titulo">{{ element.name }}</p>
+                        <p class="titulo-producto">{{ element.name }}</p>
                     </div>
                 </div>
                 <div (click)="navegar(['prod/abcd/'])" *ngIf='carousel === 3' class="slick-content3">
@@ -47,10 +47,10 @@
                     </picture>
                     <div>
                         <div style="display: flex;">
-                            <p class="slick-precio-rebaja">{{ element.precioNormal - element.precioRebaja | currency:'$ ':'symbol':'0.0' }}</p>
-                            <p class="slick-text-porcent-3">{{ element.descuento | percent }} OFF</p>
+                            <p class="precio-final">{{ element.precioAnterior - element.precioFinal | currency:'$ ':'symbol':'0.0' }}</p>
+                            <p class="porcentaje-rebaja-3">{{ element.descuento | percent }} OFF</p>
                         </div>
-                        <p class="slick-Titulo">{{ element.name }}</p>
+                        <p class="titulo-producto">{{ element.name }}</p>
                     </div>
                 </div>
             </div>

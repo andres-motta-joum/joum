@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { heroCog8ToothSolid } from '@ng-icons/heroicons/solid';
 
@@ -9,5 +10,13 @@ import { heroCog8ToothSolid } from '@ng-icons/heroicons/solid';
   providers: [provideIcons({heroCog8ToothSolid})]
 })
 export class InformacionComponent {
+  constructor(private zone: NgZone, private router: Router){
+  }
 
+  navegar(ruta: any[], event: Event){
+    event.preventDefault();
+    this.zone.run(()=>{
+      this.router.navigate(ruta)
+    })
+  }
 }

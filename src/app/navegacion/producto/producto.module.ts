@@ -8,7 +8,6 @@ import { ComponentesGeneralesModule } from '../componentes-generales/componentes
 import { InicioModule } from '../inicio/inicio.module';
 import { DescripcionComponent } from './componentes/descripcion/descripcion.component';
 import { DatosVendedorComponent } from './componentes/datos-vendedor/datos-vendedor.component';
-import { PreguntasRespuestasComponent } from './componentes/preguntas-respuestas/preguntas-respuestas.component';
 import { DatosProductoComponent } from './componentes/datos-producto/datos-producto.component';
 import { DatosProductoDosComponent } from './componentes/datos-producto-dos/datos-producto-dos.component';
 import { FotosProductoComponent } from './componentes/fotos-producto/fotos-producto.component';
@@ -20,7 +19,6 @@ import { DatosProductoTresComponent } from './componentes/datos-producto-tres/da
     ProductoComponent,
     DescripcionComponent,
     DatosVendedorComponent,
-    PreguntasRespuestasComponent,
     DatosProductoComponent,
     DatosProductoDosComponent,
     FotosProductoComponent,

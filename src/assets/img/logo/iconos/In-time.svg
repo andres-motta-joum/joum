@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M0 512C0 229.23 229.23 0 512 0C794.77 0 1024 229.23 1024 512C1024 794.77 794.77 1024 512 1024C229.23 1024 0 794.77 0 512Z" id="Fill"/>
+</defs>
+<clipPath id="ArtboardFrame">
+<rect height="1024" width="1024" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Capa-1" vectornator:layerName="Capa 1">
+<use fill="#59abee" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.0959189" vectornator:layerName="Óvalo 4" xlink:href="#Fill"/>
+<clipPath clip-rule="nonzero" id="ClipPath">
+<use xlink:href="#Fill"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<path d="M590.359 1024C590.359 1024 914.815 989.086 998.521 685.027C965.12 603.863 933.903 597.478 781.713 355.961C781.713 355.961 676.091 722.535 306.732 742.578C306.732 742.578 457.032 878.813 590.359 1024Z" fill="#4898da" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 1"/>
+<path d="M197.364 512C197.364 343.928 338.231 207.68 512 207.68C685.769 207.68 826.636 343.928 826.636 512C826.636 680.072 685.769 816.32 512 816.32C338.231 816.32 197.364 680.072 197.364 512Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 5"/>
+<path d="M463.699 521.014C463.699 493.24 487.301 470.724 516.417 470.724C545.532 470.724 569.134 493.24 569.134 521.014C569.134 548.788 545.532 571.304 516.417 571.304C487.301 571.304 463.699 548.788 463.699 521.014Z" fill="#57a1ff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 6"/>
+<path d="M512 341.339L510 518L622.268 622.654" fill="none" opacity="1" stroke="#57a1ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="74.4949" vectornator:layerName="Línea 1"/>
+</g>
+</g>
+<g id="Capa-2" vectornator:layerName="Capa 2" visibility="hidden">
+<path d="M512 207.68C338.226 207.68 197.364 343.924 197.364 512C197.364 680.076 338.226 816.32 512 816.32C685.774 816.32 826.636 680.076 826.636 512C826.636 343.924 685.774 207.68 512 207.68ZM615.61 655.244L480.536 524.599L480.536 329.408L543.464 329.408L543.464 499.401L660.099 612.213L615.61 655.244Z" fill="#000000" fill-rule="nonzero" opacity="0.405769" stroke="none" vectornator:layerName="path"/>
+</g>
+</svg>
