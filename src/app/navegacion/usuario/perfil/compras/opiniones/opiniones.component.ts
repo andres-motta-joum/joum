@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { heroStar } from '@ng-icons/heroicons/outline';
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-opiniones',
@@ -10,20 +11,16 @@ import { heroStar } from '@ng-icons/heroicons/outline';
   providers: [provideIcons({heroStar})]
 })
   export class OpinionesComponent {
-    public compras: Array<any>= [
+    public opiniones: Array<Producto>= [
       {
-        imagen: '../../../../../../assets/img/categoria/macetas/13.jpg'
+        foto: '../../../../../../assets/img/categoria/cuadros/19.jpg',
+        precio: 0,
+        descuento: 0
       },
       {
-        imagen: '../../../../../../assets/img/categoria/lamparas/6.jpg'
-      }
-      ,
-      {
-        imagen: '../../../../../../assets/img/categoria/vinilos/6.jpg'
-      }
-      ,
-      {
-        imagen: '../../../../../../assets/img/categoria/macetas/2.jpg'
+        foto: '../../../../../../assets/img/categoria/coleccionables/3.jpg',
+        precio: 0,
+        descuento: 0
       }
     ]
 

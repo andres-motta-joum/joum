@@ -43,9 +43,9 @@ export class ProductoComponent {
       this.carouselSimilaress.push({
         img: imagen,
         name: 'Cuadro Decorativo Noche Estrellada 100 X 70 Cm',
-        precioNormal: 220000,
-        precioRebaja: 46000,
-        descuento: '0.36'
+        precioAnterior: 38000,
+        precioFinal: (38000 - (38000 * 0.35)),
+        descuento: '0.35'
       });
     }
 

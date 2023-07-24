@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M0 512C0 299.923 128.942 117.961 312.706 40.2355C373.961 14.3269 441.308 0 512 0C794.77 0 1024 229.23 1024 512C1024 794.77 794.77 1024 512 1024C229.23 1024 0 794.77 0 512Z" id="Fill"/>
+</defs>
+<g id="Capa-1" vectornator:layerName="Capa 1">
+<g opacity="1" vectornator:layerName="Óvalo 4">
+<use fill="#ffffff" fill-rule="nonzero" stroke="none" xlink:href="#Fill"/>
+<mask height="1024" id="StrokeMask" maskUnits="userSpaceOnUse" width="1024" x="0" y="0">
+<rect fill="#000000" height="1024" stroke="none" width="1024" x="0" y="0"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#929292" stroke-linecap="butt" stroke-linejoin="round" stroke-width="82.4742" xlink:href="#Fill"/>
+</g>
+</g>
+<g id="Capa-3" vectornator:layerName="Capa 3">
+<path d="M164.717 502.23C164.717 450.469 207.582 408.509 260.458 408.509C313.334 408.509 356.199 450.469 356.199 502.23C356.199 553.991 313.334 595.951 260.458 595.951C207.582 595.951 164.717 553.991 164.717 502.23Z" fill="#929292" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 5"/>
+<path d="M413.808 502.23C413.808 450.469 456.672 408.509 509.549 408.509C562.425 408.509 605.289 450.469 605.289 502.23C605.289 553.991 562.425 595.951 509.549 595.951C456.672 595.951 413.808 553.991 413.808 502.23Z" fill="#929292" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 6"/>
+<path d="M665.425 502.23C665.425 450.469 708.289 408.509 761.166 408.509C814.042 408.509 856.906 450.469 856.906 502.23C856.906 553.991 814.042 595.951 761.166 595.951C708.289 595.951 665.425 553.991 665.425 502.23Z" fill="#929292" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 7"/>
+</g>
+</svg>

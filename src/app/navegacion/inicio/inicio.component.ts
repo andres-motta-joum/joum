@@ -14,17 +14,24 @@ export class InicioComponent{
   ];
   
   carouselCategorias = [
-    { img: '../../../../assets/img/categoria/cuadros/4.jpg', name: 'Cuadros' },
-    { img: '../../../../assets/img/categoria/estantes/4.jpg', name: 'Estantes' },
+    { img: '../../../../assets/img/categoria/cuadros/21.jpg', name: 'Cuadros' },
+    { img: '../../../../assets/img/categoria/estantes/15.jpg', name: 'Estantes' },
     { img: '../../../../assets/img/categoria/lamparas/6.jpg', name: 'Lámparas' },
     { img: '../../../../assets/img/categoria/macetas/1.jpg', name: 'Macetas' },
-    { img: '../../../../assets/img/categoria/relojespared/4.jpg', name: 'Relojes' },
-    { img: '../../../../assets/img/categoria/tapetes/1.jpg', name: 'Tapetes' },
-    { img: '../../../../assets/img/categoria/vinilos/3.jpg', name: 'Vinilos' },
-    { img: '../../../../assets/img/categoria/macetas/2.jpg', name: 'Adornos' }
+    { img: '../../../../assets/img/categoria/relojespared/14.jpg', name: 'Relojes' },
+    { img: '../../../../assets/img/categoria/difusores/1.jpg', name: 'Difusores' },
+    { img: '../../../../assets/img/categoria/vinilos/9.jpg', name: 'Vinilos' },
+    { img: '../../../../assets/img/categoria/coleccionables/19.jpg', name: 'Coleccionables' }
   ];
 
   public carouselOfertas: any[] = [
+    {
+      img: '../../../../assets/img/categoria/cuadros/19.jpg',
+      name: 'Conjunto de cuadros pequeños decorativos',
+      precioAnterior: 164000,
+      precioFinal: (164000 - (164000 * 0.17)),
+      descuento: '0.17'
+    },
     {
       img: '../../../../assets/img/categoria/cuadros/6.jpg',
       name: 'Cuadros decorativos para sala modernos y elegantes',
@@ -33,17 +40,10 @@ export class InicioComponent{
       descuento: '0.2'
     },
     {
-      img: '../../../../assets/img/categoria/macetas/12.jpg',
-      name: 'Conjunto de 3 masenas pequeñas con...',
-      precioAnterior: 65000,
-      precioFinal: (65000 - (65000 * 0.17)),
-      descuento: '0.17'
-    },
-    {
-      img: '../../../../assets/img/categoria/macetas/6.jpg',
-      name: 'Macetas delgadas 8 x 20',
-      precioAnterior: 30000,
-      precioFinal: (30000 - (30000 * 0.35)),
+      img: '../../../../assets/img/categoria/macetas/15.jpg',
+      name: 'Conjunto de macetas pequeñas para el hogar',
+      precioAnterior: 38000,
+      precioFinal: (38000 - (38000 * 0.35)),
       descuento: '0.35'
     },
     {
@@ -61,11 +61,46 @@ export class InicioComponent{
       descuento: '0.1'
     },
     {
-      img: '../../../../assets/img/categoria/vinilos/5.jpg',
-      name: 'Vinilo para cocina',
+      img: '../../../../assets/img/categoria/coleccionables/17.jpg',
+      name: 'Figuras coleccionables',
       precioAnterior: 29000,
       precioFinal: (29000 - (29000 * 0.16)),
       descuento: '0.16'
+    },
+        {
+      img: '../../../../assets/img/categoria/cuadros/19.jpg',
+      name: 'Conjunto de cuadros pequeños decorativos',
+      precioAnterior: 164000,
+      precioFinal: (164000 - (164000 * 0.17)),
+      descuento: '0.17'
+    },
+    {
+      img: '../../../../assets/img/categoria/cuadros/6.jpg',
+      name: 'Cuadros decorativos para sala modernos y elegantes',
+      precioAnterior: 115000,
+      precioFinal: (115000 - (115000 * 0.2)),
+      descuento: '0.2'
+    },
+    {
+      img: '../../../../assets/img/categoria/macetas/15.jpg',
+      name: 'Conjunto de macetas pequeñas para el hogar',
+      precioAnterior: 38000,
+      precioFinal: (38000 - (38000 * 0.35)),
+      descuento: '0.35'
+    },
+    {
+      img: '../../../../assets/img/categoria/relojespared/2.jpg',
+      name: 'Reloj de pared estilo con mariposas',
+      precioAnterior: 40000,
+      precioFinal: (40000 - (40000 * 0.19)),
+      descuento: '0.19'
+    },
+    {
+      img: '../../../../assets/img/categoria/vinilos/3.jpg',
+      name: 'Vinilo con frase motivacional',
+      precioAnterior: 45000,
+      precioFinal: (45000 - (45000 * 0.1)),
+      descuento: '0.1'
     }
   ];
 

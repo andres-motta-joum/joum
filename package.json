@@ -23,6 +23,7 @@
     "@ng-icons/heroicons": "^25.1.0",
     "@ng-icons/material-icons": "^25.1.0",
     "@ng-icons/ux-aspects": "^25.1.0",
+    "chart.js": "^4.3.0",
     "firebase": "^10.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

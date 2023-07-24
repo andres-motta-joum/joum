@@ -1,11 +1,4 @@
-
-<div class="informacion inUser">  
-    <div class="NoUser"> 
-            <img src="../../../../../../../assets/img/ilustraciones/ilustración1.jpg" >
-        <div>
-            <h2>Novedades</h2>
-            <p class="p">Estará disponible muy pronto.</p>
-        </div>
-        <div class="circulo"></div>
-    </div> 
+<h1>Novedades</h1>
+<div class="contenedor">
+<app-novedad [novedad]="novedad" *ngFor="let novedad of novedades"></app-novedad>
 </div>

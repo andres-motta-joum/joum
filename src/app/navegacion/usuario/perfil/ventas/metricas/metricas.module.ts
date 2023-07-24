@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgIconsModule } from '@ng-icons/core';
 
 import { routes } from '../../perfil-routing.module';
 import { RouterModule } from '@angular/router';
@@ -16,6 +17,7 @@ import { StockComponent } from './secciones/stock/stock.component';
     StockComponent
   ],
   imports: [
+    NgIconsModule,
     CommonModule,
     RouterModule.forChild(routes)
   ],

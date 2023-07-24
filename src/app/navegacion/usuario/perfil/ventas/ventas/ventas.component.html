@@ -1,12 +1,33 @@
+<h1>Ventas</h1>
 
-<div class="informacion inUser">  
-    <div class="NoUser"> 
-            <img src="../../../../../../../assets/img/ilustraciones/ilustración1.jpg" >
-        <div>
-            <h2>Ventas</h2>
-            <p class="p">Estará disponible muy pronto.</p>
+<div class="contenedor">
+    <div>
+        <div class="encabezado">
+            <p>2 ventas</p>
+            <div>
+                <input type="text" placeholder="Buscar ">
+                <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+                <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+                <select id="">
+                    <option value="">Filtrar por</option>
+                    <option value="">compra tipo1</option>
+                </select>
+            </div>
         </div>
-        <div class="circulo"></div>
-    </div> 
+        <app-venta [venta]="venta" *ngFor="let venta of ventas"></app-venta>
+    </div>
+    <div class="derecha">
+        <div>
+            <p>Por preparar</p>
+            <p>1 venta</p>
+        </div>
+        <div>
+            <p>En camino</p>
+            <p>0 venta</p>
+        </div>
+        <div>
+            <p>Finalizadas</p>
+            <p>1 venta</p>
+        </div>
+    </div>
 </div>
-<button (click)="navegar(['abcd/ventas/detalle-venta'], $event)">Detalle de venta</button>

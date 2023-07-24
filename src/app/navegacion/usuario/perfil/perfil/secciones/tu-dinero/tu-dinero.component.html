@@ -1,1 +1,25 @@
-<p>tu-dinero works!</p>
+<h1>Tu dinero</h1>
+<div class="contenedor">
+    <div class="left">
+         <div>
+            <p>Movimientos</p>
+            <select>
+                <option value="">Periodo</option><option value="">ultimos 7 días</option>
+            </select>
+         </div>
+         <div class="movimientos">
+            <app-movimiento-dinero [movimiento]="movimiento" *ngFor="let movimiento of movimientos"></app-movimiento-dinero>
+         </div>
+    </div>
+    <div class="right">
+        <div>
+            <p>Disponible</p>
+            <p>$ 110.000</p>
+        </div>
+        <div>
+            <p>A liberar</p>
+            <p>$ 455.000</p>
+        </div>
+        <button>Retirar dinero</button>
+    </div>
+</div>

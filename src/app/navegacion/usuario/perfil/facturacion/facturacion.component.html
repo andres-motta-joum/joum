@@ -1,13 +1,24 @@
-<div class="informacion inUser">  
-    <div class="NoUser"> 
-            <img src="../../../../../../../assets/img/ilustraciones/ilustración1.jpg" >
-        <div>
-            <h2>Facturación</h2>
-            <p class="p">Estará disponible muy pronto.</p>
-        </div>
-        <div class="circulo"></div>
-    </div> 
+<h1>Fecturación</h1>
+
+<div class="contenedor">
+    <div>
+        <p>En curso</p>
+        <p>Si quieres ver información de meses anteriores ingresa a <span>Facturas y reportes de tus cargos</span></p>
+    </div>
+    <div>
+        <p>Facturas y reportes</p>
+        <p>Si quieres ver información de meses anteriores ingresa a <span>Facturas y reportes de tus cargos</span></p>
+        <button (click)="navegar(['abcd/facturacion/facturas-reportes'],$event)">Facturas y reportes</button>
+    </div>
+    <div>
+        <p>Datos de facturación</p>
+        <p>Andres Yesid Motta</p>
+        <p>CC 1000320938</p>
+        <button (click)="navegar(['abcd/facturacion/editar-datos'],$event)">Editar mis datos</button>
+    </div>
+    <div>
+        <p>Impuestos</p>
+        <p><span>Retenciones:</span> Puedes descargar la información de tus retenciones</p>
+        <button (click)="navegar(['abcd/facturacion/retenciones'],$event)">Retenciones</button>
+    </div>
 </div>
-<button (click)="navegar(['abcd/facturacion/editar-datos'], $event)">Editar datos</button>
-<button (click)="navegar(['abcd/facturacion/facturas-reportes'], $event)">Facturas y reportes</button>
-<button (click)="navegar(['abcd/facturacion/retenciones'], $event)">Retenciones</button>

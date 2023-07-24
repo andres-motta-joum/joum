@@ -1,16 +1,15 @@
-
-<div class="informacion inUser">  
-    <div class="NoUser"> 
-            <img src="../../../../../../../assets/img/ilustraciones/ilustración1.jpg" >
-        <div>
-            <h2>Métricas</h2>
-            <p class="p">Estará disponible muy pronto.</p>
-        </div>
-        <div class="circulo"></div>
-    </div> 
+<h1>Métricas</h1>
+<div class="encabezado">
+    <div [ngClass]="{'active': encabezadoUrl === 'negocio'}" (click)="navegar(['abcd/metricas/negocio'], $event)" >Negocio</div>
+    <div [ngClass]="{'active': encabezadoUrl === 'atencion'}" (click)="navegar(['abcd/metricas/atencion-compradores'], $event)" >Atención de clientes</div>
+    <div [ngClass]="{'active': encabezadoUrl === 'stock'}" (click)="navegar(['abcd/metricas/stock'], $event)" >Stock</div>
+    <div [ngClass]="{'active': encabezadoUrl === 'puntos'}" (click)="navegar(['abcd/metricas/puntos'], $event)" >Puntos</div>
+    <div>
+        <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+        <select>
+            <option> Ultimos 7 días</option>
+            <option>Este mes</option>
+        </select>
+    </div>
 </div>
-<button (click)="navegar(['abcd/metricas/negocio'], $event)">Negocio</button>
-<button (click)="navegar(['abcd/metricas/atencion-compradores'], $event)">Atención compradores</button>
-<button (click)="navegar(['abcd/metricas/stock'], $event)">Stock</button>
-<button (click)="navegar(['abcd/metricas/puntos'], $event)">Puntos</button>
 <router-outlet></router-outlet>

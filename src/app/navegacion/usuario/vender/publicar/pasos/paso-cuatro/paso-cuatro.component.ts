@@ -172,7 +172,7 @@ export class PasoCuatroComponent {
             }
           ]);
           break;
-        case 'Tapetes':
+        case 'Difusores':
           res([[
               'Código universal',
               'Cantidad',
@@ -230,7 +230,7 @@ export class PasoCuatroComponent {
             }
           ]);
           break;
-        case 'Adornos':
+        case 'Coleccionables':
           res([[
               'Código universal',
               'Cantidad',

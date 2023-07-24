@@ -12,26 +12,4 @@
     </div>
 </div>
 
-<div *ngFor="let compra of compras" class="contenedor">
-    <img src="{{compra.imagen}}">
-    <div>
-        <h3>14 Junio</h3>
-        <p>Cuadro para sala 60 x 120 decorativo moderno</p>
-        <p>ver producto</p>
-    </div>
-    <div>
-        <div (click)="navegar(['abcd/perfil/informacion'], $event)">
-            <img src="../../../../../../assets/img/usuarios/user.svg"><p> Andres Yesid</p>
-        </div>
-        <div (click)="navegar(['abcd/abcd/enviar-mensaje'], $event)">
-            <img src="../../../../../../assets/img/logo/iconos/Msg-full.svg"><p>Enviar mensaje</p>
-        </div>
-        <div (click)="navegar(['abcd/compras/detalle-compra'], $event)">
-            <img src="../../../../../../assets/img/logo/iconos/In-time.svg"><p>En camino</p>
-        </div>
-    </div>
-    <div>
-        <button (click)="navegar(['abcd/compras/detalle-compra'], $event)">Ver detalle</button>
-        <button (click)="navegar(['prod/volver-a-comprar'], $event)">Volver a comprar</button>
-    </div>
-</div>
+<app-compra [compra]="compra" *ngFor="let compra of compras"></app-compra>

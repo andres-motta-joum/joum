@@ -1,0 +1,161 @@
+.body{
+    width: 100%;
+    background: #f5f5f5;
+    position: absolute;
+    height: 100%;
+    overflow: hidden !important;
+}
+h1{
+    margin: 40px auto 0 auto;
+    width: calc(100% - 70px);
+    max-width: 1200px;
+    color: #888;
+    font-weight: 500;
+    font-size: 14px;
+    span{
+        padding-left: 5px;
+        color: #888;
+        font-size: 12px;
+    }
+}
+
+.contenido{
+    margin: 10px auto 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: calc(100% - 70px);
+    max-width: 1200px;
+    margin-bottom: 80px;
+    .left{
+        position: relative;
+        height: 75vh;
+        min-height: 450px;
+        max-height: 600px;
+        border: 1px solid #e4e4e3;
+        border-radius: 5px;
+        background: white;
+        .encabezado{
+            position: relative;
+            height: 60px;
+            border-bottom: 1px solid #d6d6d6;
+            background-color: #f5f5f5;
+            display: flex;
+            border-radius: 5px 5px 0 0;
+            > img{
+                width: 40px;
+                height: 40px;
+                margin-top: 10px;
+                margin-left: 30px;
+            }
+            div{
+                h3{
+                    color: #555;
+                    font-weight: 500;
+                    margin-left: 20px;
+                }
+            }
+            div:nth-child(3){
+                margin: 18px 0;
+                position: absolute;
+                right: 60px;
+                img:nth-child(1){
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 30px;
+                    height: 30px;
+                }
+                img:nth-child(2){
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 30px;
+                    height: 30px;
+                    opacity: 0;
+                    transition: .2s;
+                    cursor: pointer;
+                    &:hover{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        .chat{
+            display: grid;
+            grid-template-rows: 7.5fr 1fr;
+            height: calc(100% - 76px);
+            .contenedorMensajes{
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: auto;
+            }
+            > div:nth-child(2){
+                bottom: 20px;
+                padding-top: 12px;
+                box-shadow: 0 0 10px 5px #fff;
+                bottom: 20px;
+                display: grid;
+                width: calc(100% - 70px);
+                margin-left: 35px;
+                display: flex;
+                justify-content: space-between;
+                align-items: end;
+                background-color: #fff;
+                z-index: 2;
+                .message-input {
+                    width: calc(100% - 80px);
+                    padding: 10px 15px;
+                    border: 1px solid #ccc;
+                    background-color: #f8f8f8;
+                    border-radius: 5px;
+                    resize: none;
+                    max-height: 50px;
+                    overflow-y: auto;
+                    white-space: pre-wrap;
+                    line-height: 1.5;
+                    overflow-wrap: anywhere;
+                    outline: none;
+                    font-size: 13px;
+                    letter-spacing: .3px;
+                    &:focus {
+                        border: 1px solid #ddd;
+                    }
+                }
+                img{
+                    height: 38px;
+                    
+                }
+                
+            }
+            
+        }
+
+    }
+    .right{
+        margin-left: 3%;
+        height: 75vh;
+        min-height: 450px;
+        max-height: 600px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: white;
+        .encabezado{
+            height: 60px;
+            background-color: #e9e9e9;
+            border-bottom: 1px solid #ddd;
+            border-radius: 5px 5px 0 0;
+            p{  
+                margin: 0;
+                padding-left: 30px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                font-size: 14px;
+                color: #666;
+                letter-spacing: .5px;
+            }
+        }
+    }
+}

@@ -1,10 +1,15 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, Input, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
+import { provideIcons } from '@ng-icons/core';
+
+import { heroChevronLeftSolid } from '@ng-icons/heroicons/solid';
+import { heroChevronRightSolid } from '@ng-icons/heroicons/solid';
 
 @Component({
   selector: 'app-carrusel',
   templateUrl: './carrusel.component.html',
-  styleUrls: ['./carrusel.component.scss']
+  styleUrls: ['./carrusel.component.scss'],
+  viewProviders: provideIcons({heroChevronLeftSolid, heroChevronRightSolid})
 })
 export class CarruselComponent {
   @Input() elements: Array<any> = [{img: '', name: ''}];
@@ -16,6 +21,8 @@ export class CarruselComponent {
   public slickWidth!: number;
 
   public leftPosition!: number;
+
+  public botonPrev: Boolean = false;
 
   constructor( 
     private renderer: Renderer2,
@@ -52,6 +59,16 @@ export class CarruselComponent {
       this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition + this.slickWidth)}px`);
     } else if (this.leftPosition > 0 && value === 1) {
       this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition - this.slickWidth)}px`);
+    }
+
+    if(value == 1){
+      if(this.leftPosition <= 300){
+        this.botonPrev = false;
+      }else if(this.leftPosition > 0){
+        this.botonPrev = true;
+      }
+    }else if(value == 2){
+      this.botonPrev = true;
     }
   }
 }

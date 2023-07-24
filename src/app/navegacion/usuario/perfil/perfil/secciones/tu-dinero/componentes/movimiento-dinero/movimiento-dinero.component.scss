@@ -1,0 +1,53 @@
+.contenido{
+    position: relative;
+    width: calc(100% - 60px);
+    border-bottom: 1px solid #ddd;
+    margin: 20px 30px;
+    height: 50px;
+    display: flex;
+    img{
+        height: 28px;
+        transform: translateY(3px);
+        margin-right: 10px;
+    }
+    > div:nth-child(2){
+        p:nth-child(1){
+            margin: 0;
+            color: #555;
+            font-size: 15px;
+            letter-spacing: .4px;
+            font-weight: 500;
+        }
+        p:nth-child(2){
+            margin: 0;
+            color: #777;
+            font-size: 13px;
+            letter-spacing: .4px;
+            font-weight: 500;
+        }
+    }
+    > div:nth-child(3){
+        position: absolute;
+        right: 0;
+        text-align: end;
+        p:nth-child(1){
+            margin: 0;
+            color: #555;
+            font-size: 15px;
+            letter-spacing: .4px;
+            font-weight: 500;
+        }
+        p:nth-child(2){
+            margin: 0;
+            color: #777;
+            font-size: 13px;
+            letter-spacing: .4px;
+            font-weight: 500;
+        }
+    }
+}
+.pago{
+    color: #00b937 !important;
+    font-weight: 550;
+}
+

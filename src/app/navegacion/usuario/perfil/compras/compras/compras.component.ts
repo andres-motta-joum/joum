@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { heroMagnifyingGlassMini } from '@ng-icons/heroicons/mini';
 import { heroAdjustmentsHorizontal } from '@ng-icons/heroicons/outline';
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-compras',
@@ -12,12 +13,16 @@ import { heroAdjustmentsHorizontal } from '@ng-icons/heroicons/outline';
 })
 export class ComprasComponent {
 
-  public compras: Array<any>= [
+  public compras: Array<Producto>= [
     {
-      imagen: '../../../../../../assets/img/categoria/macetas/12.jpg'
+      foto: '../../../../../../assets/img/categoria/cuadros/19.jpg',
+      precio: 0,
+      descuento: 0
     },
     {
-      imagen: '../../../../../../assets/img/categoria/lamparas/3.jpg'
+      foto: '../../../../../../assets/img/categoria/coleccionables/3.jpg',
+      precio: 0,
+      descuento: 0
     }
   ]
 

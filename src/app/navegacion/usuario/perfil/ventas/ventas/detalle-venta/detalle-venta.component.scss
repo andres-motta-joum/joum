@@ -1,0 +1,381 @@
+.body{
+    width: 100%;
+    min-height: 100vh;
+    background: #f5f5f5;
+    position: absolute;
+}
+h1{
+    margin: 40px auto 0 auto;
+    width: calc(100% - 70px);
+    max-width: 1200px;
+    color: #777;
+    font-weight: 500;
+    font-size: 17px;
+    span{
+        padding-left: 5px;
+        color: #888;
+        font-size: 13px;
+    }
+}
+
+.contenido{
+    margin: 10px auto 0 auto;
+    display: flex;
+    width: calc(100% - 70px);
+    max-width: 1200px;
+    margin-bottom: 80px;
+    .left{
+        position: relative;
+        width: 72%;
+        height: 550px;
+        border: 1px solid #e4e4e3;
+        border-radius: 5px;
+        background: white;
+        .encabezado{
+            position: relative;
+            height: 60px;
+            border-bottom: 1px solid #d6d6d6;
+            display: flex;
+            > img{
+                width: 40px;
+                height: 40px;
+                margin-top: 10px;
+                margin-left: 30px;
+            }
+            div{
+                h3{
+                    color: #555;
+                    font-weight: 500;
+                    margin: 10px 20px 2px 20px;
+                    
+                }
+                p{
+                    margin: 0;
+                    margin: 0 20px;
+                    font-size: 14px;
+                    font-weight: 450;
+                    color: #666;
+                }
+            }
+            div:nth-child(3){
+                margin: 12px;
+                position: absolute;
+                right: 56px;
+                img:nth-child(1){
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 36px;
+                    height: 36px;
+                }
+                img:nth-child(2){
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 36px;
+                    height: 36px;
+                    opacity: 0;
+                    transition: .2s;
+                    cursor: pointer;
+                    &:hover{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        .producto{
+            position: relative;
+            display: flex;
+            width: calc(100% - 60px);
+            height: 100px;
+            margin: 20px 30px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            img{
+                width: 80px;
+                height: 70px;
+                padding: 3px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                margin: 12px;
+                object-fit: contain;
+            }
+            div:nth-child(2){
+                margin-top: 15px;
+                margin-left: 10px;
+                h4{
+                    font-size: 13px;
+                    color: #666;
+                    font-weight: 600;
+                    margin: 0;
+                    max-width: 300px;
+                }
+                p:nth-child(2){
+                    font-size: 12px;
+                    color: #777;
+                    margin: 4px 0;
+                }
+                p:nth-child(3){
+                    font-size: 12px;
+                    color: #777;
+                    margin: 8px 0;
+                    font-weight: 500;
+                }
+            }
+            > p{
+                position: absolute;
+                right: 15px;
+                top: 0;
+                font-weight: 500;
+                font-size: 12px;
+                color: #777;
+            }
+            div:nth-child(4){
+                position: absolute;
+                right: 15px;
+                display: flex;
+                bottom: 15px;
+                @mixin estilo-boton{
+                    border-radius: 10px;
+                    font-weight: 500;
+                    border: none;
+                    padding: 5px 15px;
+                    font-size: 12px;
+                    cursor: pointer;
+                }
+                button:nth-child(1){
+                    background-color: #eee;
+                    border: 1px solid #ccc;
+                    color: #555;
+                    @include estilo-boton;
+                }
+                button:nth-child(2){
+                    margin-left: 10px;
+                    background-color: #FF9E57;
+                    color: #fff;
+                    @include estilo-boton;
+                }
+            }
+        }
+        .envio{
+            position: relative;
+            height: 180px;
+            width: calc(100% - 60px);
+            margin: 20px 30px;
+            h4{
+                font-weight: 500;
+                color: #666;
+                letter-spacing: .5px;
+                font-size: 14px;
+            }
+            span{
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 20px;
+                height: 20px;
+                background: #ccc;
+                border-radius: 50%;
+                ng-icon{
+                    font-size: 15px;
+                    color: white;
+                    margin: 2.5px;
+                }
+            }
+            .info-entrega{
+                position: relative;
+                margin-top: 40px;
+                height: 53px;
+                /*--- Iconos ---*/  
+                ng-icon:nth-child(1){
+                    color: #FF9E57;
+                    font-size: 22px;
+                    margin-left: 0;
+                }
+                ng-icon:nth-child(2){
+                    color: #FF9E57;
+                    font-size: 24px;
+                    position: absolute;
+                    top: 0;
+                    left: calc(50% - 9px);
+                }
+                ng-icon:nth-child(3){
+                    margin: 0;
+                    color: #bbb;
+                    font-size: 24px;
+                    position: absolute;
+                    top: 0;
+                    right: -2px;
+                }
+                /*--- Progreso ---*/
+                .linea{
+                    position: absolute;
+                    height: 5px;
+                    width: 100%;
+                    background: #ccc;
+                    bottom: 8px;
+                }
+                .linea-color{
+                    position: absolute;
+                    height: 5px;
+                    width: 50%;
+                    background: #FF9E57;
+                    bottom: 8px;
+                }
+                .en-preparacion{
+                    position: absolute;
+                    width: 13px;
+                    height: 13px;
+                    border: 4px solid #FF9E57;
+                    bottom: 0;
+                    left: 0;
+                    border-radius: 50%;
+                    background-color: white;
+                }
+                .en-camino{
+                    position: absolute;
+                    width: 13px;
+                    height: 13px;
+                    border: 4px solid #FF9E57;
+                    bottom: 0;
+                    left: calc(50% - 8px);
+                    border-radius: 50%;
+                    background-color: white;
+                }
+                .entregado{
+                    position: absolute;
+                    width: 13px;
+                    height: 13px;
+                    border: 4px solid #ccc;
+                    bottom: 0;
+                    right: 0;
+                    border-radius: 50%;
+                    background-color: white;
+                }
+
+            }
+        }
+        .textos{
+            height: 60px;
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(3,auto);
+            column-gap: 10px;
+            div{
+                h5{
+                    width: 100%;
+                    margin: 0;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #555;
+                }
+                p{
+                    width: 100%;
+                    font-weight: 450;
+                    font-size: 12px;
+                    color: #888;
+                    margin-top: 5px;
+                }
+            }
+            div:nth-child(2){
+                h5, p{
+                    text-align: center;
+                }
+            }
+            div:nth-child(3){
+                h5, p{
+                    text-align: right;
+                }
+            }
+        }
+        .datos-envio{
+            margin-left: 30px;
+            margin-top: 60px;
+            p:nth-child(1){
+                font-size: 15px;
+                font-weight: 500;
+                color: #555;
+            }
+            p:nth-child(3),p:nth-child(2){
+                font-size: 13px;
+                font-weight: 450;
+                color: #888;
+            }
+        }
+    }
+    .right{
+        margin-left: 3%;
+        width: 30%;
+        height: 550px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: white;
+        .encabezado{
+            height: 60px;
+            background-color: #e9e9e9;
+            border-bottom: 1px solid #ddd;
+            p{  
+                margin: 0;
+                padding-left: 30px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                font-size: 14px;
+                color: #666;
+                letter-spacing: .5px;
+            }
+        }
+        h5{
+            font-size: 16px;
+            color: #555;
+            font-weight: 500;
+            margin-left: 30px;
+        }
+        .precios{
+            width: calc(100% - 60px);
+            margin-left: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            div{
+                border-bottom: 1px solid #ddd;
+                padding: 16px 0;
+                color: #444;
+                font-size: 13.5px;
+            }
+            div:nth-child(2n+2){
+                text-align: right;
+            }
+            div:nth-last-child(-n+2){
+                border-bottom: none;
+                font-weight: 500;
+
+            }
+        }
+        > div:nth-child(4){
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            button{
+                width: calc(100% - 60px);
+                margin: 8px 30px;
+                padding: 6px;
+                border-radius: 5px;
+                border: none;
+                background: #eee;
+                color: #555;
+                font-weight: 450;
+                &:hover{
+                    cursor: pointer;
+                    background-color: #e5e5e5;
+                    color: #000;
+                }
+                ng-icon{
+                    transform: translate(-7px, 1px);
+
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,228 @@
+.contenido{
+    margin-top: 16px;
+    height: 260px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    column-gap: 20px;
+    > div{
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+    }
+    .grafica{
+        position: relative;
+        padding-left: 3px;
+        display: grid;
+        grid-template-columns: 1fr 7.5fr;
+        grid-template-rows: 4fr 1fr;
+        padding-right: 6%;
+        > div:nth-child(1){
+            margin-top: 55px;
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+            grid-row: 1/3;
+            p{
+                height: 31.5px;
+                font-size: 11.5px;
+                color: #666;
+                transform: translateX(75%);
+                margin: 0;
+            }
+        }
+        > div:nth-child(2){
+            margin-top: 58px;
+            padding-top: 15px;
+            border-left: 1.5px solid #ccc;
+            border-bottom: 1.5px solid #bbb;
+            height: 153px;
+            div{
+                height: 30px;
+                width: 100%;
+                border-top: 1.5px dashed  #ddd;
+            }
+        }
+        > div:nth-child(3){
+            margin-top: 6px;
+            height: 20px;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: 0 10px;
+            p{  
+                position: relative;
+                margin: 0;
+                font-size: 10px;
+                text-align: center;
+                color: #666;
+                letter-spacing: .4px;
+            }
+            
+            p::after{
+                content: '';
+                width: 38%;
+                position: absolute;
+                top: -7.3px;
+                left: 30.5%;
+                background-color: #9dcbf9;
+                border-radius: 5px 5px 0 0;
+            }
+            p:nth-child(1)::after{
+                height: calc(153px * 0.20);
+                transform: translateY(- calc(153px * 0.20));
+            }
+            p:nth-child(2)::after{
+                height: calc(153px * 0.20);
+                transform: translateY(- calc(153px * 0.20));
+            }
+            p:nth-child(3)::after{
+                height: calc(153px * 0.60);
+                transform: translateY(- calc(153px * 0.60));
+            }
+            p:nth-child(4)::after{
+                height: calc(153px * 0.20);
+                transform: translateY(- calc(153px * 0.20));
+            }
+            p:nth-child(5)::after{
+                height: calc(153px * 1);
+                transform: translateY(- calc(153px * 1));
+            }
+            p:nth-child(6)::after{
+                height: calc(153px * 0.80);
+                transform: translateY(- calc(153px * 0.80));
+            }
+            p:nth-child(7)::after{
+                height: calc(153px * 0.40);
+                transform: translateY(- calc(153px * 0.40));
+                background-color: #5eafff;
+            }
+        }
+        > p:nth-child(4){
+            position: absolute;
+            top: 5px;
+            left: 4.6%;
+            font-size: 13px;
+            font-weight: 450;
+            letter-spacing: .4px;
+            color: #4a4a4a;
+        }
+        > p:nth-child(5){
+            position: absolute;
+            top: 5px;
+            right: 36px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .4px;
+            color: #7a7a7a;
+            span{
+                font-size: 11px;
+                padding-left: 2px;
+                font-weight: 450;
+                letter-spacing: .4px;
+                color: #888;
+            }
+        }
+    }
+    .graficaCircular{
+        position: relative;
+        .color{
+            position: relative;
+            margin-top: 70px;
+            margin-left: 30px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(#f7f7f7 0% 1%,#f89588 2% 32%,#f7f7f7 33% 35%, #ffae7c 36% 98%, #f6f6f6 99% 99%);
+            &::before{
+                content: "";
+                width: 160px;
+                height: 160px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: white content-box;
+                border-radius: 50%;
+                padding: 26px;
+                box-sizing: border-box;
+            }
+        }
+        > div:nth-child(2){
+            position: absolute;
+            top: 70px;
+            left: 30px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            p{
+                margin: 0;
+                font-size: 15px;
+                font-weight: 500;
+                letter-spacing: .4px;
+                color: #777;
+            }
+            p:nth-child(1){
+                font-size: 22px;
+                margin-top: -5px;
+                color: #666;
+            }
+        }
+        > div:nth-child(3){
+            position: absolute;
+            top: 75px;
+            right: 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            p{  
+                position: relative;
+                margin: 0;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: .4px;
+                color: #555;
+                padding-bottom: 30px;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    left: -25px;
+                    top: 0;
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 3px;
+                    background-color: #ffae7c;
+                }
+            }
+            p:nth-child(2){
+                padding-left: 35px;
+                &::before{
+                    left: 10px;
+                    top: 0;
+                    background-color: #f89588;
+                }
+            }
+        }
+        > p:nth-child(4){
+            position: absolute;
+            top: 5px;
+            left: 30px;
+            font-size: 13px;
+            font-weight: 450;
+            letter-spacing: .4px;
+            color: #4a4a4a;
+        }
+        > p:nth-child(5){
+            position: absolute;
+            bottom: 25px;
+            right: 9%;
+            font-size: 11px;
+            font-weight: 450;
+            letter-spacing: .6px;
+            word-spacing: 2px;
+            color: #666;
+        }
+    }
+}

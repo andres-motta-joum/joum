@@ -5,12 +5,12 @@
             'slick-list2':carousel === 2,
             'slick-list3':carousel === 3
         }">
-        <button (click)='Move(1)' [ngClass]="{
+        <button *ngIf="botonPrev" (click)='Move(1)' [ngClass]="{
                 'slick-arrow slick-prev':carousel === 1,
                 'slick-arrow2 slick-prev2':carousel === 2,
                 'slick-arrow3 slick-prev3':carousel === 3
             }">
-            &#60;
+            <ng-icon name="heroChevronLeftSolid"></ng-icon>
         </button>
         <div #track [ngClass]="{
                 'slick-track':carousel === 1,
@@ -60,7 +60,7 @@
             'slick-arrow2 slick-next2':carousel === 2,
             'slick-arrow3 slick-next3':carousel === 3
             }">
-            &#62;
+            <ng-icon name="heroChevronRightSolid"></ng-icon>
         </button>
     </div>
 </div>

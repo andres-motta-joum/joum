@@ -1,0 +1,12 @@
+<div class="contenido">
+    <img src="../../../../../../../../../assets/img/logo/iconos/Mensajes-check.svg">
+    <div>
+        <p>{{fecha}}</p>
+        <p>{{movimiento.nombreCuenta}}</p>
+    </div>
+    <div>
+        <p [ngClass]="{'pago': movimiento.tipo === 'Pago por venta'}" >{{movimiento.cantidad}}</p>
+        <p>{{movimiento.tipo}}</p>
+    </div>
+</div>
+

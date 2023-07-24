@@ -1,0 +1,19 @@
+.novedad{
+    width: 100%;
+    position: relative;
+    border: 1px solid #e4e4e3;
+    box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.095);
+    border-radius: 8px;
+    background: white;
+    padding: 10px 30px;
+    p{
+        font-size: 13px;
+        color: #707070;
+        letter-spacing: .3px;
+        word-spacing: 1px;
+    }
+    p:nth-child(1){
+        font-weight: 500;
+        font-size: 15px;
+    }
+}

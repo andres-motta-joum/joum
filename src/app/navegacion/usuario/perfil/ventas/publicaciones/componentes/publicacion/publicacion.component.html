@@ -1,0 +1,64 @@
+<div class="contenedor" [ngClass]="{'masUnidades': unidades}">
+    <img src="{{publicacion.foto}}">
+    <div>
+        <p>Conjunto de cuadros de decoración para habitación 60 x 120</p>
+        <p>#437498239</p>
+        <p (click)="desplegarUnidades()">3 unidades <ng-icon name="heroChevronDownMini"></ng-icon></p>
+    </div>
+    <div>
+        <p>Publicación</p>
+        <p>Gratuita</p>
+        <p>Precio</p>
+        <p>$ 120.000</p>
+    </div>
+    <div>
+        <p>Envío</p>
+        <p>Gratuita</p>
+    </div>
+    <!--------- POSITION ABSOLUTE --------->
+    <div>
+        <img src="../../../../../../assets/img/logo/iconos/ver-mas.svg">
+        <img (click)="desplegarSubMenu()"  src="../../../../../../assets/img/logo/iconos/ver-mas-full.svg">
+    </div>
+    <div *ngIf="subMenu" class="submenu">
+        <p>Republicar</p>
+        <p (click)="navegar(['prod/abcd'],$event)">Ver publicación</p>
+        <p>Eliminar</p>
+    </div>     
+
+    <p class="vistas">24 vistas | 3 ventas</p>
+    <p class="fecha">12 de junio 2023</p>
+
+    <!------- SUB MENU UNIDADES------>
+    <div class="linea"></div>
+    <div class="unidades">
+        <div>
+            <img src='{{publicacion.foto}}'>
+            <div>
+                <p>Color: Blanco </p>
+                <p>2 unidades</p>
+            </div>
+        </div>
+        <div>
+            <img src='{{publicacion.foto}}'>
+            <div>
+                <p>Color: Blanco </p>
+                <p>2 unidades</p>
+            </div>
+        </div>
+        <div>
+            <img src='{{publicacion.foto}}'>
+            <div>
+                <p>Color: Blanco </p>
+                <p>2 unidades</p>
+            </div>
+        </div>
+        <div>
+            <img src='{{publicacion.foto}}'>
+            <div>
+                <p>Color: Blanco </p>
+                <p>2 unidades</p>
+            </div>
+        </div>
+    </div>
+</div>

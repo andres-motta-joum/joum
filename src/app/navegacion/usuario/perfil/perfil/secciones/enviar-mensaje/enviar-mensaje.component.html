@@ -1,2 +1,36 @@
-<app-menu-simple></app-menu-simple>
-<p>enviar-mensaje works!</p>
+<div class="body">
+    <app-menu-simple></app-menu-simple>
+    <h1>Compra <span>#84948585</span></h1>
+    <div class="contenido">
+        <div class="left">
+            <div class="encabezado">
+                <img src="../../../../../../../assets/img/usuarios/user.svg">
+                <div>
+                    <h3>Andres Yesid Motta</h3>
+                </div>
+                <div>
+                    <img src="../../../../../../../assets/img/logo/iconos/ver-mas.svg">
+                    <img (click)="navegar(['abcd/abcd/enviar-mensaje'], $event)" src="../../../../../../../assets/img/logo/iconos/ver-mas-full.svg">
+                </div>
+            </div> 
+            <div class="chat">
+                <div class="contenedorMensajes">
+                    <app-mensaje [mensaje]="mensaje" *ngFor="let mensaje of mensajes"></app-mensaje>
+                </div>
+                <div>
+                    <div class="message-input" contenteditable="true"></div>
+                    <img src="../../../../../../../assets/img/logo/iconos/Msg-full.svg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="encabezado">
+                <p>Compra: 14 de julio 15:20</p>
+            </div>
+            <div class="contenedorMensajes">
+                <app-producto [producto]="producto" *ngFor="let producto of productos"></app-producto>
+            </div>
+        </div>
+    </div>
+</div>

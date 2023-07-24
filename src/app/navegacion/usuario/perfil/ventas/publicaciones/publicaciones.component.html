@@ -1,11 +1,14 @@
-
-<div class="informacion inUser">  
-    <div class="NoUser"> 
-            <img src="../../../../../../../assets/img/ilustraciones/ilustración1.jpg" >
-        <div>
-            <h2>Publicaciones</h2>
-            <p class="p">Estará disponible muy pronto.</p>
-        </div>
-        <div class="circulo"></div>
-    </div> 
+<h1>Publicaciones</h1>
+<div class="encabezado">
+    <p>2 publicaciones</p>
+    <div>
+        <input type="text" placeholder="Buscar ">
+        <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+        <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+        <select id="">
+            <option value="">Todas</option>
+            <option value="">compra tipo1</option>
+        </select>
+    </div>
 </div>
+<app-publicacion [publicacion]="publicacion" *ngFor="let publicacion of publicaciones"></app-publicacion>

@@ -1,1 +1,12 @@
-<p>retenciones works!</p>
+<h1>Retenciones</h1>
+<div class="encabezado">
+    <p>2 resultados</p>
+    <div>
+        <select id="">
+            <option value="">Todas</option>
+            <option value="">compra tipo1</option>
+        </select>
+    </div>
+</div>
+
+<app-retencion [retencion]="retencion" *ngFor="let retencion of retenciones"></app-retencion>

@@ -13,7 +13,8 @@ import { PerfilUsuarioModule } from './perfil/perfil-usuario.module';
 import { ComprasComponent } from './compras/compras/compras.component';
   import { DetalleCompraComponent } from './compras/compras/detalle-compra/detalle-compra.component';
 import { FavoritosComponent } from './compras/favoritos/favoritos.component';
-import { OpinionesComponent } from './compras/opiniones/opiniones.component';/*-- Ventas --*/
+import { OpinionesComponent } from './compras/opiniones/opiniones.component';
+/*-- Ventas --*/
 import { MetricasModule } from './ventas/metricas/metricas.module';
 import { NovedadesComponent } from './ventas/novedades/novedades.component';
 import { PublicacionesComponent } from './ventas/publicaciones/publicaciones.component';
@@ -22,8 +23,14 @@ import { ResumenComponent } from './ventas/resumen/resumen.component';
 import { VentasModule } from './ventas/ventas/ventas.module';
 /*-- Facturación --*/
 import { FacturacionModule } from './facturacion/facturacion.module';
-import { EnviarMensajeComponent } from './perfil/secciones/enviar-mensaje/enviar-mensaje.component';
-import { TuDineroComponent } from './perfil/secciones/tu-dinero/tu-dinero.component';
+import { EnviarMensajeModule } from './perfil/secciones/enviar-mensaje/enviar-mensaje.module';
+
+/*-- componentes internos __*/
+import { PublicacionComponent } from './ventas/publicaciones/componentes/publicacion/publicacion.component';
+import { CompraComponent } from './compras/compras/componentes/compra/compra.component';
+import { FavoritoComponent } from './compras/favoritos/componentes/favorito/favorito.component';
+import { OpinionComponent } from './compras/opiniones/componentes/opinion/opinion.component';
+import { NovedadComponent } from './ventas/novedades/componentes/novedad/novedad.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +43,11 @@ import { TuDineroComponent } from './perfil/secciones/tu-dinero/tu-dinero.compon
     PublicacionesComponent,
     ReputacionComponent,
     ResumenComponent,
-    EnviarMensajeComponent,
-    TuDineroComponent
+    PublicacionComponent,
+    CompraComponent,
+    FavoritoComponent,
+    OpinionComponent,
+    NovedadComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +57,7 @@ import { TuDineroComponent } from './perfil/secciones/tu-dinero/tu-dinero.compon
     VentasModule,
     MetricasModule,
     FacturacionModule,
+    EnviarMensajeModule,
     RouterModule.forChild(routes),
   ]
 })

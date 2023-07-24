@@ -10,6 +10,9 @@ import { PerfilUsuarioComponent } from './perfil-usuario.component';
 import { EditarDatosComponent } from './secciones/editar-datos/editar-datos.component';
 
 import { RouterModule } from '@angular/router';
+/*---------- Componentes internos ---------*/
+import { TuDineroComponent } from './secciones/tu-dinero/tu-dinero.component';
+import { MovimientoDineroComponent } from './secciones/tu-dinero/componentes/movimiento-dinero/movimiento-dinero.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { RouterModule } from '@angular/router';
     VideosComponent,
     PerfilUsuarioComponent,
     EditarDatosComponent,
+    MovimientoDineroComponent,
+    TuDineroComponent
   ],
   imports: [
     CommonModule,

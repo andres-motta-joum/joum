@@ -8,13 +8,13 @@ import { provideIcons } from '@ng-icons/core';
   styleUrls: ['./resumen.component.scss']
 })
 export class ResumenComponent {
-constructor(private zone: NgZone, private router: Router){
-    }
+  constructor(private zone: NgZone, private router: Router){
+  }
 
-    navegar(ruta: any[], event: Event){
-      event.preventDefault();
-      this.zone.run(()=>{
-        this.router.navigate(ruta)
-      })
-    }
+  navegar(ruta: any[], event: Event){
+    event.preventDefault();
+    this.zone.run(()=>{
+      this.router.navigate(ruta)
+    })
+  }
 }

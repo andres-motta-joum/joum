@@ -1,0 +1,38 @@
+h1{
+    margin:0;
+    color: #6c6c6c;
+    font-weight:550;
+    font-size: 24px;
+    letter-spacing: .5x;
+    word-spacing: 2px;
+}
+
+.encabezado{
+    position: relative;
+    display: flex;
+    margin-top: 30px;
+    p{
+        margin: 0;
+        padding-top: 8px;
+        color: #777;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    div{
+        position: absolute;
+        right: 0;
+        top: 0;
+        select{
+            padding: 5px;
+            padding-left: 36px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            color: #444;
+            cursor: pointer;
+            width: 200px;
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+}

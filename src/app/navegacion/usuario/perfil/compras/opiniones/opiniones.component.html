@@ -9,18 +9,4 @@
     </div>
     <p>2 / 7 opiniones</p>
 </div>
-
-<div *ngFor="let compra of compras" class="contenedor">
-    <img src="{{compra.imagen}}">
-    <div>
-        <p>Cuadro para sala 60 x 120 decorativo moderno</p>
-        <p>14 junio</p>
-    </div>
-    <div>
-        <ng-icon name="heroStar"></ng-icon>
-        <ng-icon name="heroStar"></ng-icon>
-        <ng-icon name="heroStar"></ng-icon>
-        <ng-icon name="heroStar"></ng-icon>
-        <ng-icon name="heroStar"></ng-icon>
-    </div>
-</div>
+<app-opinion [opinion]="opinion" *ngFor="let opinion of opiniones"></app-opinion>

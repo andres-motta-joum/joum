@@ -1,0 +1,246 @@
+.masUnidades{
+    height: 270px !important;
+    :nth-child(3){
+        bottom: 105px !important;
+    }
+}
+.contenedor{
+    position: relative;
+    margin-top: 14px;
+    width: 100%;
+    height: 180px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    display: flex;
+    transition: .3s;
+    overflow: hidden;
+
+    > img{
+        width: 116px;
+        height:116px;
+        margin-top: 30px;
+        margin-left: 30px;
+        border-radius: 8px;
+        object-fit: contain;
+        border: 1px solid #ddd;
+        padding: 4px;
+    }
+    /*---------------------------------------------------- DIV 2 --------------------------*/
+    > div:nth-child(2){
+        margin-top: 15px;
+        margin-left: 25px;
+        height: 3px;
+        p:nth-child(1){
+            font-size: 18px;
+            font-weight: 500;
+            color: #444;
+            margin: 16px 0 10px 0;
+            max-width: 360px;
+        }
+        p:nth-child(2){
+            font-size: 13px;
+            font-weight: 500;
+            color: #888;
+            margin-top: 5px;
+        }
+        :nth-child(3){
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+            position: absolute;
+            bottom: 15px;
+            letter-spacing: .5px;
+            transition: .3s;
+            cursor: pointer;
+            &:hover{
+                color: #333;
+            }
+            ng-icon{
+                font-size: 20px;
+                transform: translateY(6px);
+                color: #333;
+            }
+        }
+    }
+    /*---------------------------------------------------- DIV 3 --------------------------*/
+    > div:nth-child(3){
+        margin-top: 15px;
+        margin-left: 25px;
+        height: 3px;
+        p:nth-child(1){
+            font-size: 17px;
+            font-weight: 500;
+            color: #555;
+            margin: 16px 0 10px 0;
+            max-width: 360px;
+        }
+        p:nth-child(2){
+            font-size: 13px;
+            font-weight: 500;
+            color: #888;
+            margin-top: 5px;
+        }
+        p:nth-child(3){
+            font-size: 17px;
+            font-weight: 500;
+            color: #555;
+            margin: 16px 0 10px 0;
+            max-width: 360px;
+        }
+        p:nth-child(4){
+            font-size: 13px;
+            font-weight: 500;
+            color: #888;
+            margin-top: 5px;
+        }
+    }
+    /*---------------------------------------------------- DIV 4 --------------------------*/
+    > div:nth-child(4){
+        margin-top: 15px;
+        margin-left:40px;
+        height: 3px;
+        p:nth-child(1){
+            font-size: 17px;
+            font-weight: 500;
+            color: #555;
+            margin: 16px 0 10px 0;
+            max-width: 360px;
+        }
+        p:nth-child(2){
+            font-size: 13px;
+            font-weight: 500;
+            color: #888;
+            margin-top: 5px;
+        }
+    }
+    /*---------------------------------------------------- DIV 5  (POSITION ABSOLUTE)--------------------------*/
+    > div:nth-child(5) {
+        margin: 20px;
+        position: absolute;
+        right: 35px;
+        
+        img:nth-child(1) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 32px;
+        }
+
+        img:nth-child(2) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            opacity: 0;
+            transition: .2s;
+            cursor: pointer;
+            
+            &:hover {
+                opacity: 1;
+            }  
+        }
+    }
+    .submenu {
+        position: absolute;
+        top: 58px;
+        right: 22px;
+        width: 150px;
+        height: 115px;
+        background: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 13px 4px #e3e3e3;
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+        z-index: 1;
+        border-radius: 5px;
+        overflow: hidden;
+        p {
+            margin: 0;
+            padding: 10px 10px;
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 450;
+            text-align: left;
+            border-radius: 5px;
+            cursor: pointer;
+            &:hover{
+                background-color: #f8f8f8;
+            }
+        }
+        animation: expandMenu .3s ease;
+    }
+    @keyframes expandMenu {
+        0% {
+            height: 0;
+        }
+        100%{
+            height: 115px;
+        }
+    }
+    > .vistas{
+        position: absolute;
+        right: 80px;
+        top: 14px;
+        font-size: 12px;
+        font-weight: 450;
+        color: #6a6a6a;
+        letter-spacing: .8px;
+    }
+    > .fecha{
+        position: absolute;
+        right: 30px;
+        top: 140px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #888;
+    }
+
+    /*--------Unidades----------*/
+    .linea{
+        position: absolute;
+        width: calc(100% - 60px);
+        left: 30px;
+        top: 181px;
+        border-bottom: 1px solid #ddd;
+    }
+    .unidades{
+        position: absolute;
+        width: calc(100% - 60px);
+        left: 30px;
+        top: 200px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        > div{
+            display: flex;
+            margin-right: 30px;
+            img{
+                height: 46px;
+                padding: 4px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            p:nth-child(1){
+                color: #444;
+                font-size: 14px;
+                padding-left: 10px;
+                font-weight: 500;
+                margin: 0;
+                margin-top: 10px;
+            }
+            p:nth-child(2){
+                color: #777;
+                font-size: 12px;
+                padding-left: 10px;
+                font-weight: 500;
+                margin-top: 5px;
+            }
+
+        }
+    }
+
+}

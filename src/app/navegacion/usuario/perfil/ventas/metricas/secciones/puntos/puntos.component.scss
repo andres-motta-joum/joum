@@ -1,0 +1,157 @@
+.contenido{
+    margin-top: 16px;
+    height: 260px;
+    display: grid;
+    grid-template-columns: 1fr;
+    > div{
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+    }
+    .graficaCircular{
+        position: relative;
+        .color{
+            transform: rotate(120deg);
+            position: relative;
+            margin-top: 60px;
+            margin-left: 30px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #f7f7f7 0% 1%,#FF9E57 1% 45%,
+                #f7f7f7 46% 47%, #ffc757 47% 69%,
+                #f7f7f7 70% 71%, #57ddff 71% 78%,
+                #f7f7f7 79% 80%,#578cff 80% 89%,
+                #f7f7f7 90% 91%, #808080 91% 95%,
+                #f7f7f7 96% 97%, #aaa 97% 99%,
+
+                #f6f6f6 100%);
+            &::before{
+                content: "";
+                width: 160px;
+                height: 160px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: white content-box;
+                border-radius: 50%;
+                padding: 26px;
+                box-sizing: border-box;
+            }
+        }
+        > div:nth-child(2){
+            position: absolute;
+            top: 60px;
+            left: 30px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            p{
+                margin: 0;
+                font-size: 15px;
+                font-weight: 500;
+                letter-spacing: .4px;
+                color: #777;
+            }
+            p:nth-child(1){
+                font-size: 22px;
+                margin-top: -5px;
+            }
+        }
+        > div:nth-child(3){
+            position: absolute;
+            top: 65px;
+            left: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            >p{  
+                width: 100%;
+                position: relative;
+                margin: 0;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: .4px;
+                color: #666;
+                padding-bottom: 30px;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    left: -22px;
+                    top: 0;
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 3px;
+                    background-color: #FF9E57;
+                }
+            }
+            >p:nth-child(2):before{  
+                background-color: #ffc757;
+            }
+            >p:nth-child(3):before{  
+                background-color: #57ddff;
+            }
+            >p:nth-child(4):before{  
+                background-color: #578cff;
+            }
+        }
+        > div:nth-child(4){
+            position: absolute;
+            top: 65px;
+            width: 300px;
+            left: 720px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            >p{  
+                width: 100%;
+                position: relative;
+                margin: 0;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: .4px;
+                color: #666;
+                padding-bottom: 30px;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    left: -22px;
+                    top: 0;
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 3px;
+                    background-color: #808080;
+                }
+            }
+            >p:nth-child(2):before{  
+                background-color: #aaa;
+            }
+        }
+        > p:nth-child(5){
+            position: absolute;
+            top: 5px;
+            left: 32px;
+            font-size: 13px;
+            font-weight: 450;
+            letter-spacing: .4px;
+            color: #4a4a4a;
+        }
+        > p:nth-child(6){
+            position: absolute;
+            bottom: 25px;
+            right: 8%;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .7px;
+            word-spacing: 2px;
+            color: #888;
+        }
+    }
+}

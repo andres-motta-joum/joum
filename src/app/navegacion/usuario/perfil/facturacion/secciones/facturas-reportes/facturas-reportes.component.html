@@ -1,1 +1,19 @@
-<p>facturas-reportes works!</p>
+<h1>Facturas y reportes</h1>
+<div class="encabezado">
+    <p>2 resultados</p>
+    <div>
+        <select id="">
+            <option value="">Ultimos 3 meses</option>
+            <option value="">compra tipo1</option>
+        </select>
+    </div>
+</div>
+<div class="contenedor">
+    <div>
+        <p>mes de facturación</p>
+        <p>Total facturado</p>
+        <p>Cierre</p>
+        <p>Vencimiento</p>
+    </div>
+    <app-factura-reporte [facturaReporte]="facturaReporte" *ngFor="let facturaReporte of facturacionesReportes"></app-factura-reporte>
+</div>

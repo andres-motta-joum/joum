@@ -1,6 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-favoritos',
@@ -8,20 +9,17 @@ import { provideIcons } from '@ng-icons/core';
   styleUrls: ['./favoritos.component.scss']
 })
 export class FavoritosComponent {
-  public compras: Array<any>= [
+
+  public favoritos: Array<Producto>= [
     {
-      imagen: '../../../../../../assets/img/categoria/macetas/13.jpg'
+      foto: '../../../../../../assets/img/categoria/cuadros/19.jpg',
+      precio: 0,
+      descuento: 0
     },
     {
-      imagen: '../../../../../../assets/img/categoria/lamparas/6.jpg'
-    }
-    ,
-    {
-      imagen: '../../../../../../assets/img/categoria/vinilos/6.jpg'
-    }
-    ,
-    {
-      imagen: '../../../../../../assets/img/categoria/macetas/2.jpg'
+      foto: '../../../../../../assets/img/categoria/coleccionables/3.jpg',
+      precio: 0,
+      descuento: 0
     }
   ]
 
