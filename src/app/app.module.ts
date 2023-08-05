@@ -8,6 +8,7 @@ import { RegistroModule } from './navegacion/usuario/registro/registro.module';
 import { PerfilModule } from './navegacion/usuario/perfil/perfil.module';
 import { VenderModule } from './navegacion/usuario/vender/publicar/vender.module';
 import { BusquedaModule } from './navegacion/busqueda//busqueda.module';
+import { InformacionModule } from './navegacion/informacion/informacion.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { environment } from 'src/environments/environment';
     AppComponent
   ],
   imports: [
+    InformacionModule,
     BrowserModule,
     InicioModule,
     RegistroModule,
@@ -38,6 +40,7 @@ import { environment } from 'src/environments/environment';
     BusquedaModule,
     ProductoModule,
     ComprarModule
+    
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent]

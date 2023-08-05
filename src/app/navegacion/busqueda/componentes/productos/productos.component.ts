@@ -14,7 +14,7 @@ export class ProductosComponent {
   public checkHeart = false;
 
   private nombres: string[] = [
-    'Macetas finas y galantes para tu gran hogar',
+    'Macetas finas y galantes',
     'Pequeñas macetas para tu decoración',
     'Macetas de varios tamaños',
     'macetas finas de tamaño pequeño para hogar habitación habitación',
@@ -49,7 +49,7 @@ export class ProductosComponent {
     '../../../../../assets/img/categoria/macetas/9.jpg',
   ];
   private precios: string[] = [
-    '',
+    '12000',
     '30000',
     '100000',
     '12000',
@@ -83,7 +83,7 @@ export class ProductosComponent {
     '550000',
   ];
   private porcentajesRebajas: string[] = [
-    '',
+    '5',
     '12% OFF',
     '7% OFF',
     '9% OFF',

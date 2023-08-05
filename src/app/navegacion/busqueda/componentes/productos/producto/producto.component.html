@@ -54,7 +54,7 @@
             <p class="titulo-producto2">{{ producto.nombre }}</p>
             <p class="precio-anterior2">{{ producto.precio | currency:'$':'symbol':'1.0-0' }}</p>
             <p class="precio-final2">{{ producto.precio - producto.descuento | currency:'$':'symbol':'1.0-0' }}</p>
-            <p class="porcentaje-rebaja2">{{ producto.descuento / producto.precio | percent }} OFF</p>
+            <p  class="porcentaje-rebaja2">{{ producto.descuento / producto.precio | percent }} OFF</p>
             <i [ngClass]="{'fa': true,  'heart1': true,}"></i>
             <div class="estrellas-lineado">
                 <div class="starts-over">

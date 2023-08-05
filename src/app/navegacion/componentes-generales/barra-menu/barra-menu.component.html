@@ -29,7 +29,7 @@
                   alt="Image">
                 <div>
                   <p (click)='navegar(["abcd/perfil/informacion"], $event)' id="nameUser2"> Andres Motta </p>
-                  <p (click)='navegar(["abcd/perfil/informacion"], $event)'>Vendedor Junior</p>
+                  <p (click)='navegar(["abcd/perfil/informacion"], $event)'>@AndresYesidM</p>
                 </div>
               </div>
               <div  class="linea-Menu"></div>
@@ -85,7 +85,7 @@
             <nav class="menu4-gray2"></nav>
           </li>
           <li class="tres">
-            <a (click)="navegar([''],$event)"><p><ng-icon class="cart" name="matShoppingCart"></ng-icon><p class="text-tres">Carrito</p></a>
+            <a (click)="navegar(['abcd/carrito'],$event)"><p><ng-icon class="cart" name="matShoppingCart"></ng-icon><p class="text-tres">Carrito</p></a>
           </li>
         </div>
       </ul>
@@ -99,12 +99,19 @@
       <ul>
         <li><p (click)="navegar(['cuenta/crear-cuenta'],$event)">Agrega tu envío</p></li>
         <li><p (click)="navegar(['busqueda/ofertas-del-dia'],$event)">Ofertas del Día</p></li>
-        <li><p (click)="navegar([''],$event)">Historial</p></li>
+        <li><p (click)="navegar(['abcd/historial'],$event)">Historial</p></li>
         <li><p (click)="navegar(['abcd/compras'],$event)">Mis compras</p></li>
         <li><p (click)="navegar(['abcd/favoritos'],$event)">Favoritos</p></li>
-        <li><p (click)="navegar(['busqueda/para-ti'],$event)">Para ti</p></li>
+        <li><p (click)="navegar(['abcd/recomendaciones'],$event)">Para ti</p></li>
         <li><p (click)="navegar(['vender'],$event)">Vender</p></li>
-        <li><p (click)="navegar([''],$event)">Ayuda</p></li>
+        <li><p (click)="navegar(['ayuda'],$event)">Ayuda</p></li>
+        <div (click)="navegar(['notificaciones'],$event)" class="notificaciones">
+          <ng-icon name="ionNotificationsOutline"></ng-icon>
+          <ng-icon name="ionChevronDownOutline"></ng-icon>
+          <div>
+
+          </div>
+        </div>
       </ul>
     </nav>
   </div>

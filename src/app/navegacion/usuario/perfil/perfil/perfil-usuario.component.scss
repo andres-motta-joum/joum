@@ -1,198 +1,145 @@
-@use 'sass:math';
-
-@mixin cuadros-estilo {
-  display: flex;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: white;
-  overflow: hidden;
-  position: relative;
-}
-
 .todo {
   width: 100%;
 
   /*--- SECCION DERECHA ---*/
   .mainPerfilMenu {
-    @include cuadros-estilo;
+    display: flex;
+    width: 100%;
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+    position: relative;
 	  margin-bottom: 25px;
-    height: 155px;
+    height: 135px;
 
     .circulo{
-      width: 280px;
+      width: 300px;
       height: 240px;
-      background-color: #ddd;
+      background-color: #e5e5e5;
       border-radius: 50%;
       position: absolute;
-      top: -150px;
+      top: -165px;
       left: -130px;
+    }
+    .picPerfil {
+      margin: 20px 40px 20px 50px;
+      object-fit: cover;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      z-index: 10;
     }
     .nombre {
       font-size: 26px;
       font-weight: 500;
-      word-spacing: 3px;
-      color: #444;
+      word-spacing: 2px;
+      color: #4a4a4a;
       width: 800px;
       height: 40px;
-    }
-    .nivel{
-      height: 25px;
-      margin-top: 3px;
-      position: absolute;
-      margin-left: 10px;
-    }
+      margin-bottom: 0;
+      letter-spacing: .5px;
+      >span{
+        margin-top: 0;
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+        letter-spacing: .4px;
+        padding-left: 10px;
 
-    .seguidores {
-      font-size: 15px;
-      color: #666;
-      font-weight: 550;
-
-      span {
-        font-weight: 450;
-        padding-left: 5px;
-        font-size: 13px;
-      }
-    }
-
-    .picPerfil {
-      object-fit: cover;
-      width: 114px;
-      height: 114px;
-      border-radius: 50%;
-      z-index: 10;
-    }
-
-    .cambiar-foto-icono {
-      position: absolute;
-      padding-top: 34px;
-      width: 114px;
-      height: 80px;
-      border-radius: 50%;
-      background: rgba($color: #000000, $alpha: .45);
-      font-weight: 500;
-      text-align: center;
-      opacity: 0;
-      color: #fff;
-      font-size: 45px;
-      cursor: pointer;
-      transition: .2s;
-      z-index: 10;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    .levelPerfilMenu {
-      width: 38px;
-      height: 38px;
-      margin-left: -30px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .nivelUsuario {
-      color: #555;
-      font-size: 15px;
-      letter-spacing: 1px;
-      font-weight: 500;
-      margin-top: -13px;
-
-      span {
-        font-weight: 650;
-      }
-    }
-    .share{
-      background-color: #eee;
-      position: absolute;
-      right: 65px;
-      top: 15px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      ng-icon{
-        font-size: 18px;
-        margin: 8px;
-        color: #555;
-      }
-    }
-    .mas{
-      background-color: #eee;
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      p{
-        position: absolute;
-        font-size: 38px;
-        top: -46px;
-        letter-spacing: -2px;
-        left: 6px;
-        color: #777;
-      }
-    }
-    .new-follow{
-      cursor: pointer;
-      background-color: #eee;
-      position: absolute;
-      right: 20px;
-      bottom: 15px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      .seguir {
-        border-radius: 50%;
-        position: absolute;
-        font-size: 25px;
-        color: #888;
-        cursor: pointer;
-        z-index: 5;
-        margin-left: 7px;
-        margin-top: 5px;
-  
-        &:hover {
-          color: #555;
-        }
-      }
-      .seguir-click {
-        animation: seguir .4s;
-        color: #4f9bff !important;
-      }
-  
-      .seguir-click-over {
-        opacity: 0.01;
-      }
-  
-      .seguir-full {
-        margin-left: 3px;
-        position: absolute;
-        font-size: 31px;
-        color: #eee;
-        z-index: 4;
-      }
-      @keyframes seguir {
-        0%{
-            opacity: 0;
-            font-size: 0;
-            margin-left: 6px;
-        }
-        60%{
-            opacity: 100;
-            font-size: 36px;
-        }
-        100%{
-            opacity: 100;
-            font-size: 31px;
-            margin-left: 3px;
-            margin-top: 3px;
+        span {
+          color: #707070;
+          font-weight: 430;
+          padding-left: 5px;
+          font-size: 13.5px;
+          letter-spacing: .4px;
         }
       }
     }
+    .dias-vendiendo {
+      margin-top: 5px;
+      font-size: 14.5px;
+      color: #707070;
+      font-weight: 450;
+      letter-spacing: .4px;
+    }
+    div:nth-child(4){
+      margin: 15px;
+      position: absolute;
+      right: 35px;
+      img:nth-child(1){
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 31px;
+          height: 31px;
+      }
+      img:nth-child(2){
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 31px;
+          height: 31px;
+          opacity: 0;
+          transition: .2s;
+          cursor: pointer;
+          &:hover{
+              opacity: 1;
+          }
+      }
+      
+    }
+    div:nth-child(5){
+      margin: 15px;
+      position: absolute;
+      right: 82px;
+      img:nth-child(1){
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 31px;
+          height: 31px;
+      }
+      img:nth-child(2){
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 31px;
+          height: 31px;
+          opacity: 0;
+          transition: .2s;
+          cursor: pointer;
+          &:hover{
+              opacity: 1;
+          }
+      }
+      
+    }
+    div:nth-child(6){
+      position: absolute;
+      bottom: 40px;
+      right: 55px;
+      img:nth-child(1){
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 31px;
+      }
+      img:nth-child(2){
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 31px;
+          opacity: 0;
+          transition: .2s;
+          cursor: pointer;
+          &:hover{
+              opacity: 1;
+          }
+      }
+      
+    }
+
   }
 
   .contenidoSeguir {
@@ -207,7 +154,13 @@
 
   /* -------- CONTENIDO PERFIL --------------*/
   .contenidoPerfil {
-    @include cuadros-estilo;
+    display: flex;
+    width: 100%;
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+    position: relative;
     height: 40px;
 
     .opcionContenido {
@@ -224,7 +177,7 @@
 
       &:hover {
         p {
-          color: #222;
+          color: #4a4a4a;
         }
       }
       ng-icon{
@@ -248,183 +201,18 @@
       z-index: 1;
       background-color: #fff;
       ng-icon{
-        color: #509df4;
+        color: #FF9E57;
+        font-size: 21px;
       }
       p {
         margin-top: 9px;
         transition: .2s;
-        color: #484848;
-        font-weight: 650;
+        color: #555;
+        font-weight: 550;
+        font-size: 17px;
+        transition: .1s;
+        transform: translateY(1px);
       }
     }
-  }
-
-  /*--- SUBIR FOTO ---*/
-  .contenidoNewFoto {
-    @include cuadros-estilo;
-    position: fixed;
-    background: white;
-    border-radius: 25px;
-    z-index: 610;
-    left: 25%;
-    width: 50%;
-    top: 25%;
-    height: 50%;
-    align-items: center;
-    flex-direction: column;
-    display: none;
-    justify-content: center;
-
-    .contenedor {
-      display: flex;
-      position: absolute;
-      background: #f5f5f5;
-      z-index: 500;
-      left: 10%;
-      width: 80%;
-      top: 10%;
-      height: 60%;
-      border-radius: 15px;
-      border: 2px solid #ddd;
-      align-items: center;
-      flex-direction: column;
-    }
-
-    .contenedor > p {
-      position: absolute;
-      top: 40%;
-      font-size: 23px;
-      letter-spacing: 2px;
-      color: #444;
-    }
-
-    .contenedor img {
-      width: 80px;
-      height: 90px;
-      margin-top: 10px;
-    }
-
-    .botonSeleccionar {
-      position: absolute;
-      top: 70%;
-      width: 180px;
-      height: 15%;
-      background: #FF9E57;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      color: white;
-      text-align: center;
-      z-index: 650;
-
-      &:hover {
-        background: #FF9E57;
-      }
-
-      p {
-        color: white;
-        text-align: center;
-        font-size: 22px;
-        width: 100%;
-      }
-    }
-
-    .botonSubir {
-      position: absolute;
-      top: 80%;
-      width: 200px;
-      height: 10%;
-      background: #bbb;
-      border-radius: 10px;
-      border: none;
-      display: flex;
-      align-items: center;
-      cursor: default;
-      left: 39%;
-    }
-
-    .botonSubirNewClass {
-      background: #FF9E57;
-      cursor: pointer;
-
-      &:hover {
-        background: #f89d47 !important;
-      }
-    }
-
-    .botonSubir p {
-      color: white;
-      font-size: 22px;
-      letter-spacing: 2px;
-      text-align: center;
-      width: 100%;
-    }
-
-
-    .equis {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #FFB56F;
-      display: flex;
-      position: absolute;
-      right: 0;
-      align-items: center;
-      margin: 10px;
-      cursor: pointer;
-
-      &:hover {
-        background: #FF9E57;
-      }
-
-      p {
-        color: white;
-        font-size: 22px;
-        font-weight: bold;
-        text-align: center;
-        width: 100%;
-      }
-    }
-
-    .newClassContenidoFoto {
-      animation-name: cuadroFoto;
-      animation-duration: .4s;
-    }
-
-    @keyframes cuadroFoto {
-      0% {
-        opacity: 0%;
-      }
-      100% {
-        opacity: 100%;
-      }
-    }
-
-    #file {
-      display: flex;
-      position: absolute;
-      background: red;
-      z-index: 530;
-      width: 100%;
-      height: 100%;
-      border-radius: 15px;
-      border: 2px solid #ddd;
-      align-items: center;
-      flex-direction: column;
-      opacity: 0%;
-    }
-  }
-
-  .sombraFoto {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    display: none;
-    top: 0;
-    left: 0;
-    z-index: 600;
   }
 }

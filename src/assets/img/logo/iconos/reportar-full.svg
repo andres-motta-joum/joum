@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M0 512C0 299.923 128.942 117.961 312.706 40.2355C373.961 14.3269 441.308 0 512 0C794.77 0 1024 229.23 1024 512C1024 794.77 794.77 1024 512 1024C229.23 1024 0 794.77 0 512Z" id="Fill"/>
+<path d="M538.905 425.687L542.669 425.687L542.669 425.687L538.905 425.687L538.905 425.687Z" id="Fill_2"/>
+</defs>
+<g id="Capa-1" vectornator:layerName="Capa 1"/>
+<g id="Capa-3" vectornator:layerName="Capa 3">
+<g opacity="1" vectornator:layerName="Grupo 1">
+<g opacity="1" vectornator:layerName="Óvalo 4">
+<use fill="#8e8e8e" fill-rule="nonzero" stroke="none" xlink:href="#Fill"/>
+<mask height="1024" id="StrokeMask" maskUnits="userSpaceOnUse" width="1024" x="0" y="0">
+<rect fill="#000000" height="1024" stroke="none" width="1024" x="0" y="0"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#8e8e8e" stroke-linecap="butt" stroke-linejoin="round" stroke-width="82.4742" xlink:href="#Fill"/>
+</g>
+<clipPath clip-rule="nonzero" id="ClipPath">
+<use xlink:href="#Fill"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<path d="M646.444 1024C646.444 1024 948.206 1003.57 1024 649.514L560.596 223.779L446.184 342.416C446.184 342.416 508.796 402.424 454.743 447.9L463.039 577.372C463.039 577.372 498.336 629.379 462.121 671.729C430.619 708.568 450.794 785.477 450.794 785.477L646.444 1024Z" fill="#7e7e7e" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 3"/>
+</g>
+</g>
+<path d="M514.009 649.522C560.065 648.859 597.932 685.208 598.587 730.71C599.241 776.211 562.436 813.635 516.38 814.297C470.325 814.96 432.458 778.611 431.803 733.11C431.149 687.608 467.953 650.185 514.009 649.522Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 7"/>
+<g opacity="1" vectornator:layerName="Rectángulo 2">
+<use fill="#8e8e8e" fill-rule="nonzero" stroke="none" xlink:href="#Fill_2"/>
+<mask height="0" id="StrokeMask_2" maskUnits="userSpaceOnUse" width="3.76348" x="538.905" y="425.687">
+<rect fill="#000000" height="0" stroke="none" width="3.76348" x="538.905" y="425.687"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill_2"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask_2)" stroke="#8e8e8e" stroke-linecap="butt" stroke-linejoin="round" stroke-width="82.4742" xlink:href="#Fill_2"/>
+</g>
+<path d="M425.303 284.111C425.303 239.926 462.113 204.107 507.52 204.107L516.297 204.107C561.704 204.107 598.514 239.926 598.514 284.111L598.514 505.491C598.514 549.676 561.704 585.495 516.297 585.495L507.52 585.495C462.113 585.495 425.303 549.676 425.303 505.491L425.303 284.111Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Rectángulo 1"/>
+</g>
+</svg>

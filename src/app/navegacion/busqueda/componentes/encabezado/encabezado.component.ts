@@ -3,12 +3,13 @@ import { provideIcons } from '@ng-icons/core';
 import { heroChevronDown} from '@ng-icons/heroicons/outline'; 
 import { heroQueueList } from '@ng-icons/heroicons/outline'; 
 import { aspectsGrid } from '@ng-icons/ux-aspects'; 
+import { ionReorderFourOutline} from '@ng-icons/ionicons';
 
 @Component({
   selector: 'app-encabezado',
   templateUrl: './encabezado.component.html',
   styleUrls: ['./encabezado.component.scss'],
-  providers: [provideIcons({heroChevronDown, aspectsGrid, heroQueueList})]
+  providers: [provideIcons({heroChevronDown, aspectsGrid, heroQueueList, ionReorderFourOutline})]
 })
 export class EncabezadoComponent implements OnInit{
 

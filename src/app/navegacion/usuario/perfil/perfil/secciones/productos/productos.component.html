@@ -1,15 +1,3 @@
 <div class="contenidoProductos">
-    <div *ngFor="let producto of productos" class="producto">
-      <img src="{{ producto.foto }}">
-      <div class="productoSec1">
-        <p class="id">#453423</p>
-        <p class="titulo">{{ producto.nombre }}</p>
-        <div class="tresValores" style="display: flex;">
-          <p>11 visitas | </p><p>0 ventas | </p><p>Finaliza en 4 horas</p>
-        </div>
-      </div>
-      <p class="productoPrecio">{{ producto.precio | currency:'$':'symbol':'1.0-0' }}</p>
-      <p class="productoUnidades">{{ producto.cantidad }} Unidades</p>
-      <div class="circuloProducto"><i class="fa fa-ellipsis-v tresPuntos" aria-hidden="true"></i></div>
-    </div>
-  </div>
+  <app-producto [producto]="producto" *ngFor="let producto of productos"></app-producto>
+</div>

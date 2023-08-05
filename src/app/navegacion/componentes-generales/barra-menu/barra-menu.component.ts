@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 /*--------- Iconos ---------------*/
 import { provideIcons } from '@ng-icons/core';
+import { ionNotificationsOutline } from '@ng-icons/ionicons';
+import { ionChevronDownOutline }from '@ng-icons/ionicons';
 import { heroBars3Solid } from '@ng-icons/heroicons/solid';
 import { heroUserCircleSolid } from '@ng-icons/heroicons/solid';
 import { heroShoppingCartSolid } from '@ng-icons/heroicons/solid';
@@ -35,7 +37,7 @@ import { heroArrowRightOnRectangle } from '@ng-icons/heroicons/outline';
   selector: 'app-barra-menu',
   templateUrl: './barra-menu.component.html',
   styleUrls: ['./barra-menu.component.scss'],
-  viewProviders: [provideIcons({ heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle})]
+  viewProviders: [provideIcons({ heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle, ionNotificationsOutline, ionChevronDownOutline})]
 })
 export class BarraMenuComponent{
   public scrollDisplay: Boolean = true;

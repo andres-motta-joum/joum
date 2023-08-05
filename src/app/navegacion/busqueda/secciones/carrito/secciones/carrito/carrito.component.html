@@ -1,0 +1,18 @@
+<div class="contenedor">
+    <div>
+        <app-producto-carrito [productoCarrito]="productoCarrito" *ngFor="let productoCarrito of productosCarrito"></app-producto-carrito>
+    </div>
+    <div>
+        <button>Realizar compra</button>
+        <div>
+            <p>Productos(3)</p><p>$ 613.000</p>
+        </div>
+        <div>
+            <p>Envio</p><p>$ 6.000</p>
+        </div>
+        <div class="linea"></div>
+        <div>
+            <p>Total</p><p>$ 619.000</p>
+        </div>
+    </div>
+</div>

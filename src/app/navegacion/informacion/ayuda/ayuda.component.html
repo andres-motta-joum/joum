@@ -1,0 +1,24 @@
+<div class="body">
+    <app-barra-menu></app-barra-menu>
+    <div class="contenido">
+        <h1>Ayuda</h1>
+        <div class="secciones">
+            <div (mouseover)="over('cliente')" (mouseleave)="over('')">
+                <img *ngIf="dato !== 'cliente'" src="../../../../assets/img/logo/iconos/ayuda-cliente.svg">
+                <img *ngIf="dato === 'cliente'" src="../../../../assets/img/logo/iconos/ayuda-cliente-color.svg">
+                <p>Ayuda como comprador</p>
+            </div>
+            <div (mouseover)="over('vendedor')" (mouseleave)="over('')">
+                <img *ngIf="dato !== 'vendedor'" src="../../../../assets/img/logo/iconos/ayuda-vendedor.svg">
+                <img *ngIf="dato === 'vendedor'" src="../../../../assets/img/logo/iconos/ayuda-vendedor-color.svg">
+                <p>Ayuda como vendedor</p>
+            </div>
+            <div (mouseover)="over('reporte')" (mouseleave)="over('')">
+                <img *ngIf="dato !== 'reporte'" src="../../../../assets/img/logo/iconos/ayuda-reportar.svg">
+                <img *ngIf="dato === 'reporte'" src="../../../../assets/img/logo/iconos/ayuda-reportar-color.svg">
+                <p>Hacer un reporte</p>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

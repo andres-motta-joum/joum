@@ -9,15 +9,15 @@
 <rect height="1024" width="1024" x="0" y="0"/>
 </clipPath>
 <g clip-path="url(#ArtboardFrame)" id="Capa-1" vectornator:layerName="Capa 1">
-<use fill="#929292" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.0959189" vectornator:layerName="Óvalo 4" xlink:href="#Fill"/>
+<use fill="#8e8e8e" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.0959189" vectornator:layerName="Óvalo 4" xlink:href="#Fill"/>
 <clipPath clip-rule="nonzero" id="ClipPath">
 <use xlink:href="#Fill"/>
 </clipPath>
 <g clip-path="url(#ClipPath)">
-<path d="M560.777 1024C560.777 1024 948.206 1015.32 1024 661.262L842.902 453.409L672.363 536.407L583.305 444.397C583.305 444.397 471.354 518.721 422.591 536.316L330.05 437.806L186.747 563.463L560.777 1024Z" fill="#858585" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 3"/>
-<path d="M164.717 502.23C164.717 450.469 207.582 408.509 260.458 408.509C313.334 408.509 356.199 450.469 356.199 502.23C356.199 553.991 313.334 595.951 260.458 595.951C207.582 595.951 164.717 553.991 164.717 502.23Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 5"/>
-<path d="M413.808 502.23C413.808 450.469 456.672 408.509 509.549 408.509C562.425 408.509 605.289 450.469 605.289 502.23C605.289 553.991 562.425 595.951 509.549 595.951C456.672 595.951 413.808 553.991 413.808 502.23Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 6"/>
-<path d="M665.425 502.23C665.425 450.469 708.289 408.509 761.166 408.509C814.042 408.509 856.906 450.469 856.906 502.23C856.906 553.991 814.042 595.951 761.166 595.951C708.289 595.951 665.425 553.991 665.425 502.23Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 7"/>
+<path d="M646.444 1024C646.444 1024 948.206 1003.57 1024 649.514L560.596 223.779L446.184 342.416C446.184 342.416 508.796 402.424 454.743 447.9L463.039 577.372C463.039 577.372 498.336 629.379 462.121 671.729C430.619 708.568 450.794 785.477 450.794 785.477L646.444 1024Z" fill="#7e7e7e" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 3"/>
+<path d="M510.775 209.727C556.82 209.094 594.697 245.014 595.373 289.957C596.05 334.9 559.271 371.847 513.225 372.48C467.18 373.113 429.303 337.193 428.627 292.25C427.95 247.307 464.729 210.36 510.775 209.727Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 5"/>
+<path d="M510.87 430.624C556.909 429.991 594.78 465.911 595.456 510.854C596.133 555.797 559.36 592.743 513.321 593.376C467.281 594.009 429.411 558.089 428.734 513.146C428.057 468.203 464.831 431.257 510.87 430.624Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 6"/>
+<path d="M510.912 645.122C556.974 644.488 594.864 680.408 595.541 725.351C596.218 770.294 559.425 807.241 513.363 807.874C467.3 808.508 429.411 772.588 428.734 727.645C428.057 682.702 464.85 645.755 510.912 645.122Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 7"/>
 </g>
 </g>
 </svg>

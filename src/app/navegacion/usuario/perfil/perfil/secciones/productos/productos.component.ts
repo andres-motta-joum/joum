@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-productos',
@@ -6,18 +7,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./productos.component.scss']
 })
 export class ProductosComponent {
-  public productos: any = [
+  public productos: Array<Producto>= [
     {
-      foto: '../../../../../../../../assets/img/ilustraciones/ilustración1.jpg',
-      nombre: 'Ilustración a mano',
-      precio: '100000',
-      cantidad: '2'
+      foto: '../../../../../../../assets/img/categoria/cuadros/19.jpg',
+      precio: 0,
+      descuento: 0
     },
     {
-      foto: '../../../../../../../../assets/img/ilustraciones/men.jpg',
-      nombre: 'Ilustración a mano',
-      precio: '100000',
-      cantidad: '2'
+      foto: '../../../../../../../assets/img/categoria/coleccionables/3.jpg',
+      precio: 0,
+      descuento: 0
+    },
+    {
+      foto: '../../../../../../../assets/img/categoria/coleccionables/8.jpg',
+      precio: 0,
+      descuento: 0
+    },
+    {
+      foto: '../../../../../../../assets/img/categoria/coleccionables/9.jpg',
+      precio: 0,
+      descuento: 0
     }
-  ];
+  ]
 }

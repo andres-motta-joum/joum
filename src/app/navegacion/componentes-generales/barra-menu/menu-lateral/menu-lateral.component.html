@@ -43,12 +43,9 @@
             <ul [@submenu]='submenuState[2]' class="submenu">
               <li class="title-menu"><ng-icon class="menu-icon subTituloDos" name="heroSquares2x2Solid"></ng-icon>Categorías</li>
               <li (click)='animarSubmenu(2)' class="goBack"><ng-icon class="menu-icon" name="heroArrowSmallLeftMini"></ng-icon>Atras</li>
-              <li><a (click)="navegar(['busqueda/solo-hoy'],$event)"><ng-icon class="menu-icon" name="heroCalendarDays"></ng-icon>Solo hoy</a></li>
               <li><a (click)="navegar(['abcd/favoritos'],$event)"><ng-icon class="menu-icon" name="heroStar"></ng-icon>Favoritos</a></li>
               <li><a (click)="navegar(['busqueda/vinilos'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>vinilos</a></li>
               <li><a (click)="navegar(['busqueda/adornos-pequeños'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Difusores</a></li>
-              <li><a (click)="navegar(['busqueda/adornos-pequeños'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Adornos Pequeños</a></li>
-              <li><a (click)="navegar(['busqueda/adornos de pared'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Adornos de Pared</a></li>
               <li><a (click)="navegar(['busqueda/macetas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Macetas</a></li>
               <li><a (click)="navegar(['busqueda/relojes'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Relojes</a></li>
               <li><a (click)="navegar(['busqueda/lamprasas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Lamparas</a></li>
@@ -56,15 +53,14 @@
               <li style="margin-bottom: 40px;"><a (click)="navegar(['busqeuda/estantes'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Cuadros</a></li>
             </ul>
           </li>
-          <li><a (click)="navegar([''],$event)"><ng-icon class="menu-icon" name="heroShoppingCart"></ng-icon>Carrito</a></li>
-          <li><a (click)="navegar([''],$event)"><ng-icon class="menu-icon" name="aspectsDeliver"></ng-icon>Pedidos</a></li>
-          <li><a (click)="navegar([''],$event)"><ng-icon class="menu-icon" name="heroNewspaper"></ng-icon>Historial</a></li>
+          <li><a (click)="navegar(['notificaciones'],$event)"><ng-icon class="menu-icon" name="ionNotificationsOutline"></ng-icon>Notificaciones</a></li>
+          <li><a (click)="navegar(['abcd/carrito'],$event)"><ng-icon class="menu-icon" name="heroShoppingCart"></ng-icon>Carrito</a></li>
+          <li><a (click)="navegar(['abcd/compras'],$event)"><ng-icon class="menu-icon" name="aspectsDeliver"></ng-icon>Pedidos</a></li>
+          <li><a (click)="navegar(['abcd/historial'],$event)"><ng-icon class="menu-icon" name="heroNewspaper"></ng-icon>Historial</a></li>
           <li><a (click)="navegar(['vender'],$event)"><ng-icon class="menu-icon" name="heroBanknotes"></ng-icon>Vender</a></li>
-          <li><a (click)="navegar([''],$event)"><ng-icon class="menu-icon" name="heroCheckBadge"></ng-icon>Garantía joum</a></li>
-          <li><a (click)="navegar([''],$event)"><ng-icon class="menu-icon" name="heroArrowUturnLeft"></ng-icon>Devoluciones gratis</a></li>
           <div class="linea-Menu"></div>
-          <li><a (click)="navegar([''],$event)"><ng-icon class="menu-icon" name="heroUsers"></ng-icon>Contigo siempre</a></li>
-          <li><a (click)="navegar([''],$event)"><ng-icon class="menu-icon" name="heroQuestionMarkCircle"></ng-icon>Ayuda</a></li>
+          <li><a (click)="navegar(['privacidad'],$event)"><ng-icon class="menu-icon" name="heroUsers"></ng-icon>Seguridad y privacidad</a></li>
+          <li><a (click)="navegar(['ayuda'],$event)"><ng-icon class="menu-icon" name="heroQuestionMarkCircle"></ng-icon>Ayuda</a></li>
           <div class="linea-Menu"></div>
           <div class="botones">
             <button (click)="navegar(['cuenta/iniciar-sesion'],$event)" class="iniciar li">Iniciar Sesion</button>

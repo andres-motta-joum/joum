@@ -1,0 +1,52 @@
+<div class="body">
+    <app-barra-menu></app-barra-menu>
+    <div class="contenido">
+        <h1>Notificaciones</h1>
+        <div class="secciones">
+            <div></div>
+            <div>
+                <div>
+                    <p>Ofertas y descuentos</p>
+                    <button (click)="onButtonClick()">
+                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                          <div class="circle"></div>
+                        </div>
+                    </button>
+                </div>
+                <div>
+                    <p>Nuevas ventas</p>
+                    <button (click)="onButtonClick()">
+                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                          <div class="circle"></div>
+                        </div>
+                    </button>
+                </div>
+                <div>
+                    <p>Publicaciones</p>
+                    <button (click)="onButtonClick()">
+                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                          <div class="circle"></div>
+                        </div>
+                    </button>
+                </div>
+                <div>
+                    <p>Sobre mis reclamos</p>
+                    <button (click)="onButtonClick()">
+                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                          <div class="circle"></div>
+                        </div>
+                    </button>
+                </div>
+                <div>
+                    <p>Nuevos mensajes</p>
+                    <button (click)="onButtonClick()">
+                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                          <div class="circle"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

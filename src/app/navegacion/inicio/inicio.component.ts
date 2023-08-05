@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
 export class InicioComponent{
 
   slider = [
+    '../../../../assets/img/anuncios/slider-uno.svg',
     '../../../../assets/img/anuncios/slider-dos.svg',
-    '../../../../assets/img/anuncios/slider-dos.svg'
+    '../../../../assets/img/anuncios/slider-uno.svg'
   ];
   
   carouselCategorias = [

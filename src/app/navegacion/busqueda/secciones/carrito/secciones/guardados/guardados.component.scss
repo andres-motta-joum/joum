@@ -1,0 +1,10 @@
+.contenedor{
+    width: 100%;
+    margin-top: 16px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    app-producto-guardado:nth-child(1) div{
+        border: none;
+    }  
+}

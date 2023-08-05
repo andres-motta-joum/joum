@@ -58,7 +58,7 @@ import { NovedadComponent } from './ventas/novedades/componentes/novedad/novedad
     MetricasModule,
     FacturacionModule,
     EnviarMensajeModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ]
 })
 export class PerfilModule { }

@@ -1,0 +1,18 @@
+<div class="body">
+    <app-barra-menu></app-barra-menu>
+    <div class="contenido">
+        <h1>Tu historial</h1>
+        <div class="encabezado">
+            <p>Registo de historial</p>
+            <button (click)="onButtonClick()">
+				<div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+				  <div class="circle"></div>
+				</div>
+			</button>
+            <div class="linea"></div>
+            <button>Borrar historial</button>
+            <p>Administrar</p>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

@@ -1,60 +1,37 @@
 <div class="informacion todo perfil">
     <div class="mainPerfilMenu">
         <div class="circulo"></div>
-        <div style="margin: 20px 46px 0px 36px; display:flex;">
-            <img src="../../../../../../assets/img/usuarios/user.svg" class="picPerfil" alt="Image">
-            <ng-icon (click)='cambiarFoto()' name="matCameraAlt" class="cambiar-foto-icono"></ng-icon>
+        <img src="../../../../../../assets/img/usuarios/user.svg" class="picPerfil" alt="Image">
+        <div>
+            <p class="nombre nombreCompletoPerfil">Andres Yesid Motta <span>102 <span>seguidores</span></span> </p>
+            <p class="dias-vendiendo">59 días vendiendo en Joum</p>
         </div>
         <div>
-            <p class="nombre nombreCompletoPerfil">Deividcat <img class="nivel" src="../../../../../assets/img/nivel/nivel.svg" alt=""></p>
-            
-            <p class="nivelUsuario">Usuario <span>Junior</span></p>
-            <p class="seguidores">102 <span>seguidores</span></p>
+            <img src="../../../../../assets/img/logo/iconos/reportar.svg">
+            <img src="../../../../../assets/img/logo/iconos/reportar-full.svg">
         </div>
-        <div class="new-follow">
-            <ng-icon class="seguir" name="matPersonAddAlt" [class.seguir-click-over] = "seguirClick == true"  (click)="agregarFavorito()"></ng-icon>
-            <ng-icon class="seguir-full" name="matPerson" [class.seguir-click] = "seguirClick == true"></ng-icon>
+        <div>
+            <img src="../../../../../assets/img/logo/iconos/Share.svg">
+            <img src="../../../../../assets/img/logo/iconos/Share-full.svg">
         </div>
-        <div class="mas"><p>···</p></div>
-        <div class="share">
-            <ng-icon name="heroShareSolid"></ng-icon>
+        <div>
+            <img src="../../../../../assets/img/logo/iconos/seguir.svg">
+            <img src="../../../../../assets/img/logo/iconos/seguidor.svg">
         </div>
     </div>
   
     <!-------------Contenido PERFIL---------------------->
   
     <div class="contenidoPerfil">
-        <div [ngClass]='{"classAddContenidoPerfil": state === "info"}' (click)='cambiarEstado("info"); navegar(["abcd/perfil/informacion"], $event)' class="opcionContenido">
+        <div [ngClass]='{"classAddContenidoPerfil": url === "informacion"}' (click)='navegar(["abcd/perfil/informacion"], $event)' class="opcionContenido">
             <ng-icon name="heroDocumentTextSolid"></ng-icon><p>Información</p>
         </div>
-        <div [ngClass]='{"classAddContenidoPerfil": state === "producto"}' (click)='cambiarEstado("producto"); navegar(["abcd/perfil/productos"], $event)' class="opcionContenido">
+        <div [ngClass]='{"classAddContenidoPerfil": url === "productos"}' (click)='navegar(["abcd/perfil/productos"], $event)' class="opcionContenido">
             <ng-icon name="heroBuildingStorefrontSolid"></ng-icon><p>Productos</p>
-        </div>
-        <div  [ngClass]='{"classAddContenidoPerfil": state === "video"}' (click)='cambiarEstado("video"); navegar(["abcd/perfil/videos"], $event)' class="opcionContenido">
-            <ng-icon name="heroPlaySolid"></ng-icon><p>Videos</p>
         </div>
     </div>
 
     <router-outlet></router-outlet>
-
-    <!------------- Nueva foto ---------------------->
-    <div [ngStyle]='{"display": stateFoto === "active" ? "block" : "none"}' class="sombraFoto" id="sombraFoto"></div>
-    
-    <div [ngStyle]='{"display": stateFoto === "active" ? "block" : "none"}' class="contenidoNewFoto" id="contenidoNuevaFoto">
-        <label class="contenedor" for="file">
-            <input #fileInput (change)='getFoto(fileInput)' type="file" accept="image/*" id="file">
-             <img src="../../../../assets/img/ilustraciones/userPhoto.png">
-             <p id="valorFile">{{ photoText }}</p>
-             <label for="file" id="botonSeleccionar" class="botonSeleccionar"><p>Seleccionar</p></label>
-        </label>
-        <div (click)='salirFoto()'
-          [ngClass]='{
-            "botonSubir": true,
-            "botonSubirNewClass": photoText !== "Arrastra aquí tu foto"
-          }'
-          id="subirFoto"><p>Subir</p></div>
-        <div class="equis" id="equis" (click)="salirFoto()"><p>X</p></div>
-    </div>
   
 </div>
   

@@ -12,12 +12,12 @@
 <rect fill="#000000" height="1024" stroke="none" width="1024" x="0" y="0"/>
 <use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
 </mask>
-<use fill="none" mask="url(#StrokeMask)" stroke="#929292" stroke-linecap="butt" stroke-linejoin="round" stroke-width="82.4742" xlink:href="#Fill"/>
+<use fill="none" mask="url(#StrokeMask)" stroke="#8e8e8e" stroke-linecap="butt" stroke-linejoin="round" stroke-width="82.4742" xlink:href="#Fill"/>
 </g>
 </g>
 <g id="Capa-3" vectornator:layerName="Capa 3">
-<path d="M164.717 502.23C164.717 450.469 207.582 408.509 260.458 408.509C313.334 408.509 356.199 450.469 356.199 502.23C356.199 553.991 313.334 595.951 260.458 595.951C207.582 595.951 164.717 553.991 164.717 502.23Z" fill="#929292" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 5"/>
-<path d="M413.808 502.23C413.808 450.469 456.672 408.509 509.549 408.509C562.425 408.509 605.289 450.469 605.289 502.23C605.289 553.991 562.425 595.951 509.549 595.951C456.672 595.951 413.808 553.991 413.808 502.23Z" fill="#929292" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 6"/>
-<path d="M665.425 502.23C665.425 450.469 708.289 408.509 761.166 408.509C814.042 408.509 856.906 450.469 856.906 502.23C856.906 553.991 814.042 595.951 761.166 595.951C708.289 595.951 665.425 553.991 665.425 502.23Z" fill="#929292" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 7"/>
+<path d="M510.775 209.727C556.82 209.094 594.697 245.014 595.373 289.957C596.05 334.9 559.271 371.847 513.225 372.48C467.18 373.113 429.303 337.193 428.627 292.25C427.95 247.307 464.729 210.36 510.775 209.727Z" fill="#8e8e8e" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 5"/>
+<path d="M510.87 430.624C556.909 429.991 594.78 465.911 595.456 510.854C596.133 555.797 559.36 592.743 513.321 593.376C467.281 594.009 429.411 558.089 428.734 513.146C428.057 468.203 464.831 431.257 510.87 430.624Z" fill="#8e8e8e" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 6"/>
+<path d="M510.912 645.122C556.974 644.488 594.864 680.408 595.541 725.351C596.218 770.294 559.425 807.241 513.363 807.874C467.3 808.508 429.411 772.588 428.734 727.645C428.057 682.702 464.85 645.755 510.912 645.122Z" fill="#8e8e8e" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Óvalo 7"/>
 </g>
 </svg>

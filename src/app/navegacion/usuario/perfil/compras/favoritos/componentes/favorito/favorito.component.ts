@@ -9,13 +9,9 @@ import { Producto } from 'src/app/interfaces/producto';
   styleUrls: ['./favorito.component.scss']
 })
 export class FavoritoComponent {
-  @Input() favorito: Producto;
-    subMenu: boolean = false;
-    constructor(private zone: NgZone, private router: Router){
-      this.favorito = {
-        precio: 0,
-        descuento: 0
-    }
+  @Input() favorito!: Producto;
+  subMenu: boolean = false;
+  constructor(private zone: NgZone, private router: Router){
   }
   desplegar(){
     this.subMenu = !this.subMenu;
@@ -23,7 +19,8 @@ export class FavoritoComponent {
   navegar(ruta: any[], event: Event){
     event.preventDefault();
     this.zone.run(()=>{
-      this.router.navigate(ruta)
+      this.router.navigate(ruta);
+      window.scroll(0,0)
     })
   }
 }

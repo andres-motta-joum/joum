@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { provideIcons } from '@ng-icons/core';
 
 @Component({
   selector: 'app-parte-superior',
@@ -7,8 +9,15 @@ import { Component } from '@angular/core';
 })
 export class ParteSuperiorComponent {
 
-  restartScroll(){
-    window.scroll(0,0)
+  constructor(private zone: NgZone, private router: Router){
+  }
+
+  navegar(ruta: any[], event: Event){
+    event.preventDefault();
+    this.zone.run(()=>{
+      this.router.navigate(ruta);
+      window.scroll(0,0)
+    })
   }
 
 }

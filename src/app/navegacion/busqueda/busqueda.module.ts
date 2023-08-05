@@ -9,7 +9,10 @@ import { BusquedaComponent } from './busqueda.component';
 import { SeccionIzquierdaComponent } from './componentes/seccion-izquierda/seccion-izquierda.component';
 import { EncabezadoComponent } from './componentes/encabezado/encabezado.component';
 import { ProductosComponent } from './componentes/productos/productos.component';
-import { ProductoComponent } from './componentes/productos/producto/producto.component'
+import { ProductoComponent } from './componentes/productos/producto/producto.component';
+import { CarritoModule } from './secciones/carrito/carrito.module';
+import { HistorialComponent } from './secciones/historial/historial.component';
+import { RecomendacionesComponent } from './secciones/recomendaciones/recomendaciones.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +20,22 @@ import { ProductoComponent } from './componentes/productos/producto/producto.com
     SeccionIzquierdaComponent,
     EncabezadoComponent,
     ProductosComponent,
-    ProductoComponent
+    ProductoComponent,
+    HistorialComponent,
+    RecomendacionesComponent
   ],
   imports: [
     CommonModule,
     ComponentesGeneralesModule,
     NgIconsModule,
+    CarritoModule,
     RouterModule.forChild(routes)
+  ],
+  exports:[
+    ProductosComponent,
+    ProductoComponent,
+    HistorialComponent,
+    RecomendacionesComponent
   ]
 })
 export class BusquedaModule { }

@@ -5,7 +5,6 @@ import { PerfilUsuarioComponent } from './perfil/perfil-usuario.component';
 /*---------  Secciones Perfil Usuario  -----------*/
   import { InformacionComponent } from './perfil/secciones/informacion/informacion.component';
   import { ProductosComponent } from './perfil/secciones/productos/productos.component';
-  import { VideosComponent } from './perfil/secciones/videos/videos.component';
   import { EditarDatosComponent } from '../perfil/perfil/secciones/editar-datos/editar-datos.component';
 
 import { ComprasComponent } from './compras/compras/compras.component';
@@ -46,11 +45,7 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
           {
             path: 'productos',
             component: ProductosComponent
-          },
-          {
-            path: 'videos',
-            component: VideosComponent
-          },
+          }
         ]
       },
       {

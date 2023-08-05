@@ -13,6 +13,7 @@ import { heroCheckBadge } from '@ng-icons/heroicons/outline';
 import { heroArrowUturnLeft } from '@ng-icons/heroicons/outline';
 import { heroUsers } from '@ng-icons/heroicons/outline';
 
+import { ionNotificationsOutline } from '@ng-icons/ionicons';
 import { heroCalendarDays } from '@ng-icons/heroicons/outline';
 import { heroArrowSmallLeftMini } from '@ng-icons/heroicons/mini';
 import { heroChevronRightMini } from '@ng-icons/heroicons/mini';
@@ -47,7 +48,7 @@ import { heroDocumentText } from '@ng-icons/heroicons/outline';
   templateUrl: './menu-lateral.component.html',
   styleUrls: ['./menu-lateral.component.scss'],
   animations: AnimationMenu,
-  providers: [provideIcons({heroUserCircleSolid,aspectsContactCard, aspectsStatusErrorFilled, heroSquares2x2Solid, aspectsDeliver, heroNewspaper, heroCheckBadge, heroArrowUturnLeft, heroUsers, heroCalendarDays,/*-iconos- perfil*/ heroArrowSmallLeftMini, heroChevronRightMini, heroCheckCircle, heroQuestionMarkCircle, aspectsLineChart, heroLockClosed, heroFingerPrint, heroArrowRightOnRectangle, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes,heroCurrencyDollar, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText})]
+  providers: [provideIcons({ionNotificationsOutline, heroUserCircleSolid,aspectsContactCard, aspectsStatusErrorFilled, heroSquares2x2Solid, aspectsDeliver, heroNewspaper, heroCheckBadge, heroArrowUturnLeft, heroUsers, heroCalendarDays,/*-iconos- perfil*/ heroArrowSmallLeftMini, heroChevronRightMini, heroCheckCircle, heroQuestionMarkCircle, aspectsLineChart, heroLockClosed, heroFingerPrint, heroArrowRightOnRectangle, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes,heroCurrencyDollar, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText})]
 })
 export class MenuLateralComponent {
 

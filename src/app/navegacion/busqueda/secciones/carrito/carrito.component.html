@@ -1,0 +1,10 @@
+<div class="body">
+    <app-barra-menu></app-barra-menu>
+    <div class="contenido">
+        <div class="encabezado">
+            <div [ngClass]='{"active": url === "carrito"}' (click)='navegar(["abcd/carrito"], $event)'>Carrito</div>
+            <div [ngClass]='{"active": url === "guardados"}' (click)='navegar(["abcd/guardados"], $event)'>Guardados</div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

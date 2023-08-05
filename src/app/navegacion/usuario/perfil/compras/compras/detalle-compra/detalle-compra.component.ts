@@ -21,7 +21,8 @@ export class DetalleCompraComponent {
   navegar(ruta: any[], event: Event){
     event.preventDefault();
     this.zone.run(()=>{
-      this.router.navigate(ruta)
+      this.router.navigate(ruta);
+      window.scroll(0,0)
     })
   }
 }

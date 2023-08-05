@@ -25,7 +25,7 @@ export class SliderComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.slickWidth = 102;
+    this.slickWidth = 100;
   }
 
   Move(value: number): void {

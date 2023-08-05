@@ -5,10 +5,8 @@
             <ng-icon name="heroChevronLeftSolid"></ng-icon>
         </button>
         <div #track Class="slick-track">
-            <div *ngFor='let element of elements' style="margin-left: -18px;" class="slick">
-                <picture>
-                    <img [src]='element' alt="Image">
-                </picture>
+            <div *ngFor='let element of elements' class="slick">
+                <img [src]='element' alt="Image">
             </div>
         </div>
         <button (click)='Move(2)' class="botones boton-next" id="button-next">

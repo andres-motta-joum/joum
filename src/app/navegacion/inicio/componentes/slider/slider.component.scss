@@ -1,45 +1,67 @@
-.Carousel{
+.Carousel {
     width: 100%;
-}
-/* images */
+  
+    .slick-list {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 275px;
+      margin: 0 auto;
+      max-width: 1400px;
+      overflow: hidden;
 
-.slick-list{
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 38vh;
-    margin: 0px auto;
-    width: 100%;
-	max-width: 1400px;
-    overflow: hidden;
-	max-height: 290px;
-}
-.slick-track{
-    position: relative;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    transition: .4s ease-in-out;
-}
-.slick{
-    width: 100%;
-    float: left;
-    box-sizing: border-box;
-    display: flex;
-}
-.slick img{
-    object-fit: cover;
-	height: 38vh;
-	max-height: 265px;
-    border-radius: 7px 7px 0px 0px;
-}
+      $base-height: 240px;
+      $breakpoint: 1300px;
 
+      @media (max-width: #{$breakpoint}) {
+        height: 240px;
+      }
 
+      @for $i from 1 through 4 {
+        $breakpoint: $breakpoint - 100px;
 
-/* buttons */
-
-.botones{
+        @media (max-width: #{$breakpoint}) {
+          height: calc(#{$base-height} - #{$i * 15px});
+        }
+      }
+  
+      .slick-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        transition: .4s ease-in-out;
+        background-color: red;
+        width: 400%;
+  
+        .slick {
+          float: left;
+          box-sizing: border-box;
+          display: flex;
+  
+          img {
+            position: absolute;
+            width: 25%;
+            object-fit: cover;
+            max-height: 265px;
+            border-radius: 7px 7px 0 0;
+          }
+        }
+        .slick:nth-child(2) {
+          img {
+            left: 25%;
+          }
+        }
+        .slick:nth-child(3) {
+          img {
+            left: 50%;
+          }
+        }
+      }
+    }
+  }
+  
+  .botones {
     border-radius: 30px;
     background-color: #fff;
     position: absolute;
@@ -47,23 +69,23 @@
     width: 48px;
     height: 48px;
     text-align: center;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
     border: 0;
     cursor: pointer;
-}
-.botones:focus{
-    outline: 0;
-}
-.botones svg{
-    width: 12px;
-    height: 100%;
-    color: rgba(0,0,0,.7);
-}
-.boton-prev{
-    left: 15px;
+    &:focus {
+      outline: 0;
+    }
+    svg {
+      width: 12px;
+      height: 100%;
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+  
+  .boton-prev, .boton-next {
     width: 37px;
     height: 38px;
-    background:#fff;
+    background: #fff;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -75,57 +97,47 @@
     font-family: monospace;
     cursor: pointer;
     transition: .2s;
-    ng-icon{
-        color: #555;
-        font-size: 25px;
-        transform: translate(-1px, -6px);
+    ng-icon {
+      color: #555;
+      font-size: 25px;
     }
-}
-.boton-next{
-    right: 15px;
-    width: 37px;
-    height: 38px;
-    background: #fff;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 40px;
+  }
+  
+  .boton-prev {
+    left: 15px;
     font-weight: bold;
-    text-align: center;
-    border-radius: 45%;
-    font-family: monospace;
-    cursor: pointer;
-	padding-top: 3px;
-	padding-left: 8px;
-    transition: .2s;
+    padding-top: 3px;
+    padding-left: 8px;
     ng-icon{
-        color: #555;
-        font-size: 25px;
-        transform: translate(-1px, -6px);
+      transform: translate(-2px,-8px)
     }
-}
-
-.boton-prev:hover{
+  }
+  
+  .boton-next {
+    right: 15px;
+    font-weight: bold;
+    padding-top: 3px;
+    padding-left: 8px;
+    ng-icon{
+      transform: translateY(-8px)
+    }
+  }
+  
+  .boton-prev:hover, .boton-next:hover {
     background: #FF9E57;
-	&:hover ng-icon{
-		color: white;
-	}
-}
-
-.boton-next:hover{
-    background: #FF9E57;
-	&:hover ng-icon{
-		color: white;
-	}
-}
-
-.slick-text{
+    &:hover ng-icon {
+      color: white;
+    }
+  }
+  
+  .slick-text {
     text-align: center;
     font-size: 23px;
     margin-top: 5px; 
     color: #222;
     height: 14px;
-}
-ng-icon{
-	margin-top: 7px;
-}
+  }
+  
+  ng-icon {
+    margin-top: 7px;
+  }

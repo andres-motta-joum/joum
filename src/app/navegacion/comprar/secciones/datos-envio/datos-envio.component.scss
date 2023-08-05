@@ -31,8 +31,11 @@
         font-size: 13px;
         margin-bottom: 8px;
         margin-left: 4px;
-        font-weight: 450;
-        color: #333;
+        color: #555;
+        font-size: 13px;
+        font-weight: 440;
+        letter-spacing: .4px;
+        word-spacing: 1px;
     }
     input, select{
         padding: 10px 15px;
@@ -40,6 +43,7 @@
         border: 1px solid #ccc;
         color: #333;
         background-color: #fcfcfc;
+        outline: none;
     }
     p{
         font-size: 12px;
@@ -54,6 +58,7 @@
     margin-bottom: 40px;
 }
 .datos-envio-contenedor > div:nth-child(4){
+
     margin-top: 66px;
     div:nth-child(1){
         width: 30%;
@@ -65,7 +70,7 @@
         width: 17%;
     }
     div:nth-child(4){
-        width: 15%;
+        width: 16%;
         padding-top: 24px;
     }
 }
@@ -109,9 +114,9 @@
     border: none;
     border-radius: 5px;
     padding: 12px;
-    letter-spacing: 1.5px;
-    font-size: 17.5px;
-    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 550;
     font-family: 'font-uno';
     word-spacing: 2px;
     &:hover{
