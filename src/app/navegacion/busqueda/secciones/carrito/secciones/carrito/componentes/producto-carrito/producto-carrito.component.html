@@ -1,10 +1,11 @@
 <div class="contenedor">
     <div>
-        <img src="{{productoCarrito.foto}}" alt="">
+        <img src="{{productoCarrito.detalles?.fotos![0][0]}}" alt="">
         <div>
             <p>{{productoCarrito.nombre}}</p>
             <p>Color de la estructura: Lampara OBS</p>
-            <p>Envío gratis</p>
+            <p *ngIf="productoCarrito.envioGratis" class="envioGratis">Envio gratis</p>
+            <p *ngIf="!productoCarrito.envioGratis" class="envioPrecio"><span>Recíbelo</span> por <span>$ {{productoCarrito.precioEnvio | number: '1.0-0'}}</span></p>
         </div>
         <div>
             <p>Eliminar</p>
@@ -13,13 +14,19 @@
         </div>
     </div>
     <div>
-        <p>$ 98.900</p>
+        <ng-container *ngIf="productoCarrito.descuento">
+            <p>$ {{productoCarrito.precio! - (productoCarrito.precio! * (productoCarrito.porcentajeDescuento! / 100)) | number: '1.0-0'}}</p>
+            <div>
+                <p>$ {{productoCarrito.precio | number: '1.0-0'}}</p><p>- {{productoCarrito.porcentajeDescuento}}%</p>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!productoCarrito.descuento">
+            <p>$ {{productoCarrito.precio | number: '1.0-0'}}</p>
+            <p></p>
+        </ng-container>
+        <p>{{productoCarrito.unidades}} disponibles</p>
         <div>
-            <p>$ 120.000</p><p>- 20%</p>
-        </div>
-        <p>8 disponibles</p>
-        <div>
-            <button>-</button><p>2</p><button>+</button>
+            <button (click)="cambiarUnidad('-')">-</button><p>{{unidades}}</p><button (click)="cambiarUnidad('+')">+</button>
         </div>
     </div>
 </div>

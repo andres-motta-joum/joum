@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef,Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, Renderer2,ViewChild, } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { provideIcons } from '@ng-icons/core';
@@ -27,6 +27,10 @@ import { heroChartPie } from '@ng-icons/heroicons/outline';
 
 import { heroDocumentTextSolid } from '@ng-icons/heroicons/solid';
 
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { filter } from 'rxjs/operators';
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -42,7 +46,7 @@ import { heroDocumentTextSolid } from '@ng-icons/heroicons/solid';
       transition('inactive => active', animate('300ms')),
       transition('active => inactive', animate('300ms'))
     ]),
-    trigger('fotoShow', [
+    trigger('fotoshow', [
       state('active', style({
         opacity: '100%'
       })),
@@ -56,34 +60,74 @@ import { heroDocumentTextSolid } from '@ng-icons/heroicons/solid';
 })
 export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
 
+  constructor(private router: Router,private route: ActivatedRoute,private renderer: Renderer2,private changeDetector: ChangeDetectorRef,private zone: NgZone, private userService: UsuarioService) {}
   public footer: any;
   public footerHeight: any;
   public footerSlide!: number;
-  public fotoSombra!: boolean;
+  public fotosombra!: boolean;
   public mouseInMenu = false;
   public screenWidth: number = window.innerWidth;
   public screenHeight: number = window.innerHeight;
   public interruptor = true;
-  public photoText = 'Arrastra aquí tu foto';
+  public photoText = 'Arrastra aquí tu fotos';
   public stateSubMenu: string[] = ['inactive', 'inactive', 'inactive'];
-  public stateFoto = 'inactive';
+  public statefotos = 'inactive';
 
   private subscripciones: Subscription[] = [];
-  private subsCliente!: Subscription;
   private listenMouseEnterMenu!: () => void;
   private listenMouseLeaveMenu!: () => void;
   private listenFooterSlide!: () => void;
-
   @ViewChild('principalUL') principalUL!: ElementRef;
   @ViewChild('body') body1!: ElementRef;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private renderer: Renderer2,
-    private changeDetector: ChangeDetectorRef,
-    private zone: NgZone
-  ) {
+  public idUsuario!: string;
+  private usuario!: Usuario | undefined;
+  private routerSubscription: Subscription | undefined;
+
+
+  ngOnInit(): any { 
+    this.idUsuario = this.route.snapshot.paramMap.get('id')!;
+    this.obtenerUsuario();
+    if(this.usuario === undefined){
+      this.router.navigate(['']);
+    }
+    this.routerSubscription = this.router.events.subscribe(async event => {
+      if (event instanceof NavigationEnd) {
+        await this.obtenerUsuario();
+        if(this.usuario === undefined){
+          this.router.navigate(['']);
+        }
+      }
+    });
+  }
+  async obtenerUsuario() {
+    this.idUsuario = this.route.snapshot.paramMap.get('id')!;
+    this.usuario = this.userService.getUserUsuario(this.idUsuario);
+  }
+
+  ngAfterViewInit(): void {
+    this.listenMouseEnterMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseenter', () => {
+      this.mouseInMenu = true;
+      this.changeDetector.detectChanges();
+    });
+    this.listenMouseLeaveMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseleave', () => {
+      this.mouseInMenu = false;
+      this.changeDetector.detectChanges();
+    });
+    this.listenFooterSlide = this.renderer.listen('window', 'load', () => {
+      this.footerSlide = (this.footer.nativeElement.getBoundingClientRect().top) - this.screenHeight;
+      this.interruptor = this.footerSlide > 0 ? true : false;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.listenMouseEnterMenu();
+    this.listenMouseLeaveMenu();
+    this.listenFooterSlide();
+    this.subscripciones.forEach(subs => subs.unsubscribe());
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
 
   desplegarSubmenu(i: number): any {
@@ -91,7 +135,7 @@ export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
   }
 
 
-  getFoto(fileInput: HTMLInputElement): void {
+  getfotos(fileInput: HTMLInputElement): void {
     if (fileInput.files !== null) {
       this.photoText = fileInput.files[0].name;
     }
@@ -150,32 +194,6 @@ export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
       this.renderer.setStyle(this.principalUL.nativeElement, 'top', `${resultado}px`);
     }
     
-  }
-
-  ngOnInit(): any { 
-    const idVisited = this.route.snapshot.paramMap.get('id');
-  }
-
-  ngAfterViewInit(): void {
-    this.listenMouseEnterMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseenter', () => {
-      this.mouseInMenu = true;
-      this.changeDetector.detectChanges();
-    });
-    this.listenMouseLeaveMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseleave', () => {
-      this.mouseInMenu = false;
-      this.changeDetector.detectChanges();
-    });
-    this.listenFooterSlide = this.renderer.listen('window', 'load', () => {
-      this.footerSlide = (this.footer.nativeElement.getBoundingClientRect().top) - this.screenHeight;
-      this.interruptor = this.footerSlide > 0 ? true : false;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.listenMouseEnterMenu();
-    this.listenMouseLeaveMenu();
-    this.listenFooterSlide();
-    this.subscripciones.forEach(subs => subs.unsubscribe());
   }
 
   @HostListener('window:resize', ['$event'])

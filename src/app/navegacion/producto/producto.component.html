@@ -1,4 +1,14 @@
 <div class="body">
+    <div *ngIf="sombraBool" class="contenidoFotos">
+        <div (click)="sombraBool = false" class="sombra"></div>
+        <ng-icon name="heroChevronLeftSolid" (click)="fotoPrev()"></ng-icon>
+        <div class="cuadro" (click)="sombraBool = false">
+            <img [src]="producto.detalles?.fotos![0][currentIndex]">
+        </div>
+        <ng-icon name="heroChevronRightSolid" (click)="fotoNex()"></ng-icon>
+        <div class="cantidadFotos">{{ currentIndex + 1 }}/{{ producto.detalles?.fotos![0].length }}</div>
+        <div (click)="sombraBool = false" class="x">X</div>
+    </div>
     <app-barra-menu></app-barra-menu>
     <div class="contenidoTotalProducto">
         <div class="encabezado">
@@ -16,29 +26,28 @@
             <ng-icon class="carrito" name="matAddShoppingCart" [class.carrito-click-over] = "carritoClick == true" (click)="agregarCarrito()"></ng-icon>
             <ng-icon class="carrito-full" name="matShoppingCart" [class.carrito-click] = "carritoClick == true"></ng-icon>
 
-            <app-fotos-producto></app-fotos-producto>
-
+            <app-fotos-producto [producto]="producto" [sombraPadre]="sombraBool" [indexPadre]="currentIndex" (sombraHijo)="nuevoDatoHijoSombra($event)" (fotoIndex)="nuevoIndex($event)" ></app-fotos-producto>
             <div class="linea-Menu"></div>
             <h1 class="titulos">Productos similares que te podrían gustar</h1>
             <div class="carrusel">
-                <app-carrusel [carousel]='3' [elements]="carouselSimilaress"></app-carrusel>
+                <app-carrusel [carousel]='3' [elements]="productos"></app-carrusel>
             </div>
             <br>
             <div class="linea-Menu"></div>
             <br>
-            <app-descripcion></app-descripcion>
+            <app-descripcion [descripcion]="producto.descripcion!"></app-descripcion>
             <br>
             <div class="linea-Menu"></div>
             <app-datos-vendedor [usuario]="usuario"></app-datos-vendedor>
             <br>
-            <app-opiniones></app-opiniones>
+            <app-opiniones [opiniones]="producto.opiniones"></app-opiniones>
         
         </div>
 
         <div class="seccioDerecha">
             <app-datos-producto [usuario]="usuario" [producto]="producto"></app-datos-producto>
             <app-datos-producto-dos></app-datos-producto-dos>
-            <app-datos-producto-tres></app-datos-producto-tres>
+            <app-datos-producto-tres [producto]="producto"></app-datos-producto-tres>
         </div>
     </div>
     <app-footer></app-footer>

@@ -22,35 +22,37 @@
                     'slick2':carousel === 2,
                     'slick3':carousel === 3
                 }">
-                <div (click)="navegar(['busqueda/',element.name])" *ngIf='carousel === 1' class="slick-content">
+                <div (click)="navegar(['busqueda/',element.nombre])" *ngIf='carousel === 1' class="slick-content">
                     <picture>
-                        <img [src]='element.img' alt="Image">
+                        <img [src]='element.detalles?.fotos' alt="Image">
                     </picture>
-                    <p class="slick-text"> {{ element.name }} </p>
+                    <p class="slick-text"> {{ element.nombre }} </p>
                 </div>
-                <div (click)="navegar(['prod/abcd/'])" *ngIf='carousel === 2' class="slick-content2">
-                    <picture>
-                        <img [src]='element.img' alt="Image">
+                <div (click)="navegar(['prod/', element.id])" *ngIf='carousel === 2' class="slick-content2">
+                    <picture *ngIf="element && element.detalles && element.detalles.fotos && element.detalles.fotos[0][0]">
+                        <img [src]='element.detalles.fotos[0][0]' alt="Image">
                     </picture>
                     <div style="height: 100px;">
-                        <p class="precio-final">{{ element.precioFinal | currency:'$ ':'symbol':'0.0' }}</p>
+                        <p class="precio-final" *ngIf="!element.descuento">$ {{ element.precio | number:'1.0-0' }}</p>
+                        <p class="precio-final" *ngIf="element.descuento">$ {{ element.precio! - (element.precio! * (element.porcentajeDescuento! / 100)) | number:'1.0-0' }}</p>
                         <div style="display: flex;">
-                            <p class="precio-anterior">{{ element.precioAnterior | currency:'$ ':'code':'0.0' }}</p>
-                            <p class="porcentaje-rebaja">- {{ element.descuento | percent }} OFF</p>
+                            <p class="precio-anterior" *ngIf="element.descuento">$ {{ element.precio | number:'1.0-0'}}</p>
+                            <p class="porcentaje-rebaja"*ngIf="element.descuento">- {{ element.porcentajeDescuento}}% OFF</p>
                         </div>
-                        <p class="titulo-producto">{{ element.name }}</p>
+                        <p class="titulo-producto">{{ element.nombre }}</p>
                     </div>
                 </div>
-                <div (click)="navegar(['prod/abcd/'])" *ngIf='carousel === 3' class="slick-content3">
-                    <picture>
-                        <img [src]='element.img' alt="Image">
+                <div (click)="navegar(['prod/',element.id])" *ngIf='carousel === 3' class="slick-content3">
+                    <picture *ngIf="element && element.detalles && element.detalles.fotos && element.detalles.fotos[0][0]">
+                        <img [src]='element.detalles.fotos[0][0]' alt="Image">
                     </picture>
                     <div>
                         <div style="display: flex;">
-                            <p class="precio-final">{{ element.precioAnterior - element.precioFinal | currency:'$ ':'symbol':'0.0' }}</p>
-                            <p class="porcentaje-rebaja-3">{{ element.descuento | percent }} OFF</p>
+                            <p class="precio-final" *ngIf="!element.descuento">$ {{ element.precio | number:'1.0-0' }}</p>
+                            <p class="precio-final" *ngIf="element.descuento">$ {{ element.precio! - (element.precio! * (element.porcentajeDescuento! / 100)) | number:'1.0-0' }}</p>
+                            <p class="porcentaje-rebaja-3" *ngIf="element.descuento">{{ element.porcentajeDescuento }}% OFF</p>
                         </div>
-                        <p class="titulo-producto">{{ element.name }}</p>
+                        <p class="titulo-producto">{{ element.nombre }}</p>
                     </div>
                 </div>
             </div>

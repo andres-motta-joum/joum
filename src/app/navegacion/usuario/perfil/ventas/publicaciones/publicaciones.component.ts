@@ -1,9 +1,12 @@
 import { Component, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { heroMagnifyingGlassMini } from '@ng-icons/heroicons/mini';
 import { heroAdjustmentsHorizontal } from '@ng-icons/heroicons/outline';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 
 @Component({
   selector: 'app-publicaciones',
@@ -12,22 +15,21 @@ import { Producto } from 'src/app/interfaces/producto';
   providers: [provideIcons({heroMagnifyingGlassMini, heroAdjustmentsHorizontal})]
 })
 export class PublicacionesComponent {
-
-  public publicaciones: Array<Producto>= [
-    {
-      foto: '../../../../../../assets/img/categoria/cuadros/19.jpg',
-      precio: 0,
-      descuento: 0
-    },
-    {
-      foto: '../../../../../../assets/img/categoria/coleccionables/3.jpg',
-      precio: 0,
-      descuento: 0
-    }
-  ]
-
-  constructor(private zone: NgZone, private router: Router){
+  constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private userService: UsuarioService, private prdService: ProductoService) {}
+  public usuario!: Usuario | undefined;
+  public publicaciones!: Producto[];
+  
+  ngOnInit() {
+    this.route.parent?.params.subscribe(params => {
+      const userId = params['id'];
+      this.publicaciones = [];
+      this.usuario = this.userService.getUserUsuario(userId);
+      for(const id of this.usuario?.publicaciones!){
+        this.publicaciones.push(this.prdService.getProductsId(id.id!)!)
+      }
+    });
   }
+
 
   navegar(ruta: any[], event: Event){
     event.preventDefault();

@@ -10,7 +10,7 @@
                 <app-encabezado (listadoCuadradosOut)="getCuadradoList($event)" (listadoLineadoOut)="getLineadoList($event)"></app-encabezado>
             </div>
             <div class="productos">
-                <app-productos [listadoCuadradosInp]="listadoCuadrados" [listadoLineadoInp]="listadoLineado"></app-productos>
+                <app-productos [listadoCuadradosInp]="listadoCuadrados" [listadoLineadoInp]="listadoLineado" [productos]="productosFiltrados"></app-productos>
             </div>
         </div>
     </div>

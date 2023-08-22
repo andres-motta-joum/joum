@@ -13,10 +13,10 @@ h1{
     .left{
         position: relative;
         width: 67%;
-        height: 470px;
         border: 1px solid #ddd;
         border-radius: 8px;
         background: white;
+        padding-bottom: 100px;
         .encabezado{
             position: relative;
             height: 60px;
@@ -27,6 +27,7 @@ h1{
                 height: 40px;
                 margin-top: 10px;
                 margin-left: 30px;
+                cursor: pointer;
             }
             div{
                 h3{
@@ -38,9 +39,11 @@ h1{
                 p{
                     margin: 0;
                     margin: 0 20px;
-                    font-size: 14px;
-                    font-weight: 450;
-                    color: #666;
+                    font-size: 12px;
+                    font-weight: 480;
+                    color: #888;
+                    letter-spacing: .8px;
+                    word-spacing: 2px;
                 }
             }
             div:nth-child(3){
@@ -69,80 +72,7 @@ h1{
                 }
             }
         }
-        .producto{
-            position: relative;
-            display: flex;
-            width: calc(100% - 60px);
-            height: 100px;
-            margin: 20px 30px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            img{
-                width: 80px;
-                height: 70px;
-                padding: 3px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                margin: 12px;
-                object-fit: contain;
-            }
-            div:nth-child(2){
-                margin-top: 15px;
-                margin-left: 10px;
-                h4{
-                    font-size: 13px;
-                    color: #666;
-                    font-weight: 600;
-                    margin: 0;
-                    max-width: 300px;
-                }
-                p:nth-child(2){
-                    font-size: 12px;
-                    color: #777;
-                    margin: 4px 0;
-                }
-                p:nth-child(3){
-                    font-size: 12px;
-                    color: #777;
-                    margin: 8px 0;
-                    font-weight: 500;
-                }
-            }
-            > p{
-                position: absolute;
-                right: 15px;
-                top: 0;
-                font-weight: 500;
-                font-size: 12px;
-                color: #777;
-            }
-            div:nth-child(4){
-                position: absolute;
-                right: 15px;
-                display: flex;
-                bottom: 15px;
-                @mixin estilo-boton{
-                    border-radius: 10px;
-                    font-weight: 500;
-                    border: none;
-                    padding: 5px 15px;
-                    font-size: 12px;
-                    cursor: pointer;
-                }
-                button:nth-child(1){
-                    background-color: #ddd;
-                    color: #555;
-                    @include estilo-boton;
-                }
-                button:nth-child(2){
-                    margin-left: 10px;
-                    background-color: #FF9E57;
-                    color: #fff;
-                    @include estilo-boton;
-                }
-            }
-        }
+        
         .envio{
             position: relative;
             height: 180px;
@@ -150,9 +80,9 @@ h1{
             margin: 20px 30px;
             h4{
                 font-weight: 500;
-                color: #666;
+                color: #777;
                 letter-spacing: .5px;
-                font-size: 14px;
+                font-size: 15px;
             }
             span{
                 position: absolute;
@@ -178,7 +108,6 @@ h1{
                     font-size: 22px;
                 }
                 ng-icon:nth-child(2){
-                    color: #FF9E57;
                     font-size: 24px;
                     position: absolute;
                     top: 0;
@@ -186,24 +115,29 @@ h1{
                 }
                 ng-icon:nth-child(3){
                     margin: 0;
-                    color: #aaa;
                     font-size: 24px;
                     position: absolute;
                     top: 0;
                     right: -2px;
+                }
+                .check{
+                    color: #ff9e57;
+                }
+                .noCheck{
+                    color: #a0a0a0;
                 }
                 /*--- Progreso ---*/
                 .linea{
                     position: absolute;
                     height: 5px;
                     width: 100%;
-                    background: #aaa;
+                    background: #bbb;
                     bottom: 8px;
                 }
                 .linea-color{
                     position: absolute;
                     height: 5px;
-                    width: 50%;
+                    width: 0%;
                     background: #FF9E57;
                     bottom: 8px;
                 }
@@ -221,7 +155,7 @@ h1{
                     position: absolute;
                     width: 13px;
                     height: 13px;
-                    border: 4px solid #FF9E57;
+                    border: 4px solid #aaa;
                     bottom: 0;
                     left: calc(50% - 8px);
                     border-radius: 50%;
@@ -252,7 +186,7 @@ h1{
                     margin: 0;
                     font-size: 14px;
                     font-weight: 600;
-                    color: #555;
+                    color: #606060;
                 }
                 p{
                     width: 100%;
@@ -265,6 +199,7 @@ h1{
             div:nth-child(2){
                 h5, p{
                     text-align: center;
+                    transform: translateX(-10px);
                 }
             }
             div:nth-child(3){
@@ -283,6 +218,10 @@ h1{
             position: absolute;
             bottom: 30px;
             left: 30px;
+            cursor: pointer;
+            &:hover{
+                background: #eaeaea;
+            }
         }
     }
     .right{
@@ -305,7 +244,7 @@ h1{
                 font-weight: 500;
                 font-size: 14px;
                 color: #666;
-                letter-spacing: .5px;
+                letter-spacing: .8px;
             }
         }
         h5{
@@ -313,6 +252,7 @@ h1{
             color: #555;
             font-weight: 500;
             margin-left: 30px;
+            margin-bottom: 20px;
         }
         .precios{
             width: calc(100% - 60px);
@@ -322,15 +262,19 @@ h1{
             div{
                 border-bottom: 1px solid #ddd;
                 padding: 16px 0;
-                color: #444;
+                color: #666;
+                letter-spacing: .4px;
+                font-size: 14px;
+                font-weight: 420;
             }
             div:nth-child(2n+2){
                 text-align: right;
             }
             div:nth-last-child(-n+2){
                 border-bottom: none;
+                color: #444;
                 font-weight: 500;
-
+                font-size: 15px;
             }
         }
     }

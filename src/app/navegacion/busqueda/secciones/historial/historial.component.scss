@@ -108,4 +108,11 @@
             top: 10px;
         }
     }
+    .productos{
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(100% + 23px);
+        margin-bottom: 100px;
+    }
 }

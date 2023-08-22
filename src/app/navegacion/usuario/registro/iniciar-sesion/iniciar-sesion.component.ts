@@ -1,37 +1,100 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { heroEnvelopeSolid } from '@ng-icons/heroicons/solid';
-import { heroLockClosedSolid } from '@ng-icons/heroicons/solid';
+import { aspectsSocialFacebook } from '@ng-icons/ux-aspects';
+import { ionLogoTwitter } from '@ng-icons/ionicons';
+import { ionLogoGoogle } from '@ng-icons/ionicons';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-iniciar-sesion',
   templateUrl: './iniciar-sesion.component.html',
   styleUrls: ['./iniciar-sesion.component.scss'],
-  providers: [provideIcons({heroEnvelopeSolid, heroLockClosedSolid})]
+  providers: [provideIcons({aspectsSocialFacebook, ionLogoTwitter, ionLogoGoogle})]
 })
 export class IniciarSesionComponent {
-  form!: FormGroup;
+  constructor(private fb: FormBuilder,private zone: NgZone, private router: Router, private authService: AuthService) {}
+  public form!: FormGroup;
+  public user$!: Observable<any>;
+  private readonly emailpattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  public errorEmail = false;
+  public errorPassword = false;
+  public requiredEmail = false;
+  public requiredPassword = false;
 
-  btnDisabled = false;
-
-  constructor(
-    private formBuilder: FormBuilder
-    ) {
-      this.buildForm();
+  ngOnInit(): void {
+    this.initForm();
+    this.user$ = this.authService.userState$;
   }
 
-  private buildForm(): any {
-    this.form = this.formBuilder.group({
-      correo: ['', [Validators.required]],
-      contrasena: ['', [Validators.required]]
-    });
+  private initForm():void {
+    this.form = this.fb.group(
+      {
+        email: ['', [
+          Validators.required
+        ]],
+        password: ['', [
+          Validators.required
+        ]]
+      }
+    )
+  }
+  hasError(field: string ): boolean{
+    const fieldName = this.form.get(field);
+    return !! fieldName?.invalid && fieldName.touched
   }
 
+  async onSubmit(): Promise<void>{
+    const {email,password} = this.form.value;
+    const errorMessage = await this.authService.singIn(email, password);
+    if (errorMessage) {
+      if(errorMessage === 'emailError'){
+        this.errorEmail = true;
+        this.errorPassword = false;
+        this.requiredEmail = false;
+        this.requiredPassword = false;
+      }else if(errorMessage === 'passwordError'){
+        this.errorEmail = false
+        this.errorPassword = true;
+        this.requiredEmail = false;
+        this.requiredPassword = false;
+      }
+      else if(errorMessage === 'emailRequier'){
+        this.errorEmail = false
+        this.errorPassword = false;
+        this.requiredEmail = true;
+        this.requiredPassword = false;
+      }
+      else if(errorMessage === 'passwordRequier'){
+        this.errorEmail = false
+        this.errorPassword = false;
+        this.requiredEmail = false;
+        this.requiredPassword = true;
+      }
+    }else{
+      this.errorEmail = false; this.errorPassword = false; this.requiredEmail = false; this.requiredPassword = false;
+    }
+  }
+
+
+  //------------------------------------------
+  singInGoogle(){
+    this.authService.singInGoogle();
+  }
+  singInFacebook(){
+    this.authService.singInFacebook();
+  }
+  singInTwitter(){
+    this.authService.singInTwitter();
+  }
   /*-------- Crear Usuario y Producto ---------*/
-  ingresar(event: Event):void{
-    event.preventDefault()
-  }
 
+  navegar(ruta: string){
+    this.zone.run(()=>{
+      this.router.navigate([ruta]);
+    })
+  }
 
 }

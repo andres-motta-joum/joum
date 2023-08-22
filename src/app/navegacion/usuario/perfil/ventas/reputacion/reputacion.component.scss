@@ -9,9 +9,9 @@ h1{
 .contenedor{
     position: relative;
     margin-top: 25px;
-    width: 100%;
+    width: 94%;
     display: grid;
-    grid-template-columns: 1.25fr 1.25fr 1fr;
+    grid-template-columns: 35%  25% 10% 30%;
     grid-template-rows: repeat(2,180px);
     column-gap: 20px;
     row-gap: 20px;
@@ -22,29 +22,32 @@ h1{
         box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.095);
         border-radius: 8px;
         background: white;
+        padding-left: 10px;
         > p:nth-child(1){
-            margin: 15px 25px;
-            font-size: 14px;
+            margin: 15px 20px 20px 20px;
+            font-size: 15px;
             font-weight: 500;
-            color: #5a5a5a;
+            color: #595959;
+            letter-spacing: .4px;
+            word-spacing: 1px;
         }
         div p{
             font-size: 13px;
             color: #787878;
             font-weight: 420;
-            margin: 10px 30px 10px 25px;
+            margin: 10px 25px 10px 25px;
             letter-spacing: .3px;
             word-spacing: 1px;
             line-height: 21px;
+            
             span{
                 color: #5a5a5a;
                 font-weight: 500;
                 letter-spacing: .6px;
                 padding-right: 2px;
             }
-            span:nth-child(2){
+            span:nth-child(3){
                 color: #ff9447;
-                padding-left: 40px;
                 line-height: 25px;
                 cursor: pointer;
                 &:hover{
@@ -74,7 +77,7 @@ h1{
         }
     }
     > div:nth-child(2){
-        grid-column: 2/3;
+        grid-column: 2/4;
         grid-row: 1/2;
         > div{
             display: flex;
@@ -92,52 +95,54 @@ h1{
         }
     }
     > div:nth-child(3){
-        grid-column: 3/5;
+        grid-column: 4/6;
         grid-row: 1/3;
     }
 
     > div:nth-child(4){
-        grid-column: 1/3;
+        grid-column: 1/2;
         grid-row: 2/3;
         > div{
-            margin-top: 20px;
-            width: calc(100% - 25px);
-            margin-left: 25px;
-            height: 100px;
-            display: grid;
-            grid-template-columns: repeat(5,1fr)1.6fr;
-            column-gap: 20px;
-            > div{
-                height: 100px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-content: center;
-                img{
-                    height: 44px;
-                }
-                p{
-                    margin: 10px 0 0 0;
-                    text-align: center;
-                    font-weight: 450;
-                    font-size: 13px;
-                }
+            display: flex;
+            img{
+                height: 40px;
+                margin-left: 35px;
             }
-            > div:nth-child(6){
-                transform: translateY(-10px);
-                height: 120px;
-                border-left: 1px solid #ddd;
-                p{
-                    font-size: 14px;
-                }
-                p:nth-child(1){
-                    font-size: 20px;
-                    font-weight: 500;
-                    color: #666;
-                    margin-bottom: 0;
-                }
+            div:nth-child(1) p{
+                width: 70px;
+            }
+            div:nth-child(2) p:nth-child(1){
+                font-weight: 500;
+                color: #626262;
             }
         }
     }
+    > div:nth-child(5){
+        grid-column: 2/3;
+        grid-row: 2/3;
+        div:nth-child(2) p:nth-child(1){
+            font-weight: 500;
+            color: #626262;
+        }
+    }
+    > div:nth-child(6){
+        padding: 0;
+        height: 90px;
+        p:nth-child(1){
+            font-weight: 500;
+            color: #666;
+            font-size: 23px;
+            margin: 0;
+            margin-top: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        p:nth-child(2){
+            margin: 0;
+            margin-top: 10px;
+            text-align: center;
+        }
+    }
+    
     
 }

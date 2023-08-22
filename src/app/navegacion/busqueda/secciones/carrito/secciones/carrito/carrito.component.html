@@ -1,18 +1,18 @@
 <div class="contenedor">
     <div>
-        <app-producto-carrito [productoCarrito]="productoCarrito" *ngFor="let productoCarrito of productosCarrito"></app-producto-carrito>
+        <app-producto-carrito (unidadEmitida)="cambiarUnidades($event)" [productoCarrito]="productoCarrito" [unidades]="unidades[i]" [indice]="i" *ngFor="let productoCarrito of productos; let i = index; " ></app-producto-carrito>
     </div>
     <div>
         <button>Realizar compra</button>
         <div>
-            <p>Productos(3)</p><p>$ 613.000</p>
+            <p>Productos({{cantidadProductos}})</p><p>$ {{precioProductos | number: '1.0-0'}}</p>
         </div>
         <div>
-            <p>Envio</p><p>$ 6.000</p>
+            <p>Envio</p><p>$ {{precioEnvio | number: '1.0-0'}}</p>
         </div>
         <div class="linea"></div>
         <div>
-            <p>Total</p><p>$ 619.000</p>
+            <p>Total</p><p>$ {{precioEnvio + precioProductos | number: '1.0-0'}}</p>
         </div>
     </div>
 </div>

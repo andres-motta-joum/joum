@@ -1,7 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 
 @Component({
   selector: 'app-factura-reporte',
@@ -14,7 +14,7 @@ export class FacturaReporteComponent {
   constructor(private zone: NgZone, private router: Router){
     this.facturaReporte = {
       precio: 0,
-      descuento: 0
+      descuento: false
     }
   }
   navegar(ruta: any[], event: Event){

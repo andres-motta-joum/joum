@@ -3,44 +3,46 @@
     <div class="contenido">
         <h1>Notificaciones</h1>
         <div class="secciones">
-            <div></div>
+            <div>
+                <app-notificacion *ngFor="let notificacion of usuario?.notificaciones"></app-notificacion>
+            </div>
             <div>
                 <div>
                     <p>Ofertas y descuentos</p>
-                    <button (click)="onButtonClick()">
-                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                    <button (click)="onButtonClick('descuentos')">
+                        <div class="rectangle" [ngClass]="{'clicked': descuentos}">
                           <div class="circle"></div>
                         </div>
                     </button>
                 </div>
                 <div>
                     <p>Nuevas ventas</p>
-                    <button (click)="onButtonClick()">
-                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                    <button (click)="onButtonClick('ventas')">
+                        <div class="rectangle" [ngClass]="{'clicked': ventas}">
                           <div class="circle"></div>
                         </div>
                     </button>
                 </div>
                 <div>
                     <p>Publicaciones</p>
-                    <button (click)="onButtonClick()">
-                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                    <button (click)="onButtonClick('publicaciones')">
+                        <div class="rectangle" [ngClass]="{'clicked': publicaciones}">
                           <div class="circle"></div>
                         </div>
                     </button>
                 </div>
                 <div>
                     <p>Sobre mis reclamos</p>
-                    <button (click)="onButtonClick()">
-                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                    <button (click)="onButtonClick('reclamos')">
+                        <div class="rectangle" [ngClass]="{'clicked': reclamos}">
                           <div class="circle"></div>
                         </div>
                     </button>
                 </div>
                 <div>
                     <p>Nuevos mensajes</p>
-                    <button (click)="onButtonClick()">
-                        <div class="rectangle" [ngClass]="{'clicked': registroHistorial}">
+                    <button (click)="onButtonClick('mensajes')">
+                        <div class="rectangle" [ngClass]="{'clicked': mensajes}">
                           <div class="circle"></div>
                         </div>
                     </button>

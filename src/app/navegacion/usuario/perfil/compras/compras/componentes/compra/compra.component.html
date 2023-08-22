@@ -1,23 +1,31 @@
-<div class="contenedor">
-    <img src="{{compra.foto}}">
+<div class="contenedor" (click)="navegar(['prod/' + producto.id], $event)">
+    <img src="{{producto.detalles?.fotos![0][0]}}">
     <div>
-        <h3>14 Junio</h3>
-        <p>Cuadro para sala 60 x 120 decorativo moderno</p>
+        <h3>{{venta.fechaVenta | date:'d \'de\' MMMM \'.\' y'}}</h3>
+        <p>{{producto.nombre}}</p>
         <p>ver producto</p>
     </div>
     <div>
-        <div (click)="navegar(['abcd/perfil/informacion'], $event)">
-            <img src="../../../../../../assets/img/usuarios/user.svg"><p> Andres Motta</p>
+        <div (click)="navegar([usuarioVendedor?.usuario +'/perfil/informacion'], $event)">
+            <img src="assets/img/usuarios/user.svg"><p> {{usuarioVendedor?.nombre}}</p>
         </div>
-        <div (click)="navegar(['abcd/abcd/enviar-mensaje'], $event)">
-            <img src="../../../../../../assets/img/logo/iconos/Msg-full.svg"><p>Enviar mensaje</p>
+        <div (click)="navegar([miUsuario?.usuario+'/' + usuarioVendedor?.usuario +'/' + venta.numVenta +'/enviar-mensaje'], $event)">
+            <img src="assets/img/logo/iconos/Msg-full.svg"><p>Enviar mensaje</p>
         </div>
-        <div (click)="navegar(['abcd/compras/detalle-compra'], $event)">
-            <img src="../../../../../../assets/img/logo/iconos/In-time.svg"><p>En camino</p>
+        <div (click)="navegar([miUsuario?.usuario+'/compras/detalle-compra/'+ venta.numVenta], $event)">
+            <ng-container *ngIf="!venta.enCamino && !venta.entregado" >
+                <img src="assets/img/logo/iconos/In-time.svg"><p>En Preparación</p>
+            </ng-container>
+            <ng-container *ngIf="venta.enCamino && !venta.entregado" >
+                <img src="assets/img/logo/iconos/In-time.svg"><p>En camino</p>
+            </ng-container>
+            <ng-container *ngIf="venta.entregado" >
+                <img src="assets/img/logo/iconos/Time-check.svg"><p>Entregado</p>
+            </ng-container>
         </div>
     </div>
     <div>
-        <button (click)="navegar(['abcd/compras/detalle-compra'], $event)">Ver detalle</button>
-        <button (click)="navegar(['prod/volver-a-comprar'], $event)">Volver a comprar</button>
+        <button (click)="navegar([miUsuario?.usuario+'/compras/detalle-compra/'+ venta.numVenta], $event)">Ver detalle</button>
+        <button (click)="navegar(['prod/' + producto.id], $event)">Volver a comprar</button>
     </div>
 </div>

@@ -22,8 +22,12 @@
 }
 
 .texto1{
-    color: #999;
-    margin-bottom: 10px;
+    color: #909090;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    letter-spacing: .5px;
+    word-spacing: 1px;
 }
 
 .tituloProducto{
@@ -32,25 +36,25 @@
     font-size: 20px;
     color: #333;
     padding-right: 10%;
-    font-weight: 600;
+    font-weight: 550;
     font-family: 'font-uno';
 }
 /*----------------- ESTRELLAS -----------------*/
 
 .opiniones{
     width: 15px;
-    margin-top: -34px;
+    margin-top: -33px;
     margin-left: 106px;
-    color: #ed8619;
+    color: #a6a6a6;
     letter-spacing: 1px;
     font-family: 'font-uno';
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 550;
     position: absolute;
     cursor: pointer;
     transition: .1s;
     &:hover{
-        color: #ff9b31;
+        color: #fc972b;
         font-size: 16px;
         margin-top: -35px;
     }
@@ -58,7 +62,7 @@
 .estrellas{
     position: relative;
     width: 100px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 .starts{
     margin-top: 0;
@@ -86,9 +90,6 @@
 }
 
  /*----------------- PRECIOS -----------------*/
- .contenidoPrecios{
-    height: 70px;
- }
 
  .precio-descuento{
     display: flex; 
@@ -106,7 +107,7 @@
 }
 .contenidoPrecios h2{
     font-size: 33px;
-    margin: 5px 0 60px 0;
+    margin: 5px 0 25px 0;
     font-weight: 400;
     letter-spacing: 1px;
     color: #333;
@@ -118,7 +119,7 @@
     padding-left: 10px;
     letter-spacing: 1px;
     font-family: 'font-uno';
-    font-weight: 500;
+    font-weight: 480;
     font-size: 17px;
 }
 
@@ -157,12 +158,54 @@
     letter-spacing: 0;
 }
 
+.recibelo-gratis{
+    position: relative;
+    font-size: 15px;
+    font-family: 'font-uno';
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.recibelo-gratis span{
+    top: 3px;
+    position: absolute;
+    font-weight: 480;
+    color: #0cb16f;
+    letter-spacing: .8px;
+}
+.recibelo-gratis ng-icon{
+    color: #0cb16f;
+    font-size:21px;
+    padding-right: 6px;
+}
+.entre-gratis{
+    font-size: 14px;
+    font-family: 'font-uno';
+    margin-top: 0;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+.entre-gratis span{
+    font-weight: 600;
+    letter-spacing: 0;
+}
+.entre-gratis span:nth-child(2){
+    font-weight: 550;
+    letter-spacing: .8px;
+    color: #11b674;
+    padding-left: 2px;
+}
+
 /*----------------- Unidades -----------------*/
 .linea-Menu{
     border-bottom: 1px solid #ddd;
     margin-bottom: 26px;
 }
 
+.session3{
+    display: flex;
+}
 .session3 label{
     font-size: 14px;
     color: #333;
@@ -179,19 +222,21 @@
     font-family: 'font-uno';
     font-weight: 600;
     cursor: pointer;
+    height: 18px;
+    outline: none;
+    width: 90px;
 }
 .session3 p{
-    margin-top: -18px;
-    margin-left: 178px;
+    margin: 0;
+    margin-left: 10px;
     font-size: 13px;
     color: #777;
-    letter-spacing: .5px;
+    letter-spacing: .4px;
     margin-bottom: 20px;
     font-family: 'font-uno';
 }
 .session3 p span{
-    font-weight: 500;
-    padding-left: 1px;
+    margin-left: 5px;
 }
 
 /*----------------- PAGAR -----------------*/
@@ -200,7 +245,7 @@
     height: 43px;
     border-radius: 5px;
     background: #ffa148;
-    margin: 20px auto;
+    margin: 15px auto 20px auto;
     position: relative;
     cursor: pointer;
     transition: .2s;
@@ -218,4 +263,40 @@
     font-family: 'font-uno';
     font-weight: 600;
     word-spacing: 2px;
+}
+
+.proteccionCompra{
+    position: relative;
+    font-size: 14px;
+    color: #6c6c6c;
+    letter-spacing: .5px;
+    font-weight: 440;
+    line-height: 20px;
+    padding: 5px 5px 0 25px;
+    margin-bottom: 22px;
+    cursor: pointer;
+    &:hover{
+        color: #606060;
+        ng-icon{
+            color: #707070;
+        }
+    }
+    span{
+        color: #797979;
+        font-weight: 420;
+        font-size: 13.5px;
+    }
+    ng-icon{
+        position: absolute;
+        left: 0;
+        top: 6px;
+        font-size: 20px;
+        color: #7d7d7d;
+    }
+}
+
+@for $i from 1 through 10 {
+    .estrellas .starts-over.starts-#{$i * 10} {
+        width: ($i * 10.15%);
+    }
 }

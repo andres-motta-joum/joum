@@ -19,6 +19,7 @@
             object-fit: contain;
         }
         >div:nth-child(2){
+            min-width: 300px;
             position: relative;
             p:nth-child(1){
                 letter-spacing: .5px;
@@ -36,7 +37,7 @@
                 font-size: 13px;
                 font-weight: 420;
             }
-            p:nth-child(3){
+            p.envioGratis{
                 position: absolute;
                 word-spacing: 1px;
                 margin: 10px 0 5px 25px;
@@ -44,6 +45,18 @@
                 font-size: 13px;
                 font-weight: 500;
                 top: 109px;
+            }
+            p.envioPrecio{
+                position: absolute;
+                word-spacing: 1px;
+                margin: 10px 0 5px 25px;
+                color: #888;
+                font-size: 13px;
+                font-weight: 500;
+                top: 109px;
+                span{
+                    color: #777;
+                }
             }
         }
         >div:nth-child(3){

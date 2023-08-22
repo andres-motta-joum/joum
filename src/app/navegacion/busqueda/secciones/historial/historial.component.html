@@ -13,6 +13,9 @@
             <button>Borrar historial</button>
             <p>Administrar</p>
         </div>
+        <div class="productos">
+            <app-producto-historial [producto]="producto" *ngFor="let producto of productos"></app-producto-historial>
+        </div>
     </div>
     <app-footer></app-footer>
 </div>

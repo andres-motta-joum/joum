@@ -1,11 +1,15 @@
 <div class="contenidoTotal">
-    <div class="seccionIzquierda">
-        <div><img src="../../../../../assets/img/categoria/cuadros/9.jpg" alt=""></div>
-        <div><img src="../../../../../assets/img/categoria/cuadros/8.jpg" alt=""></div>
-        <div><img src="../../../../../assets/img/categoria/cuadros/7.jpg" alt=""></div>
-        <div><img src="../../../../../assets/img/categoria/cuadros/10.jpg" alt=""></div>
+    <div class="seccionIzquierda" (scroll)="onScroll($event)">
+        <ng-container *ngFor="let fotoUrl of producto.detalles!.fotos![0]; let i = index">
+            <div *ngIf="fotoUrl" (click)="index = i; cambiarImagen()" class="div">
+                <img [src]="fotoUrl">
+            </div>
+        </ng-container>
+        <div *ngIf="producto.detalles!.fotos![0].length > 5 && linea" class="linea">
+            <div class="sombra"></div>
+        </div>
     </div>
     <div class="seccionDerecha">
-        <div><img src="../../../../../assets/img/categoria/cuadros/14.jpg" alt=""></div>
+        <div><img [src]="selectedImage" (click)="emitirSombra(); emitirIndex()"></div>
     </div>
 </div>

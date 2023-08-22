@@ -1,25 +1,25 @@
 <div class="body">
     <app-menu-simple></app-menu-simple>
-    <h1>Compra <span>#84948585</span></h1>
+    <h1>Venta <span>#{{venta?.numVenta}}</span></h1>
     <div class="contenido">
         <div class="left">
             <div class="encabezado">
-                <img src="../../../../../../../assets/img/usuarios/user.svg">
+                <img src="assets/img/usuarios/user.svg">
                 <div>
-                    <h3>Andres Yesid Motta</h3>
+                    <h3>{{usuarioDos?.nombre}}</h3>
                 </div>
                 <div>
-                    <img src="../../../../../../../assets/img/logo/iconos/ver-mas.svg">
-                    <img (click)="navegar(['abcd/abcd/enviar-mensaje'], $event)" src="../../../../../../../assets/img/logo/iconos/ver-mas-full.svg">
+                    <img src="assets/img/logo/iconos/ver-mas.svg">
+                    <img (click)="navegar(['MOTTAANDRES20221130093921/MOTTAANDRES20221130093921/enviar-mensaje'], $event)" src="assets/img/logo/iconos/ver-mas-full.svg">
                 </div>
             </div> 
             <div class="chat">
                 <div class="contenedorMensajes">
-                    <app-mensaje [mensaje]="mensaje" *ngFor="let mensaje of mensajes"></app-mensaje>
+                    <app-mensaje [mensaje]="mensaje" [tipoUsuario]="tipoUsuario" *ngFor="let mensaje of chat?.mensajes"></app-mensaje>
                 </div>
                 <div>
                     <div class="message-input" contenteditable="true"></div>
-                    <img src="../../../../../../../assets/img/logo/iconos/Msg-full.svg" alt="">
+                    <img src="assets/img/logo/iconos/Msg-full.svg" alt="">
                 </div>
             </div>
         </div>

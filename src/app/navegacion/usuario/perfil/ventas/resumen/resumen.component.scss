@@ -12,7 +12,7 @@ h1{
     width: 100%;
     display: grid;
     grid-template-columns: 1.5fr 1.5fr 1fr;
-    grid-template-rows: repeat(2,180px);
+    grid-template-rows: 190px 180px;
     column-gap: 20px;
     row-gap: 20px;
     /*-------------- ESTILO GENERAL -----------*/
@@ -74,7 +74,7 @@ h1{
             width: 100%;
             grid-template-columns: 33% 33% 33%;
             position: absolute;
-            bottom: 17px;
+            bottom: 28px;
             width: 100%;
             div{
                 display: flex;
@@ -104,7 +104,7 @@ h1{
         .contenedor-metricas{
             position: absolute;
             width: 100%;
-            bottom: 17px;
+            bottom: 28px;
             display: flex;
             justify-content: space-between;
             > div{

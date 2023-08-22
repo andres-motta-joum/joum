@@ -1,7 +1,8 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
+import { Venta } from 'src/app/interfaces/usuario/subInterfaces/venta';
 
 @Component({
   selector: 'app-opinion',
@@ -9,14 +10,10 @@ import { Producto } from 'src/app/interfaces/producto';
   styleUrls: ['./opinion.component.scss']
 })
 export class OpinionComponent {
-  @Input() opinion: Producto;
-    subMenu: boolean = false;
-    constructor(private zone: NgZone, private router: Router){
-      this.opinion = {
-        precio: 0,
-        descuento: 0
-    }
-  }
+  @Input() producto!: Producto;
+  @Input() venta!: Venta;
+  subMenu: boolean = false;
+  constructor(private zone: NgZone, private router: Router){}
   desplegar(){
     this.subMenu = !this.subMenu;
   }

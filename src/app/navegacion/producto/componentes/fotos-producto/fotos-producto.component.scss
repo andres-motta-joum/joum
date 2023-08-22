@@ -1,58 +1,89 @@
-.contenidoTotal{
+
+.contenidoTotal {
     display: flex;
-}
-.seccionIzquierda{
-    width: 6%;
-    height: 450px;
     position: relative;
-    z-index: 10;
-    margin-top: 35px;
-    margin-left: 5px;
+  
+    .seccionIzquierda {
+      width: 77px;
+      max-height: 470px;
+      z-index: 10;
+      margin-top: 35px;
+      margin-left: 5px;
+      overflow-y: scroll;
+      img {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 15px;
+        background: white;
+        border-radius: 5px;
+        border: 1px solid #bbb;
+        display: flex;
+        align-items: center;
+        object-position: center;
+        padding: 2.5px;
+        &:hover{
+            cursor: pointer;
+            box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);
+        }
+      }
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      &::-webkit-scrollbar {
+        width: 0; /* Chrome, Safari, Opera */
+        display: none; /* Safari and Chrome mobile */
+      }
+      .linea{
+        width: 93px;
+        height: 16px;
+        position: absolute ;
+        bottom: -1px;
+        left: -4px;
+        overflow: hidden;
+        .sombra{
+          width: 100%;
+          height: 2px;
+          background-color: rgba($color: #000, $alpha: .22);
+          box-shadow: 0 0 13px 1px #222;
+          position: absolute ;
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+  
+    .seccionDerecha {
+      width: 88%;
+      height: 470px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      object-position: center;
+      margin-top: 25px;
+      margin-left: 6%;
+  
+      div {
+        position: absolute;
+        width: 97%;
+        height: 97%;
+        display: flex;
+        object-position: center;
+        justify-content: center;
+        right: 0;
+  
+        img {
+          max-width: 100%;
+          max-height: 100%;
+          min-width: 40%;
+          min-height: 90%;
+          width: auto;
+          height: auto;
+          object-fit: cover;
+          border-radius: 3px;
+          transform: translateX(-10%);
+          cursor: zoom-in;
+        }
+      }
+    }
+
 }
-.seccionIzquierda div{
-    width: 65px;
-    height: 65px;
-    margin-bottom: 15px;
-    background: white;
-    border-radius: 5px;
-    border: 1px solid #bbb;
-    display: flex;
-    align-items: center;
-    object-position: center;
-}
-.seccionIzquierda div img{
-    margin: auto;
-    width: 59px;
-    height: 59px;
-    border-radius: 3px;
-    object-fit: cover;
-}
-.seccionDerecha{
-    width: 88%;
-    height: 450px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    object-position: center;
-    margin-top: 25px;
-    margin-left: 6%;
-}
-.seccionDerecha div{
-    position: absolute;
-    width: 97%;
-    height: 97%;
-    display: flex;
-    align-items: center;
-    object-position: center;
-    right: 0;
-}
-.seccionDerecha div img{
-    max-width: 100%;
-    max-height: 100%;
-    min-width: 40%;
-    min-height: 90%;
-    width: auto;
-    height: auto;
-    object-fit: cover;
-    border-radius: 3px;
-}
+  

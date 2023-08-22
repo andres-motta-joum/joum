@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { NgIconsModule } from '@ng-icons/core';
 import { ProductoComponent } from './producto.component';
 import { RouterModule } from '@angular/router'
@@ -10,10 +10,15 @@ import { DescripcionComponent } from './componentes/descripcion/descripcion.comp
 import { DatosVendedorComponent } from './componentes/datos-vendedor/datos-vendedor.component';
 import { DatosProductoComponent } from './componentes/datos-producto/datos-producto.component';
 import { DatosProductoDosComponent } from './componentes/datos-producto-dos/datos-producto-dos.component';
-import { FotosProductoComponent } from './componentes/fotos-producto/fotos-producto.component';
+import { fotosProductoComponent } from './componentes/fotos-producto/fotos-producto.component';
 import { OpinionesComponent } from './componentes/opiniones/opiniones.component';
 import { DatosProductoTresComponent } from './componentes/datos-producto-tres/datos-producto-tres.component';
 
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { FormsModule } from '@angular/forms';
+
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 @NgModule({
   declarations: [
     ProductoComponent,
@@ -21,7 +26,7 @@ import { DatosProductoTresComponent } from './componentes/datos-producto-tres/da
     DatosVendedorComponent,
     DatosProductoComponent,
     DatosProductoDosComponent,
-    FotosProductoComponent,
+    fotosProductoComponent,
     OpinionesComponent,
     DatosProductoTresComponent
   ],
@@ -30,7 +35,12 @@ import { DatosProductoTresComponent } from './componentes/datos-producto-tres/da
     NgIconsModule,
     ComponentesGeneralesModule,
     InicioModule,
+    FormsModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    ProductoService,
+    { provide: LOCALE_ID, useValue: 'es-CO' }
   ]
 })
 export class ProductoModule { }

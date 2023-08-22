@@ -1,11 +1,13 @@
 <div class="contenido">
-    <img src="../../../../../../../../../assets/img/logo/iconos/Mensajes-check.svg">
+    <img src="assets/img/logo/iconos/Mensajes-check.svg">
     <div>
-        <p>{{fecha}}</p>
-        <p>{{movimiento.nombreCuenta}}</p>
+        <p>{{movimiento.fecha | date:'d \'de\' MMMM \'del\' y'}}</p>
+        <p *ngIf="movimiento.tipo !== 'pago'">{{movimiento.nombreDestinatario}}</p>
+        <p *ngIf="movimiento.tipo === 'pago'">Liberación de dinero</p>
     </div>
     <div>
-        <p [ngClass]="{'pago': movimiento.tipo === 'Pago por venta'}" >{{movimiento.cantidad}}</p>
+        <p *ngIf="movimiento.tipo === 'pago'" [ngClass]="{'pago': movimiento.tipo === 'pago'}" >+ $ {{ movimiento.valor | currency: '':'':''}}</p>
+        <p *ngIf="movimiento.tipo !== 'pago'" [ngClass]="{'pago': movimiento.tipo === 'pago'}" >- $ {{ movimiento.valor | currency: '':'':''}}</p>
         <p>{{movimiento.tipo}}</p>
     </div>
 </div>

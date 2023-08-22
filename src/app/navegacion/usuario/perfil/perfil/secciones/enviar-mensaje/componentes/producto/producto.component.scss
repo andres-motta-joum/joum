@@ -1,111 +1,29 @@
-.contenedor{
+.producto{
     position: relative;
-    margin-top: 14px;
-    width: 100%;
-    height: 200px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: white;
+    margin: 20px 30px 0 30px;
+    width: calc(100% - 60px);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    height: 106px;
     display: flex;
-    cursor: pointer;
-
-    > img{
-        width: 156px;
-        height: 156px;
-        margin-top: 20px;
-        margin-left: 25px;
-        border-radius: 8px;
-        object-fit: contain;
+    img{
+        width: 80px;
+        height: 80px;
+        margin: 10px;
+        padding: 3px;
         border: 1px solid #ddd;
-        padding: 2px;
+        border-radius: 8px;
+        background-color: #fff;
+        object-fit: contain;
     }
-
-    div:nth-child(2){
-        margin-top: 20px;
-        margin-left: 30px;
-        height: 3px;
-        p:nth-child(1){
-            font-size: 19px;
-            font-weight: 480;
-            color: #555;
-            margin: 0;
-            max-width: 500px;
-            min-width: 50px;
-            word-spacing: 1px;
-        }
-        div{
-            display: flex;
-            height: 15px;
-            margin-top: 15px;
-            margin-left: 0;
-            p:nth-child(1){
-                font-size: 15px;
-                font-weight: 400;
-                color: #888;
-                list-style: 1px solid #555;
-                position: relative;
-                margin-right: 10px;
-                letter-spacing: .3px;
-                &::after {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    top: 56%;
-                    width: 100%;
-                    height: 1.5px;
-                    background-color: rgba($color: #000000, $alpha: .3);
-                }
-            }
-            p:nth-child(2){
-                font-size: 15px;
-                font-weight: 500;
-                color: #1a98f3;
-                margin-top: 0;
-                letter-spacing: .3px;
-            }
-        }
-        p:nth-child(3){
-            margin: 5px 0;
-            font-size: 28px;
-            font-weight: 400;
-            color: #383838;
-        }
-        p:nth-child(4){
-            font-size: 14px;
-            font-weight: 500;
-            color: #4ac94c;
-            margin: 10px 0;
-            letter-spacing: .3px;
-            word-spacing: 1px;
-        }
-    }
-    div:nth-child(3), div:nth-child(4){
-        margin: 20px;
-        position: absolute;
-        right: 85px;
-        img:nth-child(1){
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 32px;
-            height: 32px;
-        }
-        img:nth-child(2){
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 32px;
-            height: 32px;
-            opacity: 0;
-            transition: .2s;
-            cursor: pointer;
-            &:hover{
-                opacity: 1;
-            }
-        }
-    }
-    div:nth-child(4){
-        right: 35px;
+    p{
+        font-size: 12px;
+        font-weight: 450;
+        letter-spacing: .5px;
+        color: #666;
+        padding: 5px 10px;
+        margin: 0;
+        line-height: 20px;
     }
 
 }

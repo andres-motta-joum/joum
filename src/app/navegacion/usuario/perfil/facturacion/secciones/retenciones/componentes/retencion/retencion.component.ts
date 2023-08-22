@@ -1,7 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 
 @Component({
   selector: 'app-retencion',
@@ -9,13 +9,8 @@ import { Producto } from 'src/app/interfaces/producto';
   styleUrls: ['./retencion.component.scss']
 })
 export class RetencionComponent {
-  @Input() retencion: Producto;
-  constructor(private zone: NgZone, private router: Router){
-    this.retencion = {
-      precio: 0,
-      descuento: 0
-    }
-  }
+  @Input() retencion!: Producto;
+  constructor(private zone: NgZone, private router: Router){}
   navegar(ruta: any[], event: Event){
     event.preventDefault();
     this.zone.run(()=>{

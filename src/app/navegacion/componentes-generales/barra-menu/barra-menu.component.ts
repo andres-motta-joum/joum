@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 /*--------- Iconos ---------------*/
 import { provideIcons } from '@ng-icons/core';
@@ -32,6 +33,10 @@ import { heroArrowTrendingUp, } from '@ng-icons/heroicons/outline';
 
 import { heroDocumentText } from '@ng-icons/heroicons/outline';
 import { heroArrowRightOnRectangle } from '@ng-icons/heroicons/outline';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-barra-menu',
@@ -40,13 +45,51 @@ import { heroArrowRightOnRectangle } from '@ng-icons/heroicons/outline';
   viewProviders: [provideIcons({ heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle, ionNotificationsOutline, ionChevronDownOutline})]
 })
 export class BarraMenuComponent{
+  public ultimoDatoUrl!: string;
   public scrollDisplay: Boolean = true;
-
+  private routeSubscription!: Subscription;
   @ViewChild(MenuLateralComponent, {static: false})
   menuLateral: MenuLateralComponent = new MenuLateralComponent(this.changeDetectorRef, this.zone,this.router);
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router){}
+  public usuario!: Usuario | undefined;
+  public logged!: boolean;
+  public usuarioLogged!: User;
+  constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private userService: UsuarioService, private authService: AuthService){}
 
+  ngOnInit() {
+    this.routeSubscription = this.route.paramMap.subscribe(params => {
+      this.decodificarURL();
+      this.usuario = this.userService.getUserUsuario('MOTTAANDRES20221130093921');
+    });
+
+    this.authService.userState$.subscribe(user => {
+      if (user) {
+        this.usuarioLogged = user;
+        this.logged = true;
+      } else {
+        this.logged = false;
+      }
+    });
+  }
+
+  singOut(){
+    this.authService.singOut();
+  }
+
+  decodificarURL(){ // Saber el texto puesto en el Input
+    const url = this.router.url;
+      const decodedUrl = decodeURIComponent(url);
+      const segments = decodedUrl.split('/');
+      if(segments[1] === 'busqueda'){
+        this.ultimoDatoUrl = segments[segments.length - 1];
+      }
+  }
+  ngOnDestroy() {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+  }
+  //-------------------------------------------------------  Funciones básicas  --------- //
   navegar(ruta: any[], event: Event): void{
     event.preventDefault();
     this.zone.run(()=>{
@@ -54,6 +97,26 @@ export class BarraMenuComponent{
       window.scroll(0,0)
     })
   }
-
+  buscar(busqueda: string){
+    if(busqueda !== ''){
+      this.zone.run(()=>{
+        this.router.navigate(['busqueda/',busqueda]);
+        window.scroll(0,0)
+      })
+    }else{
+      this.zone.run(()=>{
+        this.router.navigate(['']);
+        window.scroll(0,0)
+      })
+    }
+  }
+  buscarEnter(busqueda: string){
+    if(busqueda !== ''){
+      this.zone.run(()=>{
+        this.router.navigate(['busqueda/',busqueda]);
+        window.scroll(0,0)
+      })
+    }
+  }
   
 }

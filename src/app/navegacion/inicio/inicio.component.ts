@@ -1,113 +1,80 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { Producto } from 'src/app/interfaces/producto/producto';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
-  selector: 'app-inicio',
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.scss']
 })
-export class InicioComponent{
+export class InicioComponent implements OnInit{
+  constructor( private zone: NgZone, private router: Router, private productoService: ProductoService, private authService: AuthService) {window.scroll(0,0)}
+
+  ngOnInit(){
+    this.productos = this.productoService.getProducts();
+  }
+ //-----------------
 
   slider = [
-    '../../../../assets/img/anuncios/slider-uno.svg',
-    '../../../../assets/img/anuncios/slider-dos.svg',
-    '../../../../assets/img/anuncios/slider-uno.svg'
-  ];
-  
-  carouselCategorias = [
-    { img: '../../../../assets/img/categoria/cuadros/21.jpg', name: 'Cuadros' },
-    { img: '../../../../assets/img/categoria/estantes/15.jpg', name: 'Estantes' },
-    { img: '../../../../assets/img/categoria/lamparas/6.jpg', name: 'Lámparas' },
-    { img: '../../../../assets/img/categoria/macetas/1.jpg', name: 'Macetas' },
-    { img: '../../../../assets/img/categoria/relojespared/14.jpg', name: 'Relojes' },
-    { img: '../../../../assets/img/categoria/difusores/1.jpg', name: 'Difusores' },
-    { img: '../../../../assets/img/categoria/vinilos/9.jpg', name: 'Vinilos' },
-    { img: '../../../../assets/img/categoria/coleccionables/19.jpg', name: 'Coleccionables' }
+    'assets/img/anuncios/slider-uno.svg',
+    'assets/img/anuncios/slider-uno.svg',
+    'assets/img/anuncios/slider-uno.svg'
   ];
 
-  public carouselOfertas: any[] = [
+  public productos!: Producto[];
+
+  public categorias: Producto[] = 
+  [
     {
-      img: '../../../../assets/img/categoria/cuadros/19.jpg',
-      name: 'Conjunto de cuadros pequeños decorativos',
-      precioAnterior: 164000,
-      precioFinal: (164000 - (164000 * 0.17)),
-      descuento: '0.17'
+      nombre: 'Cuadros',
+      detalles:{
+        fotos: [['assets/img/categoria/cuadros/21.jpg']]
+      }
     },
     {
-      img: '../../../../assets/img/categoria/cuadros/6.jpg',
-      name: 'Cuadros decorativos para sala modernos y elegantes',
-      precioAnterior: 115000,
-      precioFinal: (115000 - (115000 * 0.2)),
-      descuento: '0.2'
+      nombre: 'Repisas',
+      detalles:{
+        fotos: [['assets/img/categoria/repisas/15.jpg']]
+      }
     },
     {
-      img: '../../../../assets/img/categoria/macetas/15.jpg',
-      name: 'Conjunto de macetas pequeñas para el hogar',
-      precioAnterior: 38000,
-      precioFinal: (38000 - (38000 * 0.35)),
-      descuento: '0.35'
+      nombre: 'Iluminación',
+      detalles:{
+        fotos: [['assets/img/categoria/iluminacion/6.jpg']]
+      }
     },
     {
-      img: '../../../../assets/img/categoria/relojespared/2.jpg',
-      name: 'Reloj de pared estilo con mariposas',
-      precioAnterior: 40000,
-      precioFinal: (40000 - (40000 * 0.19)),
-      descuento: '0.19'
+      nombre: 'Macetas',
+      detalles:{
+        fotos: [['assets/img/categoria/macetas/1.jpg']]
+      }
     },
     {
-      img: '../../../../assets/img/categoria/vinilos/3.jpg',
-      name: 'Vinilo con frase motivacional',
-      precioAnterior: 45000,
-      precioFinal: (45000 - (45000 * 0.1)),
-      descuento: '0.1'
+      nombre: 'Relojes',
+      detalles:{
+        fotos: [['assets/img/categoria/relojes/14.jpg']]
+      }
     },
     {
-      img: '../../../../assets/img/categoria/coleccionables/17.jpg',
-      name: 'Figuras coleccionables',
-      precioAnterior: 29000,
-      precioFinal: (29000 - (29000 * 0.16)),
-      descuento: '0.16'
-    },
-        {
-      img: '../../../../assets/img/categoria/cuadros/19.jpg',
-      name: 'Conjunto de cuadros pequeños decorativos',
-      precioAnterior: 164000,
-      precioFinal: (164000 - (164000 * 0.17)),
-      descuento: '0.17'
+      nombre: 'Difusores',
+      detalles:{
+        fotos: [['assets/img/categoria/difusores/1.jpg']]
+      }
     },
     {
-      img: '../../../../assets/img/categoria/cuadros/6.jpg',
-      name: 'Cuadros decorativos para sala modernos y elegantes',
-      precioAnterior: 115000,
-      precioFinal: (115000 - (115000 * 0.2)),
-      descuento: '0.2'
+      nombre: 'Vinilos',
+      detalles:{
+        fotos: [['assets/img/categoria/vinilos/9.jpg']]
+      }
     },
     {
-      img: '../../../../assets/img/categoria/macetas/15.jpg',
-      name: 'Conjunto de macetas pequeñas para el hogar',
-      precioAnterior: 38000,
-      precioFinal: (38000 - (38000 * 0.35)),
-      descuento: '0.35'
-    },
-    {
-      img: '../../../../assets/img/categoria/relojespared/2.jpg',
-      name: 'Reloj de pared estilo con mariposas',
-      precioAnterior: 40000,
-      precioFinal: (40000 - (40000 * 0.19)),
-      descuento: '0.19'
-    },
-    {
-      img: '../../../../assets/img/categoria/vinilos/3.jpg',
-      name: 'Vinilo con frase motivacional',
-      precioAnterior: 45000,
-      precioFinal: (45000 - (45000 * 0.1)),
-      descuento: '0.1'
+      nombre: 'Adornos',
+      detalles:{
+        fotos: [['assets/img/categoria/adornos/19.jpg']]
+      }
     }
   ];
-
-  constructor( private zone: NgZone, private router: Router) {
-    window.scroll(0,0)
-  }
   navegar( ruta: any[], event: Event): void{
     event.preventDefault();
     this.zone.run(()=>{

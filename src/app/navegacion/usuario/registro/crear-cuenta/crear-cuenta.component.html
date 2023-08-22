@@ -1,103 +1,50 @@
-<div id="formularios">
-    <form
-        [formGroup]='form'
-        (ngSubmit)='guardar($event)'
-        method="POST"
-        id="form_session">
-
-        <div class="columns">
-            <div class="field-container">
-                <p> Nombre</p>
-                <ng-icon name="heroUserCircleSolid"></ng-icon>  
-                <input
-                    formControlName='nombre'
-                    type="text"
-                    class="field"
-                    placeholder="Ejemplo: Felipe"
-                    id="Nombre"
-                    name="nombrecliente"> <br/>
-            </div>
-            <div class="field-container">
-                <p> Apellido</p>
-                <ng-icon name="heroUserCircleSolid"></ng-icon>    
-                <input
-                    formControlName='apellido'
-                    type="text"
-                    class="field"
-                    placeholder="Ejemplo: Ramirez"
-                    id="Apellido" name="apellidocliente">
-                <br/>
+<div class="formulario">
+    <h1>Crear cuenta</h1>
+    <!----------->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="nombres">
+            <div>
+                <label for="" [ngClass]="{'errorText': hasError('name')}">Nombre</label>
+                <input type="text" formControlName="name" [ngClass]="{'invalid': hasError('name')}">
+                <app-error-message [control]="form.get('name')!" />
             </div>
 
+            <div>
+                <label for="" [ngClass]="{'errorText': hasError('lastname')}">Apellido</label>
+                <input type="text" formControlName="lastname" [ngClass]="{'invalid': hasError('lastname')}">
+                <app-error-message [control]="form.get('lastname')!" />
+            </div>
         </div>
-        
-        <p>Correo electrónico</p>
-        <div class="field-container">
-            <ng-icon name="heroEnvelopeSolid"></ng-icon>    
-            <input
-                formControlName='correo'
-                type="text"
-                class="field"
-                placeholder="user@example.com"
-                id="Correo"
-                name="correocliente">
-            <br/>
-        </div>
+        <!----------->
+        <label for="email" [ngClass]="{'errorText': hasError('email')}" for="email" >Correo</label>
+        <input name="email" type="text" placeholder="nombre@correo.com" formControlName="email" [ngClass]="{'invalid': hasError('email')}">
+        <app-error-message [control]="form.get('email')!" patternType="email"/>
 
-        <p>Contraseña</p>
-        <div class="field-container">
-            <ng-icon name="heroLockClosedSolid"></ng-icon>  
-            <input
-                formControlName='contrasena'
-                type="password"
-                class="field"
-                placeholder="****"
-                id="Contraseña"
-                name="clavecliente">
-            <br/>
-        </div>
+        <!----------->
+        <label for="password" [ngClass]="{'errorText': hasError('password')}" for="email" >Contraseña</label>
+        <input name="password" type="password" placeholder="* * * *" formControlName="password" [ngClass]="{'invalid': hasError('password')}">
+        <app-error-message [control]="form.get('password')!" patternType="password" />
 
-        <p>Telefono</p>
-        <div class="field-container">
-            <ng-icon name="heroPhoneSolid"></ng-icon>  
-            <input
-                formControlName='telefono'
-                type="number"
-                class="field"
-                placeholder="+52 55..."
-                id="Telefono"
-                name="telefonocliente">
+        <!----------->
+        <label for="" [ngClass]="{'errorText': hasError('phone')}">Teléfono</label>
+        <input type="text" placeholder="+57" formControlName="phone" [ngClass]="{'invalid': hasError('phone')}">
+        <app-error-message [control]="form.get('phone')!"/>
+
+        <!----------->
+        <div class="politicas">
+            <input type="checkbox">
+            <p>Declaro que he leído y acepto la nueva <span (click)="navegar('privacidad')"> Política de Privacidad</span> y los <span (click)="navegar('terminos-condiciones')">Términos y Condiciones</span> de joum.</p>
         </div>
 
-        <input
-            formControlName='terminosAceptados'
-            type="checkbox"
-            id="Declaracion"
-            name="registration[acceptTerms]"
-            required="required"
-            class="Check"
-            ng-model="acceptTerms"
-            value="1">
-        <label for="Declaracion" class="label">
-        Declaro que he leído y acepto la nueva <a href="/sp/privacidad" target="_blank">Política de Privacidad</a> y los <a href="/sp/terminos" target="_blank">Términos y Condiciones</a> de joum.
-        </label>
-
-
-        <div class="center-content">
-            <input
-                type="submit"
-                class="btn"
-                value="crear cuenta"
-                name="boton" 
-                id="btn-crear"
-                [ngStyle]='{
-                    "background": (form.invalid || btnDisabled) ? "white" : "#FF9E57",
-                    "border": (form.invalid || btnDisabled) ? "1px solid #777" : "none",
-                    "color": (form.invalid || btnDisabled) ? "#888" : "white",
-                    "cursor": (form.invalid || btnDisabled) ? "auto" : "pointer"
-                }'
-                [disabled]='(form.invalid || btnDisabled)'>
-            <p *ngIf="btnDisabled">Procesando Información</p>
+        <div class="botones">
+            <button type="button" (click)="navegar('cuenta/iniciar-sesion')">Iniciar sesión</button> <button type="submit">Crear</button>
         </div>
     </form>
+
+    <p>O crea tu cuenta con</p>
+    <div class="iconos">
+        <div (click)="singInFacebook()"><ng-icon name="aspectsSocialFacebook"></ng-icon></div>
+        <div (click)="singInTwitter()"><ng-icon name="ionLogoTwitter"></ng-icon></div>
+        <div (click)="singInGoogle()"><ng-icon name="ionLogoGoogle"></ng-icon></div>
+    </div>
 </div>

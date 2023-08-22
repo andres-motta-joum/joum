@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 
 @Component({
   selector: 'app-facturas-reportes',
@@ -9,14 +9,14 @@ import { Producto } from 'src/app/interfaces/producto';
 export class FacturasReportesComponent {
   public facturacionesReportes: Array<Producto>= [
     {
-      foto: '../../../../../../assets/img/categoria/cuadros/19.jpg',
       precio: 0,
-      descuento: 0
+      descuento: false,
+      detalles: {fotos: [['assets/img/categoria/adornos/9.jpg']]}
     },
     {
-      foto: '../../../../../../assets/img/categoria/coleccionables/3.jpg',
       precio: 0,
-      descuento: 0
+      descuento: false,
+      detalles: {fotos: [['assets/img/categoria/adornos/9.jpg']]}
     }
   ]
 }

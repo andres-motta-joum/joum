@@ -1,7 +1,10 @@
 import { Component, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { Venta } from 'src/app/interfaces/usuario/subInterfaces/venta';
 
 @Component({
   selector: 'app-compra',
@@ -9,16 +12,17 @@ import { Producto } from 'src/app/interfaces/producto';
   styleUrls: ['./compra.component.scss']
 })
 export class CompraComponent {
-  @Input() compra: Producto;
+  @Input() producto!: Producto;
+  @Input() venta!: Venta;
+  public usuarioVendedor!: Usuario | undefined;
+  public miUsuario!: Usuario | undefined;
+
   subMenu: boolean = false;
-  constructor(private zone: NgZone, private router: Router){
-    this.compra = {
-      precio: 0,
-      descuento: 0
-    }
-  }
-  desplegar(){
-    this.subMenu = !this.subMenu;
+  constructor(private zone: NgZone,private route: ActivatedRoute, private router: Router, private usrService: UsuarioService){}
+  ngOnInit(){
+    const miId = this.route.parent?.snapshot.paramMap.get('id');
+    this.miUsuario = this.usrService.getUserUsuario(miId!);
+    this.usuarioVendedor = this.usrService.getUserId(this.producto.idUsuario!);
   }
   navegar(ruta: any[], event: Event){
     event.preventDefault();

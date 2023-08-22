@@ -26,7 +26,7 @@ export class SeccionIzquierdaComponent {
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
   }
-  envioGratis: boolean = false;
+  envioGratis: boolean = true;
   onButtonClick(): void {
     this.envioGratis = !this.envioGratis;
   }

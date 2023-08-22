@@ -1,6 +1,10 @@
 import { Component, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Producto } from 'src/app/interfaces/producto/producto';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 
 @Component({
   selector: 'app-historial',
@@ -8,7 +12,24 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./historial.component.scss']
 })
 export class HistorialComponent {
-  constructor(private zone: NgZone, private router: Router){}
+
+  constructor(private zone: NgZone, private router: Router, private route: ActivatedRoute, private userService: UsuarioService,private prdService: ProductoService){}
+
+  private routeSubscription!: Subscription;
+  public usuario!: Usuario | undefined;
+  public productos!: Producto[];
+
+
+  public url!: string;
+  ngOnInit() {
+    this.productos = [];
+    this.usuario = this.userService.getUserUsuario('MOTTAANDRES20221130093921');
+    for(const producto of this.usuario?.historial!){
+      this.productos.push(this.prdService.getProductsId(producto.id!)!);
+    }
+    console.log(this.productos)
+  }
+
   registroHistorial: boolean = true;
 
   navegar( ruta: any[], event: Event): void{
