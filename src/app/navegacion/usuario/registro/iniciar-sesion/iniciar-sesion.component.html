@@ -1,33 +1,28 @@
-<div id="formularios">
-    <form (ngSubmit)='ingresar($event)' [formGroup]='form' id="form_register" style="display: block;">
-        <p>Correo electrónico</p>
-        <div class="field-container">
-            <ng-icon name="heroEnvelopeSolid"></ng-icon>   
-            <input formControlName='correo' type="text" class="field" placeholder="user@example.com" id="Correo2">
-            <br/>
-        </div>
+<div class="formulario">
+    <h1>Iniciar sesión</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-        <p>Contraseña</p>
-        <div class="field-container">
-            <ng-icon name="heroLockClosedSolid"></ng-icon>
-            <input formControlName='contrasena' type="password" class="field" placeholder="****" id="Contraseña2">
-            <br/>
-        </div><br>
-        <a class="recuperarContraseña" routerLink='/cliente/iniciar-sesion'> Olvide mi contraseña </a>
-        <div class="center-content">
-            <input
-                type="submit"
-                value="Iniciar sesión"
-                id="btn-Iniciar"
-                [ngStyle]='{
-                    "background": (form.invalid || btnDisabled) ? "white" : "#FF9E57",
-                    "border": (form.invalid || btnDisabled) ? "1px solid #777" : "none",
-                    "color": (form.invalid || btnDisabled) ? "#888" : "white",
-                    "cursor": (form.invalid || btnDisabled) ? "auto" : "pointer"
-                }'
-                [disabled]='(form.invalid || btnDisabled)'>
-            <p *ngIf="btnDisabled">Procesando Información</p>
-            <br/><br/>
+        <label [ngClass]="{'errorText': errorEmail || requiredEmail}" for="email" >Correo</label>
+        <input name="email" type="text" placeholder="nombre@correo.com" formControlName="email" [ngClass]="{'invalid': errorEmail || requiredEmail}">
+        <p class="error" *ngIf="errorEmail">El correo es incorrecto</p>
+        <p class="error" *ngIf="requiredEmail">Este campo es requerido</p>
+
+        <label [ngClass]="{'errorText': errorPassword || requiredPassword}" for="password" >Contraseña</label>
+        <input name="password" type="password" placeholder="* * * *" formControlName="password" [ngClass]="{'invalid': errorPassword || requiredPassword}">
+        <p class="error" *ngIf="errorPassword">La constraseña es incorrecta</p>
+        <p class="error" *ngIf="requiredPassword">Este campo es requerido</p>
+
+        <p (click)="navegar('cuenta/phone-validation/email-request')" class="forgotPassword">¿Olvidaste tu constraseña?</p>
+
+        <div class="botones">
+            <button type="button" (click)="navegar('cuenta/crear-cuenta')">Crear cuenta</button> <button type="submit">Ingresar</button>
         </div>
     </form>
+
+    <p class="segundaOpcionP">O iniciar sesión con</p>
+    <div class="iconos">
+        <div (click)="singInFacebook()"><ng-icon name="aspectsSocialFacebook"></ng-icon></div>
+        <div (click)="singInTwitter()"><ng-icon name="ionLogoTwitter"></ng-icon></div>
+        <div (click)="singInGoogle()"><ng-icon name="ionLogoGoogle"></ng-icon></div>
+    </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { provideIcons } from '@ng-icons/core';
 import { heroChevronDownMini } from '@ng-icons/heroicons/mini';
 
@@ -12,16 +12,11 @@ import { heroChevronDownMini } from '@ng-icons/heroicons/mini';
   providers: [provideIcons({heroChevronDownMini})]
 })
 export class PublicacionComponent {
-  @Input() publicacion: Producto;
+  @Input() publicacion!: Producto;
   subMenu: boolean = false;
   unidades: boolean = false;
 
-  constructor(private zone: NgZone, private router: Router){
-    this.publicacion = {
-      precio: 0,
-      descuento: 0
-    }
-  }
+  constructor(private zone: NgZone, private router: Router){}
   desplegarSubMenu(){
     this.subMenu = !this.subMenu;
   }

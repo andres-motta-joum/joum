@@ -1,65 +1,92 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges, HostListener } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Usuario } from '../../interfaces/usuario';
-import { Producto } from '../../interfaces/producto';
+import { Usuario } from '../../interfaces/usuario/usuario';
+import { Producto } from '../../interfaces/producto/producto';
 import { provideIcons } from '@ng-icons/core';
 import { heroHeart } from '@ng-icons/heroicons/outline';
 import { heroHeartSolid } from '@ng-icons/heroicons/solid';
 import { matAddShoppingCart } from '@ng-icons/material-icons/baseline';
 import { matShoppingCart } from '@ng-icons/material-icons/baseline';
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { heroChevronLeftSolid } from '@ng-icons/heroicons/solid';
+import { heroChevronRightSolid } from '@ng-icons/heroicons/solid';
 
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
   styleUrls: ['./producto.component.scss'],
-  providers: [provideIcons({heroHeart, heroHeartSolid,matAddShoppingCart,matShoppingCart})]
+  providers: [provideIcons({heroHeart, heroHeartSolid,matAddShoppingCart,matShoppingCart, heroChevronLeftSolid, heroChevronRightSolid})]
 })
 export class ProductoComponent {
-  
+  constructor(private route: ActivatedRoute,private cd: ChangeDetectorRef, private productoService: ProductoService, private router: Router) {}
+  private routerSubscription!: Subscription;
+  public producto!: Producto;
+  public usuario!: Usuario;
+  public productos!: Producto[];
+  private productoId!: string;
+
   public corazonClick: boolean = false;
   public carritoClick: boolean = false;
-  carouselSimilaress: Array<any> = [];
+  public carouselSimilaress: Array<any> = [];
 
-  public imgsOfertas: string[] = [
-    '../../../../assets/img/categoria/cuadros/4.jpg',
-    '../../../../assets/img/categoria/cuadros/10.jpg',
-    '../../../../assets/img/categoria/cuadros/6.jpg',
-    '../../../../assets/img/categoria/cuadros/7.jpg',
-    '../../../../assets/img/categoria/cuadros/8.jpg',
-    '../../../../assets/img/categoria/cuadros/9.jpg',
-    '../../../../assets/img/categoria/cuadros/5.jpg',
-    '../../../../assets/img/categoria/cuadros/11.jpg',
-    '../../../../assets/img/categoria/cuadros/12.jpg',
-    '../../../../assets/img/categoria/cuadros/13.jpg',
-    '../../../../assets/img/categoria/cuadros/3.jpg'
-  ];
+  public sombraBool: boolean = false;
+  public currentIndex = 0;
 
-  public usuario: Usuario;
-  public producto: Producto;
-
-  constructor(private route: ActivatedRoute,private cd: ChangeDetectorRef) {
-    for (const imagen of this.imgsOfertas) {
-      this.carouselSimilaress.push({
-        img: imagen,
-        name: 'Cuadro Decorativo Noche Estrellada 100 X 70 Cm',
-        precioAnterior: 38000,
-        precioFinal: (38000 - (38000 * 0.35)),
-        descuento: '0.35'
-      });
+  @HostListener('document:keydown', ['$event'])
+  miFuncionPersonalizada(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft' && this.sombraBool === true) {
+      this.fotoPrev();
+    }else if (event.key === 'ArrowRight' && this.sombraBool === true){
+      this.fotoNex()
     }
+  }
 
+  ngOnInit() {
+    this.obtenerProducto();
     this.usuario = {
-      fotoPerfil: '../../../../../assets/img/usuarios/user.svg',
-      nombreCliente: "Andres Yesid",
-      apellidoCliente: "Motta"
+      nombre: "Andres Yesid",
+      apellido: "Motta"
     };
-    this.producto = {
-      foto: "../../../../../assets/img/usuarios/logo.png",
-      nombre:"Forro Estuche Smart Case Compatible Para iPad Colores",
-      precio:250000,
-      descuento: 50000
-    };
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.obtenerProducto();
+      }
+    });
+  }
+  ngOnDestroy() {
+    this.routerSubscription.unsubscribe();
+  }
+
+  obtenerProducto() { //Validamos si el producto existe por la URL, si definimos cual es en caso de existir
+    this.route.url.subscribe(segments => {
+      this.productoId = segments[segments.length - 1].path;
+    });
+
+    this.productos = this.productoService.getProducts();
+    const productoEncontrado = this.productos.find(product => product.id === this.productoId);
+
+    if (productoEncontrado !== undefined) {
+      this.producto = productoEncontrado;
+    } else {
+      alert("Producto no encontrado");
+      this.router.navigate([''])
+    }
+  }
+
+  nuevoDatoHijoSombra(newDato: boolean){ //Al recibir nuevo dato de componente Hijo
+    this.sombraBool = newDato;
+  }
+  nuevoIndex(numero: number){ //Al recibir nuevo dato de componente Hijo
+    this.currentIndex = numero;
+  }
+
+  fotoNex() {
+    this.currentIndex = (this.currentIndex + 1) % this.producto.detalles!.fotos![0].length;
+  }
+  fotoPrev() {
+    this.currentIndex = (this.currentIndex - 1 + this.producto.detalles!.fotos![0].length) % this.producto.detalles!.fotos![0].length;
   }
 
   agregarFavorito(){
@@ -68,6 +95,4 @@ export class ProductoComponent {
   agregarCarrito(){
     this.carritoClick = !this.carritoClick;
   }
-
-
 }

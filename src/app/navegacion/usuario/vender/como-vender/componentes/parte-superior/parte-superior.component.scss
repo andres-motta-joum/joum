@@ -12,14 +12,15 @@
 	column-gap: 30px;
 	div:nth-child(1){
 		h2{
-			font-size: 26px;
+			font-size: 25px;
 			font-weight: 520;
 			color: #606060;
 			letter-spacing: .5px;
-			word-spacing: 1px;
+			word-spacing: 1.5px;
 			margin-left: 30px;
 			max-width: 90%;
 			margin-top: 25px;
+			line-height: 35px;
 		}
 		button{
 			margin: 30px;
@@ -73,8 +74,8 @@
 			margin: 0;
 			height: 50px;
 			background-color: #999;
-			background: linear-gradient(to bottom, #909090, #999);
-			color: white;
+			background: linear-gradient(to bottom, #e4e4e4, #f0f0f0);
+			color: #606060;
 			font-weight: 500;
 			letter-spacing: .5px;
 			word-spacing: 1px;

@@ -1,9 +1,9 @@
 <div class="contenidoDatosProducto">
     <div class="contenido">
-        <p class="texto1">Nuevo | +100 vendidos</p>
+        <p class="texto1">+ {{producto.ventas}} vendidos</p>
         <h2 class="tituloProducto">{{ producto.nombre }}</h2>
         <div class="estrellas">
-            <div class="starts-over">
+            <div class="starts-over" [ngClass]="'starts-' + promedioCalificacion">
                 <ng-icon name="matStarRound"></ng-icon>
                 <ng-icon name="matStarRound"></ng-icon>
                 <ng-icon name="matStarRound"></ng-icon>
@@ -18,36 +18,42 @@
                 <ng-icon name="matStarRound"></ng-icon>
             </div>
         </div>
-        <p (click)="opiniones()" class="opiniones">25</p>
+        <p (click)="opiniones()" class="opiniones"> {{producto.opiniones?.length}}</p>
 
         <div class="contenidoPrecios">
-            <div class="precio-descuento">
-                <p>{{ producto.precio | currency:'$ ':'symbol':'1.0-0'}}</p>
-                <p>- {{ producto.descuento / producto.precio | percent }} OFF</p>
+            <div class="precio-descuento" *ngIf="producto.descuento">
+                <p>$ {{ producto.precio | number:'1.0-0'}}</p>
+                <p>- {{ producto.porcentajeDescuento}}% OFF</p>
             </div>
-            <h2>{{ producto.precio - producto.descuento | currency:'$ ':'symbol':'1.0-0' }}</h2>
+            <h2 *ngIf="producto.descuento">$ {{ producto.precio! - (producto.precio! * (producto.porcentajeDescuento! / 100)) | number:'1.0-0' }}</h2>
+            <h2 *ngIf="!producto.descuento">$ {{ producto.precio | number:'1.0-0'}}</h2>
         </div>
 
         <div>
-            <p class="recibelo"><ng-icon name="heroTruck"></ng-icon><span>Recibelo</span></p>
-            <p class="entre">entre el <span>8 y 10 de junio</span> por <span>$9.000</span></p>
+            <ng-container *ngIf="producto.envioGratis; else otroContenido">
+                <p class="recibelo-gratis"><ng-icon name="heroTruck"></ng-icon><span>Recíbelo</span></p>
+                <p class="entre-gratis">entre el <span>8 y 10 de junio</span> <span> Gratis!</span></p>
+            </ng-container>
+            <ng-template #otroContenido>
+                <ng-container>
+                    <p class="recibelo"><ng-icon name="heroTruck"></ng-icon><span>Recíbelo</span></p>
+                    <p class="entre">entre el <span>8 y 10 de junio</span> por <span>$ {{producto.precioEnvio | number:'1.0-0'}}</span></p>
+                </ng-container>
+            </ng-template>
+            
         </div>
 
         <div class="linea-Menu"></div>
         <div class="session3">
             <label for="unidades">Cantidad:</label>
-            <select name="unidades" id="unidades">
+            <select name="unidades" id="unidades" [style.width.px]="unaUnidad ? 90 : 117" (change)="unidadesChange($event)">
                 <option value="1" selected>1 unidad</option>
-                <option value="1">2 unidad</option>
-                <option value="1">3 unidad</option>
-                <option value="1">4 unidad</option>
-                <option value="1">5 unidad</option>
-                <option value="1">6 unidad</option>
-                <option value="1">7 unidad</option>
-                <option value="1">8 unidad</option>
-                <option value=""><input type="text" placeholder="hola"></option>
+                <option *ngFor="let i of [].constructor(producto.unidades! - 1); let idx = index" [value]="idx + 2">
+                  {{ idx + 2 }} unidad{{ idx + 1 !== 0 ? 'es' : '' }}
+                </option>
             </select>
-            <p>(<span>37</span> disponibles)</p>
+            <p>(<span>{{producto.unidades}}</span> disponibles )</p>
         </div>
     <div (click)="navegar(['comprar/checkout/detalles-envio'], $event)" class="btnComprar"><p>Comprar ahora</p></div>
+    <div class="proteccionCompra">Compra protegida:<span> Obtén lo que esperabas o recupera tu dinero.</span><ng-icon name="matGppGoodOutline"></ng-icon></div>
 </div>

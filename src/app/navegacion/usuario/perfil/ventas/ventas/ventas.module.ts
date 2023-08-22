@@ -9,12 +9,14 @@ import { RouterModule } from '@angular/router';
 import { VentasComponent } from './ventas.component';
 import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
 import { VentaComponent } from './componentes/venta/venta.component';
+import { ProductoComponent } from './detalle-venta/producto/producto.component';
 
 @NgModule({
   declarations: [
     VentasComponent,
     DetalleVentaComponent,
-    VentaComponent
+    VentaComponent,
+    ProductoComponent
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,8 @@
 <div class="producto">
-    <img src="{{producto.foto}}">
+    <img src="{{producto.detalles?.fotos![0][0]}}">
     <div>
-        <p>Cuadro decorativo para sala 60 x 120 lienzo elegante</p>
-        <p>120.000</p>
+        <p>{{producto.nombre}}</p>
+        <p>{{producto.precio | number:'1.0-0'}} x 2u.</p>
     </div>
 </div>
 

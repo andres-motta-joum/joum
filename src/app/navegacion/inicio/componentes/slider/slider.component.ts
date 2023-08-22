@@ -39,7 +39,5 @@ export class SliderComponent implements OnInit {
     } else if (this.leftPosition > 0 && value === 1) {
       this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition - this.slickWidth)}%`);
     }
-    console.log(trackWidth);
-    console.log(listWidth);
   }
 }

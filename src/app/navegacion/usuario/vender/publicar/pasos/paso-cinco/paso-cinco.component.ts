@@ -9,7 +9,7 @@ import { PasosVenderService } from '../../../../../../servicios/vender/vender.se
   styleUrls: ['./paso-cinco.component.scss']
 })
 export class PasoCincoComponent {
-  public textFoto = 'Agregar foto de tu producto';
+  public textfotos = 'Agregar fotos de tu producto';
   public descripcion!: string;
 
   constructor(
@@ -33,20 +33,20 @@ export class PasoCincoComponent {
     }
   }
 
-  getFoto(fotoFile: HTMLInputElement): void {
+  getfotos(fotosFile: HTMLInputElement): void {
     // tslint:disable-next-line: no-non-null-assertion
-    this.textFoto = fotoFile.files![0].name;
+    this.textfotos = fotosFile.files![0].name;
   }
 
   irPaso4(): void {
     this.router.navigate(['/vender', 'formulario', 'paso4']);
   }
 
-  irPaso6(form: NgForm, fotoFile: HTMLInputElement): void {
-    if (form.valid && fotoFile.files !== null && fotoFile.files[0] !== undefined && this.textFoto !== 'Agregar foto de tu producto') {
+  irPaso6(form: NgForm, fotosFile: HTMLInputElement): void {
+    if (form.valid && fotosFile.files !== null && fotosFile.files[0] !== undefined && this.textfotos !== 'Agregar fotos de tu producto') {
       this.pasos.paso6 = true;
       this.pasos.producto.descripcion = form.value.descripcion;
-      this.pasos.producto.foto = fotoFile.files[0];
+      this.pasos.producto.detalles.fotos[1] = fotosFile.files[0];
       this.router.navigate(['/vender', 'formulario', 'paso6']);
     }
   }

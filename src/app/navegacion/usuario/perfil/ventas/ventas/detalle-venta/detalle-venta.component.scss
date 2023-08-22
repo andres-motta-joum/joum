@@ -27,10 +27,10 @@ h1{
     .left{
         position: relative;
         width: 72%;
-        height: 550px;
         border: 1px solid #e4e4e3;
         border-radius: 5px;
         background: white;
+        padding-bottom: 20px;
         .encabezado{
             position: relative;
             height: 60px;
@@ -83,81 +83,6 @@ h1{
                 }
             }
         }
-        .producto{
-            position: relative;
-            display: flex;
-            width: calc(100% - 60px);
-            height: 100px;
-            margin: 20px 30px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            img{
-                width: 80px;
-                height: 70px;
-                padding: 3px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                margin: 12px;
-                object-fit: contain;
-            }
-            div:nth-child(2){
-                margin-top: 15px;
-                margin-left: 10px;
-                h4{
-                    font-size: 13px;
-                    color: #666;
-                    font-weight: 600;
-                    margin: 0;
-                    max-width: 300px;
-                }
-                p:nth-child(2){
-                    font-size: 12px;
-                    color: #777;
-                    margin: 4px 0;
-                }
-                p:nth-child(3){
-                    font-size: 12px;
-                    color: #777;
-                    margin: 8px 0;
-                    font-weight: 500;
-                }
-            }
-            > p{
-                position: absolute;
-                right: 15px;
-                top: 0;
-                font-weight: 500;
-                font-size: 12px;
-                color: #777;
-            }
-            div:nth-child(4){
-                position: absolute;
-                right: 15px;
-                display: flex;
-                bottom: 15px;
-                @mixin estilo-boton{
-                    border-radius: 10px;
-                    font-weight: 500;
-                    border: none;
-                    padding: 5px 15px;
-                    font-size: 12px;
-                    cursor: pointer;
-                }
-                button:nth-child(1){
-                    background-color: #eee;
-                    border: 1px solid #ccc;
-                    color: #555;
-                    @include estilo-boton;
-                }
-                button:nth-child(2){
-                    margin-left: 10px;
-                    background-color: #FF9E57;
-                    color: #fff;
-                    @include estilo-boton;
-                }
-            }
-        }
         .envio{
             position: relative;
             height: 180px;
@@ -165,9 +90,9 @@ h1{
             margin: 20px 30px;
             h4{
                 font-weight: 500;
-                color: #666;
+                color: #777;
                 letter-spacing: .5px;
-                font-size: 14px;
+                font-size: 15px;
             }
             span{
                 position: absolute;
@@ -191,10 +116,8 @@ h1{
                 ng-icon:nth-child(1){
                     color: #FF9E57;
                     font-size: 22px;
-                    margin-left: 0;
                 }
                 ng-icon:nth-child(2){
-                    color: #FF9E57;
                     font-size: 24px;
                     position: absolute;
                     top: 0;
@@ -202,24 +125,29 @@ h1{
                 }
                 ng-icon:nth-child(3){
                     margin: 0;
-                    color: #bbb;
                     font-size: 24px;
                     position: absolute;
                     top: 0;
                     right: -2px;
+                }
+                .check{
+                    color: #ff9e57;
+                }
+                .noCheck{
+                    color: #a0a0a0;
                 }
                 /*--- Progreso ---*/
                 .linea{
                     position: absolute;
                     height: 5px;
                     width: 100%;
-                    background: #ccc;
+                    background: #bbb;
                     bottom: 8px;
                 }
                 .linea-color{
                     position: absolute;
                     height: 5px;
-                    width: 50%;
+                    width: 0%;
                     background: #FF9E57;
                     bottom: 8px;
                 }
@@ -237,7 +165,7 @@ h1{
                     position: absolute;
                     width: 13px;
                     height: 13px;
-                    border: 4px solid #FF9E57;
+                    border: 4px solid #aaa;
                     bottom: 0;
                     left: calc(50% - 8px);
                     border-radius: 50%;
@@ -247,7 +175,7 @@ h1{
                     position: absolute;
                     width: 13px;
                     height: 13px;
-                    border: 4px solid #ccc;
+                    border: 4px solid #aaa;
                     bottom: 0;
                     right: 0;
                     border-radius: 50%;

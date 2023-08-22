@@ -11,6 +11,7 @@ import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
 
 import { ComponentesGeneralesModule } from '../componentes-generales/componentes-generales.module';
+import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ComponentesGeneralesModule } from '../componentes-generales/componentes
     NotificacionesComponent,
     PrivacidadComponent,
     QuienesSomosComponent,
-    TerminosCondicionesComponent
+    TerminosCondicionesComponent,
+    NotificacionComponent
   ],
   imports: [
     CommonModule,

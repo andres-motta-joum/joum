@@ -20,7 +20,10 @@ import { ProductoModule } from './navegacion/producto/producto.module';
 import { ComprarModule } from './navegacion/comprar/comprar.module';
 
 /*----------- FireBase --------*/
-import { environment } from 'src/environments/environment';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth, connectAuthEmulator } from '@angular/fire/auth';
+import { provideFirestore,getFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,18 @@ import { environment } from 'src/environments/environment';
     ComponentesGeneralesModule,
     BusquedaModule,
     ProductoModule,
-    ComprarModule
+    ComprarModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => {
+      const auth = getAuth();
+      connectAuthEmulator(auth, 'http://localhost:9099', {disableWarnings: true});
+      return auth
+    }),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      connectFirestoreEmulator(firestore, 'http://localhost', 9098)
+      return firestore;
+    })
     
   ],
   providers: [CurrencyPipe],

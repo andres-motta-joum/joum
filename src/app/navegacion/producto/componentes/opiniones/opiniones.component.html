@@ -1,9 +1,9 @@
 <div class="opiniones-contenedor">
     <div style="display: flex;">
-        <h1>4.5</h1>
+        <h1>{{promedio}}</h1>
         <div>
             <div class="estrellas">
-                <div class="starts-over">
+                <div class="starts-over" [ngClass]="'starts-' + promedioCalificacion">
                     <ng-icon name="heroStarSolid"></ng-icon>
                     <ng-icon name="heroStarSolid"></ng-icon>
                     <ng-icon name="heroStarSolid"></ng-icon>
@@ -18,108 +18,49 @@
                     <ng-icon name="heroStarSolid"></ng-icon>
                 </div>
             </div>
-            <p class="calificaciones">60 calificaciones</p>
+            <p class="calificaciones">{{opiniones?.length}} calificaciones</p>
         </div>
     </div>
     <div class="barras">
-        <div class="linea">
-            <span class="linea-span"><span class="fondo-span" style="width: 70%;"></span></span>
-            <p>5</p><ng-icon name="heroStarSolid"></ng-icon>
-        </div>
-        <div class="linea">
-            <span class="linea-span"><span class="fondo-span" style="width: 15%;"></span></span>
-            <p>4</p><ng-icon name="heroStarSolid"></ng-icon>
-        </div>
-        <div class="linea">
-            <span class="linea-span"><span class="fondo-span" style="width: 8%;"></span></span>
-            <p>3</p><ng-icon name="heroStarSolid"></ng-icon>
-        </div>
-        <div class="linea">
-            <span class="linea-span"><span class="fondo-span" style="width: 3%;"></span></span>
-            <p>2</p><ng-icon name="heroStarSolid"></ng-icon>
-        </div>
-        <div class="linea">
-            <span class="linea-span"><span class="fondo-span" style="width: 10%;"></span></span>
-            <p style="margin-left: 12px;">1</p><ng-icon name="heroStarSolid"></ng-icon>
+        <div class="linea" *ngFor="let calificacion of calificaciones">
+            <span class="linea-span">
+                <span class="fondo-span" [style.width.%]="calificacion.porcentaje"></span>
+            </span>
+            <p>{{ calificacion.estrellas }}</p><ng-icon name="heroStarSolid"></ng-icon>
         </div>
     </div>
-    <select> 
-        <option value="">Calificación</option>
-        <option value="">1</option>
-        <option value="">2</option>
-        <option value="">3</option>
-        <option value="">4</option>
-        <option value="">5</option>
+    <select [(ngModel)]="opcionSeleccionada" (change)="leccionarOpcion()"> 
+        <option disabled selected value="0">Calificación</option>
+        <option value="5">5 estrellas</option>
+        <option value="4">4 estrellas</option>
+        <option value="3">3 estrellas</option>
+        <option value="2">2 estrellas</option>
+        <option value="1">1 estrellas</option>
+        <option value="todas">Todas</option>
     </select>
-    
-    <div class="opinion">
-        <div style="display: flex;">
-            <div class="estrellas-opinion">
-                <div class="starts-over">
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
+    <ng-container *ngFor="let opinion of opinionesSelecionadas">
+        <div class="opinion">
+            <div style="display: flex;">
+                <div class="estrellas-opinion">
+                    <div class="starts-over" [ngClass]="'starts-' + (opinion.calificacion! * 20)">
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                    </div>
+                    <div class="starts">
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                        <ng-icon name="heroStarSolid"></ng-icon>
+                    </div>
                 </div>
-                <div class="starts">
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                </div>
+                <p>{{ opinion.fecha | date:'d \'/\' MMMM \'/\' y' }}</p>
             </div>
-            <p>30 de abril 2023 </p> 
+            <p class="texto-opinion">{{opinion.contenido}}</p>
+            <div class="linea-opinion"></div>
         </div>
-        <p class="texto-opinion">La silla es extremadamente cómoda me gusta los ajustes que le puedes hacer, algo malo y el porque le quito dos estrellas es que a la hora de levantarte de ella cuando necesitas apoyarte en el apoya manos, poco a poco se va abriendo y creo que posiblemente se rompa si no se tiene precaución,</p>
-        <div class="linea-opinion"></div>
-    </div>
-    <div class="opinion">
-        <div style="display: flex;">
-            <div class="estrellas-opinion">
-                <div class="starts-over">
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                </div>
-                <div class="starts">
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                </div>
-            </div>
-            <p>30 de abril 2023 </p> 
-        </div>
-        <p class="texto-opinion">Calidad precio es genial ! no es un 5 estrellas por qué en cuestión de materiales no es muy firme a mi parecer no es para una persona de más de 90 kg.</p>
-        <div class="linea-opinion"></div>
-    </div>
-    <div class="opinion">
-        <div style="display: flex;">
-            <div class="estrellas-opinion">
-                <div class="starts-over">
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                </div>
-                <div class="starts">
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                    <ng-icon name="heroStarSolid"></ng-icon>
-                </div>
-            </div>
-            <p>30 de abril 2023 </p> 
-        </div>
-        <p class="texto-opinion">No lleva 15 días de haber sido ensamblado y el apoyabrazos izquierdo ya está tambaleando, el asiento nones cómodo para nada, tuve que ponerle un cojín para que no me dejara plano el sentadero!! además los materiales se ven bien ordinarios, pensé que sería una buena compra pero me equivoqué, ya no puedo devolverla porque boté los empaques pero estoy muy insatisfecho con esta compra, no cumple mis expectativas!!!.</p>
-        <div class="linea-opinion"></div>
-    </div>
-
+    </ng-container>
 </div>

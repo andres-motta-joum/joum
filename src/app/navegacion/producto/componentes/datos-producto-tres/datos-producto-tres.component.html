@@ -4,42 +4,46 @@
         <h2 class="sub-titulo">Principales</h2>
 		<div class="tabla">	
 			<table>
-				<tr>
-					<th>Marca:</th><td>Art Industry</td>
-				</tr>
-				<tr>
-					<th>Modelo:</th><td>Noche estrelladaArt Industry</td>
-				</tr>
-				<tr>
-					<th>Temática del cuadro:</th><td>Paisaje</td>
-				</tr>
-				<tr>
-					<th>Altura x Ancho:</th><td>70 cm x 100 cm</td>
-				</tr>
-				<tr>
-					<th>Cantidad de cuadros:</th><td>5</td>
-				</tr>
+				<ng-container *ngFor="let detalle of detalles">
+					<ng-container *ngIf="!ValoresAEvitar(detalle[0])">
+					  <tr>
+						<th>{{ detalle[0] }}</th>
+						<td>{{ detalle[1] }}</td>
+					  </tr>
+					</ng-container>
+				</ng-container>
+				<ng-container *ngIf="detallesSubCategoria !== []">
+					<ng-container *ngFor="let detalle of detallesSubCategoria">
+						<ng-container *ngIf="!ValoresAEvitar(detalle[0])">
+						  <tr>
+							<th>{{ detalle[0] }}</th>
+							<td>{{ detalle[1] }}</td>
+						  </tr>
+						</ng-container>
+					</ng-container>
+				</ng-container>
 			</table>
 		</div>
-		<h2 class="sub-titulo">Otras</h2>
-		<div class="tabla">	
-			<table>
-				<tr>
-					<th>Marca:</th><td>Art Industry</td>
-				</tr>
-				<tr>
-					<th>Modelo:</th><td>Noche estrelladaArt Industry</td>
-				</tr>
-				<tr>
-					<th>Temática del cuadro:</th><td>Paisaje</td>
-				</tr>
-				<tr>
-					<th>Altura x Ancho:</th><td>70 cm x 100 cm</td>
-				</tr>
-				<tr>
-					<th>Cantidad de cuadros:</th><td>5</td>
-				</tr>
-			</table>
-		</div>
+		<ng-container *ngIf="!subCategoria && producto.categoria !== 'difusores'">
+			<h2 class="sub-titulo">Medidas</h2>
+			<div class="tabla">	
+				<table>
+					<ng-container *ngFor="let detalle of detallesDimensiones">
+						<tr>
+							<th>{{ detalle[0] }}</th>
+							<td>{{ detalle[1] }}</td>
+						</tr>
+					</ng-container>
+					<ng-container *ngIf="detallesSubCategoriaDimensiones !== []">
+						<ng-container *ngFor="let detalle of detallesSubCategoriaDimensiones">
+							<tr>
+								<th>{{ detalle[0] }}</th>
+								<td>{{ detalle[1] }}</td>
+							</tr>
+						</ng-container>
+					</ng-container>
+				</table>
+			</div>
+		</ng-container>
     </div>
 </div>

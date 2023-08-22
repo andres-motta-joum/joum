@@ -165,7 +165,7 @@
 }
 .numVotos{
     color: #666;
-    font-size: 15px;
+    font-size: 13px;
     margin-top: 8px;
     margin-left: 116px;
     letter-spacing: 1px;
@@ -364,5 +364,11 @@
     }
     .fondo-corazon{
         top: 46%;
+    }
+}
+
+@for $i from 1 through 10 {
+    .estrellas .starts-over.starts-#{$i * 10} {
+        width: ($i * 10.15%);
     }
 }

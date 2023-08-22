@@ -1,0 +1,13 @@
+<div class="producto">
+    <img [src]="producto.detalles?.fotos![0][0]">
+    <div>
+        <h4>{{producto.nombre}}</h4>
+        <p>Color: Blanco</p>
+        <p>$ {{producto.precio | number:'1.0-0'}}</p>
+    </div>
+    <p> {{unidad}} Unidades</p>
+    <div>
+        <button (click)="navegar(['ayuda/'], $event)">Devolver</button>
+        <button (click)="navegar(['prod/' + producto.id], $event)">Volver a comprar</button>
+    </div>
+</div>

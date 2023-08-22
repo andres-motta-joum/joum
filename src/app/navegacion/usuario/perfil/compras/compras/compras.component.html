@@ -12,4 +12,4 @@
     </div>
 </div>
 
-<app-compra [compra]="compra" *ngFor="let compra of compras"></app-compra>
+<app-compra [producto]="producto" [venta]="ventas[i]" *ngFor="let producto of productos; let i = index"></app-compra>

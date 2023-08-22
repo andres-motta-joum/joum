@@ -14,20 +14,20 @@
                 </select>
             </div>
         </div>
-        <app-venta [venta]="venta" *ngFor="let venta of ventas"></app-venta>
+        <app-venta [venta]="venta" [producto]="productos[i]" [usuario]="usuario" [unidad]="unidades[i]" *ngFor="let venta of ventas; let i = index"></app-venta>
     </div>
     <div class="derecha">
         <div>
             <p>Por preparar</p>
-            <p>1 venta</p>
+            <p>{{porPreparar}} venta</p>
         </div>
         <div>
             <p>En camino</p>
-            <p>0 venta</p>
+            <p>{{enCamino}} venta</p>
         </div>
         <div>
             <p>Finalizadas</p>
-            <p>1 venta</p>
+            <p>{{finalizadas}} venta</p>
         </div>
     </div>
 </div>

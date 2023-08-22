@@ -1,0 +1,16 @@
+<div class="formulario">
+    <h1>Código SMS</h1>
+    <p>Ingresa el código que enviamos por SMS al +57 3025459435</p>
+    <br>
+    <div class="verification-code">
+        <input #firstInput class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 0)" (keydown)="onInputBefore($event, $event, 0)" #verificationInput />
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 1)" (keydown)="onInputBefore($event, $event, 1)" #verificationInput />
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 2)" (keydown)="onInputBefore($event, $event, 2)" #verificationInput />
+        <div></div>
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 3)" (keydown)="onInputBefore($event, $event, 3)" #verificationInput />
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 4)" (keydown)="onInputBefore($event, $event, 4)" #verificationInput />
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 5)" (keydown)="onInputBefore($event, $event, 5)" #verificationInput />
+    </div>
+
+    <button>Validar</button>
+</div>

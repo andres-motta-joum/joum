@@ -1,7 +1,7 @@
 import { Component, Input, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { Producto } from '../../../../interfaces/producto';
-import { Usuario } from '../../../../interfaces/usuario';
+import { Producto } from '../../../../interfaces/producto/producto';
+import { Usuario } from '../../../../interfaces/usuario/usuario';
 
 import { provideIcons } from '@ng-icons/core';
 import { heroChatBubbleLeft } from '@ng-icons/heroicons/outline';
@@ -15,21 +15,10 @@ import { matPlagiarism } from '@ng-icons/material-icons/baseline';
   providers: [provideIcons({heroChatBubbleLeft, heroTruck, matPlagiarism})]
 })
 export class DatosVendedorComponent {
-  @Input() producto: Producto;
-  @Input() usuario: Usuario;
+  @Input() producto!: Producto;
+  @Input() usuario!: Usuario;
 
   constructor(private zone: NgZone, private router: Router){
-    this.usuario = {
-      fotoPerfil: 'Ejemplo',
-      nombreCliente: "Ejemplo",
-      apellidoCliente: "Ejemplo"
-    };
-    this.producto = {
-      foto: "Ejemplo",
-      nombre:"Ejemplo",
-      precio:100,
-      descuento:50
-    };
   }
 
   navegar(ruta: any[], event: Event){

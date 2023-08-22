@@ -8,17 +8,17 @@
             </select>
          </div>
          <div class="movimientos">
-            <app-movimiento-dinero [movimiento]="movimiento" *ngFor="let movimiento of movimientos"></app-movimiento-dinero>
+            <app-movimiento-dinero [movimiento]="movimiento" *ngFor="let movimiento of usuario?.dinero!.transacciones"></app-movimiento-dinero>
          </div>
     </div>
     <div class="right">
         <div>
             <p>Disponible</p>
-            <p>$ 110.000</p>
+            <p>$ {{usuario?.dinero?.disponible | number: '1.0-0'}}</p>
         </div>
         <div>
             <p>A liberar</p>
-            <p>$ 455.000</p>
+            <p>$ {{usuario?.dinero?.aLiberar | number: '1.0-0'}}</p>
         </div>
         <button>Retirar dinero</button>
     </div>

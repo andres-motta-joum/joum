@@ -1,7 +1,10 @@
 import { Component, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 
 @Component({
   selector: 'app-favoritos',
@@ -9,21 +12,19 @@ import { Producto } from 'src/app/interfaces/producto';
   styleUrls: ['./favoritos.component.scss']
 })
 export class FavoritosComponent {
-
-  public favoritos: Array<Producto>= [
-    {
-      foto: '../../../../../../assets/img/categoria/cuadros/19.jpg',
-      precio: 0,
-      descuento: 0
-    },
-    {
-      foto: '../../../../../../assets/img/categoria/coleccionables/3.jpg',
-      precio: 0,
-      descuento: 0
-    }
-  ]
-
-  constructor(private zone: NgZone, private router: Router){
+  constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private userService: UsuarioService, private prdService: ProductoService) {}
+  public usuario!: Usuario | undefined;
+  public favoritos!: Producto[];
+  
+  ngOnInit() {
+    this.route.parent?.params.subscribe(params => {
+      const userId = params['id'];
+      this.favoritos = [];
+      this.usuario = this.userService.getUserUsuario(userId);
+      for(const id of this.usuario?.favoritos!){
+        this.favoritos.push(this.prdService.getProductsId(id.id!)!)
+      }
+    });
   }
 
   navegar(ruta: any[], event: Event){

@@ -1,32 +1,32 @@
 <div class="informacion todo perfil">
     <div class="mainPerfilMenu">
         <div class="circulo"></div>
-        <img src="../../../../../../assets/img/usuarios/user.svg" class="picPerfil" alt="Image">
+        <img src="assets/img/usuarios/user.svg" class="picPerfil" alt="Image">
         <div>
-            <p class="nombre nombreCompletoPerfil">Andres Yesid Motta <span>102 <span>seguidores</span></span> </p>
-            <p class="dias-vendiendo">59 días vendiendo en Joum</p>
+            <p class="nombre nombreCompletoPerfil">{{usuario?.nombre}} <span>{{usuario?.seguidores}}<span>seguidores</span></span> </p>
+            <p class="dias-vendiendo">{{diasJoum}} vendiendo en Joum</p>
         </div>
         <div>
-            <img src="../../../../../assets/img/logo/iconos/reportar.svg">
-            <img src="../../../../../assets/img/logo/iconos/reportar-full.svg">
+            <img src="assets/img/logo/iconos/reportar.svg">
+            <img src="assets/img/logo/iconos/reportar-full.svg">
         </div>
         <div>
-            <img src="../../../../../assets/img/logo/iconos/Share.svg">
-            <img src="../../../../../assets/img/logo/iconos/Share-full.svg">
+            <img src="assets/img/logo/iconos/Share.svg">
+            <img src="assets/img/logo/iconos/Share-full.svg">
         </div>
         <div>
-            <img src="../../../../../assets/img/logo/iconos/seguir.svg">
-            <img src="../../../../../assets/img/logo/iconos/seguidor.svg">
+            <img src="assets/img/logo/iconos/seguir.svg">
+            <img src="assets/img/logo/iconos/seguidor.svg">
         </div>
     </div>
   
     <!-------------Contenido PERFIL---------------------->
   
     <div class="contenidoPerfil">
-        <div [ngClass]='{"classAddContenidoPerfil": url === "informacion"}' (click)='navegar(["abcd/perfil/informacion"], $event)' class="opcionContenido">
+        <div [ngClass]='{"classAddContenidoPerfil": url === "informacion"}' (click)='navegar([usuario?.usuario + "/perfil/informacion"], $event)' class="opcionContenido">
             <ng-icon name="heroDocumentTextSolid"></ng-icon><p>Información</p>
         </div>
-        <div [ngClass]='{"classAddContenidoPerfil": url === "productos"}' (click)='navegar(["abcd/perfil/productos"], $event)' class="opcionContenido">
+        <div [ngClass]='{"classAddContenidoPerfil": url === "productos"}' (click)='navegar([usuario?.usuario + "/perfil/productos"], $event)' class="opcionContenido">
             <ng-icon name="heroBuildingStorefrontSolid"></ng-icon><p>Productos</p>
         </div>
     </div>

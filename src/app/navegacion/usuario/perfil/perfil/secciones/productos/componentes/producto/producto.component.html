@@ -1,15 +1,17 @@
-<div (click)="navegar(['prod/abcd'], $event)"class="contenedor">
-    <img src="{{producto.foto}}">
+<div (click)="navegar(['prod/' + producto.id])" class="contenedor">
+    <img src="{{producto.detalles?.fotos![0][0]}}">
     <div>
-        <p>Cuadro para sala 60 x 120 decorativo moderno</p>
-        <div>
-            <p>$ 125.000</p><p>- 30% OFF</p>
+        <p>{{producto.nombre}}</p>
+        <div *ngIf="producto.descuento">
+            <p>$ {{ producto.precio | number:'1.0-0'}}</p>
+            <p>- {{ producto.porcentajeDescuento}}% OFF</p>
         </div>
-        <p>$ 100.000</p>
-        <p>Envío gratis</p>
+        <p *ngIf="producto.descuento">$ {{ producto.precio! - (producto.precio! * (producto.porcentajeDescuento! / 100)) | number:'1.0-0' }}</p>
+        <p class="precio" *ngIf="!producto.descuento">$ {{ producto.precio | number:'1.0-0'}}</p>
+        <p *ngIf="producto.descuento">Envío gratis</p>
     </div>
     <div>
-        <img src="../../../../../../assets/img/logo/iconos/Share.svg">
-        <img src="../../../../../../assets/img/logo/iconos/Share-full.svg">
+        <img src="assets/img/logo/iconos/Share.svg">
+        <img src="assets/img/logo/iconos/Share-full.svg">
     </div>
 </div>

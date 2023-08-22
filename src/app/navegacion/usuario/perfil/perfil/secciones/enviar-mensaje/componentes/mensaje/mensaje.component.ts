@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-import { Mensaje } from 'src/app/interfaces/mensaje';
+import { Mensaje } from 'src/app/interfaces/chat';
 
 @Component({
   selector: 'app-mensaje',
@@ -8,5 +8,6 @@ import { Mensaje } from 'src/app/interfaces/mensaje';
   styleUrls: ['./mensaje.component.scss']
 })
 export class MensajeComponent {
-  @Input() mensaje: Mensaje = {};
+  @Input() mensaje!: Mensaje;
+  @Input() tipoUsuario!: string;
 }

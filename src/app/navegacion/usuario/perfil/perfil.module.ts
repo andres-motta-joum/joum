@@ -31,6 +31,9 @@ import { CompraComponent } from './compras/compras/componentes/compra/compra.com
 import { FavoritoComponent } from './compras/favoritos/componentes/favorito/favorito.component';
 import { OpinionComponent } from './compras/opiniones/componentes/opinion/opinion.component';
 import { NovedadComponent } from './ventas/novedades/componentes/novedad/novedad.component';
+import { ProductoComponent } from './compras/compras/detalle-compra/producto/producto.component';
+
+import { ChatsService } from 'src/app/servicios/chats/chats.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,8 @@ import { NovedadComponent } from './ventas/novedades/componentes/novedad/novedad
     CompraComponent,
     FavoritoComponent,
     OpinionComponent,
-    NovedadComponent
+    NovedadComponent,
+    ProductoComponent
   ],
   imports: [
     CommonModule,
@@ -59,6 +63,9 @@ import { NovedadComponent } from './ventas/novedades/componentes/novedad/novedad
     FacturacionModule,
     EnviarMensajeModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    ChatsService
   ]
 })
 export class PerfilModule { }

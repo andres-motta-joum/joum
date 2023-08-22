@@ -1,60 +1,40 @@
 <div class="contenedor" [ngClass]="{'masUnidades': unidades}">
-    <img src="{{publicacion.foto}}">
+    <img src="{{publicacion.detalles?.fotos![0][0]}}">
     <div>
-        <p>Conjunto de cuadros de decoración para habitación 60 x 120</p>
-        <p>#437498239</p>
-        <p (click)="desplegarUnidades()">3 unidades <ng-icon name="heroChevronDownMini"></ng-icon></p>
+        <p>{{publicacion.nombre}}</p>
+        <p>#{{publicacion.id}}</p>
+        <p (click)="desplegarUnidades()">{{publicacion.unidades}} unidades<ng-icon name="heroChevronDownMini"></ng-icon></p>
     </div>
     <div>
         <p>Publicación</p>
         <p>Gratuita</p>
         <p>Precio</p>
-        <p>$ 120.000</p>
+        <p>$ {{publicacion.precio | number:'1.0-0'}}</p>
     </div>
     <div>
         <p>Envío</p>
-        <p>Gratuita</p>
+        <p *ngIf="publicacion.envioGratis">Gratuita</p>
+        <p *ngIf="!publicacion.envioGratis">Pago</p>
     </div>
     <!--------- POSITION ABSOLUTE --------->
     <div>
-        <img src="../../../../../../assets/img/logo/iconos/ver-mas.svg">
-        <img (click)="desplegarSubMenu()"  src="../../../../../../assets/img/logo/iconos/ver-mas-full.svg">
+        <img src="assets/img/logo/iconos/ver-mas.svg">
+        <img (click)="desplegarSubMenu()"  src="assets/img/logo/iconos/ver-mas-full.svg">
     </div>
     <div *ngIf="subMenu" class="submenu">
         <p>Republicar</p>
-        <p (click)="navegar(['prod/abcd'],$event)">Ver publicación</p>
+        <p (click)="navegar(['prod/MOTTAANDRES20221130093921'],$event)">Ver publicación</p>
         <p>Eliminar</p>
     </div>     
 
-    <p class="vistas">24 vistas | 3 ventas</p>
+    <p class="vistas">{{publicacion.vistas}} vistas | {{publicacion.ventas}} ventas</p>
     <p class="fecha">12 de junio 2023</p>
 
     <!------- SUB MENU UNIDADES------>
     <div class="linea"></div>
     <div class="unidades">
-        <div>
-            <img src='{{publicacion.foto}}'>
-            <div>
-                <p>Color: Blanco </p>
-                <p>2 unidades</p>
-            </div>
-        </div>
-        <div>
-            <img src='{{publicacion.foto}}'>
-            <div>
-                <p>Color: Blanco </p>
-                <p>2 unidades</p>
-            </div>
-        </div>
-        <div>
-            <img src='{{publicacion.foto}}'>
-            <div>
-                <p>Color: Blanco </p>
-                <p>2 unidades</p>
-            </div>
-        </div>
-        <div>
-            <img src='{{publicacion.foto}}'>
+        <div *ngFor="let seccion of publicacion.detalles?.fotos">
+            <img src='{{seccion[0]}}'>
             <div>
                 <p>Color: Blanco </p>
                 <p>2 unidades</p>

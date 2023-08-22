@@ -5,6 +5,8 @@ import { provideIcons } from '@ng-icons/core';
 import { heroChevronLeftSolid } from '@ng-icons/heroicons/solid';
 import { heroChevronRightSolid } from '@ng-icons/heroicons/solid';
 
+import { Producto } from 'src/app/interfaces/producto/producto';
+
 @Component({
   selector: 'app-carrusel',
   templateUrl: './carrusel.component.html',
@@ -12,7 +14,8 @@ import { heroChevronRightSolid } from '@ng-icons/heroicons/solid';
   viewProviders: provideIcons({heroChevronLeftSolid, heroChevronRightSolid})
 })
 export class CarruselComponent {
-  @Input() elements: Array<any> = [{img: '', name: ''}];
+  @Input() elements!: Producto[];
+  @Input() categorias!: Array<any>;
   @Input() carousel = 0;
 
   @ViewChild('track') track!: ElementRef;

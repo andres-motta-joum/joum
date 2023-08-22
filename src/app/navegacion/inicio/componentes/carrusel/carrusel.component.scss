@@ -30,7 +30,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    height: 180px;
+    height: 195px;
+    padding-left: 1px;
     margin: 0px auto;
     width: 100%;
     overflow: hidden;
@@ -53,7 +54,7 @@
     border: 1px solid #e9e9e9;
   
     &:hover {
-      box-shadow: 0 0 13px 4px #e3e3e3;
+      box-shadow: 0 0 10px 4px #ececec;
     }
   }
   
@@ -71,6 +72,11 @@
       height: 125px;
       width: 145px;
       border-radius: 7px 7px 0px 0px;
+    }
+    p{
+      color: #606060;
+      letter-spacing: .5px;
+
     }
 
   }

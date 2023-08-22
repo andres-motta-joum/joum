@@ -1,7 +1,10 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
+import { Venta } from 'src/app/interfaces/usuario/subInterfaces/venta';
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
 
 @Component({
   selector: 'app-venta',
@@ -9,16 +12,13 @@ import { Producto } from 'src/app/interfaces/producto';
   styleUrls: ['./venta.component.scss']
 })
 export class VentaComponent {
-  @Input() venta: Producto;
-  subMenu: boolean = false;
-  constructor(private zone: NgZone, private router: Router){
-    this.venta = {
-      precio: 0,
-      descuento: 0
-    }
-  }
-  desplegar(){
-    this.subMenu = !this.subMenu;
+  @Input() venta!: Venta;
+  @Input() producto!: Producto;
+  @Input() usuario!: Usuario | undefined;
+  @Input() unidad?: number;
+  constructor(private zone: NgZone, private router: Router){}
+  
+  ngOnInit(){
   }
   navegar(ruta: any[], event: Event){
     event.preventDefault();

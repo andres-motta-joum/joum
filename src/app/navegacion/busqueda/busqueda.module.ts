@@ -14,6 +14,9 @@ import { CarritoModule } from './secciones/carrito/carrito.module';
 import { HistorialComponent } from './secciones/historial/historial.component';
 import { RecomendacionesComponent } from './secciones/recomendaciones/recomendaciones.component';
 
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { ProductoHistorialComponent } from './secciones/historial/producto-historial/producto-historial.component';
+
 @NgModule({
   declarations: [
     BusquedaComponent,
@@ -22,7 +25,8 @@ import { RecomendacionesComponent } from './secciones/recomendaciones/recomendac
     ProductosComponent,
     ProductoComponent,
     HistorialComponent,
-    RecomendacionesComponent
+    RecomendacionesComponent,
+    ProductoHistorialComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,9 @@ import { RecomendacionesComponent } from './secciones/recomendaciones/recomendac
     ProductoComponent,
     HistorialComponent,
     RecomendacionesComponent
+  ],
+  providers: [
+    ProductoService
   ]
 })
 export class BusquedaModule { }

@@ -1,11 +1,21 @@
 <div class="venta">
-    <img src="{{venta.foto}}">
+    <img src="{{producto.detalles!.fotos![0][0]}}">
     <div>
-        <p>Conjunto de cuadros de decoración para habitación 60 x 120</p>
-        <p>#437498239</p>
-        <p>$ 120.000</p>
+        <p>{{producto.nombre}}</p>
+        <p>#{{producto.id}}</p>
+        <p>$ {{producto.precio | number: '1.0-0'}}</p>
     </div>
-    <p>Estado: <span>En preparación</span></p>
+    <p>Estado: 
+        <ng-container *ngIf="!venta.enCamino && !venta.entregado">
+            <span>En preparación</span>
+        </ng-container>
+        <ng-container *ngIf="venta.enCamino && !venta.entregado">
+            <span>En camino</span>
+        </ng-container>
+        <ng-container *ngIf="venta.entregado">
+            <span>Entregado</span>
+        </ng-container>
+    </p>
     <p>19 de mayo. <span>8:02 hs</span></p>
-    <div><p>2 unidades</p> <button (click)="navegar(['abcd/ventas/detalle-venta'], $event)">Ver detalle</button></div>
+    <div><p>{{unidad}} unidades</p> <button (click)="navegar([usuario?.usuario + '/ventas/detalle-venta/'+venta.numVenta], $event)">Ver detalle</button></div>
 </div>

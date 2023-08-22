@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-datos-producto-dos',
@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./datos-producto-dos.component.scss']
 })
 export class DatosProductoDosComponent {
-
 }

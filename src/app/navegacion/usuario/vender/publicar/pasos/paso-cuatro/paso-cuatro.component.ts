@@ -62,7 +62,7 @@ export class PasoCuatroComponent {
             ]
           );
           break;
-        case 'Estantes':
+        case 'repisas':
           res([[
                 'Código universal',
                 'Cantidad',
@@ -95,7 +95,7 @@ export class PasoCuatroComponent {
               }
           ]);
           break;
-        case 'Lámparas':
+        case 'Iluminación':
           res([[
               'Código universal',
               'Cantidad',
@@ -230,7 +230,7 @@ export class PasoCuatroComponent {
             }
           ]);
           break;
-        case 'Coleccionables':
+        case 'adornos':
           res([[
               'Código universal',
               'Cantidad',

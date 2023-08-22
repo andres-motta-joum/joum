@@ -61,7 +61,7 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
         component: ComprasComponent
       },
       {
-        path: 'compras/detalle-compra',
+        path: 'compras/detalle-compra/:id',
         component: DetalleCompraComponent
       },
       {

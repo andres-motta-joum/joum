@@ -3,70 +3,65 @@
 
     <div class="left">
         <div class="encabezado">
-            <img src="../../../../../../../assets/img/usuarios/user.svg">
+            <img src="assets/img/usuarios/user.svg" (click)="navegar([usuarioVendedor?.usuario+'/perfil/informacion'], $event)">
             <div>
-                <h3>Andres Yesid Motta</h3>
-                <p>CC 1000320938</p>
+                <h3>{{usuarioVendedor?.nombre}}</h3>
+                <p>{{usuarioVendedor?.tipoDocumento}} {{usuarioVendedor?.documento}}</p>
             </div>
             <div>
-                <img src="../../../../../../../assets/img/logo/iconos/Msg.svg">
-                <img (click)="navegar(['abcd/abcd/enviar-mensaje'], $event)" src="../../../../../../../assets/img/logo/iconos/Msg-full.svg">
+                <img src="assets/img/logo/iconos/Msg.svg">
+                <img (click)="navegar([usuario?.usuario+'/' + usuarioVendedor?.usuario +'/' + numVenta +'/enviar-mensaje'], $event)" src="assets/img/logo/iconos/Msg-full.svg">
             </div>
         </div> 
-        <div class="producto">
-            <img src="../../../../../../../assets/img/categoria/macetas/12.jpg">
-            <div>
-                <h4>Conjunto de macetas de decoración para el hogar. 20 cm de alto</h4>
-                <p>Color: Blanco</p>
-                <p>$ 120.000</p>
-            </div>
-            <p>2 Unidades</p>
-            <div>
-                <button>Devolver</button>
-                <button (click)="navegar(['prod/abcd'], $event)">Volver a comprar</button>
-            </div>
-        </div>
+        <app-producto [producto]="producto" [venta]="ventas[i]" [unidad]="unidades[i]" *ngFor="let producto of productos; let i = index"></app-producto>
         <div class="envio">
-            <h4>Día de entrega: Del 4 al 8 de Julio</h4>
+            <h4 *ngIf="!ventas[0].entregado">Día de entrega: Del 4 al 8 de Julio</h4>
+            <h4 *ngIf="ventas[0].entregado">Entregado</h4>
             <span><ng-icon name="matQuestionMark"></ng-icon></span>
             <div class="info-entrega">
                 <ng-icon name="aspectsPlatformDropbox"></ng-icon>
-                <ng-icon name="heroTruckSolid"></ng-icon>
-                <ng-icon name="heroCheckCircleSolid"></ng-icon>
+                <ng-icon [ngClass]="{'check': ventas[0].enCamino, 'noCheck': !ventas[0].enCamino}" name="heroTruckSolid"></ng-icon>
+                <ng-icon [ngClass]="{'check': ventas[0].entregado, 'noCheck': !ventas[0].enCamino}" name="heroCheckCircleSolid"></ng-icon>
 
                 <div class="linea"></div>
-                <div class="linea-color"></div>
+                <div class="linea-color" [ngStyle]="{'width': ventas[0].enCamino === true && ventas[0].entregado === false ? '50%' : ( ventas[0].entregado === true ? '100%' : '5%' )}"></div>
                 <div class="en-preparacion"></div>
-                <div class="en-camino"></div>
-                <div class="entregado"></div>
+                <div class="en-camino" [ngStyle]="{'border-color': ventas[0].enCamino === true ? '#ff9e57': '#bbb'}"></div>
+                <div class="entregado" [ngStyle]="{'border-color': ventas[0].entregado === true ? '#ff9e57': '#bbb'}"></div>
             </div>
             <div class="textos">
                 <div>
                     <h5>En preparación</h5>
-                    <p>16 junio 9:45</p>
+                    <p>{{ventas[0].fechaVenta | date:'d \' MMMM'}} 9:45</p>
                 </div>
                 <div>
-                    <h5>En camino</h5>
-                    <p>18 junio 14:24</p>
+                    <h5 [ngStyle]="{'color': ventas[0].enCamino === true ? '#606060': '#999', 'transform': ventas[0].enCamino === true ? 'translateX(-10px)' : 'translateX(-32px)'}" >En camino</h5>
+                    <p *ngIf="ventas[0].enCamino">{{ventas[0].fechaVenta | date:'d \' MMMM'}} 14:24</p>
                 </div>
                 <div>
-                    <h5>Llegó</h5>
-                    <p>19 junio 7:49</p>
+                    <h5 [ngStyle]="{'color': ventas[0].entregado === true ? '#606060': '#999'}">Llegó</h5>
+                    <p *ngIf="ventas[0].entregado">{{ventas[0].fechaVenta | date:'d \' MMMM'}} 7:49</p>
                 </div>
             </div>
         </div>
-        <button>¿Dudas sobre la compra?</button>
+        <button (click)="navegar(['ayuda/'], $event)">¿Dudas sobre la compra?</button>
     </div>
 
     <div class="right">
         <div class="encabezado">
-            <p>Compra: 14 de julio 15:20</p>
+            <p *ngIf="!ventas[0].entregado">Compra: 14 de julio 15:20</p>
+            <p *ngIf="ventas[0].entregado">Entregado</p>
         </div>
         <h5>Detalles de pago</h5>
         <div class="precios">
-            <div>Producto</div><div>$ 120.000</div>
-            <div>Envío</div><div>$ 15.000</div>
-            <div>Total</div><div>$ 135.000</div>
+            <ng-container *ngIf="productos.length === 1">
+                <div>Producto</div><div>$ {{precio | number: '1.0-0'}}</div>
+            </ng-container>
+            <ng-container *ngIf="productos.length !== 1">
+                <div>Productos ({{productos.length}})</div><div>$ {{precio | number: '1.0-0'}}</div>
+            </ng-container>
+            <div>Envío</div><div>$ {{precioEnvio | number: '1.0-0'}}</div>
+            <div>Total</div><div>$ {{(precioEnvio + precio) | number: '1.0-0'}}</div>
         </div>
     </div>
 </div>

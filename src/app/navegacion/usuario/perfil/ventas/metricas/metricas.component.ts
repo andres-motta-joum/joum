@@ -18,13 +18,13 @@ export class MetricasComponent{
   }
 
   url(){
-    if(this.router.url == '/abcd/metricas/negocio'){
+    if(this.router.url == '/MOTTAANDRES20221130093921/metricas/negocio'){
       this.encabezadoUrl = "negocio";
-    } else if(this.router.url == '/abcd/metricas/atencion-compradores'){
+    } else if(this.router.url == '/MOTTAANDRES20221130093921/metricas/atencion-compradores'){
       this.encabezadoUrl = "atencion";
-    }else if(this.router.url == '/abcd/metricas/stock'){
+    }else if(this.router.url == '/MOTTAANDRES20221130093921/metricas/stock'){
       this.encabezadoUrl = "stock";
-    }else if(this.router.url == '/abcd/metricas/puntos'){
+    }else if(this.router.url == '/MOTTAANDRES20221130093921/metricas/puntos'){
       this.encabezadoUrl = "puntos";
     }
   }

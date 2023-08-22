@@ -16,11 +16,11 @@ const routes: Routes = [
   },
   /*------ Sección Perfil ------*/
   {
-    path: ':id/ventas/detalle-venta',
+    path: ':id/ventas/detalle-venta/:id',
     component: DetalleVentaComponent
   },
   {
-    path: ':id/:id/enviar-mensaje',
+    path: ':id/:id/:id/enviar-mensaje',
     component: EnviarMensajeComponent
   }
 ];

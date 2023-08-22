@@ -31,7 +31,7 @@ h1{
     margin: 2px 6px 2px 0;
 }
 .estrellas .starts-over{
-    width: 90%;
+    width: 80%;
     overflow: hidden;
     display: flex;
     position: absolute;
@@ -66,10 +66,10 @@ p.calificaciones{
     font-family: 'font-uno';
 }
 .linea ng-icon{
-    margin:-5px;
+    margin:-4px;
     margin-left: 10px;
     color: #FFA963;
-    font-size: 19px;
+    font-size: 17px;
     position: absolute;
     left: 435px;
 }
@@ -79,14 +79,14 @@ p.calificaciones{
     width: 420px;
     background-color: #ddd;
     border-radius: 4px;
-    height: 8px;
+    height: 9px;
 }
 .fondo-span{
     position: absolute;
     width: 70%;
     background-color: #888;
     border-radius: 4px;
-    height: 8px;
+    height: 9px;
 }
 /*---------- CALIFICACIÓN ---------------*/
 
@@ -96,6 +96,7 @@ select{
 	padding: 10px;
 	border:1px solid #86a3c7;
 	border-radius: 5px;
+    outline: none;
 	&:hover{
 		background: rgba(#4688d9, .1);
 	}
@@ -121,7 +122,7 @@ select{
     margin: 2px 2px 2px 0;
 }
 .estrellas-opinion .starts-over{
-    width: 65%;
+    width: 60%;
     overflow: hidden;
     display: flex;
     position: absolute;
@@ -142,8 +143,8 @@ select{
 .opinion div p{
     position: absolute;
     right: 0;
-    font-size: 13px;
-    color: #777;
+    font-size: 12px;
+    color: #888;
     top: 15px;
 }
 .texto-opinion{
@@ -158,4 +159,16 @@ select{
     margin-bottom: 5px;
     width: 100%;
     border-bottom: 1px solid #eee;
+}
+
+@for $i from 1 through 5 {
+    .estrellas-opinion .starts-over.starts-#{$i * 20} {
+        width: ($i * 20.2%);
+    }
+}
+
+@for $i from 1 through 10 {
+    .estrellas .starts-over.starts-#{$i * 10} {
+        width: ($i * 10.15%);
+    }
 }

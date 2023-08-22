@@ -8,13 +8,13 @@
             <nav [ngStyle]='{"height": screenHeight - 90}' class="headercuenta">
                 <ul #principalUL [ngStyle]='{"height": screenHeight - 90}' class="principalUL" id="ul">
                     <div class="contenidoHeader4">
-                        <img src="../../../../../assets/img/usuarios/user.svg" class=" IdPicUser4 fotoPerfil" alt="Image">
+                        <img src="assets/img/usuarios/user.svg" class=" IdPicUser4 fotoPerfil" alt="Image">
                     </div>
                     <li class="titleMenu">
-                        <span class="menuSmall" id="nombreContenidoUsuario">Deividcat</span>
+                        <span class="menuSmall" id="nombreContenidoUsuario">Andres</span>
                     </li>
 
-                    <li><a (click)='navegar(["abcd/perfil/informacion"], $event)' class="perfil-a">
+                    <li><a (click)='navegar([idUsuario +"/perfil/informacion"], $event);' class="perfil-a">
                         <ng-icon style="font-size: 20px;" name="heroUserCircleSolid"></ng-icon><span style="position: absolute; margin-top: 3px;" class="menuSmall">Perfil</span></a>
                     </li>
                     <li (click)='desplegarSubmenu(0); scroll();' class="item-submenu-compras" menu="1">
@@ -23,9 +23,9 @@
                         </p>
                         <span class="menuSmall">
                             <ul [@subMenu]='stateSubMenu[0]' class="submenu-compras">
-                                <li><a (click)='navegar(["abcd/compras"], $event);'><ng-icon name="heroShoppingCart"></ng-icon>Compras</a></li>
-                                <li><a (click)='navegar(["abcd/favoritos"], $event)'><ng-icon name="heroStar"></ng-icon>Favoritos</a></li>
-                                <li><a (click)='navegar(["abcd/opiniones"], $event)'><ng-icon name="heroDocumentCheck"></ng-icon>opiniones</a></li>
+                                <li><a (click)='navegar([idUsuario +"/compras"], $event);'><ng-icon name="heroShoppingCart"></ng-icon>Compras</a></li>
+                                <li><a (click)='navegar([idUsuario +"/favoritos"], $event)'><ng-icon name="heroStar"></ng-icon>Favoritos</a></li>
+                                <li><a (click)='navegar([idUsuario +"/opiniones"], $event)'><ng-icon name="heroDocumentCheck"></ng-icon>opiniones</a></li>
                             </ul>
                         </span>
                     </li>
@@ -35,16 +35,16 @@
                         </p>
                         <span class="menuSmall">
                             <ul [@subMenu]='stateSubMenu[1]' class="submenu-ventas">
-                                <li><a (click)='navegar(["/abcd/resumen"], $event);'><ng-icon name="heroRectangleGroup"></ng-icon>Resumen</a></li>
-                                <li><a (click)='navegar(["/abcd/novedades"], $event)'><ng-icon name="heroBell"></ng-icon>Novedades</a></li>
-                                <li><a (click)='navegar(["/abcd/publicaciones"], $event)'><ng-icon name="heroBuildingStorefront"></ng-icon>Publicaciones</a></li>
-                                <li><a (click)='navegar(["/abcd/ventas"], $event)'><ng-icon name="heroCurrencyDollar"></ng-icon>Ventas</a></li>
-                                <li><a (click)='navegar(["/abcd/metricas/negocio"], $event)'><ng-icon name="heroChartPie"></ng-icon>Metricas</a></li>
-                                <li><a (click)='navegar(["/abcd/reputacion"], $event)'><ng-icon name="heroArrowTrendingUp"></ng-icon>Reputación</a></li>
+                                <li><a (click)='navegar([idUsuario +"/resumen"], $event);'><ng-icon name="heroRectangleGroup"></ng-icon>Resumen</a></li>
+                                <li><a (click)='navegar([idUsuario +"/novedades"], $event)'><ng-icon name="heroBell"></ng-icon>Novedades</a></li>
+                                <li><a (click)='navegar([idUsuario +"/publicaciones"], $event)'><ng-icon name="heroBuildingStorefront"></ng-icon>Publicaciones</a></li>
+                                <li><a (click)='navegar([idUsuario +"/ventas"], $event)'><ng-icon name="heroCurrencyDollar"></ng-icon>Ventas</a></li>
+                                <li><a (click)='navegar([idUsuario +"/metricas/negocio"], $event)'><ng-icon name="heroChartPie"></ng-icon>Metricas</a></li>
+                                <li><a (click)='navegar([idUsuario +"/reputacion"], $event)'><ng-icon name="heroArrowTrendingUp"></ng-icon>Reputación</a></li>
                             </ul>
                         </span>
                     </li>
-                    <li><a (click)='navegar(["/abcd/facturacion"], $event)' class="facturacion-a"><ng-icon name="heroDocumentTextSolid"></ng-icon><span class="menuSmall">Facturación</span></a></li>
+                    <li><a (click)='navegar([idUsuario +"/facturacion"], $event)' class="facturacion-a"><ng-icon name="heroDocumentTextSolid"></ng-icon><span class="menuSmall">Facturación</span></a></li>
                 </ul>
             </nav>
         </div>
