@@ -1,0 +1,11 @@
+<div class="formulario">
+    <h1>Teléfono</h1>
+    <p>Agrega un numero telefónico a tu cuenta</p>
+    <br>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <label for="phone" [ngClass]="{'errorText': error !== ''}">Teléfono</label>
+        <input name="phone" type="number" formControlName="phone" (input)="valorInput()" [ngClass]="{'invalid': error !== ''}"> <p class="input">+57</p>
+        <p class="errorPhone">{{error}}</p>
+        <button type="submit">Continuar</button>
+    </form>
+</div>

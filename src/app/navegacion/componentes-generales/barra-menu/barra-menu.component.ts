@@ -36,7 +36,10 @@ import { heroArrowRightOnRectangle } from '@ng-icons/heroicons/outline';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
-import { User } from '@angular/fire/auth';
+import { Auth, User } from '@angular/fire/auth';
+import { getApp } from '@angular/fire/app';
+import { getFirestore } from 'firebase/firestore'; 
+import { doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-barra-menu',
@@ -51,29 +54,42 @@ export class BarraMenuComponent{
   @ViewChild(MenuLateralComponent, {static: false})
   menuLateral: MenuLateralComponent = new MenuLateralComponent(this.changeDetectorRef, this.zone,this.router);
 
-  public usuario!: Usuario | undefined;
+  public usuario!: Usuario;
+  public nombre!: string;
+
   public logged!: boolean;
   public usuarioLogged!: User;
-  constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private userService: UsuarioService, private authService: AuthService){}
+  public routeStateSubsCription!: Subscription;
+  constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private userService: UsuarioService, private authService: AuthService, private auth: Auth){}
 
   ngOnInit() {
+    
     this.routeSubscription = this.route.paramMap.subscribe(params => {
       this.decodificarURL();
-      this.usuario = this.userService.getUserUsuario('MOTTAANDRES20221130093921');
     });
 
-    this.authService.userState$.subscribe(user => {
+    this.routeStateSubsCription = this.authService.userState$.subscribe(user => {
       if (user) {
         this.usuarioLogged = user;
         this.logged = true;
+        this.llamarUsuario()
       } else {
         this.logged = false;
       }
     });
   }
 
-  singOut(){
-    this.authService.singOut();
+  async llamarUsuario(){
+    const app = getApp();
+    const db = getFirestore(app);
+    const docSnap = await getDoc(doc(db, "usuarios", this.auth.currentUser?.uid!));
+    this.usuario = docSnap.data()!;
+    const palabras = this.usuario.nombre!.trim().split(' ');
+    this.nombre = palabras.slice(0, 2).join(' ');
+  }
+
+  signOut(){
+    this.authService.signOut();
   }
 
   decodificarURL(){ // Saber el texto puesto en el Input
@@ -87,6 +103,9 @@ export class BarraMenuComponent{
   ngOnDestroy() {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
+    }
+    if (this.routeStateSubsCription) {
+      this.routeStateSubsCription.unsubscribe();
     }
   }
   //-------------------------------------------------------  Funciones básicas  --------- //

@@ -31,8 +31,8 @@
                     class="fotoPerfil"
                     alt="Image">
                   <div>
-                    <p (click)='navegar(["MOTTAANDRES20221130093921/perfil/informacion"], $event)' id="nameUser2"> {{usuarioLogged.displayName}} </p>
-                    <p (click)='navegar(["MOTTAANDRES20221130093921/perfil/informacion"], $event)'>@{{usuarioLogged.displayName}}</p>
+                    <p *ngIf="usuario?.usuario" (click)='navegar(["MOTTAANDRES20221130093921/perfil/informacion"], $event)' id="nameUser2"> {{nombre}} </p>
+                    <p *ngIf="usuario?.usuario" (click)='navegar(["MOTTAANDRES20221130093921/perfil/informacion"], $event)'>@{{usuario.usuario}}</p>
                   </div>
                 </div>
                 <div  class="linea-Menu"></div>
@@ -78,7 +78,7 @@
 
                 <div class="linea-Menu"></div>
                 <li class="cerrarSesion">
-                    <a (click)='navegar([""], $event); singOut()'>
+                    <a (click)='navegar([""], $event); signOut()'>
                       <ng-icon name="heroArrowRightOnRectangle"></ng-icon> Salir
                     </a>
                 </li>

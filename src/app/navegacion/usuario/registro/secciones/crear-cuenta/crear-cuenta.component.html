@@ -26,22 +26,28 @@
         <app-error-message [control]="form.get('password')!" patternType="password" />
 
         <!----------->
-        <label for="" [ngClass]="{'errorText': hasError('phone')}">Teléfono</label>
-        <input type="text" placeholder="+57" formControlName="phone" [ngClass]="{'invalid': hasError('phone')}">
-        <app-error-message [control]="form.get('phone')!"/>
+        <label for="passwordVerify" *ngIf="inputFunction" [ngClass]="{'errorText': hasError('passwordVerify') || !passwordCheck}">Verificar contraseña</label>
+        <label for="passwordVerify" *ngIf="!inputFunction" [ngClass]="{'errorText': hasError('passwordVerify')}">Verificar contraseña</label>
+        <input name="passwordVerify" type="password" placeholder="* * * *" formControlName="passwordVerify" [ngClass]="{'invalid': hasError('passwordVerify') || !passwordCheck}" *ngIf="inputFunction"  (input)="passwordVerifyValidator(form)">
+        <input name="passwordVerify" type="password" placeholder="* * * *" formControlName="passwordVerify" [ngClass]="{'invalid': hasError('passwordVerify')}" *ngIf="!inputFunction">
+        <app-error-message [control]="form.get('passwordVerify')!"/>
+        <p class="errorPasswordVerify" *ngIf="inputFunction && !passwordCheck">La contraseña no coincide con la anterior</p>
+
 
         <!----------->
         <div class="politicas">
-            <input type="checkbox">
+            <input type="checkbox" formControlName="checkbox" (change)="handleCheckBoxChange()" [ngClass]="{'checkBoxError': !checkbox}">
             <p>Declaro que he leído y acepto la nueva <span (click)="navegar('privacidad')"> Política de Privacidad</span> y los <span (click)="navegar('terminos-condiciones')">Términos y Condiciones</span> de joum.</p>
         </div>
 
         <div class="botones">
             <button type="button" (click)="navegar('cuenta/iniciar-sesion')">Iniciar sesión</button> <button type="submit">Crear</button>
         </div>
+
+        <div id="recaptcha-container"></div>
     </form>
 
-    <p>O crea tu cuenta con</p>
+    <p class="redes">O crea tu cuenta con</p>
     <div class="iconos">
         <div (click)="singInFacebook()"><ng-icon name="aspectsSocialFacebook"></ng-icon></div>
         <div (click)="singInTwitter()"><ng-icon name="ionLogoTwitter"></ng-icon></div>
