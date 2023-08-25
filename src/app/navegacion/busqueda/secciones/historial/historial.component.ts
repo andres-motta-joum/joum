@@ -27,7 +27,6 @@ export class HistorialComponent {
     for(const producto of this.usuario?.historial!){
       this.productos.push(this.prdService.getProductsId(producto.id!)!);
     }
-    console.log(this.productos)
   }
 
   registroHistorial: boolean = true;

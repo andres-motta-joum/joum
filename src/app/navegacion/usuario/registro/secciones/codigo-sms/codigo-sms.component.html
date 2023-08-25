@@ -1,0 +1,17 @@
+<div class="formulario">
+    <h1>Código SMS</h1>
+    <p>Ingresa el código que enviamos por SMS al {{numero}}</p>
+    <br>
+    <div class="verification-code">
+        <input #firstInput class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 0)" (keydown)="onInputBefore($event, $event, 0)" [ngClass]="{ 'error': codigoIncorrecto }"  #verificationInput />
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 1)" (keydown)="onInputBefore($event, $event, 1)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 2)" (keydown)="onInputBefore($event, $event, 2)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+        <div></div>
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 3)" (keydown)="onInputBefore($event, $event, 3)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 4)" (keydown)="onInputBefore($event, $event, 4)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+        <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 5)" (keydown)="onInputBefore($event, $event, 5)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+    </div>
+
+    <button (click)="verifyCode()">Validar</button>
+</div>
+<div id="recaptcha-container"></div>

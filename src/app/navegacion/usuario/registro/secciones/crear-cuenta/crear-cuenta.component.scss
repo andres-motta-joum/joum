@@ -29,6 +29,14 @@
             width: calc(100% - 10px);
         }
     }
+    .errorPasswordVerify{
+        color: #ff6d6d;  
+        transform: translateY(-19px); 
+        font-size: 12px !important; 
+        font-weight: 450; 
+        letter-spacing: .4px; 
+        margin: 0;
+    }
     label, p{
         padding-left: 42px;
         font-size: 14px;
@@ -71,16 +79,35 @@
     }
     .politicas{
         margin-right: 30px;
+        .checkBoxError{
+            &::before{
+                content: "";
+                margin-top: -.5px;
+                margin-left: -.5px;
+                display: inline-block;
+                width: 95%;
+                height: 95%;
+                border: 1.4px solid rgb(255, 121, 121); /* Cambio del borde a rojo */
+                border-radius: 4px; /* Bordes redondeados */
+                transition: border-color 0.3s; /* Transición suave */
+                background-color: #ffe9e9;
+                box-shadow: 0 0 10px #ffdbdb;
+            }
+        }
         input{
             position: absolute;
-            left: -6px;
-            width: 32px;
-            margin-top: 17px;
+            left: 1px;
+            transform: translateY(-3px);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
         p{
+            margin-top: 5px;
+            margin-bottom: 25px;
             color: #969696;
-            padding-left: 67px;
-            font-size: 14.5px;
+            padding-left: 72px;
+            font-size: 15px;
             span{
                 cursor: pointer;
                 color: #ffa667;
@@ -127,7 +154,7 @@
             }
         }
     }
-    p:nth-child(11){
+    .redes{
         margin-top: 40px;
         text-align: center;
         padding: 0;

@@ -281,17 +281,23 @@ ng-icon.cart{
 	margin-top: 10px;
 }
 .contentUser p{
+	width: 185px;
 	text-align: left;
-	color: #666;
+	color: #777;
 	margin: 9px;
-	font-size: 14px;
+	font-size: 12px;
 	cursor: pointer;
 	margin-top: 7px;
 }
 .contentUser p:nth-child(1) {
 	color: #555;
-	font-size: 17px;
+	font-size: 18px;
 	font-weight: 500;
+}
+.contentUser p:nth-child(2) {
+	word-wrap: break-word;
+	letter-spacing: .5px;
+	font-weight: 440;
 }
 .contentUser p:nth-child(1):hover{
 	color: #ee8000;

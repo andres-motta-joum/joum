@@ -23,7 +23,7 @@ import { ComprarModule } from './navegacion/comprar/comprar.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth, connectAuthEmulator } from '@angular/fire/auth';
-import { provideFirestore,getFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
+import { provideFirestore,getFirestore, connectFirestoreEmulator} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -46,12 +46,10 @@ import { provideFirestore,getFirestore, connectFirestoreEmulator } from '@angula
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => {
       const auth = getAuth();
-      connectAuthEmulator(auth, 'http://localhost:9099', {disableWarnings: true});
       return auth
     }),
     provideFirestore(() => {
       const firestore = getFirestore();
-      connectFirestoreEmulator(firestore, 'http://localhost', 9098)
       return firestore;
     })
     

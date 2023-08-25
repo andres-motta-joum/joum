@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Auth, FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, User, authState, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signInWithRedirect, user } from '@angular/fire/auth';
+import { Auth, FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, User, authState, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signInWithRedirect, updatePhoneNumber, updateProfile, RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult, UserCredential, getRedirectResult, getAdditionalUserInfo} from '@angular/fire/auth';
+import { doc, setDoc} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import 'firebase/auth';
+import { DataSharingService } from './data-sharing.service';
+import { getFirestore } from "firebase/firestore";
+import { getApp } from '@angular/fire/app';
 
 interface ErrorResponse  {
   code: string;
@@ -11,7 +15,7 @@ interface ErrorResponse  {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private auth: Auth, private router: Router) { }
+  constructor(private auth: Auth, private router: Router, private dataSharingService: DataSharingService) { this.handleRedirectResult() }
   private readonly googleProvider = new GoogleAuthProvider();
   private readonly facebookProvider = new FacebookAuthProvider();
   private readonly twitterProvider = new TwitterAuthProvider();
@@ -20,22 +24,49 @@ export class AuthService {
     return authState(this.auth);
   }
 
-  async singUp(email:string, password:string, name: string, lastname: string, phone: string):Promise<void>{
-    try {
-      const { user } = await createUserWithEmailAndPassword(this.auth, email, password);
-      const userDos = await createUserWithEmailAndPassword(this.auth, email, password)
+  //--------------------------------------------------------------------------------------------------------------------------
 
+  async singUp(email: string, password: string, name: string, lastname: string): Promise<void> {
+    try {
+      const { user} = await createUserWithEmailAndPassword(this.auth, email, password);
+      await updateProfile(user, {
+        displayName: `${name} ${lastname}`
+      });
+      await this.addUserFirestore();
       await this.sendEmail(user);
-      this.router.navigate(['']);
-      // crear cuenta
-      // EnviarEmail
-      // Redireccionar al Home
-    } catch (error:unknown) {
-      const {code, message} = error as ErrorResponse;
+    } catch (error: unknown) {
+      const { code, message } = error as ErrorResponse;
       console.log('code', code);
-      console.log('message', message)
+      console.log('message', message);
     }
+
   }
+
+  sendCode(phoneNumber: string, recaptchaVerifier: RecaptchaVerifier): Promise<ConfirmationResult> {
+    return signInWithPhoneNumber(this.auth, phoneNumber, recaptchaVerifier);
+  }
+
+  async addUserFirestore(){
+    const app = getApp();
+    const db = getFirestore(app);
+    const currentUser = this.auth.currentUser;
+
+    const palabras = currentUser?.displayName?.trim().split(' ')!;
+    const nombre = palabras.slice(0, 2).join(' ');
+    const usuario = nombre.toUpperCase() + '022341';
+    const userData = {
+      usuario: usuario.replace(/\s/g, ''),
+      nombre: currentUser?.displayName,
+      correo: currentUser?.email,
+      seguidores: 0,
+      correoVerificado: currentUser?.emailVerified,
+      planJoum: "Gratuito",
+    };
+    await setDoc(doc(db, "usuarios", this.auth.currentUser?.uid!), userData);
+  }
+
+  //------------------------------------------------------------------------------------------------------------------------------
+
   
   async singIn(email:string, password:string):Promise<string | void>{
     try {
@@ -60,8 +91,11 @@ export class AuthService {
     }
   }
 
-  //--------------
-  async singOut(): Promise<void>{
+
+  //------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  async signOut(): Promise<void>{
     try{
       this.auth.signOut();
     }catch(error: unknown){
@@ -78,11 +112,37 @@ export class AuthService {
 
   private checkUserIsVerified(user: User){
     const verified = user.emailVerified;
-    const route = verified ? '': 'cuenta/phone-validation/sJd3fg4JhSOj9fSNDF/enter-code';
-    this.router.navigate([route]);
+    const route = verified ? 'cuenta/phone-validation/enter-code': 'cuenta/phone-validation/enter-code';
+    //this.router.navigate([route]);
+  }
+  //--------------------------------------------------------------------------------------------
+
+
+  async handleRedirectResult() {
+    try {
+      const result = await getRedirectResult(this.auth);
+      if (result) {
+        const isNewUser = getAdditionalUserInfo(result)?.isNewUser;
+        if (isNewUser) {
+          this.dataSharingService.setFormData({
+            phone: this.auth.currentUser?.phoneNumber,
+            tipo: "singUpGoogle"
+          });
+          await this.addUserFirestore();
+        } else {
+          this.dataSharingService.setFormData({
+            phone: this.auth.currentUser?.phoneNumber,
+            tipo: "singInGoogle"
+          });
+        }
+        this.router.navigate(['cuenta/phone-validation']);
+      }
+    } catch (error) {
+      console.log("Error", error)
+    }
   }
 
-  //-----------------------------------------
+  //----------------------------------------------------------
 
   async singInGoogle(): Promise<void>{
     try{

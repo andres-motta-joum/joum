@@ -1,0 +1,11 @@
+<div class="formulario">
+    <h1>Verificación</h1>
+    <p>introduce el correo electrónico asociado a la cuenta de la que olvidaste la contraseña.</p>
+    <br>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <label for="email" [ngClass]="{'errorText': error !== ''}">Correo</label>
+        <input name="email" type="text" formControlName="email" placeholder="nombre@correo.com" [ngClass]="{'invalid': error !== ''}">
+        <p class="error">{{error}}</p>
+        <button type="submit">Continuar</button>
+    </form>
+</div>

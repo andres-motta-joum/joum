@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 
 import { RegistroComponent } from './registro.component';
-import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
-import { CrearCuentaComponent } from './crear-cuenta/crear-cuenta.component';
-import { CodigoSMSComponent } from './codigo-sms/codigo-sms.component';
-import { CorreoCodigoSMSComponent } from './correo-codigo-sms/correo-codigo-sms.component';
+import { IniciarSesionComponent } from './secciones/iniciar-sesion/iniciar-sesion.component';
+import { CrearCuentaComponent } from './secciones/crear-cuenta/crear-cuenta.component';
+import { CodigoSMSComponent } from './secciones/codigo-sms/codigo-sms.component';
+import { CorreoCodigoSMSComponent } from './secciones/validar-correo-sms/correo-codigo-sms.component';
 import { authGuard } from './guards/auth.guard';
+import { ValidarTelefonoComponent } from './secciones/validar-telefono/validar-telefono.component';
+import { CorreoEnviadoComponent } from './secciones/correo-enviado/correo-enviado.component';
 
 export const routes: Routes = [
   {
@@ -23,12 +25,22 @@ export const routes: Routes = [
         canActivate:[authGuard]
       },
       {
-        path: 'phone-validation/:id/enter-code',
+        path: 'phone-validation',
+        component: ValidarTelefonoComponent
+      },
+      {
+        path: 'phone-validation/enter-code',
         component: CodigoSMSComponent
       },
       {
         path: 'phone-validation/email-request',
-        component: CorreoCodigoSMSComponent
+        component: CorreoCodigoSMSComponent,
+        canActivate:[authGuard]
+      },
+      {
+        path: 'email-sent',
+        component: CorreoEnviadoComponent,
+        canActivate:[authGuard]
       }
     ]
   }

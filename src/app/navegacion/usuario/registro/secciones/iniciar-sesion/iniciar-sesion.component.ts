@@ -6,7 +6,9 @@ import { aspectsSocialFacebook } from '@ng-icons/ux-aspects';
 import { ionLogoTwitter } from '@ng-icons/ionicons';
 import { ionLogoGoogle } from '@ng-icons/ionicons';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
-import { Observable } from 'rxjs';
+import { Observable} from 'rxjs';
+import { DataSharingService } from 'src/app/servicios/usuarios/data-sharing.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -15,7 +17,7 @@ import { Observable } from 'rxjs';
   providers: [provideIcons({aspectsSocialFacebook, ionLogoTwitter, ionLogoGoogle})]
 })
 export class IniciarSesionComponent {
-  constructor(private fb: FormBuilder,private zone: NgZone, private router: Router, private authService: AuthService) {}
+  constructor(private fb: FormBuilder,private zone: NgZone, private router: Router, private authService: AuthService, private dataSharingService: DataSharingService, private auth: Auth) {}
   public form!: FormGroup;
   public user$!: Observable<any>;
   private readonly emailpattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -41,11 +43,7 @@ export class IniciarSesionComponent {
       }
     )
   }
-  hasError(field: string ): boolean{
-    const fieldName = this.form.get(field);
-    return !! fieldName?.invalid && fieldName.touched
-  }
-
+  
   async onSubmit(): Promise<void>{
     const {email,password} = this.form.value;
     const errorMessage = await this.authService.singIn(email, password);
@@ -75,6 +73,16 @@ export class IniciarSesionComponent {
       }
     }else{
       this.errorEmail = false; this.errorPassword = false; this.requiredEmail = false; this.requiredPassword = false;
+      
+      const { email, password } = this.form.value;
+        this.dataSharingService.setFormData({
+          email: email,
+          password: password,
+          phone: this.auth.currentUser?.phoneNumber,
+          tipo: "singIn"
+      });
+      this.authService.signOut();
+      this.router.navigate(['cuenta/phone-validation']);
     }
   }
 
