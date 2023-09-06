@@ -1,28 +1,22 @@
-<form [formGroup]='form' (submit)='irPaso5($event)' id="form_session4" class="paso4">
+<div class="contenido">
+    <button class="back" (click)='atras()'><ng-icon name="heroArrowSmallLeft"></ng-icon></button>
+    <form class="paso2" (ngSubmit)="submit()">
 
-    <h1 id="tituloPaso4">Datos de tu producto</h1>
-    <p>Recuerda que es posible no poner algunos valores, pero entre más información le des a los clientes acerca de tu producto es más problable que las personas puedan verlo en la tienda.</p>
-
-    <div class="inputs" id="inputs">
-        <div>
-        	<div class="input" id="cuadros" *ngFor="let cuadro of categoria[0]; index as i;">
-            	<input formControlName='{{ formControls[i] }}' type="text" class="field" id="Fabricante" placeholder="{{cuadro}}" name="nombrecliente"> <br>
-        	</div>
+        <h1>Estilos</h1>
+        <p>Si tienes varios estilos de tu producto, agregalos según como consideres sus diferencias.</p>
+    
+        <div class="field-container">
+            <ng-container *ngFor="let input of inputs; let i = index">
+                <div>
+                    <input [value]="estilosSubmit[i].nombre" type="text" class="field" (input)="modificarestilo(i, $event)" [ngClass]="{'inputError': estilosErrors[i]}" #estiloInput>
+                    <button *ngIf="!error" class="removeColor" (click)="eliminarestilo(i)" type="button">X</button>
+                </div>
+            </ng-container>
+            <button type="button" class="addColor" class="addColor" (click)="agregarestilo()" *ngIf="agregar">+ <span>Añadir Estilo</span></button>
         </div>
-    </div>
 
-
-    <div class="linea"></div>
-
-    <div class="center-content">
-        <input (click)='irPaso3()' type="button" class="btn3" value="Anterior" name="boton" id="btn-anterior3">
-        <input
-          type="submit"
-          [ngClass]="{'btn3': form.invalid, 'btn3active': form.valid}"
-          value="Siguiente"
-          name="boton"
-          [disabled]='form.invalid'
-          id="btn-Siguiente4">
-    </div>
-
-</form>
+        <div class="center-content">
+            <button type="submit" class="botonInvalid" value="Continuar" name="boton" [disabled]='!btnSubmit' [ngClass]="{'botonValid': btnSubmit}">Continuar</button>
+        </div>
+    </form>
+</div>

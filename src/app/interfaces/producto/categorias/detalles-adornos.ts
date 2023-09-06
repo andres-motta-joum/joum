@@ -1,10 +1,11 @@
 export interface DetallesAdornos {
-    marca?: string,       /*--- Principales ---*/
+    marca?: string,
     modelo?: string,
 
-    colores?: string[],   /*--- visual ---*/
+    estilos?: string[], 
     fotos?: string[][],
     autoria?: string,
+//-------------------------------
     material?: string,
     tema?: string, //Navideño, de animales, anime...
     linea?: string, //Cabezones

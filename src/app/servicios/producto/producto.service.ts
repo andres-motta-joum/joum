@@ -13,11 +13,11 @@ export class ProductoService {
       categoria: 'cuadros',            
       nombre: 'Conjunto de cuadros decorativos para sala...',
       precio: 110000,
-      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad. \n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con colores vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
+      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad. \n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con estilos vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Neutros'],
+        estilos: ['Neutros'],
         fotos: [['assets/img/categoria/cuadros/21.jpg']],
         tematica: 'paisaje',
         autoria: 'Hecho por mi',
@@ -119,11 +119,11 @@ export class ProductoService {
       categoria: 'repisas',            
       nombre: 'Repisas Flotantes Modernas Set X 4 Un Decoracion Moderna',
       precio: 37000,
-      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\nNuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con colores vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
+      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\nNuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con estilos vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
       detalles: {
         marca: 'Industria Colombiana',
         modelo: 'Lineal',
-        colores: ['Café claro'],
+        estilos: ['Café claro'],
         fotos: [['assets/img/categoria/repisas/13.jpg', 'assets/img/categoria/repisas/12.jpg']],
         cantidadPiezas: 1,
         forma: 'rectangular',
@@ -185,11 +185,11 @@ export class ProductoService {
       categoria: 'iluminacion',            
       nombre: 'Lamparas colgantes para comedor ',
       precio: 75000,
-      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\nNuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con colores vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
+      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\nNuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con estilos vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Negro',],
+        estilos: ['Negro',],
         fotos: [['assets/img/categoria/iluminacion/15.jpg', 'assets/img/categoria/iluminacion/16.jpg']],
         autoria: 'Hecho por mi',
         subCategoria: {
@@ -262,11 +262,11 @@ export class ProductoService {
       categoria: 'macetas',            
       nombre: 'Maceta decorativda elegante y económica',
       precio: 24000,
-      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con colores vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
+      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con estilos vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Piedra con morado'],
+        estilos: ['Piedra con morado'],
         fotos: [['assets/img/categoria/macetas/18.jpg', 'assets/img/categoria/macetas/19.jpg'],['assets/img/categoria/cuadros/21.jpg']],
         estilo: 'Minimalista',
         tipo: 'Macetero',
@@ -283,7 +283,6 @@ export class ProductoService {
         unidadMedidaLargo: 'cm',
         forma: 'circular',
         material: 'arsilla',
-        capacidadVolumen: 3,
         unidadMedidaVolumen: 'litros',
         sistemaAutorriego: false, 
         colgante: false,
@@ -340,7 +339,7 @@ export class ProductoService {
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Café claro', ' Negro'],
+        estilos: ['Café claro', ' Negro'],
         fotos: [['assets/img/categoria/relojes/11.jpg', 'assets/img/categoria/relojes/10.jpg'],['assets/img/categoria/cuadros/21.jpg']],
         tipo: 'Pared',
         estilo: 'Silver',
@@ -402,13 +401,13 @@ export class ProductoService {
       idUsuario: '1',
       verificado: true,
       categoria: 'difusores',            
-      nombre: 'Humificador Led Difusor Usb 7 Colores Oficina + Esencia',
+      nombre: 'Humificador Led Difusor Usb 7 estilos Oficina + Esencia',
       precio: 47000,
       descripcion: '****** EL COLOR SE ENCUENTRA SUJETO A CAMBIOS DE INVENTARIO, PUEDE LLEGARTE MARRON CLARO, OSCURO o BLANCO ASI COMO EL DISEÑO SUJETO A DISPONIBILidAD , SE CUENTA CON DIFERENTES DISEÑOS COMO SE COMO SE OBSERVA EN IMAGENES***',
       detalles: {
         marca: 'HUMidIFIER',
         modelo: 'Spartan',
-        colores: ['Negro', ' Blanco'],
+        estilos: ['Negro', ' Blanco'],
         fotos: [['assets/img/categoria/difusores/13.jpg', 'assets/img/categoria/difusores/12.jpg']],
         tipo: 'Humificador difusor',
         tecnologiaDifusion: 'Electrónica',
@@ -476,7 +475,7 @@ export class ProductoService {
       detalles: {
         marca: 'Vinilos indigo',
         modelo: 'Frase motivacionas',
-        colores: ['Negro'],
+        estilos: ['Negro'],
         fotos: [['assets/img/categoria/vinilos/12.jpg', 'assets/img/categoria/vinilos/3.jpg']],
         autoria: 'Hecho por mi',
         diseño: 'Frase',
@@ -529,7 +528,7 @@ export class ProductoService {
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Naranja con planeado'],
+        estilos: ['Naranja con planeado'],
         fotos: [['assets/img/categoria/adornos/18.jpg', 'assets/img/categoria/adornos/17.jpg']],
         autoria: 'Funk Pop',
         materia: 'plastico, resina',
@@ -595,7 +594,7 @@ export class ProductoService {
       detalles: {
         marca: 'NeoName',
         modelo: 'Led',
-        colores: ['Amarillo',],
+        estilos: ['Amarillo',],
         fotos: [['assets/img/categoria/iluminacion/17.jpg', 'assets/img/categoria/iluminacion/7.jpg', 'assets/img/categoria/iluminacion/8.jpg', 'assets/img/categoria/iluminacion/18.jpg', 'assets/img/categoria/iluminacion/17.jpg', 'assets/img/categoria/iluminacion/18.jpg', 'assets/img/categoria/iluminacion/7.jpg']],
         autoria: 'NeonName',
         
@@ -670,11 +669,11 @@ export class ProductoService {
       categoria: 'cuadros',            
       nombre: 'Conjunto de cuadros decorativos para sala...',
       precio: 110000,
-      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad. \n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con colores vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
+      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad. \n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con estilos vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Neutros'],
+        estilos: ['Neutros'],
         fotos: [['assets/img/categoria/cuadros/12.jpg', 'assets/img/categoria/cuadros/15.jpg', 'assets/img/categoria/cuadros/16.jpg', 'assets/img/categoria/cuadros/17.jpg', 'assets/img/categoria/cuadros/18.jpg', 'assets/img/categoria/cuadros/14.jpg']],
         tematica: 'paisaje',
         autoria: 'Hecho por mi',
@@ -776,11 +775,11 @@ export class ProductoService {
       categoria: 'repisas',            
       nombre: 'Repisas Flotantes Modernas Set X 4 Un Decoracion Moderna',
       precio: 37000,
-      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\nNuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con colores vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
+      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\nNuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con estilos vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
       detalles: {
         marca: 'Industria Colombiana',
         modelo: 'Lineal',
-        colores: ['Café claro'],
+        estilos: ['Café claro'],
         fotos: [['assets/img/categoria/repisas/4.jpg', 'assets/img/categoria/repisas/6.jpg']],
         cantidadPiezas: 1,
         forma: 'rectangular',
@@ -842,11 +841,11 @@ export class ProductoService {
       categoria: 'iluminacion',            
       nombre: 'Lamparas colgantes para comedor ',
       precio: 75000,
-      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\nNuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con colores vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
+      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\nNuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con estilos vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Negro',],
+        estilos: ['Negro',],
         fotos: [['assets/img/categoria/iluminacion/3.jpg', 'assets/img/categoria/iluminacion/4.jpg']],
         autoria: 'Hecho por mi',
         subCategoria: {
@@ -919,11 +918,11 @@ export class ProductoService {
       categoria: 'macetas',            
       nombre: 'Maceta decorativda elegante y económica',
       precio: 24000,
-      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con colores vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
+      descripcion: 'HERMOSOS CUADROS DECORATIVOS\n\nLindos cuadros con imágenes y acabados de excelente calidad.\n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nAdemás de su belleza, están hechos de material de la más alta calidad, y la aplicación de los mejores terminados dando como resultado imágenes nítidas Brillantes con estilos vivos y acabados de excelente Calidad.\n\nNo pierdas el tiempo y elige tus modelo favorito\n\nImpresión en la mas alta resoluciónTerminado laminado brillante permite limpiar',
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Piedra con morado'],
+        estilos: ['Piedra con morado'],
         fotos: [['assets/img/categoria/macetas/14.jpg', 'assets/img/categoria/macetas/9.jpg'],['assets/img/categoria/cuadros/21.jpg']],
         estilo: 'Minimalista',
         tipo: 'Macetero',
@@ -940,7 +939,6 @@ export class ProductoService {
         unidadMedidaLargo: 'cm',
         forma: 'circular',
         material: 'arsilla',
-        capacidadVolumen: 3,
         unidadMedidaVolumen: 'litros',
         sistemaAutorriego: false, 
         colgante: false,
@@ -997,7 +995,7 @@ export class ProductoService {
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Café claro', ' Negro'],
+        estilos: ['Café claro', ' Negro'],
         fotos: [['assets/img/categoria/relojes/1.jpg', 'assets/img/categoria/relojes/5.jpg'],['assets/img/categoria/cuadros/21.jpg']],
         tipo: 'Pared',
         estilo: 'Silver',
@@ -1059,13 +1057,13 @@ export class ProductoService {
       idUsuario: '2',
       verificado: true,
       categoria: 'difusores',            
-      nombre: 'Humificador Led Difusor Usb 7 Colores Oficina + Esencia',
+      nombre: 'Humificador Led Difusor Usb 7 estilos Oficina + Esencia',
       precio: 47000,
       descripcion: '****** EL COLOR SE ENCUENTRA SUJETO A CAMBIOS DE INVENTARIO, PUEDE LLEGARTE MARRON CLARO, OSCURO o BLANCO ASI COMO EL DISEÑO SUJETO A DISPONIBILidAD , SE CUENTA CON DIFERENTES DISEÑOS COMO SE COMO SE OBSERVA EN IMAGENES***',
       detalles: {
         marca: 'HUMidIFIER',
         modelo: 'Spartan',
-        colores: ['Negro', ' Blanco'],
+        estilos: ['Negro', ' Blanco'],
         fotos: [['assets/img/categoria/difusores/3.jpg', 'assets/img/categoria/difusores/5.jpg']],
         tipo: 'Humificador difusor',
         tecnologiaDifusion: 'Electrónica',
@@ -1133,7 +1131,7 @@ export class ProductoService {
       detalles: {
         marca: 'Vinilos indigo',
         modelo: 'Frase motivacionas',
-        colores: ['Negro'],
+        estilos: ['Negro'],
         fotos: [['assets/img/categoria/vinilos/2.jpg', 'assets/img/categoria/vinilos/9.jpg']],
         autoria: 'Hecho por mi',
         diseño: 'Frase',
@@ -1186,7 +1184,7 @@ export class ProductoService {
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Naranja con planeado'],
+        estilos: ['Naranja con planeado'],
         fotos: [['assets/img/categoria/adornos/7.jpg', 'assets/img/categoria/adornos/6.jpg']],
         autoria: 'Funk Pop',
         materia: 'plastico, resina',
@@ -1252,7 +1250,7 @@ export class ProductoService {
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Negro'],
+        estilos: ['Negro'],
         fotos: [['assets/img/categoria/cuadros/23.jpg', 'assets/img/categoria/cuadros/24.jpg']],
         tematica: 'naturaleza',
         autoria: 'Hecho por mi',
@@ -1312,7 +1310,7 @@ export class ProductoService {
           idProducto: '1',
           calificacion: 3,
           fecha: new Date(2023, 6, 5),
-          contenido: 'Me encanta la idea detrás del cuadro, pero tal vez podría haber una mejor elección de colores para las formas geométricas.'
+          contenido: 'Me encanta la idea detrás del cuadro, pero tal vez podría haber una mejor elección de estilos para las formas geométricas.'
         },
         {
           id: '2',
@@ -1335,11 +1333,11 @@ export class ProductoService {
       categoria: 'cuadros',            
       nombre: 'Cuadros de hojas verde con decoración nórdica',
       precio: 70000,
-      descripcion: 'Cuadros de planta con decoración nórdica sería una pieza de arte que encapsula la estética minimalista y funcional característica de este estilo.\nSon cuadros que generan un entorno tranquilo y sereno. Los colores predominantes son tonos neutros, como blanco, gris, plateados, verdes o beige, con posibles acentos de colores suaves y naturales.\n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nEstos cuadros proporciona un toque de calma y naturalidad a cualquier espacio, siguiendo la esencia característica de la decoración nórdica',
+      descripcion: 'Cuadros de planta con decoración nórdica sería una pieza de arte que encapsula la estética minimalista y funcional característica de este estilo.\nSon cuadros que generan un entorno tranquilo y sereno. Los estilos predominantes son tonos neutros, como blanco, gris, plateados, verdes o beige, con posibles acentos de estilos suaves y naturales.\n Nuestros cuadros son hermosos y transforman cualquier entorno, seducen enamoran y conquistan a sus visitantes.\nEstos cuadros proporciona un toque de calma y naturalidad a cualquier espacio, siguiendo la esencia característica de la decoración nórdica',
       detalles: {
         marca: 'Generica',
         modelo: 'N/A',
-        colores: ['Neutros'],
+        estilos: ['Neutros'],
         fotos: [['assets/img/categoria/cuadros/25.jpg', 'assets/img/categoria/cuadros/26.jpg','assets/img/categoria/cuadros/27.jpg']],
         tematica: 'Naturaleza',
        autoria: 'Hecho por nordic',
@@ -1366,7 +1364,7 @@ export class ProductoService {
           calificacion: 4,
           fecha: new Date(2023, 5, 9),
 
-          contenido: 'La elección de colores y detalles en estos cuadros de hojas es encantadora. Aportan un toque de elegancia y serenidad a mi hogar.'
+          contenido: 'La elección de estilos y detalles en estos cuadros de hojas es encantadora. Aportan un toque de elegancia y serenidad a mi hogar.'
         },
         {
           id: '2',
@@ -1382,7 +1380,7 @@ export class ProductoService {
           idProducto: '1',
           calificacion: 4,
           fecha: new Date(2023, 8, 12),
-          contenido: 'Sería genial ver una mayor variedad de colores en los cuadros de hojas para agregar un toque más vibrante y dinámico a la colección.'
+          contenido: 'Sería genial ver una mayor variedad de estilos en los cuadros de hojas para agregar un toque más vibrante y dinámico a la colección.'
         },
         {
           id: '2',
@@ -1406,7 +1404,7 @@ export class ProductoService {
           idProducto: '1',
           calificacion: 4,
           fecha: new Date(2023, 3, 4),
-          contenido: 'Me gusta mucho el detalle y las paletas de colores. Me parece que le da un toque bonito a sitios con luz. De igual manera cuenta con buen tamaño y su calidad es buena.'
+          contenido: 'Me gusta mucho el detalle y las paletas de estilos. Me parece que le da un toque bonito a sitios con luz. De igual manera cuenta con buen tamaño y su calidad es buena.'
         },
       ],
       tipoPublicacion: 'gratis',
@@ -1424,7 +1422,7 @@ export class ProductoService {
       detalles: {
         marca: 'Monaco',  
         modelo: 'Repisa flotante',
-        colores: ['Madera'], 
+        estilos: ['Madera'], 
         fotos: [['assets/img/categoria/cuadros/25.jpg', 'assets/img/categoria/cuadros/26.jpg','assets/img/categoria/cuadros/27.jpg']],
         cantidadPiezas: 2,
         forma: 'Rectangular',

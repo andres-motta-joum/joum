@@ -3,8 +3,9 @@
         <div class="circulo"></div>
         <img src="assets/img/usuarios/user.svg" class="picPerfil" alt="Image">
         <div>
-            <p class="nombre nombreCompletoPerfil">{{usuario?.nombre}} <span>{{usuario?.seguidores}}<span>seguidores</span></span> </p>
-            <p class="dias-vendiendo">{{diasJoum}} vendiendo en Joum</p>
+            <p class="nombre nombreCompletoPerfil">{{datosUsuario?.nombre!}} <span *ngIf="datosUsuario?.diasComoVendedor" class="seguidores">{{datosUsuario?.seguidores!}}<span>seguidores</span></span> </p>
+            <p *ngIf="datosUsuario?.diasComoVendedor" class="dias-vendiendo">{{diasJoum}} vendiendo en Joum</p>
+            <p *ngIf="!datosUsuario?.diasComoVendedor" class="seguidores">{{datosUsuario?.seguidores!}}<span>seguidores</span></p>
         </div>
         <div>
             <img src="assets/img/logo/iconos/reportar.svg">
@@ -23,10 +24,10 @@
     <!-------------Contenido PERFIL---------------------->
   
     <div class="contenidoPerfil">
-        <div [ngClass]='{"classAddContenidoPerfil": url === "informacion"}' (click)='navegar([usuario?.usuario + "/perfil/informacion"], $event)' class="opcionContenido">
+        <div [ngClass]='{"classAddContenidoPerfil": url === "informacion"}' (click)='navegar([datosUsuario?.usuario! + "/perfil/informacion"], $event)' class="opcionContenido">
             <ng-icon name="heroDocumentTextSolid"></ng-icon><p>Información</p>
         </div>
-        <div [ngClass]='{"classAddContenidoPerfil": url === "productos"}' (click)='navegar([usuario?.usuario + "/perfil/productos"], $event)' class="opcionContenido">
+        <div [ngClass]='{"classAddContenidoPerfil": url === "productos"}' (click)='navegar([datosUsuario?.usuario! + "/perfil/productos"], $event)' class="opcionContenido">
             <ng-icon name="heroBuildingStorefrontSolid"></ng-icon><p>Productos</p>
         </div>
     </div>

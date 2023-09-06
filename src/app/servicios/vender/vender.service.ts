@@ -5,21 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class PasosVenderService {
 
-  paso1: boolean;
-  paso2: boolean;
-  paso3: boolean;
-  paso4: boolean;
-  paso5: boolean;
-  paso6: boolean;
-
+  paso1 = true;
+  paso2 = false;
+  paso3 = false;
+  paso4 = false;
+  paso5 = false;
+  paso6 = false;
+  paso7 = false;
+  paso8 = false;
+  paso9 = false;
+  paso10 = false;
+  
   producto!: any;
-
-  constructor() {
-    this.paso1 = true;
-    this.paso2 = false;
-    this.paso3 = false;
-    this.paso4 = false;
-    this.paso5 = false;
-    this.paso6 = false;
-  }
+                                                                
 }

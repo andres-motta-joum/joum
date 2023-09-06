@@ -1,11 +1,12 @@
 export interface DetallesCuadros {
-    marca?: string,       /*--- Principales ---*/
+    marca?: string, 
     modelo?: string,
 
-    colores?: string[],   /*--- visual ---*/
+    estilos?: string[], 
     fotos?: string[][],
-    tematica?: string,
     autoria?: string,
+//-------------------------------
+    tematica?: string,
 
     altura?: number,      /*--- diametros ---*/
     unidadMedidaAltura?: string,

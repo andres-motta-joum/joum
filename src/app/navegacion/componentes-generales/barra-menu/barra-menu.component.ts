@@ -37,8 +37,7 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { Auth, User } from '@angular/fire/auth';
-import { getApp } from '@angular/fire/app';
-import { getFirestore } from 'firebase/firestore'; 
+import { Firestore} from '@angular/fire/firestore'; 
 import { doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
@@ -48,50 +47,46 @@ import { doc, getDoc } from '@angular/fire/firestore';
   viewProviders: [provideIcons({ heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle, ionNotificationsOutline, ionChevronDownOutline})]
 })
 export class BarraMenuComponent{
+  constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private authService: AuthService, private auth: Auth, private firestore: Firestore){}
   public ultimoDatoUrl!: string;
   public scrollDisplay: Boolean = true;
   private routeSubscription!: Subscription;
   @ViewChild(MenuLateralComponent, {static: false})
   menuLateral: MenuLateralComponent = new MenuLateralComponent(this.changeDetectorRef, this.zone,this.router);
 
-  public usuario!: Usuario;
+  public usuario!: Usuario | null;
   public nombre!: string;
+  public inUser!: boolean;
 
-  public logged!: boolean;
-  public usuarioLogged!: User;
   public routeStateSubsCription!: Subscription;
-  constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private userService: UsuarioService, private authService: AuthService, private auth: Auth){}
 
   ngOnInit() {
-    
-    this.routeSubscription = this.route.paramMap.subscribe(params => {
+    this.routeSubscription = this.route.paramMap.subscribe(()=> {
       this.decodificarURL();
     });
 
-    this.routeStateSubsCription = this.authService.userState$.subscribe(user => {
+    this.routeSubscription = this.authService.userState$.subscribe(user => {
       if (user) {
-        this.usuarioLogged = user;
-        this.logged = true;
-        this.llamarUsuario()
-      } else {
-        this.logged = false;
-      }
+        this.inUser = true;
+        this.obtenerUsuario()
+      } else {this.inUser = false;}
     });
   }
 
-  async llamarUsuario(){
-    const app = getApp();
-    const db = getFirestore(app);
-    const docSnap = await getDoc(doc(db, "usuarios", this.auth.currentUser?.uid!));
-    this.usuario = docSnap.data()!;
-    const palabras = this.usuario.nombre!.trim().split(' ');
-    this.nombre = palabras.slice(0, 2).join(' ');
+  obtenerUsuario(){
+    this.routeSubscription = this.authService.getUsuarioId(this.auth.currentUser?.uid!).subscribe(usuario =>{
+      this.usuario = usuario;
+      const palabras = this.usuario.nombre!.trim().split(' ');
+      this.nombre = palabras.slice(0, 2).join(' ');
+      
+    });
   }
 
   signOut(){
     this.authService.signOut();
   }
 
+  //--------------------------------------------------  Funciones buscador ----------------------------------- //
   decodificarURL(){ // Saber el texto puesto en el Input
     const url = this.router.url;
       const decodedUrl = decodeURIComponent(url);
@@ -100,15 +95,6 @@ export class BarraMenuComponent{
         this.ultimoDatoUrl = segments[segments.length - 1];
       }
   }
-  ngOnDestroy() {
-    if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe();
-    }
-    if (this.routeStateSubsCription) {
-      this.routeStateSubsCription.unsubscribe();
-    }
-  }
-  //-------------------------------------------------------  Funciones básicas  --------- //
   navegar(ruta: any[], event: Event): void{
     event.preventDefault();
     this.zone.run(()=>{
@@ -135,6 +121,13 @@ export class BarraMenuComponent{
         this.router.navigate(['busqueda/',busqueda]);
         window.scroll(0,0)
       })
+    }
+  }
+
+//---------------------------
+  ngOnDestroy() {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
     }
   }
   

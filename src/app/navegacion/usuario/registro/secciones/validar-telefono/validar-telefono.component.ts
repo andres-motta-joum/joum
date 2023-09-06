@@ -64,28 +64,32 @@ export class ValidarTelefonoComponent implements OnDestroy{
   //------------------------------ SUBMIT -----------------------------------
 
   async onSubmit(): Promise<void> {
-
     if (this.numeroLength !== 0) {
       if (this.numeroLength === 10) {
         const { phone } = this.form.value;
-
-        if(this.datosRegistros.tipo === 'singUp'){
-          this.dataSharingService.setFormData({
-            email: this.datosRegistros.email,
-            password: this.datosRegistros.password,
-            name: this.datosRegistros.name,
-            lastname: this.datosRegistros.lastname,
-            phone: phone,
-            tipo: 'singUp'
-          });
-        }else if(this.datosRegistros.tipo === 'singUpGoogle' || this.datosRegistros.tipo === 'singInGoogle'){
-          this.dataSharingService.setFormData({
-            tipo: 'singUpGoogle',
-            phone: phone
-          });
-        }
-        this.check = true;
-        this.router.navigate(['cuenta/phone-validation/enter-code']);
+        const numero = await this.authService.getTelefonoExistente('+57' + phone).then((existe)=>{
+          if(!existe){
+            if(this.datosRegistros.tipo === 'singUp'){
+              this.dataSharingService.setFormData({
+                email: this.datosRegistros.email,
+                password: this.datosRegistros.password,
+                name: this.datosRegistros.name,
+                lastname: this.datosRegistros.lastname,
+                phone: phone,
+                tipo: 'singUp'
+              });
+            }else if(this.datosRegistros.tipo === 'singUpGoogle' || this.datosRegistros.tipo === 'singInGoogle'){
+              this.dataSharingService.setFormData({
+                tipo: 'singUpGoogle',
+                phone: phone
+              });
+            }
+            this.check = true;
+            this.router.navigate(['cuenta/phone-validation/enter-code']);
+          }else{
+            this.error = 'Este número ya se encuentra asociado a una cuenta existente.';
+          }
+        })
       }else{
         this.error = 'El numero debe de tener 10 carácteres';
       }

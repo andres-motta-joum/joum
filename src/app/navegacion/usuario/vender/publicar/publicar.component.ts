@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { PasosVenderService } from 'src/app/servicios/vender/vender.service';
 
 @Component({
@@ -7,17 +10,13 @@ import { PasosVenderService } from 'src/app/servicios/vender/vender.service';
   styleUrls: ['./publicar.component.scss']
 })
 export class PublicarComponent {
-  constructor(
-    private pasos: PasosVenderService
-  ) { }
+  constructor( private pasos: PasosVenderService, private authService : AuthService, private router: Router) {}
+  private routeSubscription!: Subscription;
 
-  
-
-  ngOnDestroy(): void {
-    this.pasos.paso2 = false;
-    this.pasos.paso3 = false;
-    this.pasos.paso4 = false;
-    this.pasos.paso5 = false;
+  ngOnInit(): void {
+    this.routeSubscription = this.authService.userState$.subscribe((user)=>{
+      user ? true : this.router.navigate(['']);
+    })
   }
 
   getPaso(num: number): any {
@@ -32,6 +31,18 @@ export class PublicarComponent {
               break;
       case 5: return this.pasos.paso5;
               break;
+      case 6: return this.pasos.paso6;
+      break;
     }
+  }
+
+  ngOnDestroy(): void {
+    if(this.routeSubscription){
+      this.routeSubscription.unsubscribe();
+    }
+    this.pasos.paso2 = false;
+    this.pasos.paso3 = false;
+    this.pasos.paso4 = false;
+    this.pasos.paso5 = false;
   }
 }

@@ -30,6 +30,7 @@ import { heroDocumentTextSolid } from '@ng-icons/heroicons/solid';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { filter } from 'rxjs/operators';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -60,7 +61,7 @@ import { filter } from 'rxjs/operators';
 })
 export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
 
-  constructor(private router: Router,private route: ActivatedRoute,private renderer: Renderer2,private changeDetector: ChangeDetectorRef,private zone: NgZone, private userService: UsuarioService) {}
+  constructor(private router: Router,private route: ActivatedRoute,private renderer: Renderer2,private changeDetector: ChangeDetectorRef,private zone: NgZone, private authService: AuthService) {}
   public footer: any;
   public footerHeight: any;
   public footerSlide!: number;
@@ -81,44 +82,30 @@ export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
   @ViewChild('body') body1!: ElementRef;
 
   public idUsuario!: string;
-  private usuario!: Usuario | undefined;
   private routerSubscription: Subscription | undefined;
+  public datosUsuario!: Usuario;
 
 
   ngOnInit(): any { 
-    this.idUsuario = this.route.snapshot.paramMap.get('id')!;
     this.obtenerUsuario();
-    if(this.usuario === undefined){
-      this.router.navigate(['']);
-    }
     this.routerSubscription = this.router.events.subscribe(async event => {
       if (event instanceof NavigationEnd) {
-        await this.obtenerUsuario();
-        if(this.usuario === undefined){
-          this.router.navigate(['']);
-        }
+        this.obtenerUsuario();
       }
     });
   }
+
   async obtenerUsuario() {
     this.idUsuario = this.route.snapshot.paramMap.get('id')!;
-    this.usuario = this.userService.getUserUsuario(this.idUsuario);
+    await this.authService.getUsuarioUser(this.idUsuario).then((usuario)=>{
+      if(!usuario){
+        this.router.navigate(['']);
+      }
+    })
   }
 
-  ngAfterViewInit(): void {
-    this.listenMouseEnterMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseenter', () => {
-      this.mouseInMenu = true;
-      this.changeDetector.detectChanges();
-    });
-    this.listenMouseLeaveMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseleave', () => {
-      this.mouseInMenu = false;
-      this.changeDetector.detectChanges();
-    });
-    this.listenFooterSlide = this.renderer.listen('window', 'load', () => {
-      this.footerSlide = (this.footer.nativeElement.getBoundingClientRect().top) - this.screenHeight;
-      this.interruptor = this.footerSlide > 0 ? true : false;
-    });
-  }
+
+  //---------------------------------
 
   ngOnDestroy(): void {
     this.listenMouseEnterMenu();
@@ -129,6 +116,25 @@ export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
       this.routerSubscription.unsubscribe();
     }
   }
+
+
+
+//----------------------------------------------------------- APARIENCIA DE LA PAGINA ----------------------------------------------------------------------------
+
+ngAfterViewInit(): void {
+  this.listenMouseEnterMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseenter', () => {
+    this.mouseInMenu = true;
+    this.changeDetector.detectChanges();
+  });
+  this.listenMouseLeaveMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseleave', () => {
+    this.mouseInMenu = false;
+    this.changeDetector.detectChanges();
+  });
+  this.listenFooterSlide = this.renderer.listen('window', 'load', () => {
+    this.footerSlide = (this.footer.nativeElement.getBoundingClientRect().top) - this.screenHeight;
+    this.interruptor = this.footerSlide > 0 ? true : false;
+  });
+}
 
   desplegarSubmenu(i: number): any {
     this.stateSubMenu[i] = this.stateSubMenu[i] === 'active' ? 'inactive' : 'active';

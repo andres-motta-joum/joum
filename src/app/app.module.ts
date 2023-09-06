@@ -22,8 +22,8 @@ import { ComprarModule } from './navegacion/comprar/comprar.module';
 /*----------- FireBase --------*/
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth, connectAuthEmulator } from '@angular/fire/auth';
-import { provideFirestore,getFirestore, connectFirestoreEmulator} from '@angular/fire/firestore';
+import { provideAuth,getAuth} from '@angular/fire/auth';
+import { provideFirestore,getFirestore} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -44,15 +44,8 @@ import { provideFirestore,getFirestore, connectFirestoreEmulator} from '@angular
     ProductoModule,
     ComprarModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => {
-      const auth = getAuth();
-      return auth
-    }),
-    provideFirestore(() => {
-      const firestore = getFirestore();
-      return firestore;
-    })
-    
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent]

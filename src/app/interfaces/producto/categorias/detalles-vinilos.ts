@@ -1,10 +1,11 @@
 export interface DetallesVinilos {
-    marca?: string,       /*--- Principales ---*/
+    marca?: string, 
     modelo?: string,
 
-    colores?: string[],   /*--- visual ---*/
+    estilos?: string[], 
     fotos?: string[][],
     autoria?: string,
+//--------------------------------------------------
     diseño?: string, //figuras, frases,etc
     material?: string,
     tematica?: string, //inspiracion, naturaleza, etc

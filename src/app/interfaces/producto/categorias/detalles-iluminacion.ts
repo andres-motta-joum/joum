@@ -1,11 +1,13 @@
 export interface DetallesIluminacion {
-    marca?: string,       /*--- Principales ---*/
+    marca?: string,
     modelo?: string,
 
-    tecnologiaIluminacion?: string,   /*--- visual ---*/
-    colores?: string[],
+    estilos?: string[], 
     fotos?: string[][],
     autoria?: string,
+//-------------------------------
+
+    tecnologiaIluminacion?: string,   /*--- visual ---*/
 
     subCategoria?: Bombillos | Lamparas | LetrerosLed,
 
@@ -14,11 +16,12 @@ export interface DetallesIluminacion {
 }
 
 interface Bombillos {
-    potencia?: number,      /*--- valores ---*/
     temperaturaColor?: string,
     forma?: string,
     sistemasOperativosCompatibles?: string[],
     apliacionesCompatibles?: string[],
+    potencia?: number,      /*--- valores ---*/
+    unidadMedidaPotencia?: string;
 
     wifi?: boolean,    /*--- preguntas si/no ---*/
     giratorio?: boolean,
@@ -30,8 +33,10 @@ interface Lamparas {
     estilo?: string,
     material?: string,
     potencia?: number, 
+
     inalambrico?: boolean,
     autoadhesiva?: boolean,
+    regulable?: boolean,
     controlRemoto?: boolean,
     sistemaDePresion?: boolean,
     wifi?: boolean

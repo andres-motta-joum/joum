@@ -5,6 +5,7 @@ import { aspectsSocialFacebook } from '@ng-icons/ux-aspects';
 import { ionLogoTwitter } from '@ng-icons/ionicons';
 import { ionLogoGoogle } from '@ng-icons/ionicons';
 import { Router } from '@angular/router';
+import { matCheck } from '@ng-icons/material-icons/baseline';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { Auth } from '@angular/fire/auth';
@@ -14,7 +15,7 @@ import { DataSharingService } from 'src/app/servicios/usuarios/data-sharing.serv
   selector: 'app-crear-cuenta',
   templateUrl: './crear-cuenta.component.html',
   styleUrls: ['./crear-cuenta.component.scss'],
-  providers: [provideIcons({aspectsSocialFacebook, ionLogoTwitter, ionLogoGoogle})]
+  providers: [provideIcons({aspectsSocialFacebook, ionLogoTwitter, ionLogoGoogle, matCheck})]
 })
 export class CrearCuentaComponent implements OnInit{
   constructor(private fb: FormBuilder,private zone: NgZone, private router: Router, private authService: AuthService, private auth: Auth, private dataSharingService: DataSharingService) {}
@@ -22,9 +23,11 @@ export class CrearCuentaComponent implements OnInit{
   public user$!: Observable<any>;
   private readonly emailattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   private readonly passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  private readonly nombreApellidoPattern = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]{2,20}$/;
   public passwordCheck!: boolean | null;
   public inputFunction = false;
   public checkbox = true;
+  public checkedbox = false;
 
   ngOnInit(): void {
     this.initForm();
@@ -35,8 +38,8 @@ export class CrearCuentaComponent implements OnInit{
   private initForm():void {
     this.form = this.fb.group(
       {
-        name: ['', [Validators.required, Validators.minLength(2)] ],
-        lastname: ['', [Validators.required, Validators.minLength(2)] ],
+        name: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this.nombreApellidoPattern)] ],
+        lastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this.nombreApellidoPattern)] ],
         email: ['', [Validators.required, Validators.pattern(this.emailattern)] ],
         password: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(24),Validators.pattern(this.passwordPattern)]],
         passwordVerify: ['', [Validators.required]],
@@ -102,5 +105,6 @@ export class CrearCuentaComponent implements OnInit{
   handleCheckBoxChange() { // CheckBox
     const isChecked = this.form.get('checkbox')!.value;
     this.checkbox = isChecked;
+    this.checkedbox = isChecked;
   }
 }

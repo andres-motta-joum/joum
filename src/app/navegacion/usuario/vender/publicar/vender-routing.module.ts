@@ -7,6 +7,10 @@ import { PasoTresComponent } from './pasos/paso-tres/paso-tres.component';
 import { PasoCuatroComponent } from './pasos/paso-cuatro/paso-cuatro.component';
 import { PasoCincoComponent } from './pasos/paso-cinco/paso-cinco.component';
 import { PasoSeisComponent } from './pasos/paso-seis/paso-seis.component';
+import { PasoSieteComponent } from './pasos/paso-siete/paso-siete.component';
+import { PasoOchoComponent } from './pasos/paso-ocho/paso-ocho.component';
+import { PasoNueveComponent } from './pasos/paso-nueve/paso-nueve.component';
+import { PasoDiezComponent } from './pasos/paso-diez/paso-diez.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +40,22 @@ export const routes: Routes = [
       {
         path: 'paso6',
         component: PasoSeisComponent
+      },
+      {
+        path: 'paso7',
+        component: PasoSieteComponent
+      },
+      {
+        path: 'paso8',
+        component: PasoOchoComponent
+      },
+      {
+        path: 'paso9',
+        component: PasoNueveComponent
+      },
+      {
+        path: 'paso10',
+        component: PasoDiezComponent
       },
     ]
   }

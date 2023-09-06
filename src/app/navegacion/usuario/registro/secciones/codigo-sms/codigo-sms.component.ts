@@ -1,9 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { Auth, PhoneAuthCredential, PhoneAuthProvider, RecaptchaVerifier, sendPasswordResetEmail, signInWithPhoneNumber, updatePhoneNumber } from '@angular/fire/auth';
+import { Auth, PhoneAuthCredential, PhoneAuthProvider, RecaptchaVerifier, sendPasswordResetEmail, updatePhoneNumber } from '@angular/fire/auth';
+import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getApp } from 'firebase/app';
 import { ConfirmationResult } from 'firebase/auth';
-import { getFirestore, doc, updateDoc  } from "firebase/firestore";
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { DataSharingService } from 'src/app/servicios/usuarios/data-sharing.service';
 
@@ -18,7 +17,7 @@ interface ErrorResponse  {
   styleUrls: ['./codigo-sms.component.scss']
 })
 export class CodigoSMSComponent implements OnInit{
-  constructor(private authService: AuthService, private auth: Auth, private router: Router, private route: ActivatedRoute, private dataSharingService: DataSharingService){}
+  constructor(private authService: AuthService, private auth: Auth, private router: Router, private route: ActivatedRoute, private dataSharingService: DataSharingService, private firestore: Firestore){}
   @ViewChildren('verificationInput') verificationInputs!: QueryList<ElementRef>;
   @ViewChild('firstInput') firstInput!: ElementRef;
   private datos!: any;
@@ -72,9 +71,6 @@ export class CodigoSMSComponent implements OnInit{
     const enteredCode = this.enteredCodes.join('');
     try {
       const verificationId = this.confirmationResult.verificationId;
-      const app = getApp();
-      const db = getFirestore(app);
-
       if(this.datos.tipo === 'singUp'){
         await this.authService.singUp(this.datos.email, this.datos.password, this.datos.name, this.datos.lastname);
       }else if(this.datos.tipo === 'singIn'){
@@ -88,7 +84,7 @@ export class CodigoSMSComponent implements OnInit{
 
         //No tienen un numero asignado.
         if(this.datos.tipo === 'singUpGoogle' || this.datos.tipo === 'singUp'){ //Agregar numero "Firestore"
-          await updateDoc(doc(db, "usuarios", currentUser?.uid!), { telefono: this.numero });
+          await updateDoc(doc(this.firestore, "usuarios", currentUser?.uid!), { telefono: this.numero });
           await updatePhoneNumber(currentUser!, phoneCredential);
         }
         this.dataSharingService.deleteData();

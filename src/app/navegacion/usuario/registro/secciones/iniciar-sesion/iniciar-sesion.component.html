@@ -8,18 +8,18 @@
         <p class="error" *ngIf="requiredEmail">Este campo es requerido</p>
 
         <label [ngClass]="{'errorText': errorPassword || requiredPassword}" for="password" >Contraseña</label>
-        <input name="password" type="password" placeholder="* * * *" formControlName="password" [ngClass]="{'invalid': errorPassword || requiredPassword}">
+        <input class="password" name="password" type="password" placeholder="* * * * *" formControlName="password" [ngClass]="{'invalid': errorPassword || requiredPassword}">
         <p class="error" *ngIf="errorPassword">La constraseña es incorrecta</p>
         <p class="error" *ngIf="requiredPassword">Este campo es requerido</p>
 
-        <p (click)="navegar('cuenta/phone-validation/email-request')" class="forgotPassword">¿Olvidaste tu constraseña?</p>
+        <p (click)="navegar('cuenta/phone-validation/email-request')" class="forgotPassword">¿Olvidaste la constraseña?</p>
 
         <div class="botones">
             <button type="button" (click)="navegar('cuenta/crear-cuenta')">Crear cuenta</button> <button type="submit">Ingresar</button>
         </div>
     </form>
 
-    <p class="segundaOpcionP">O iniciar sesión con</p>
+    <p class="segundaOpcionP">O inicia sesión con</p>
     <div class="iconos">
         <div (click)="singInFacebook()"><ng-icon name="aspectsSocialFacebook"></ng-icon></div>
         <div (click)="singInTwitter()"><ng-icon name="ionLogoTwitter"></ng-icon></div>

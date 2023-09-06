@@ -2,51 +2,42 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasosVenderService } from '../../../../../../servicios/vender/vender.service';
+import { provideIcons } from '@ng-icons/core';
+import { heroArrowSmallLeft } from '@ng-icons/heroicons/outline';
+import { matContentPasteSearchOutline } from '@ng-icons/material-icons/outline';
 
 @Component({
   selector: 'app-paso-dos',
   templateUrl: './paso-dos.component.html',
-  styleUrls: ['./paso-dos.component.scss']
+  styleUrls: ['./paso-dos.component.scss'],
+  providers: [provideIcons({heroArrowSmallLeft})]
 })
 export class PasoDosComponent {
+  constructor( private pasos: PasosVenderService, private router: Router, private changeDetector: ChangeDetectorRef, private formBuilder: FormBuilder) {}
   form!: FormGroup;
 
-  constructor(
-    private pasos: PasosVenderService,
-    private router: Router,
-    private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder
-  ) {
-    if (this.pasos.producto !== undefined) {
-      this.buildForm(this.pasos.producto.nombre);
-    } else {
-      this.router.navigate(['/vender', 'formulario', 'paso1']);
-    }
+  ngOnInit(): void {
+    this.pasos.paso2 ? this.buildForm(this.pasos.producto.nombre) : this.router.navigate(['/vender', 'formulario', 'paso1']);
+    this.changeDetector.detectChanges();
   }
 
   private buildForm(inDefault: string): void {
     this.form = this.formBuilder.group({
-      titulo: [inDefault, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]]
+      titulo: [inDefault, [Validators.required, Validators.minLength(10), Validators.maxLength(70)]]
     });
   }
 
-  ngOnInit(): void {
-    if (!this.pasos.paso2) {
-      this.router.navigate(['/vender', 'formulario', 'paso1']);
-    }
-    this.changeDetector.detectChanges();
-  }
-
-  irPaso3(event: Event): any {
-    event.preventDefault();
-    if (this.form.valid) {
+  submit(): any {
+    if (this. form && this.form.valid) {
       this.pasos.producto.nombre = this.form.value.titulo;
       this.pasos.paso3 = true;
       this.router.navigate(['/vender', 'formulario', 'paso3']);
     }
   }
 
-  irPaso1(): void {
+  atras(): void {
+    this.pasos.producto.nombre = this.form.value.titulo;
+    this.pasos.paso1 = true;
     this.router.navigate(['/vender', 'formulario', 'paso1']);
   }
 }

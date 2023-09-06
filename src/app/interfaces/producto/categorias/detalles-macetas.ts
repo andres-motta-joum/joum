@@ -1,12 +1,13 @@
 export interface DetallesMacetas {
-    marca?: string,        /*--- Principales ---*/
+    marca?: string,   
     modelo?: string,
 
-    colores?: string[],     /*--- visual ---*/
+    estilos?: string[],
     fotos?: string[][],
+    autoria?: string,
+//-------------------------------
     estilo?: string,
     tipo?: string,
-    autoria?: string,
 
     diametroBoca?: number,      /*--- diametros ---*/
     unidadMedidaDiametroBoca?: string,
@@ -18,9 +19,9 @@ export interface DetallesMacetas {
     unidadMedidaAncho?: string,
     largo?: number,
     unidadMedidaLargo?: string,
-    forma?: string,
+    forma?: string, //BORRAR
     material?: string,
-    capacidadVolumen?: number;
+    volumen?: number;
     unidadMedidaVolumen?: string,
 
     sistemaAutorriego?: boolean,      /*--- preguntas si/no ---*/

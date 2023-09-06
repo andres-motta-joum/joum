@@ -27,6 +27,7 @@
     .errorPhone{
         color: #ff6d6d;  
         transform: translateY(-19px); 
+        padding-right: 40px;
         font-size: 12px !important; 
         font-weight: 450; 
         letter-spacing: .4px; 
@@ -43,7 +44,7 @@
         width: calc(100% - 153px);
         margin: 5px 0 22px 40px;   
         padding: 11px 20px 11px 53px;
-        border: 1px solid #d6d6d6;
+        border: 1px solid #d8d8d8;
         outline: none;
         border-radius: 8px;
         color: #505050;

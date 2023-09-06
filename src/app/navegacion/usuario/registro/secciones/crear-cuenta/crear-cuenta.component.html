@@ -22,22 +22,23 @@
 
         <!----------->
         <label for="password" [ngClass]="{'errorText': hasError('password')}" for="email" >Contraseña</label>
-        <input name="password" type="password" placeholder="* * * *" formControlName="password" [ngClass]="{'invalid': hasError('password')}">
+        <input class="password" name="password" type="password" placeholder="* * * *" formControlName="password" [ngClass]="{'invalid': hasError('password')}">
         <app-error-message [control]="form.get('password')!" patternType="password" />
 
         <!----------->
         <label for="passwordVerify" *ngIf="inputFunction" [ngClass]="{'errorText': hasError('passwordVerify') || !passwordCheck}">Verificar contraseña</label>
         <label for="passwordVerify" *ngIf="!inputFunction" [ngClass]="{'errorText': hasError('passwordVerify')}">Verificar contraseña</label>
-        <input name="passwordVerify" type="password" placeholder="* * * *" formControlName="passwordVerify" [ngClass]="{'invalid': hasError('passwordVerify') || !passwordCheck}" *ngIf="inputFunction"  (input)="passwordVerifyValidator(form)">
-        <input name="passwordVerify" type="password" placeholder="* * * *" formControlName="passwordVerify" [ngClass]="{'invalid': hasError('passwordVerify')}" *ngIf="!inputFunction">
+        <input class="password" name="passwordVerify" type="password" placeholder="* * * * *" formControlName="passwordVerify" [ngClass]="{'invalid': hasError('passwordVerify') || !passwordCheck}" *ngIf="inputFunction"  (input)="passwordVerifyValidator(form)">
+        <input class="password" name="passwordVerify" type="password" placeholder="* * * * *" formControlName="passwordVerify" [ngClass]="{'invalid': hasError('passwordVerify')}" *ngIf="!inputFunction">
         <app-error-message [control]="form.get('passwordVerify')!"/>
         <p class="errorPasswordVerify" *ngIf="inputFunction && !passwordCheck">La contraseña no coincide con la anterior</p>
 
 
         <!----------->
         <div class="politicas">
-            <input type="checkbox" formControlName="checkbox" (change)="handleCheckBoxChange()" [ngClass]="{'checkBoxError': !checkbox}">
-            <p>Declaro que he leído y acepto la nueva <span (click)="navegar('privacidad')"> Política de Privacidad</span> y los <span (click)="navegar('terminos-condiciones')">Términos y Condiciones</span> de joum.</p>
+            <ng-icon *ngIf="checkedbox" name="matCheck" ></ng-icon>
+            <input type="checkbox" formControlName="checkbox" (change)="handleCheckBoxChange()" [ngClass]="{'checkBoxError': !checkbox, 'checkedBox': checkedbox}" name="checkbox">
+            <p [ngClass]="{'checkErrorP': !checkbox}" for="checkbox">Declaro que he leído y acepto la nueva <span (click)="navegar('privacidad')"> Política de Privacidad</span> y los <span (click)="navegar('terminos-condiciones')">Términos y Condiciones</span> de joum.</p>
         </div>
 
         <div class="botones">

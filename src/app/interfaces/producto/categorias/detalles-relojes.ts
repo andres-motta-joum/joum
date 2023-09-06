@@ -1,9 +1,11 @@
 export interface DetallesRelojes {
-    marca?: string,       /*--- Principales ---*/
+    marca?: string,
     modelo?: string,
 
-    colores?: string[],   /*--- visual ---*/
+    estilos?: string[], 
     fotos?: string[][],
+    autoria?: string,
+//-------------------------------
     tipo?: string, //pared o mesa
     estilo?: string,
     material?: string,
@@ -13,6 +15,7 @@ export interface DetallesRelojes {
 
     figura?: string,
         diametro?: number, /*--- diametros ---*/
+        unidadMedidaDiametro?: string,
         altura?: number,
         unidadMedidaAltura?: string,
         ancho?: number,

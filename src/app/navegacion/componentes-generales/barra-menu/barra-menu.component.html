@@ -9,40 +9,40 @@
           <input class="Buscador" (keyup.enter)="buscarEnter(busqueda.value)" placeholder='Buscar' type="text" #busqueda [(ngModel)]="ultimoDatoUrl">
           <div (click)="buscar(busqueda.value)" class="Buscar"><ng-icon class="search" name="heroMagnifyingGlassMini"></ng-icon></div>
             
-          <li class="uno"><a (click)="navegar(['MOTTAANDRES20221130093921/ventas'], $event)"><p><ng-icon class="ventas" name="heroCurrencyDollarMini"></ng-icon><br>Ventas</p></a></li>
+          <li class="uno"><a (click)="navegar([ usuario?.usuario + '/ventas' ], $event)"><p><ng-icon class="ventas" name="heroCurrencyDollarMini"></ng-icon><br>Ventas</p></a></li>
 
           <li id="dos" class="Interruptor">
             <a><p><ng-icon class="user" name="heroUserCircleSolid"></ng-icon><p class="text-dos">Cuenta</p></a>
             <ul class="User-submenu">
             
-              <ng-container *ngIf="!logged">
+              <ng-container *ngIf="!inUser">
                 <div class="botones">
                   <a><button (click)="navegar(['cuenta/iniciar-sesion'],$event)" class="iniciar">Iniciar Sesion</button></a>
                   <a><button (click)="navegar(['cuenta/crear-cuenta'], $event)" class="crear">crear cuenta</button></a>
                 </div>
               </ng-container>
 
-              <ng-container *ngIf="logged">
+              <ng-container *ngIf="inUser">
                 <div class="contentUser">
                   <img
-                  (click)='navegar(["MOTTAANDRES20221130093921/perfil/informacion"], $event)'
+                  (click)='navegar([usuario?.usuario + "/perfil/informacion"], $event)'
                     id="picUser"
                     src="assets/img/usuarios/user.svg"
                     class="fotoPerfil"
                     alt="Image">
                   <div>
-                    <p *ngIf="usuario?.usuario" (click)='navegar(["MOTTAANDRES20221130093921/perfil/informacion"], $event)' id="nameUser2"> {{nombre}} </p>
-                    <p *ngIf="usuario?.usuario" (click)='navegar(["MOTTAANDRES20221130093921/perfil/informacion"], $event)'>@{{usuario.usuario}}</p>
+                    <p  (click)='navegar([usuario?.usuario + "/perfil/informacion"], $event)' id="nameUser2"> {{nombre!}} </p>
+                    <p (click)='navegar([usuario?.usuario + "/perfil/informacion"], $event)'>@{{usuario?.usuario}}</p>
                   </div>
                 </div>
                 <div  class="linea-Menu"></div>
                 <li >
-                  <a (click)='navegar(["MOTTAANDRES20221130093921/compras"], $event)'>
+                  <a (click)='navegar([usuario?.usuario + "/compras"], $event)'>
                     <ng-icon name="heroShoppingCart"></ng-icon> Compras
                   </a>
                 </li>
                 <li>
-                  <a (click)='navegar(["MOTTAANDRES20221130093921/opiniones"], $event)'>
+                  <a (click)='navegar([usuario?.usuario + "/opiniones"], $event)'>
                     <ng-icon name="heroDocumentCheck"></ng-icon> Opiniones
                   </a>
                 </li>
@@ -54,24 +54,24 @@
                   </a>
                 </li>
                 <li>
-                  <a (click)='navegar(["MOTTAANDRES20221130093921/resumen"], $event)'>
+                  <a (click)='navegar([usuario?.usuario + "/resumen"], $event)'>
                     <ng-icon name="heroRectangleGroup"></ng-icon> Resumen
                   </a>
                 </li>
                 <li>
-                  <a (click)='navegar(["MOTTAANDRES20221130093921/novedades"], $event)'>
+                  <a (click)='navegar([usuario?.usuario + "/novedades"], $event)'>
                     <ng-icon name="heroBell"></ng-icon> Novedades
                   </a>
                 </li>
                 <li>
-                  <a (click)='navegar(["MOTTAANDRES20221130093921/publicaciones"], $event)'>
+                  <a (click)='navegar([usuario?.usuario + "/publicaciones"], $event)'>
                     <ng-icon name="heroBuildingStorefront"></ng-icon> Publicaciones
                   </a>
                 </li>
 
                 <div class="linea-Menu"></div>
                 <li>
-                  <a (click)='navegar(["MOTTAANDRES20221130093921/facturacion"], $event)'>
+                  <a (click)='navegar([usuario?.usuario + "/facturacion"], $event)'>
                     <ng-icon name="heroDocumentText"></ng-icon> Facturacion
                   </a>
                 </li>
@@ -88,7 +88,7 @@
             <nav class="menu4-gray2"></nav>
           </li>
           <li class="tres">
-            <a (click)="navegar(['MOTTAANDRES20221130093921/carrito'],$event)"><p><ng-icon class="cart" name="matShoppingCart"></ng-icon><p class="text-tres">Carrito</p></a>
+            <a (click)="navegar([usuario?.usuario + '/carrito'],$event)"><p><ng-icon class="cart" name="matShoppingCart"></ng-icon><p class="text-tres">Carrito</p></a>
           </li>
         </div>
       </ul>
@@ -102,13 +102,13 @@
       <ul>
         <li><p (click)="navegar(['cuenta/crear-cuenta'],$event)">Agrega tu envío</p></li>
         <li><p (click)="navegar(['busqueda/ofertas-del-dia'],$event)">Ofertas del Día</p></li>
-        <li><p (click)="navegar(['MOTTAANDRES20221130093921/historial'],$event)">Historial</p></li>
-        <li *ngIf="logged"><p (click)="navegar(['MOTTAANDRES20221130093921/compras'],$event)">Mis compras</p></li>
-        <li *ngIf="logged"><p (click)="navegar(['MOTTAANDRES20221130093921/favoritos'],$event)">Favoritos</p></li>
-        <li><p (click)="navegar(['MOTTAANDRES20221130093921/recomendaciones'],$event)">Para ti</p></li>
+        <li><p (click)="navegar([usuario?.usuario + '/historial'],$event)">Historial</p></li>
+        <li *ngIf="inUser"><p (click)="navegar([usuario?.usuario + '/compras'],$event)">Mis compras</p></li>
+        <li *ngIf="inUser"><p (click)="navegar([usuario?.usuario + '/favoritos'],$event)">Favoritos</p></li>
+        <li><p (click)="navegar([usuario?.usuario + '/recomendaciones'],$event)">Para ti</p></li>
         <li><p (click)="navegar(['vender'],$event)">Vender</p></li>
         <li><p (click)="navegar(['ayuda'],$event)">Ayuda</p></li>
-        <div (click)="navegar(['notificaciones'],$event)" class="notificaciones" *ngIf="logged">
+        <div (click)="navegar(['notificaciones'],$event)" class="notificaciones" *ngIf="inUser">
           <ng-icon name="ionNotificationsOutline"></ng-icon>
           <ng-icon name="ionChevronDownOutline"></ng-icon>
           <div>

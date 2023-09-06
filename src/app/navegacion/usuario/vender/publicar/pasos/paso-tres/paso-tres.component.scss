@@ -1,135 +1,134 @@
-form.paso3{
-	width: 1150px;
-	height: 450px;
+.contenido{
+	position: relative;
+	margin: 70px auto;
+	width: 500px;
+	height: 510px;
+	background-color: white;
+	box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	button.back{
+		width: 34px;
+		height: 34px;
+		background-color: #e9e9e9;
+		border-radius: 50%;
+		border: none;
+		position: absolute;
+		left: 20px;
+		top: 23px;
+		cursor: pointer;
+		transition: .2s;
+		ng-icon{
+			color: #666;
+			font-size: 21px;
+			padding: 3px 1px;
+		}
+		&:hover{
+			background-color: #ffad72;
+			ng-icon{
+				color: white;
+			}
+		}
+	}
+}
+form.paso3 {
 	margin: 40px auto;
-}
-
-form.paso3 h1{
-	color: #555;
-	font-size: 36px;
-	text-align: center;
-}
-
-form.paso3 p{
-	color: #555;
-	width: 90%;
-	font-size: 25px;
-	margin: auto;
-	text-align: center;
-}
-
-form.paso3 div.inputs{
-	width: 100%;
-	margin: 45px 0px;
-}
-
-form.paso3 div.inputs div.input{
-
-	display:flex;
-	margin: 20px auto;
-	width: 70%;
-}
-
-form.paso3 div.input input{
-	width: 100%;
-	border-radius: 5px;
-	border: 1px solid #999;
-	padding: 11px;
-}
-
-form.paso3 div.input input::placeholder{
-	font-size: 15px;
-}
-
-form.paso3 div.input select{
-	width: 100%;
-	border-radius: 5px;
-	border: 1px solid #999;
-	color: #777;
-	font-size: 15px;
-	height: 40px;
-	margin-left: -5px;
-}
-
-form.paso3 div.input select:focus{
-	border: 1px solid #FF9E57;
-}
-
-form.paso3 div.input input:focus{
-	border: 1px solid #FF9E57;
-}
-
-form.paso3 div.input label{
-	font-size: 20px;
-	padding: 5px 15px 0px 0px;
-	width: 180px;
-	text-align: right;
-
-}
-form.paso3 div.input label b{
-	font-size: 16px;
-	font-weight: 500;
-	margin: 0px 2px 0px 0px;
-}
-
-form.paso3 div.linea{
-	width: 100%;
-	border-bottom: 2px solid #ddd;
-}
-
-
-.btn3 {
-	width: 30%;
-	float: right;
-	background:white;
-	height: 40px;
-	border:1px solid #777;
-	color: #888;
-	border-radius: 6px;
-	font-size: 16px;
-	margin: 32px 40px;
-	text-align: center;
-}
-
-.btn3active {
-	width: 30%;
-	float: right;
-	background:#FF9E57;
-	height: 40px;
-	color: white;
-    border: none;
-	border-radius: 6px;
-	font-size: 16px;
-	margin: 32px 40px;
-	text-align: center;
-  cursor: pointer;
-}
-
-#btn-anterior2{
-	float: left;
-	background: #FF9E57;
-	border: none;
-	color: white;
-	cursor: pointer;
-}
-
-@media (max-width: 1270px){
-
-	form.paso1{
-	width: 98%;
+	padding-top: 10px;
+	h1 {
+		color: #666;
+		font-size: 31px;
+		letter-spacing: 0.7px;
+		word-spacing: 1.2px;
+		font-weight: 550;
+		text-align: center;
 	}
 
-
-	form.paso2{
-	width: 98%;
+	p {
+		font-size: 16.5px;
+		color: #707070;
+		word-spacing: 1px;
+		font-weight: 450;
+		letter-spacing: 0.5px;
+		width: 90%;
+		margin: auto;
+		text-align: center;
 	}
 
-	form.paso3{
-	width: 98%;
+	div.inputs {
+		width: 100%;
+		margin: 60px 0 45px 0;
+
+		div.input {
+			position: relative;
+			display: flex;
+			width: calc(100% - 100px);
+			margin-left: 50px;
+			margin-top: 20px;
+			margin-bottom: 45px;
+
+			label {
+				position: absolute;
+				top: -25px;
+				left: 0;
+				font-size: 15px;
+				font-weight: 420;
+				width: 250px;
+				text-align: left;
+				color: #777;
+				word-spacing: 1px;
+				font-weight: 450;
+				letter-spacing: 0.5px;
+				b {
+					font-size: 16px;
+					font-weight: 500;
+					margin: 0px 2px 0px 0px;
+				}
+			}
+
+			input{
+				width: 100%;
+				padding: 13px 20px;
+				border: 1px solid #c4c4c4;
+				outline: none;
+				border-radius: 7px;
+				color: #505050;
+				font-weight: 420;
+				letter-spacing: 0.4px;
+				font-size: 14px;
+				&:focus {
+					border: 1.4px solid #bbb;
+				}
+				&::placeholder {
+					font-weight: 380;
+					letter-spacing: 0.6px;
+					color: #b0b0b0;
+				}
+			}
+		}
 	}
 
-	#formularios, #menu{
-	width: 98%;
+	.botonInvalid {
+		width: 190px;
+		float: right;
+		background: white;
+		height: 40px;
+		border: 1px solid #aaa;
+		color: #888;
+		border-radius: 6px;
+		font-size: 16px;
+		margin: 0 50px;
+		text-align: center;
+		cursor: pointer;
+		transition: .2s;
 	}
 
+	.botonValid {
+		width: 200px;
+		background: #ffad72;
+		border: none;
+		color: white;
+		font-size: 16px;
+		&:hover{
+			background: #ffa462;
+		}
+	}
 }

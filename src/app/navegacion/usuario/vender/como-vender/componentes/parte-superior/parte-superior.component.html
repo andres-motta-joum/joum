@@ -1,7 +1,8 @@
 <div class="contenidoHeader">
     <div>
         <h2>¡Crea con pasión, vende con éxito! Únete a Joum y comparte tu arte con el mundo.</h2>
-        <button (click)="navegar(['vender/formulario/paso1'],$event)" >Registrar mi producto</button>
+        <button *ngIf="inUser" (click)="navegar(['vender/formulario/paso1'],$event)" >Registrar mi producto</button>
+        <button *ngIf="!inUser" (click)="navegar(['cuenta/crear-cuenta'],$event)" >Registrar mi producto</button>
     </div>
     <div>
         <img src="assets/img/ilustraciones/box.svg">

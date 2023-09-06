@@ -19,6 +19,10 @@ import { PasoSeisComponent } from './pasos/paso-seis/paso-seis.component';
 import { ComoVenderComponent } from '../como-vender/como-vender.component';
 import { PasosComponent } from '../como-vender/componentes/pasos/pasos.component';
 import { ParteSuperiorComponent } from '../como-vender/componentes/parte-superior/parte-superior.component';
+import { PasoSieteComponent } from './pasos/paso-siete/paso-siete.component';
+import { PasoOchoComponent } from './pasos/paso-ocho/paso-ocho.component';
+import { PasoNueveComponent } from './pasos/paso-nueve/paso-nueve.component';
+import { PasoDiezComponent } from './pasos/paso-diez/paso-diez.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { ParteSuperiorComponent } from '../como-vender/componentes/parte-superio
     PasoSeisComponent,
     ComoVenderComponent,
     PasosComponent,
-    ParteSuperiorComponent
+    ParteSuperiorComponent,
+    PasoSieteComponent,
+    PasoOchoComponent,
+    PasoNueveComponent,
+    PasoDiezComponent
   ],
   imports: [
     FormsModule,

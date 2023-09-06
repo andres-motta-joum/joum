@@ -7,12 +7,12 @@ import { heroDocumentTextSolid } from '@ng-icons/heroicons/solid';
 import { heroPlaySolid } from '@ng-icons/heroicons/solid';
 import { heroShareSolid } from '@ng-icons/heroicons/solid';
 
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -20,40 +20,49 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./perfil-usuario.component.scss'],
   providers: [provideIcons({matCameraAlt, matPersonAddAlt, matPerson, heroBuildingStorefrontSolid, heroDocumentTextSolid, heroPlaySolid, heroShareSolid})]
 })
-export class PerfilUsuarioComponent implements OnInit, OnDestroy{
-  constructor(private route: ActivatedRoute, private zone: NgZone, private router: Router, private userService: UsuarioService) {}
+export class PerfilUsuarioComponent implements OnInit{
+  constructor(private route: ActivatedRoute, private zone: NgZone, private router: Router, private userService: UsuarioService, private authService: AuthService) {}
+  private routeSubscription!: Subscription;
   public state!: string;
   public url!: string;
-  public usuarioLink!: string;
-  private routeSubscription!: Subscription;
 
-  public usuario!: Usuario | undefined;
-  public diasJoum!: string;
+  public userUsuario!: string;
+  private usuario!: Usuario | undefined;
+  public datosUsuario!: Usuario | undefined;
+  public diasJoum!: string | undefined;
 
-  ngOnInit() {
-    this.obtenerUsuarios();
+  ngOnInit(): any { 
+    this.obtenerUsuario();
     const urlSegments = this.router.url.split('/');
     this.url = urlSegments[urlSegments.length - 1];
 
     this.routeSubscription = this.router.events.subscribe(async event => {
       if (event instanceof NavigationEnd) {
-        await this.obtenerUsuarios();
-        const urlSegments = this.router.url.split('/');
-        this.url = urlSegments[urlSegments.length - 1];
+          const urlSegments = this.router.url.split('/');
+          this.url = urlSegments[urlSegments.length - 1];
         }
     });
   }
-  
-  async obtenerUsuarios() {
-    this.usuarioLink = this.route.parent?.snapshot.paramMap.get('id')!;
-    this.usuario = await this.userService.getUserUsuario(this.usuarioLink);
-    
-    this.diasJoum = this.obtenerTiempoTranscurrido(this.usuario?.diasComoVendedor!);
+
+  async obtenerUsuario(){
+    this.userUsuario = this.route.parent?.snapshot.paramMap.get('id')!;
+    await this.authService.getUsuarioUser(this.userUsuario).then((usuario)=>{
+      if(usuario){
+        this.usuario = usuario;
+        this.datosPublicosUsuario();
+        this.diasJoum = this.obtenerTiempoTranscurrido(this.usuario?.diasComoVendedor!);
+      }
+    })
   }
-  
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
+
+  datosPublicosUsuario(){
+    this.datosUsuario = {
+      nombre: this.usuario?.nombre,
+      seguidores: this.usuario?.seguidores,
+      diasComoVendedor: this.usuario?.diasComoVendedor
+    }
   }
+
 
   obtenerTiempoTranscurrido(dias: number) {
     if (dias < 0) {
@@ -80,6 +89,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy{
       return `${anios} año${anios > 1 ? 's' : ''} y ${meses} mes${meses > 1 ? 'es' : ''}`;
     }
   }
+
+  //--------------------------------------------------------------
 
   cambiarEstado(newState: string): any {
     this.state = newState;

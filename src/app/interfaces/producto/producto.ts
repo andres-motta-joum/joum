@@ -8,19 +8,36 @@ import { DetallesVinilos } from "./categorias/detalles-vinilos";
 import { DetallesAdornos } from "./categorias/detalles-adornos";
 
 export interface Producto {
+  unidades?: number; // BORRAR
+  //--------------------------------------------------------------
   id?: string; 
   idUsuario?: string; 
   verificado?: boolean,
 
+//------------------------ FORMULARIO -----------
   categoria?: string; 
-  nombre?: string;
-  precio?: number; 
-  descripcion?: string; 
-  detalles?: DetallesCuadros | DetallesRepisas | DetallesIluminacion | DetallesMacetas | DetallesRelojes | DetallesDifusores | DetallesVinilos | DetallesAdornos;
-  precioEnvio?: number;
-  envioGratis?: boolean,
-  unidades?: number; 
 
+  nombre?: string;
+
+  autoria?: string,
+  marca?: string,       /*--- Principales ---*/
+  modelo?: string,
+
+  estilos?: Estilos[],   /*--- visual ---*/
+  
+
+  detalles?: DetallesCuadros | DetallesRepisas | DetallesIluminacion | DetallesMacetas | DetallesRelojes | DetallesDifusores | DetallesVinilos | DetallesAdornos;
+
+  descripcion?: string;
+
+  precio?: number;  
+
+  envioGratis?: boolean,
+
+  tipoPublicacion?: string,
+
+//-----------------
+  precioEnvio?: number;
   vistas?: number,
   descuento?: boolean; 
     porcentajeDescuento?: number;
@@ -28,7 +45,6 @@ export interface Producto {
     fechaDescuento?: Date,
   opiniones?: Opinion[],
     calificacion?: number,
-  tipoPublicacion?: string,
 
   ventas?: number,
   estado?: boolean
@@ -43,4 +59,11 @@ export interface Opinion {
   contenido?: string,
   numVenta?: number,
   check?: boolean,
+}
+
+interface Estilos {
+  nombre?: string;
+  fotos?: string[];
+  unidades?: number;
+  sku?: string;
 }

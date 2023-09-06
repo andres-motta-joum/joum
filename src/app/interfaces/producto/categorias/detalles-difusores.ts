@@ -1,9 +1,11 @@
 export interface DetallesDifusores {
-    marca?: string,       /*--- Principales ---*/
+    marca?: string,  
     modelo?: string,
 
-    colores?: string[],   /*--- visual ---*/
+    estilos?: string[], 
     fotos?: string[][],
+    autoria?: string,
+//-------------------------------
     
     tipo?: string,
     tecnologiaDifusion?: string,

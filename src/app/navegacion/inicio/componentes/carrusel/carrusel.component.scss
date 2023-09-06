@@ -111,7 +111,7 @@
       font-weight: bold;
       text-align: center;
       border-radius: 45%;
-      font-family: monospace;
+      
       cursor: pointer;
       box-shadow: 0 0 7px 3px rgba($color: #000, $alpha: .2);
       color: #333;
@@ -126,7 +126,7 @@
         margin-right:2px
       }
     }
-  
+  s
     &.slick-next {
       right: 20px;
       width: 43px;
@@ -140,7 +140,6 @@
       font-weight: bold;
       text-align: center;
       border-radius: 45%;
-      font-family: monospace;
       cursor: pointer;
       box-shadow: 0 0 7px 3px rgba($color: #000, $alpha: .2);
       color: #333;
@@ -189,7 +188,7 @@
   }
   
   .slick-content2 {
-    height: 380px;
+    height: 384px;
     width: 230px;
     background: #fff;
     cursor: pointer;
@@ -239,7 +238,7 @@
       font-weight: bold;
       text-align: center;
       border-radius: 45%;
-      font-family: monospace;
+      
       cursor: pointer;
       color: #333;
 
@@ -267,7 +266,7 @@
       font-weight: bold;
       text-align: center;
       border-radius: 45%;
-      font-family: monospace;
+      
       cursor: pointer;
       color: #333;
   
@@ -285,7 +284,7 @@
 
   .titulo-producto {
     margin: 0 20px 5px 15px;
-    font-family: 'font-uno';
+    
     font-size: 13px;
     font-weight:500;
     color: #777;
@@ -296,7 +295,7 @@
     color: #666;
     margin: 0 8px 10px 20px;
     text-decoration: line-through;
-    font-family: 'font-uno';
+    
   }
   
   .precio-final {
@@ -304,7 +303,7 @@
     margin: 2px 8px 0 0;
     color: #555;
     font-weight: 450;
-    font-family: 'font-uno';
+    
     padding: 6px 0;
     margin-left: 15px;
   }
@@ -313,7 +312,6 @@
     font-size: 16px;
     color: #00c600;
     font-weight: 500;
-    font-family: sans-serif;
     margin-top: 1px;
     margin-bottom: 0;
   }
@@ -369,7 +367,7 @@
     font-size: 16px;
     color: #00a900;
     font-weight: 500;
-    font-family: 'font-uno';
+    
     margin-top: 15px;
   }
   
@@ -398,7 +396,7 @@
       font-weight: bold;
       text-align: center;
       border-radius: 45%;
-      font-family: monospace;
+      
       cursor: pointer;
       outline: none;
       color: #333;
@@ -426,7 +424,7 @@
       font-weight: bold;
       text-align: center;
       border-radius: 45%;
-      font-family: monospace;
+      
       cursor: pointer;
       outline: hidden;
       display: flex;

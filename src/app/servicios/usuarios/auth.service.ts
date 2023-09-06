@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Auth, FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, User, authState, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signInWithRedirect, updatePhoneNumber, updateProfile, RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult, UserCredential, getRedirectResult, getAdditionalUserInfo} from '@angular/fire/auth';
-import { doc, setDoc} from '@angular/fire/firestore';
+import { Auth, FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, User, authState, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signInWithRedirect, updateProfile, RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult, getRedirectResult, getAdditionalUserInfo} from '@angular/fire/auth';
+import { Firestore, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, where} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import 'firebase/auth';
 import { DataSharingService } from './data-sharing.service';
-import { getFirestore } from "firebase/firestore";
-import { getApp } from '@angular/fire/app';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { Observable } from 'rxjs';
 
 interface ErrorResponse  {
   code: string;
@@ -15,13 +14,66 @@ interface ErrorResponse  {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private auth: Auth, private router: Router, private dataSharingService: DataSharingService) { this.handleRedirectResult() }
+  constructor(private auth: Auth, private router: Router, private dataSharingService: DataSharingService, private firestore: Firestore) { this.handleRedirectResult() }
   private readonly googleProvider = new GoogleAuthProvider();
   private readonly facebookProvider = new FacebookAuthProvider();
   private readonly twitterProvider = new TwitterAuthProvider();
 
   get userState$(){
     return authState(this.auth);
+  }
+
+  //------------------------------------------------------------- FIRESTORE  --------------------------------------------
+
+  getUsuarioId(id: string): Observable<Usuario>{
+    const documentoUsuario = doc(this.firestore, 'usuarios', id);
+    return docData(documentoUsuario);
+  }
+  async getUsuarioUser(usuario: string){
+    const q = query(collection(this.firestore, 'usuarios'), where('usuario', '==', usuario));
+    const querySnapshot = await getDocs(q);
+    const doc = querySnapshot.docs[0];
+    if (doc) {
+      return doc.data()
+    }else{
+      return null
+    }
+  }
+  
+  async getTelefonoExistente(telefono: string){
+    const queri = query(collection(this.firestore, 'usuarios'), where('telefono', '==', telefono));
+    const querySnapshot = await getDocs(queri);
+    const doc = querySnapshot.docs[0];
+    if(doc){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  get getUsuarios$(): Observable<Usuario[]>{
+    const collectionUsuarios = collection(this.firestore, 'usuarios');
+    return collectionData(collectionUsuarios, {idField: 'id'}) as Observable<Usuario[]>;
+  }
+
+  async addUserFirestore(): Promise<void>{
+    const usuario = this.obtenerUsuarioUnico();
+    await setDoc(doc(this.firestore, "usuarios", this.auth.currentUser?.uid!), usuario);
+  }
+
+  obtenerUsuarioUnico(): Usuario {
+    const currentUser = this.auth.currentUser;
+    const palabras = currentUser?.displayName?.trim().split(' ')!;
+    const nombre = palabras.slice(0, 2).join(' ');
+    const usuario = nombre.toUpperCase() + '022341';
+    return {
+      usuario: usuario.replace(/\s/g, ''),
+      nombre: currentUser?.displayName!,
+      correo: currentUser?.email!,
+      seguidores: 0,
+      correoVerificado: currentUser?.emailVerified,
+      planJoum: "Gratuito",
+    };
   }
 
   //--------------------------------------------------------------------------------------------------------------------------
@@ -44,25 +96,6 @@ export class AuthService {
 
   sendCode(phoneNumber: string, recaptchaVerifier: RecaptchaVerifier): Promise<ConfirmationResult> {
     return signInWithPhoneNumber(this.auth, phoneNumber, recaptchaVerifier);
-  }
-
-  async addUserFirestore(){
-    const app = getApp();
-    const db = getFirestore(app);
-    const currentUser = this.auth.currentUser;
-
-    const palabras = currentUser?.displayName?.trim().split(' ')!;
-    const nombre = palabras.slice(0, 2).join(' ');
-    const usuario = nombre.toUpperCase() + '022341';
-    const userData = {
-      usuario: usuario.replace(/\s/g, ''),
-      nombre: currentUser?.displayName,
-      correo: currentUser?.email,
-      seguidores: 0,
-      correoVerificado: currentUser?.emailVerified,
-      planJoum: "Gratuito",
-    };
-    await setDoc(doc(db, "usuarios", this.auth.currentUser?.uid!), userData);
   }
 
   //------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +148,7 @@ export class AuthService {
     const route = verified ? 'cuenta/phone-validation/enter-code': 'cuenta/phone-validation/enter-code';
     //this.router.navigate([route]);
   }
-  //--------------------------------------------------------------------------------------------
+  //-------------------------------------------------------------------------------------------- GOOGLE --------------
 
 
   async handleRedirectResult() {

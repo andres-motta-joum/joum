@@ -1,0 +1,44 @@
+<div class="contenido">
+    <button class="back" (click)='atras()'><ng-icon name="heroArrowSmallLeft"></ng-icon></button>
+    <form class="paso2" novalidate>
+        <h1>Tipo de publicación</h1>
+        <p>Destaca tu producto a tu preferencia.</p>
+        
+        <div class="tipoPublicaciones" >
+            <div (click)="cambiarPlan('gratuito')" [ngClass]="{'gratuito': gratuito}">
+                <h2>Gratuita</h2>
+                <p><span>·</span>Exposición baja</p>
+                <p><span>·</span>Duración 60 días</p>
+                <h3><span>$</span>0</h3>
+                <h5>Cargo por venta</h5>
+                <button><span *ngIf="!gratuito">Seleccionar</span> <ng-icon *ngIf="gratuito" name="ionCheckmarkSharp"></ng-icon></button>
+            </div>
+            <div (click)="cambiarPlan('basico')" [ngClass]="{'basico': basico}">
+                <h2>Basica</h2>
+                <p><span>·</span>Exposición alta</p>
+                <p><span>·</span>Duración ilimitada</p>
+                <h3><span>$</span>{{precioBasico | number: '1.0-0'}} <ng-icon name="ionInformationCircleOutline"></ng-icon></h3>
+                <h5>Cargo por venta</h5>
+                <button><span *ngIf="!basico">Seleccionar</span> <ng-icon *ngIf="basico" name="ionCheckmarkSharp"></ng-icon></button>
+            </div>
+            <div (click)="cambiarPlan('premium')" [ngClass]="{'premium': premium}">
+                <h2>Premium</h2>
+                <p><span>·</span>Máxima exposición</p>
+                <p><span>·</span>Duración ilimitada</p>
+                <p><span>·</span>Exhibición Mensual</p>
+                <h3><span>$</span>{{precioPremium | number: '1.0-0'}} <ng-icon name="ionInformationCircleOutline"></ng-icon></h3>
+                <h5>Cargo por   venta</h5>
+                <button><span *ngIf="!premium">Seleccionar</span> <ng-icon *ngIf="premium" name="ionCheckmarkSharp"></ng-icon></button>
+            </div>
+        </div>
+
+        <div class="center-content">
+            <button class="detalles botonInvalid"><ng-icon name="aspectsInformation"></ng-icon> Ver detalles</button>
+            <button (click)="submit()" class="botonInvalid" value="Continuar" name="boton" [disabled]='!submitValue' [ngClass]="{'botonValid': submitValue}">Publicar</button>
+        </div>
+    </form>
+</div>
+
+<pre>
+    {{producto}}
+</pre>

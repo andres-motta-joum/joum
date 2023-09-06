@@ -1,13 +1,14 @@
 export interface DetallesRepisas {
-    marca?: string,       /*--- Principales ---*/
+    marca?: string,
     modelo?: string,
 
-    colores?: string[],   /*--- visual ---*/
+    estilos?: string[],
     fotos?: string[][],
+    autoria?: string,
+//-------------------------------
     cantidadPiezas?: number,
     forma?: string,
     materia?: string,
-    autoria?: string,
 
     altura?: number,      /*--- medición ---*/
     unidadMedidaAltura?: string,

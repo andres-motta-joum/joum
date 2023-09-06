@@ -1,46 +1,34 @@
-<form #formPaso1='ngForm' (submit)='irPaso2(formPaso1)' class="paso1" novalidate>
-    <div class="container">
+<form #formPaso1='ngForm' (submit)='submit(formPaso1)' class="paso1" novalidate>
+  <div class="container">
 
-        <div class="text">
-        <h1>Selecciona la categoria de tu producto</h1>
-        <p>Si tu producto no está en la categoria, selecciona la opción <strong>Otro</strong> y asegurate de que tu producto cumpla con las caracteristicas necesarias para poder venderlo en nuestra tienda</p>
-        </div>
-
-        <div class="seleccion">
-
-          <input *ngFor="let box of boxes; index as i;"
-            #radiobtn
-            type="radio"
-            [id]="box"
-            name="categoria"
-            class="Check"
-            [value]="titulos[i]"
-            [(ngModel)]="formValue"
-            required>
-
-          <label (click)='changeDisabled()' *ngFor="let box of boxes; index as i;" [class]="box + ' box'" [for]="box">
-              <img [src]="images[i]" alt="Image">
-              <p>{{ titulos[i] }}</p>
-          </label>
-
-        </div>
-
-
+    <div class="text">
+      <h1>Categoría</h1>
+      <p>Selecciona la categoría que más se adapte a tu producto</p>
     </div>
 
-    <div class="center-content">
-        <input type="submit"
-          [ngStyle]="{
-            'background': disabled ? 'white' : '#FF9E57',
-            'cursor': disabled ? 'inherit' : 'pointer',
-            'color': disabled ? '#888' : 'white',
-            'border': disabled ? '1px solid #777' : 'none'
-          }"
-          class="btn1"
-          value="Siguiente"
-          name="boton"
-          [disabled]='disabled'
-          id="btn-Siguiente">
+    <div class="seleccion">
+      <input *ngFor="let box of boxes; index as i;" #radiobtn type="radio" [id]="box" name="categoria" class="check" [value]="titulos[i]" [(ngModel)]="formValue" required>
+      <label (click)='changeDisabled($event, i, titulos[i])' *ngFor="let box of boxes; index as i;" [class]="box + ' box'" [for]="box">
+        <img [src]="images[i]" alt="Image">
+        <p>{{ titulos[i] }}</p>
+      </label>
     </div>
 
+    <div class="alerta" *ngIf="alerta" (click)="alert(false)">
+      <div class="content" (click)="$event.stopPropagation()">
+        <h1>¿Quieres cambiar la categoría?</h1>
+        <p>perderás todo el progreso y la información que ingresaste</p>
+        <div>
+          <button (click)="alert(true)">Aceptar</button>
+          <button (click)="alert(false)">Cancelar</button>
+        </div>
+        <p class="close" (click)="alert(false)">x</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="center-content">
+    <input type="submit" [disabled]='disabled' id="btn-Siguiente" value="Continuar">
+  </div>
 </form>

@@ -1,10 +1,9 @@
 import { Component, NgZone } from '@angular/core';
-import { getApp } from '@angular/fire/app';
 import { Auth, fetchSignInMethodsForEmail } from '@angular/fire/auth';
 import { collection, getDocs, query, where } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { getFirestore } from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { DataSharingService } from 'src/app/servicios/usuarios/data-sharing.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { DataSharingService } from 'src/app/servicios/usuarios/data-sharing.serv
   styleUrls: ['./correo-codigo-sms.component.scss']
 })
 export class CorreoCodigoSMSComponent {
-  constructor(private fb: FormBuilder,private zone: NgZone, private router: Router, private auth: Auth, private dataSharingService: DataSharingService) {}
+  constructor(private fb: FormBuilder,private zone: NgZone, private router: Router, private auth: Auth, private dataSharingService: DataSharingService, private firestore: Firestore) {}
   public form!: FormGroup;
   private readonly emailattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   public error = '';
@@ -56,10 +55,7 @@ export class CorreoCodigoSMSComponent {
       const methods = await fetchSignInMethodsForEmail(this.auth , email);
   
       if (methods && methods.length > 0) {
-        const app = getApp();
-        const db = getFirestore(app);
-
-        const usuarios = collection(db, "usuarios");
+        const usuarios = collection(this.firestore, "usuarios");
         const queri = query(usuarios, where("correo", "==", email));
         const querySnapshot = await getDocs(queri);
 
