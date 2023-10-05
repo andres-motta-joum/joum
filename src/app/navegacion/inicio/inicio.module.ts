@@ -8,8 +8,6 @@ import { SubMenuComponent } from './componentes/sub-menu/sub-menu.component';
 import { CarruselComponent } from './componentes/carrusel/carrusel.component';
 import { SliderComponent } from './componentes/slider/slider.component';
 
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
-
 @NgModule({
   declarations: [
     InicioComponent,
@@ -25,9 +23,6 @@ import { ProductoService } from 'src/app/servicios/producto/producto.service';
   exports: [
     InicioComponent,
     CarruselComponent
-  ],
-  providers: [
-    ProductoService
   ]
 })
 export class InicioModule { }

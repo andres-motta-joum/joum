@@ -9,7 +9,6 @@ export interface DetallesAdornos {
     material?: string,
     tema?: string, //Navideño, de animales, anime...
     linea?: string, //Cabezones
-    personaje?: string,
     significado?: string,
 
     altura?: number,      /*--- diametros ---*/
@@ -19,6 +18,8 @@ export interface DetallesAdornos {
     profundidad?: number,
     unidadMedidaProfundidad?: string,
 
+    personaje?: boolean, //CAMBIAR A BOOLEAN
+    tipoPersonaje?: string;
     coleccionable?: boolean,
         coleccion?: string, //A que colección pertenece
     incluyeAccesorios?: boolean,

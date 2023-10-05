@@ -1,0 +1,73 @@
+<div class="contenedor">
+    <h2>E-mails</h2>
+    <div (click)="configuracionNotificaciones('ofertas')">
+        <div>
+            <h4>Ofertas y promociones</h4>
+        </div>
+        <button>
+            <div class="rectangle" [ngClass]="{'clicked': ofertas}">
+                <div class="circle"></div>
+            </div>
+        </button>
+    </div>
+    <div (click)="configuracionNotificaciones('mensajes')">
+        <div>
+            <h4>Te enviaron un mensaje sobre un producto</h4>
+        </div>
+        <button>
+            <div class="rectangle" [ngClass]="{'clicked': mensajes}">
+                <div class="circle"></div>
+            </div>
+        </button>
+    </div>
+    <div (click)="configuracionNotificaciones('opiniones')">
+        <div>
+            <h4>Nuevas opiniones habilitadas</h4>
+        </div>
+        <button>
+            <div class="rectangle" [ngClass]="{'clicked': opiniones}">
+                <div class="circle"></div>
+            </div>
+        </button>
+    </div>
+    <div (click)="configuracionNotificaciones('ventas')">
+        <div>
+            <h4>Vendiste un producto</h4>
+        </div>
+        <button>
+            <div class="rectangle" [ngClass]="{'clicked': ventas}">
+                <div class="circle"></div>
+            </div>
+        </button>
+    </div>
+    <div (click)="configuracionNotificaciones('publicacionesPorFinalizar')">
+        <div>
+            <h4>Tu publicación está por finalizar</h4>
+        </div>
+        <button>
+            <div class="rectangle" [ngClass]="{'clicked': publicacionesPorFinalizar}">
+                <div class="circle"></div>
+            </div>
+        </button>
+    </div>
+    <div (click)="configuracionNotificaciones('publicacionesFinalizadas')">
+        <div>
+            <h4>Finalizó tu publicación</h4>
+        </div>
+        <button>
+            <div class="rectangle" [ngClass]="{'clicked': publicacionesFinalizadas}">
+                <div class="circle"></div>
+            </div>
+        </button>
+    </div>
+    <div (click)="configuracionNotificaciones('compras')">
+        <div>
+            <h4>Compraste un producto</h4>
+        </div>
+        <button>
+            <div class="rectangle" [ngClass]="{'clicked': compras}">
+                <div class="circle"></div>
+            </div>
+        </button>
+    </div>
+</div>

@@ -7,11 +7,14 @@
         
         <div class="detalles">
             <ng-container *ngFor="let detalle of detalles; let index = index">
-              <div [ngClass]="{'siNo': detalle.tipo === 'selectSiNo', 'medida': detalle.tipo === 'medida' || detalle.tipo === 'medidaVolumen' ||  detalle.tipo === 'medidaPeso' || detalle.tipo === 'medidaPotencia', 'active': detalle.active == true, 'desactive': detalle.active == false }">
+              <div [ngClass]="{'siNo': detalle.tipo === 'selectSiNo', 'medida': detalle.tipo === 'medida' || detalle.tipo === 'medidaVolumen' ||  detalle.tipo === 'medidaPeso' || detalle.tipo === 'medidaPotencia' || detalle.tipo === 'medidaTemperatura', 'active': detalle.active == true, 'desactive': detalle.active == false }">
                 <label [for]="detalle.detalle">{{ detalle.nombre }}</label>
 
                 <ng-container *ngIf="detalle.tipo === 'input'">
                   <input type="text" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                </ng-container>
+                <ng-container *ngIf="detalle.tipo === 'number'">
+                  <input type="number" [formControlName]='detalle.detalle' [id]="detalle.detalle">
                 </ng-container>
 
                 <ng-container *ngIf="detalle.tipo === 'select'">
@@ -50,7 +53,21 @@
                       <option value="Sí">Sí</option>
                     </select>
 
-                    <select *ngIf="detalle.detalle !== 'conPlanta' && detalle.detalle !== 'coleccionable' && detalle.detalle !== 'giratorio' && detalle.detalle !== 'control'" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                    <select (change)="inputSecundarioSiNo($event, 'tipoPanel'); " *ngIf="detalle.detalle == 'panel'" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                      <option value="No">No</option>
+                      <option value="Sí">Sí</option>
+                    </select>
+
+                    <select (change)="inputSecundarioSiNo($event, 'materialMarco'); " *ngIf="detalle.detalle == 'marco'" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                      <option value="No">No</option>
+                      <option value="Sí">Sí</option>
+                    </select>
+                    <select (change)="inputSecundarioSiNo($event, 'tipoPersonaje'); " *ngIf="detalle.detalle == 'personaje'" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                      <option value="No">No</option>
+                      <option value="Sí">Sí</option>
+                    </select>
+
+                    <select *ngIf="detalle.detalle !== 'conPlanta' && detalle.detalle !== 'coleccionable' && detalle.detalle !== 'giratorio' && detalle.detalle !== 'control' && detalle.detalle !== 'panel' && detalle.detalle !== 'marco' && detalle.detalle !== 'personaje'" [formControlName]='detalle.detalle' [id]="detalle.detalle">
                       <option value="No">No</option>
                       <option value="Sí">Sí</option>
                     </select>
@@ -60,7 +77,7 @@
 
                 <ng-container *ngIf="detalle.tipo === 'medida'">
                     <br>
-                    <input type="text" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                    <input type="number" [formControlName]='detalle.detalle' [id]="detalle.detalle">
                     <select class="select" [formControlName]='detalle.valorSelect'>
                         <option value="cm">cm</option>
                         <option value="m">m</option>
@@ -70,7 +87,7 @@
 
                 <ng-container *ngIf="detalle.tipo === 'medidaVolumen'">
                     <br>
-                    <input type="text" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                    <input type="number" [formControlName]='detalle.detalle' [id]="detalle.detalle">
                     <select class="select" [formControlName]='detalle.valorSelect'>
                         <option value="L">L</option>
                         <option value="cc">cc</option>
@@ -81,7 +98,7 @@
 
                 <ng-container *ngIf="detalle.tipo === 'medidaPeso'">
                   <br>
-                  <input type="text" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                  <input type="number" [formControlName]='detalle.detalle' [id]="detalle.detalle">
                   <select class="select" [formControlName]='detalle.valorSelect'>
                       <option value="g">g</option>
                       <option value="Kg" selected>Kg</option>
@@ -92,12 +109,21 @@
 
                 <ng-container *ngIf="detalle.tipo === 'medidaPotencia'">
                   <br>
-                  <input type="text" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                  <input type="number" [formControlName]='detalle.detalle' [id]="detalle.detalle">
                   <select class="select" [formControlName]='detalle.valorSelect'>
                       <option value="W">W</option>
                       <option value="Im" selected>Im</option>
                       <option value="cd">cd</option>
                       <option value="IRC">IRC</option>
+                  </select>
+                 <ng-icon class="down" name="ionChevronDown"></ng-icon>
+                </ng-container>
+
+                <ng-container *ngIf="detalle.tipo === 'medidaTemperatura'">
+                  <br>
+                  <input type="number" [formControlName]='detalle.detalle' [id]="detalle.detalle">
+                  <select class="select" [formControlName]='detalle.valorSelect'>
+                      <option value="K">K</option>
                   </select>
                  <ng-icon class="down" name="ionChevronDown"></ng-icon>
                 </ng-container>

@@ -41,6 +41,15 @@ form.paso2 {
 		font-weight: 520;
 		text-align: center;
 		margin-bottom: 24px;
+		ng-icon{
+			color: #9b9b9b;
+			font-size: 28px;
+			transform: translate(2px,5px);
+			cursor: pointer;
+			&:hover{
+				color: #666;
+			}
+		}
 	}
 
 	p {
@@ -161,6 +170,88 @@ form.paso2 {
 		font-size: 16px;
 		&:hover{
 			background: #ffa462;
+		}
+	}
+}
+
+.alerta{
+	position: fixed;
+	width: 100%;
+	min-height: 100vh;
+	background-color: rgba($color: #000, $alpha: .5);
+    backdrop-filter: blur(5px);
+	left: 0;
+	top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.content{
+		position: relative;
+		transform: translateY(-9vh);
+		width: 600px;
+		background: white;
+		border-radius: 8px;
+		padding: 50px 52px 40px 52px;
+		h1{
+			margin: 0;
+			text-align: center;
+			color: #555;
+			font-size: 30px;
+			padding: 0 20px;
+			letter-spacing: 0.7px;
+			word-spacing: 1.2px;
+			font-weight: 520;
+		}
+		p{
+			margin: 0;
+			font-size: 15.5px;
+			padding: 18px 0;
+			color: #707070;
+			word-spacing: 1px;
+			font-weight: 440;
+			letter-spacing: 0.4px;
+			line-height: 24px;
+		}
+		p:nth-child(2){
+			width: 102%;
+		}
+		>div{
+			width: 104%;
+		}
+		button{
+			width: 45%;
+			transform: translateX(55%);
+			background: #fbfbfb;
+			height: 40px;
+			border: 1px solid #b9b9b9;
+			color: #888;
+			border-radius: 6px;
+			font-size: 15px;
+			margin: 24px 0 0 0;
+			text-align: center;
+			letter-spacing: 0.4px;
+			word-spacing: 1px;
+			transition: .1s;
+			cursor: pointer;
+			&:hover{
+				background: #ff9e57;
+				border: none;
+				color: white;
+				font-weight: 480;
+			}
+		}
+		.close{
+			position: absolute;
+			font-size: 24px;
+			right: 20px;
+			top: 12px;
+			cursor: pointer;
+			padding: 0;
+			margin: 0;
+			color: #a4a4a4;
+			&:hover{
+				color: #606060;
+			}
 		}
 	}
 }

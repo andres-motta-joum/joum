@@ -98,6 +98,32 @@
         }
     }
 }
+.productoPropio{
+    position: absolute;
+    width: 200px;
+    height: 30px;
+    background-color: #6993ff;
+    box-shadow: 0 2px 7px -1px rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 10px 10px;
+    top: 90px;
+    left: calc(50% - 100px);
+    z-index: 10;
+    p{
+        margin: 0;
+        font-size: 15px;
+        text-align: center;
+        line-height: 29px;
+        color: white;
+        font-weight: 450;
+        letter-spacing: .5px;
+        word-spacing: 1px;
+    }
+}
+.productoPropioFixed{
+    position: fixed;
+    top: 58px;
+}
+
 .body{
     position: relative;
 	min-height: 100vh;
@@ -126,6 +152,9 @@
     letter-spacing: .6px;
     word-spacing: 1.4px;
     padding-left: 5px;
+}
+.carrusel{
+    height: 365px;
 }
 .linea-Menu{
     border-bottom: 1px solid #ddd;

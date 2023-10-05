@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasosVenderService } from '../../../../../../servicios/vender/vender.service';
 import { provideIcons } from '@ng-icons/core';
@@ -23,13 +23,13 @@ export class PasoDosComponent {
 
   private buildForm(inDefault: string): void {
     this.form = this.formBuilder.group({
-      titulo: [inDefault, [Validators.required, Validators.minLength(10), Validators.maxLength(70)]]
+      titulo: [inDefault, [Validators.required, this.pasos.characterCountValidator(10,70)]]
     });
   }
 
   submit(): any {
     if (this. form && this.form.valid) {
-      this.pasos.producto.nombre = this.form.value.titulo;
+      this.pasos.producto.nombre = this.form.value.titulo.replace(/\s+/g, ' ').trim();
       this.pasos.paso3 = true;
       this.router.navigate(['/vender', 'formulario', 'paso3']);
     }
@@ -39,5 +39,10 @@ export class PasoDosComponent {
     this.pasos.producto.nombre = this.form.value.titulo;
     this.pasos.paso1 = true;
     this.router.navigate(['/vender', 'formulario', 'paso1']);
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload($event: any): void {
+      $event.returnValue = true;
   }
 }

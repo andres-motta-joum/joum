@@ -2,8 +2,8 @@
     <app-barra-menu></app-barra-menu>
     <div class="contenido">
         <div class="encabezado">
-            <div [ngClass]='{"active": url === "carrito"}' (click)='navegar(["MOTTAANDRES20221130093921/carrito"], $event)'>Carrito</div>
-            <div [ngClass]='{"active": url === "guardados"}' (click)='navegar(["MOTTAANDRES20221130093921/guardados"], $event)'>Guardados</div>
+            <div [ngClass]='{"active": url === "carrito"}' (click)='navegar([usuario.usuario + "/carrito"], $event)'>Carrito</div>
+            <div [ngClass]='{"active": url === "guardados"}' (click)='navegar([usuario.usuario + "/guardados"], $event)'>Guardados</div>
         </div>
         <router-outlet></router-outlet>
     </div>

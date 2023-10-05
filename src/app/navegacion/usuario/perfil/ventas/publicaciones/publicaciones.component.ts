@@ -1,12 +1,14 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { getDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { heroMagnifyingGlassMini } from '@ng-icons/heroicons/mini';
 import { heroAdjustmentsHorizontal } from '@ng-icons/heroicons/outline';
+import { Subscription } from 'rxjs';
 import { Producto } from 'src/app/interfaces/producto/producto';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { ProductosService } from 'src/app/servicios/productos/productos.service';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
   selector: 'app-publicaciones',
@@ -14,20 +16,39 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
   styleUrls: ['./publicaciones.component.scss'],
   providers: [provideIcons({heroMagnifyingGlassMini, heroAdjustmentsHorizontal})]
 })
-export class PublicacionesComponent {
-  constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private userService: UsuarioService, private prdService: ProductoService) {}
-  public usuario!: Usuario | undefined;
-  public publicaciones!: Producto[];
+export class PublicacionesComponent implements OnInit, OnDestroy{
+  constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private authService: AuthService, private productosService: ProductosService) {}
+  private routeSubscription!: Subscription;
+  public usuario!: Usuario;
+  public publicaciones: Producto[] = [];
+  fotos: string[] = [];
   
   ngOnInit() {
-    this.route.parent?.params.subscribe(params => {
+    this.routeSubscription = this.route.parent!.params.subscribe(params => {
       const userId = params['id'];
-      this.publicaciones = [];
-      this.usuario = this.userService.getUserUsuario(userId);
-      for(const id of this.usuario?.publicaciones!){
-        this.publicaciones.push(this.prdService.getProductsId(id.id!)!)
-      }
+      this.obtenerusuario(userId);
     });
+  }
+
+  async obtenerusuario(usuario: string){
+    await this.authService.getUsuarioUser(usuario).then((usuario)=>{
+      if(usuario){
+        this.usuario = usuario
+      }
+    })
+    this.obtenerProductos();
+  }
+
+  async obtenerProductos() {
+    if (this.usuario?.publicaciones) {
+      const productosRef = await Promise.all(this.usuario?.publicaciones.map((ref:any) => getDoc(ref)));
+      productosRef.forEach(productSnapshot => {
+        const prd = productSnapshot.data() as Producto;
+        prd.id = productSnapshot.id;
+        this.publicaciones.push(prd);
+      });
+      this.fotos = await this.productosService.obtenerFotos(this.publicaciones);
+    }
   }
 
 
@@ -37,6 +58,12 @@ export class PublicacionesComponent {
       this.router.navigate(ruta);
       window.scroll(0,0)
     })
+  }
+
+  ngOnDestroy(): void {
+    if(this.routeSubscription){
+      this.routeSubscription.unsubscribe();
+    }
   }
 
 }

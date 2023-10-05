@@ -129,7 +129,7 @@ form.paso8 {
 		font-size: 16px;
 		margin: 0 50px;
 		text-align: center;
-		cursor: pointer;
+		cursor: default;
 		transition: .2s;
 	}
 
@@ -139,6 +139,7 @@ form.paso8 {
 		border: none;
 		color: white;
 		font-size: 16px;
+		cursor: pointer;
 		&:hover{
 			background: #ffa462;
 		}

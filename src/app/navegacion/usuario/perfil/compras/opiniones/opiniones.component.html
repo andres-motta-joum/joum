@@ -1,13 +1,14 @@
 <h1>Opiniones</h1>
-
-<div class="encabezado">
-    <div>
-        <select id="">
-            <option value="">Todas</option>
-            <option value="">Pendientes</option>
-            <option value="">Realizadas</option>
-        </select>
+<ng-container *ngIf="fotos.length !== 0">
+    <div class="encabezado">
+        <div>
+            <select id="">
+                <option value="">Todas</option>
+                <option value="">Pendientes</option>
+                <option value="">Realizadas</option>
+            </select>
+        </div>
+        <p>0 / {{opiniones.length}} opiniones</p>
     </div>
-    <p>2 / 7 opiniones</p>
-</div>
-<app-opinion [producto]="producto" [venta]="ventas[i]" *ngFor="let producto of productos;let i = index"></app-opinion>
+    <app-opinion [producto]="producto" [foto]="fotos[i]" [fechaVenta]="fechaVentas[i]" *ngFor="let producto of productos;let i = index"></app-opinion>
+</ng-container>

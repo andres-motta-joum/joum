@@ -1,0 +1,93 @@
+.contenedor{
+    position: relative;
+    width: 100%;
+    box-shadow: 0 -0.1px 2.6px rgba(0,0,0,0.17), 0 3.1px 2.3px rgba(0,0,0,0.05);
+    border-radius: 7px;
+    background: linear-gradient(to bottom, #fefefe, #fff);
+    overflow: hidden;
+    padding-bottom: 45px;
+    height: 436px;
+    h2{
+        font-size: 16.5px;
+        font-weight: 450;
+        color: #525252;
+        letter-spacing: .5px;
+        word-spacing: 1px;
+        padding: 18px 0 14px 30px;
+        margin: 0;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #ebebeb;
+        background: white;
+    }
+    > div{
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding: 19px 0 20px 0;
+        border-left: #fff;
+        transition: .3s;
+        cursor: pointer;
+        div{
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            h4,p{
+                letter-spacing: .4px;
+                word-spacing: .8px;
+                padding-left: 15px;
+                padding-right: 30px;
+            }
+            h4{
+                margin: 0;
+                font-size: 15px;
+                font-weight: 450;
+                color: #555;
+                padding-bottom: 7px;
+            }
+            p{
+                margin: 0;
+                font-size: 14px;
+                font-weight: 415;
+                color: #7d7d7d;
+                padding-right: 45px;
+                letter-spacing: .3px;
+            }
+            .sinDocumento{
+                color: #ababab;
+                font-weight: 380;
+            }
+        }
+        .edit{
+            position: absolute;
+            transition: .1s;
+            right: 0;
+            top: 0;
+            line-height: 42px;
+            font-size: 13px;
+            font-weight: 415;
+            color: #7a7a7a;
+            padding-right: 35px;
+            letter-spacing: .3px;
+            .verificado{
+                color: #0ac169;
+                font-weight: 440;
+                ng-icon{
+                    font-size: 18px;
+                    transform: translate(-4px, 4.5px);
+                }
+            }
+        }
+        &:hover{
+            background: linear-gradient(to bottom, #fbfbfa, #fcfcfb);
+            .edit{
+                color: #585858;
+            }
+        }
+
+    }
+    div:nth-child(3) >div p{
+        font-size: 12.8px !important;
+        font-weight: 430 !important;
+    }
+
+}

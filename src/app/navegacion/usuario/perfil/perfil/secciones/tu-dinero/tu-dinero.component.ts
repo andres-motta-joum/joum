@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { MovimientoDinero } from 'src/app/interfaces/movimiento-dinero';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
   selector: 'app-tu-dinero',
@@ -11,10 +9,19 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
   styleUrls: ['./tu-dinero.component.scss']
 })
 export class TuDineroComponent {
-  constructor(private route: ActivatedRoute, private userService: UsuarioService){}
-  public usuario!: Usuario | undefined;
+  constructor(private route: ActivatedRoute, private authService: AuthService){}
+  public usuario!: Usuario;
 
-  ngOnInit(){
-    this.usuario = this.userService.getUserUsuario(this.route.parent?.snapshot.paramMap.get('id')!)
+  ngOnInit(): any { 
+    this.obtenerUsuario();
+  }
+
+  async obtenerUsuario() {
+    const idUsuario = this.route.parent?.snapshot.paramMap.get('id')!;
+    await this.authService.getUsuarioUser(idUsuario).then((usuario)=>{
+      if(usuario){
+        this.usuario = usuario;
+      }
+    })
   }
 }

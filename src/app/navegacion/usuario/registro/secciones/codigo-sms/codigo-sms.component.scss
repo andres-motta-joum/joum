@@ -60,6 +60,7 @@
     }
 
     button{
+        position: relative;
         margin-top: 35px;
         width: calc(100% - 84px);
         margin-left: 42px;
@@ -68,10 +69,11 @@
         cursor: pointer;
         border: none;
         color: #fff;
-        background-color: #ffa15d;
+        background-color: #ffa260;
         font-weight: 500;
         letter-spacing: .5px;
         word-spacing: 1px;
+        height: 40px;
         &:hover{
             background-color: #ff9c56;
         }
@@ -80,3 +82,42 @@
         border: 2px solid rgb(245, 124, 124) !important;
     }
 }
+.invisible{
+    position: absolute;
+    opacity: 0;
+}
+.cargando{
+	cursor: default !important;
+    background-color: #ffaa6d !important;
+	&:hover{
+		background: #ffaa6d !important;
+	}
+}
+.loading{
+	width: 22px;
+	height: 22px;
+	border: 3px solid white;
+	border-radius: 50%;
+	position: absolute;
+	left: calc(50% - 15px);
+	top: 6px;
+	border-left-color: transparent;
+	animation: load 1s ease infinite;
+}
+
+@keyframes load {
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+#recaptcha-container{
+    position: absolute !important;
+    z-index: 100 !important;
+    left: 50%;
+    transform: translate(-50%, 100px);
+
+}
+  

@@ -1,4 +1,4 @@
-<div class="formulario">
+<div class="formulario" [ngClass]="{'invisible': !capcha}">
     <h1>Código SMS</h1>
     <p>Ingresa el código que enviamos por SMS al {{numero}}</p>
     <br>
@@ -11,7 +11,6 @@
         <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 4)" (keydown)="onInputBefore($event, $event, 4)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
         <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 5)" (keydown)="onInputBefore($event, $event, 5)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
     </div>
-
-    <button (click)="verifyCode()">Validar</button>
+    <button [disabled]="!capcha" (click)="verifyCode()" [ngClass]="{'cargando': cargando}"><span *ngIf="!cargando">Validar</span> <span class="loading" *ngIf="cargando"></span></button>
 </div>
-<div id="recaptcha-container"></div>
+<div *ngIf="!capcha" id="recaptcha-container"></div>

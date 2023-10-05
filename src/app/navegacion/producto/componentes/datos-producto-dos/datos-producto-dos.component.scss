@@ -8,9 +8,22 @@
     border-radius: 5px;
 }
 .contenido{
+    position: relative;
     width: 88%;
     margin-left: 6%;
     padding-bottom: 40px;
+    > img{
+        position: absolute;
+        height: 36px;
+        right: -6px;
+        top: -6px;
+    }
+    >div{
+        img:nth-child(2){
+            height: 36px;
+            transform: translateY(-5px);
+        }
+    }
 }
 .contenidoDatosProducto h2{
     color: #4f4f4f;
@@ -31,11 +44,12 @@
     padding-left: 10px;
 }
 .img-big{
-    height: 20px;
+    height: 16px;
     margin-top: 5px;
 }
 img{
-    height: 30px;
+    height: 25px;
     margin-left: 10px;
     margin-right: 5px;
 }
+

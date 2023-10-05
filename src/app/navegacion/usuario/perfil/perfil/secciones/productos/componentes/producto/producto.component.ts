@@ -10,8 +10,8 @@ import { Producto } from 'src/app/interfaces/producto/producto';
 })
 export class ProductoComponent {
   @Input() producto!: Producto;
-    constructor(private zone: NgZone, private router: Router){
-  }
+  @Input() foto!: string;
+  constructor(private zone: NgZone, private router: Router){}
   navegar( ruta: any[]): any {
     this.zone.run(() => {
       this.router.navigate(ruta);

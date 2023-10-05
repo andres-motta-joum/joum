@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { PasosVenderService } from '../../../../../../servicios/vender/vender.service';
 import { Router } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';
 import { heroArrowSmallLeft } from '@ng-icons/heroicons/outline';
 import { ionChevronDown } from '@ng-icons/ionicons';
@@ -15,7 +14,7 @@ import { ionChevronDown } from '@ng-icons/ionicons';
   providers: [provideIcons({heroArrowSmallLeft, ionChevronDown})]
 })
 export class PasoSeisComponent {
-  constructor( private pasos: PasosVenderService, private router: Router, private changeDetector: ChangeDetectorRef, private formBuilder: FormBuilder) {
+  constructor( private pasos: PasosVenderService, private router: Router, private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({});
   }
   form!: FormGroup;
@@ -33,25 +32,26 @@ export class PasoSeisComponent {
     const detalles: any = {
       Cuadros: [
         { nombre: 'Temática', tipo: 'input', detalle: 'tematica' },
-        { nombre: 'Tipo de panel', tipo: 'input', detalle: 'tipoPanel' },
-        { nombre: 'Marco', tipo: 'input', detalle: 'marco' },
-        { nombre: 'Material del marco', tipo: 'input', detalle: 'materialMarco' },
         { nombre: 'Altura', tipo: 'medida', detalle: 'altura', valorSelect: 'unidadMedidaAltura' },
         { nombre: 'Ancho', tipo: 'medida', detalle: 'ancho', valorSelect: 'unidadMedidaAncho' },
         { nombre: 'Formato de venta', tipo: 'select', opciones: ['Unidades', 'Pack'], detalle: 'formatoVenta'  },
-        { nombre: 'Unidades por pack', tipo: 'input', detalle: 'unidadesPack', active: false },
-        { nombre: 'Frase', tipo: 'selectSiNo', detalle: 'frase' }
+        { nombre: 'Unidades por pack', tipo: 'number', detalle: 'unidadesPack', active: false },
+        { nombre: 'Frase', tipo: 'selectSiNo', detalle: 'frase' },
+        { nombre: 'Panel', tipo: 'selectSiNo', detalle: 'panel' },
+          { nombre: 'Tipo de panel', tipo: 'input', detalle: 'tipoPanel', active: false }, 
+        { nombre: 'Marco', tipo: 'selectSiNo', detalle: 'marco' },
+          { nombre: 'Material de marco', tipo: 'input', detalle: 'materialMarco', active: false },
       ],
       Repisas: [
-        { nombre: 'Cantidad de piezas', tipo: 'input', detalle: 'cantidadPiezas' },
-        { nombre: 'Forma', tipo: 'input', detalle: 'forma' },
-        { nombre: 'Materia', tipo: 'input', detalle: 'materia' },
+        { nombre: 'Cantidad de piezas', tipo: 'number', detalle: 'cantidadPiezas' },
+        { nombre: 'Forma', tipo: 'input', detalle: 'forma'},
+        { nombre: 'Materia', tipo: 'input', detalle: 'materia'},
         { nombre: 'Altura', tipo: 'medida', detalle: 'altura', valorSelect: 'unidadMedidaAltura' },
         { nombre: 'Ancho', tipo: 'medida', detalle: 'ancho', valorSelect: 'unidadMedidaAncho' },
         { nombre: 'Profundidad', tipo: 'medida', detalle: 'profundidad', valorSelect: 'unidadMedidaProfundidad' },
         { nombre: 'Peso', tipo: 'medidaPeso', detalle: 'peso', valorSelect: 'unidadMedidaPeso' },
         { nombre: 'Formato de venta', tipo: 'select', opciones: [ 'Unidades', 'Pack'], detalle: 'formatoVenta'  },
-        { nombre: 'Unidades por pack', tipo: 'input', detalle: 'unidadesPack', active: false },
+        { nombre: 'Unidades por pack', tipo: 'number', detalle: 'unidadesPack', active: false },
         { nombre: 'Incluye kit de instalación', tipo: 'selectSiNo', detalle: 'kitInstalacion' }
       ],
       Iluminacion: [
@@ -63,7 +63,7 @@ export class PasoSeisComponent {
         { nombre: 'Material', tipo: 'input', detalle: 'material', active: false },
 
         { nombre: 'Poténcia', tipo: 'medidaPotencia', detalle: 'potencia', valorSelect: 'unidadMedidaPotencia', active: false },
-        { nombre: 'Temperatura de color', tipo: 'input', detalle: 'temperaturaColor', active: false },
+        { nombre: 'Temperatura de color', tipo: 'medidaTemperatura', detalle: 'temperaturaColor', valorSelect: 'unidadMedidaTemperaturaColor', active: false }, //--
         { nombre: 'Forma', tipo: 'input', detalle: 'forma', active: false },
         { nombre: 'Sistemas operativos compatibles', tipo: 'input', detalle: 'sistemasOperativosCompatibles', active: false },
         { nombre: 'Apliaciones compatibles', tipo: 'input', detalle: 'apliacionesCompatibles', active: false },
@@ -76,7 +76,7 @@ export class PasoSeisComponent {
         { nombre: 'Ancho', tipo: 'medida', detalle: 'ancho', valorSelect: 'unidadMedidaAncho', active: false },
 
         { nombre: 'Formato de venta', tipo: 'select', opciones: [ 'Unidades', 'Pack'], detalle: 'formatoVenta', active: false  },
-          { nombre: 'Unidades por pack', tipo: 'input', detalle: 'unidadesPack', active: false },
+          { nombre: 'Unidades por pack', tipo: 'number', detalle: 'unidadesPack', active: false },
 
         { nombre: 'Inalambrico', tipo: 'selectSiNo', detalle: 'inalambrico', active: false },
         { nombre: 'Auto adhesiva', tipo: 'selectSiNo', detalle: 'autoadhesiva', active: false },
@@ -93,14 +93,14 @@ export class PasoSeisComponent {
        { nombre: 'Estilo', tipo: 'input', detalle: 'estilo' },
         { nombre: 'Tipo', tipo: 'select', opciones: [ 'Maceta', 'Macetero'], detalle: 'tipo' },
         { nombre: 'Material', tipo: 'input', detalle: 'material' },
-        { nombre: 'Diametro de boca', tipo: 'medida', detalle: 'diametroBoca', valorSelect: 'unidadMedidaDiametroBoca' },
-        { nombre: 'Diametro de base', tipo: 'medida', detalle: 'diametroBase', valorSelect: 'unidadMedidaDiametroBase' },
         { nombre: 'Altura', tipo: 'medida', detalle: 'altura', valorSelect: 'unidadMedidaAltura' },
         { nombre: 'Ancho', tipo: 'medida', detalle: 'ancho', valorSelect: 'unidadMedidaAncho' },
         { nombre: 'Largo', tipo: 'medida', detalle: 'largo', valorSelect: 'unidadMedidaLargo' },
+        { nombre: 'Diametro de boca', tipo: 'medida', detalle: 'diametroBoca', valorSelect: 'unidadMedidaDiametroBoca' },
+        { nombre: 'Diametro de base', tipo: 'medida', detalle: 'diametroBase', valorSelect: 'unidadMedidaDiametroBase' },
         { nombre: 'Capacidad en volumen', tipo: 'medidaVolumen', detalle: 'volumen', valorSelect: 'unidadMedidaVolumen' },
         { nombre: 'Formato de venta', tipo: 'select', opciones: [ 'Unidades', 'Pack'], detalle: 'formatoVenta'  },
-        { nombre: 'Unidades por pack', tipo: 'input', detalle: 'unidadesPack', active: false },
+        { nombre: 'Unidades por pack', tipo: 'number', detalle: 'unidadesPack', active: false },
         { nombre: 'Sistema autorriego', tipo: 'selectSiNo', detalle: 'sistemaAutorriego' },
         { nombre: 'Es colgante', tipo: 'selectSiNo', detalle: 'colgante' },
         { nombre: 'Incluye plato', tipo: 'selectSiNo', detalle: 'incluyePlato' },
@@ -113,7 +113,6 @@ export class PasoSeisComponent {
         { nombre: 'Tipo', tipo: 'select', opciones: [ 'Pared', 'Mesa'], detalle: 'tipo' },
         { nombre: 'Estilo', tipo: 'input', detalle: 'estilo' },
         { nombre: 'Material', tipo: 'input', detalle: 'material' },
-        { nombre: 'Tipo de panel', tipo: 'input', detalle: 'panel' },
         { nombre: 'Alimentación', tipo: 'input', detalle: 'alimentacion' },
         { nombre: 'Montaje', tipo: 'input', detalle: 'montaje' },
         { nombre: 'Figura', tipo: 'input', detalle: 'figura' },
@@ -121,14 +120,16 @@ export class PasoSeisComponent {
         { nombre: 'Altura', tipo: 'medida', detalle: 'altura', valorSelect: 'unidadMedidaAltura' },
         { nombre: 'Ancho', tipo: 'medida', detalle: 'ancho', valorSelect: 'unidadMedidaAncho' },
         { nombre: 'Formato de venta', tipo: 'select', opciones: [ 'Unidades', 'Pack'], detalle: 'formatoVenta'  },
-        { nombre: 'Unidades por pack', tipo: 'input', detalle: 'unidadesPack', active: false },
+        { nombre: 'Unidades por pack', tipo: 'number', detalle: 'unidadesPack', active: false },
+        { nombre: 'Panel', tipo: 'selectSiNo', detalle: 'panel' }, 
+        { nombre: 'Tipo de panel', tipo: 'input', detalle: 'tipoPanel', active: false }, 
       ],
       Difusores: [
         { nombre: 'Tipo', tipo: 'select', opciones: [ 'Difusor', 'Humificador'], detalle: 'tipo' },
         { nombre: 'Tecnologia difusion', tipo: 'select', opciones: [ 'Ventilación', 'Ultra sonido', 'Calor', 'Difusión por mecha', 'Nebulización'], detalle: 'tecnologiaDifusion' },
         { nombre: 'Material', tipo: 'input', detalle: 'material' },
         { nombre: 'Formato de venta', tipo: 'select', opciones: ['Unidades', 'Pack'], detalle: 'formatoVenta'  },
-        { nombre: 'Unidades por pack', tipo: 'input', detalle: 'unidadesPack', active: false },
+        { nombre: 'Unidades por pack', tipo: 'number', detalle: 'unidadesPack', active: false },
         { nombre: 'Temporizador', tipo: 'selectSiNo', detalle: 'temporizador' },
         { nombre: 'Luces led', tipo: 'selectSiNo', detalle: 'lucesLed' },
         { nombre: 'Apagado automático', tipo: 'selectSiNo', detalle: 'apagadoAutomatico' },
@@ -141,21 +142,22 @@ export class PasoSeisComponent {
         { nombre: 'Altura', tipo: 'medida', detalle: 'altura', valorSelect: 'unidadMedidaAltura' },
         { nombre: 'Ancho', tipo: 'medida', detalle: 'ancho', valorSelect: 'unidadMedidaAncho' },
         { nombre: 'Formato de venta', tipo: 'select', opciones: [ 'Unidades', 'Pack'], detalle: 'formatoVenta'  },
-        { nombre: 'Unidades por pack', tipo: 'input', detalle: 'unidadesPack', active: false },
+        { nombre: 'Unidades por pack', tipo: 'number', detalle: 'unidadesPack', active: false },
       ],
       Adornos: [
         { nombre: 'Material', tipo: 'input', detalle: 'material' },
         { nombre: 'Tema', tipo: 'input', detalle: 'tema' },
         { nombre: 'Linea', tipo: 'input', detalle: 'linea' },
-        { nombre: 'Personaje', tipo: 'input', detalle: 'personaje' },
         { nombre: 'Significado', tipo: 'input', detalle: 'significado' },
         { nombre: 'Altura', tipo: 'medida', detalle: 'altura', valorSelect: 'unidadMedidaAltura' },
         { nombre: 'Ancho', tipo: 'medida', detalle: 'ancho', valorSelect: 'unidadMedidaAncho' },
         { nombre: 'Profundidad', tipo: 'medida', detalle: 'profundidad' , valorSelect: 'unidadMedidaProfundidad' },
         { nombre: 'Formato de venta', tipo: 'select', opciones: [ 'Unidades', 'Pack'], detalle: 'formatoVenta'  },
-        { nombre: 'Unidades por pack', tipo: 'input', detalle: 'unidadesPack', active: false },
+        { nombre: 'Unidades por pack', tipo: 'number', detalle: 'unidadesPack', active: false },
         { nombre: 'Es coleccionable:', tipo: 'selectSiNo', detalle: 'coleccionable'},
           { nombre: 'Colección', tipo: 'input', detalle: 'coleccion', active: false },
+        { nombre: 'Es un personaje', tipo: 'selectSiNo', detalle: 'personaje' },
+          { nombre: 'Personaje', tipo: 'input', detalle: 'tipoPersonaje', active: false },
         { nombre: 'Incluye accesorios:', tipo: 'selectSiNo', detalle: 'incluyeAccesorios'},
         { nombre: 'Es articulada:', tipo: 'selectSiNo', detalle: 'articulada'},
         { nombre: 'Piezas intercambiables?:', tipo: 'selectSiNo', detalle: 'piezasIntercambiables'}
@@ -184,6 +186,9 @@ export class PasoSeisComponent {
         }
         if(detalle.tipo == 'medidaPotencia'){
           this.form.addControl(detalle.valorSelect, this.formBuilder.control('W'));
+        }
+        if(detalle.tipo == 'medidaTemperatura'){
+          this.form.addControl(detalle.valorSelect, this.formBuilder.control('K')); //--
         }
       }
       if(detalle.tipo == 'selectSiNo'){
@@ -224,9 +229,30 @@ export class PasoSeisComponent {
         }
       });
     }
+    if(this.form.value['panel'] == 'Sí'){ //categoría Macetas
+      this.detalles.forEach((objeto) => {
+        if (objeto.detalle === 'tipoPanel') {
+          objeto.active = true;
+        }
+      });
+    }
+    if(this.form.value['marco'] == 'Sí'){ //categoría Macetas
+      this.detalles.forEach((objeto) => {
+        if (objeto.detalle === 'materialMarco') {
+          objeto.active = true;
+        }
+      });
+    }
     if(this.form.value['coleccionable'] == 'Sí'){ //categoría Adornos
       this.detalles.forEach((objeto) => {
         if (objeto.detalle === 'coleccion') {
+          objeto.active = true;
+        }
+      });
+    }
+    if(this.form.value['personaje'] == 'Sí'){ //categoría Adornos
+      this.detalles.forEach((objeto) => {
+        if (objeto.detalle === 'tipoPersonaje') {
           objeto.active = true;
         }
       });
@@ -309,6 +335,11 @@ export class PasoSeisComponent {
 
   submit(): any {
       this.pasos.paso7 = true;
+      Object.entries(this.form.value).forEach(([key, value])=>{
+        if (typeof value === 'string') {
+          this.form.value[key] = value.replace(/\s+/g, ' ').trim();
+        }
+      })
       this.pasos.producto.detalles = this.form.value;
       this.router.navigate(['/vender', 'formulario', 'paso7']);
   }
@@ -316,5 +347,10 @@ export class PasoSeisComponent {
   atras(): void {
     this.pasos.producto.detalles = this.form.value;
     this.router.navigate(['/vender', 'formulario', 'paso5']);
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload($event: any): void {
+      $event.returnValue = true;
   }
 }

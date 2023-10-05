@@ -1,5 +1,5 @@
 <div class="contenedor" [ngClass]="{'masUnidades': unidades}">
-    <img src="{{publicacion.detalles?.fotos![0][0]}}">
+    <img [src]="foto">
     <div>
         <p>{{publicacion.nombre}}</p>
         <p>#{{publicacion.id}}</p>
@@ -23,7 +23,7 @@
     </div>
     <div *ngIf="subMenu" class="submenu">
         <p>Republicar</p>
-        <p (click)="navegar(['prod/MOTTAANDRES20221130093921'],$event)">Ver publicación</p>
+        <p (click)="navegar(['prod/'+ publicacion.id],$event)">Ver publicación</p>
         <p>Eliminar</p>
     </div>     
 
@@ -33,11 +33,11 @@
     <!------- SUB MENU UNIDADES------>
     <div class="linea"></div>
     <div class="unidades">
-        <div *ngFor="let seccion of publicacion.detalles?.fotos">
-            <img src='{{seccion[0]}}'>
+        <div *ngFor="let estilo of publicacion.estilos">
+            <img [src]='foto'>
             <div>
-                <p>Color: Blanco </p>
-                <p>2 unidades</p>
+                <p>Estilo: {{estilo.nombre}} </p>
+                <p>{{estilo.unidades}} unidades</p>
             </div>
         </div>
     </div>

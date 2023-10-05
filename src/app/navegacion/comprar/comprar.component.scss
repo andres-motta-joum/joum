@@ -1,80 +1,123 @@
-.body{
-    background-color: #f4f4f4;
+.body {
+    background-color: #f8f8f8;
     width: 100%;
     min-height: 100vh;
-    min-width: 880px;
+    min-width: 1000px;
     position: relative;
 	padding-bottom: 430px;
 	overflow: hidden;
 }
-.contenido-compra{
+
+.contenido-compra {
     position: relative;
     max-width: 1200px;
     width: 95%;
     display: flex;
     margin: auto;
     margin-top: 73px;
-    padding-bottom: 140px;
+    padding-bottom: 180px;
     display: grid;
-    grid-template-columns: 2.8fr 1fr;
-    column-gap: 10px;
-}
-.titulo{
-    position: absolute;
-    top: -36px;
-    h1{
-        font-size: 22px;
-        margin: 0 0 0 4px;
-        
-        font-weight: 500;
-        color: #333;
-    }
-}
-.izquierda{
-    min-width: 500px;
-    background-color: #fff;
-    border: 1px solid #e6e6e6;
-    border-radius: 5px;
-    padding: 35px;
-}
-.derecha{
-    background-color: #fff;
-    border: 1px solid #e6e6e6;
-    border-radius: 8px;
-    height: 235px;
-    button{
-        width: calc(100% - 50px);
-        margin: 25px 25px 10px 25px;
-        padding: 10px;
-        font-weight: 550;
-        font-size: 15px;
-        letter-spacing: .5px;
-        word-spacing: 1px;
-        color: white;
-        background-color: #ffbd8e;
-        border: none;
-        border-radius: 6px;
-    }
-    >div{
-        width: calc(100% - 50px);
-        margin: 20px 25px 0 25px;
-        display: flex;
-        justify-content: space-between;
-        p{
-            color: #666;
-            font-size: 14px;
-            font-weight: 450;
-            letter-spacing: .4px;
-            word-spacing: 1px;
-            margin: 0;
+    grid-template-columns: 2.6fr 1fr;
+    column-gap: 15px;
+
+    .titulo {
+        position: absolute;
+        top: -36px;
+
+        h1 {
+            font-size: 22px;
+            margin: 0 0 0 4px;
+            font-weight: 500;
+            color: #333;
         }
     }
-    >div:nth-child(5) p{
-        font-weight: 550;
-        color: #4a4a4a;
-        font-size: 15px;
+
+    .izquierda {
+        min-width: 500px;
+        background-color: #fff;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        padding: 15px 15px 50px 15px;
+        box-shadow: 0 2px 7px -1px rgba(0, 0, 0, 0.1);
     }
-    .linea{
-        border-bottom: 1px solid #ddd;
+
+    .derecha {
+        box-shadow: 0 2px 7px -1px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        height: 240px;
+
+        button {
+            position: relative;
+            width: calc(100% - 60px);
+            margin: 25px 30px 10px 30px;
+            height: 42px;
+            padding: 12px;
+            font-weight: 520;
+            font-size: 16px;
+            letter-spacing: .4px;
+            word-spacing: .8px;
+            color:white; 
+            background-color:#ffa463; 
+            border:none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            &:hover{
+                background-color: #ff9e57;;
+            }
+        }
+        .cargando{
+            cursor: default !important;
+            background: #ffad72 !important;
+            &:hover{
+                background: #ffad72 !important;
+            }
+        }
+        .loading{
+            width: 22px;
+            height: 22px;
+            border: 3px solid white;
+            border-radius: 50%;
+            position: absolute;
+            left: calc(50% - 15px);
+            top: 7px;
+            border-left-color: transparent;
+            animation: load 1s ease infinite;
+        }
+        @keyframes load {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+
+        > div {
+            width :calc(100% - 60px); 
+            margin :20px 30px 0 30px; 
+            display:flex; 
+            justify-content :space-between; 
+
+            p{
+                color:#666; 
+                font-size :14px; 
+                font-weight :450; 
+                letter-spacing :.4px; 
+                word-spacing :1px; 
+                margin :0; 
+            }
+        }
+
+        > div:nth-child(5) p{
+            font-weight :550; 
+            color:#4a4a4a; 
+            font-size: 16px; 
+        }
+
+        .linea{
+            border-bottom :1px solid #ddd; 
+        }
     }
 }

@@ -16,12 +16,13 @@ export interface DetallesIluminacion {
 }
 
 interface Bombillos {
-    temperaturaColor?: string,
     forma?: string,
     sistemasOperativosCompatibles?: string[],
     apliacionesCompatibles?: string[],
     potencia?: number,      /*--- valores ---*/
     unidadMedidaPotencia?: string;
+    temperaturaColor?: number,
+    unidadMedidaTemperaturaColor?: string,
 
     wifi?: boolean,    /*--- preguntas si/no ---*/
     giratorio?: boolean,

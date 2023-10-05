@@ -67,7 +67,33 @@ ng-icon.cart{
 
 /*---- Buscador ----*/
 .tres{
+	position: relative;
 	margin-right: 20px;
+	&:hover{
+		.cantidadEnCarrito{
+			background-color: rgb(255, 86, 86);
+			p{
+				color: white;
+			}
+		}
+	}
+	.cantidadEnCarrito{
+		position: absolute;
+		width: 18px;
+		height: 18px;
+		background-color: white;
+		border-radius: 50%;
+		top: 5px;
+		left: calc(61%);
+		pointer-events: none;
+		p{
+			margin: 0;
+			padding-top: 1.5px;
+			font-size: 12.5px;
+			font-weight: 520;
+			color: #444;
+		}
+	}
 }
 .Buscador{
 	padding: 0 16px;
@@ -333,33 +359,42 @@ ng-icon.cart{
 		position: absolute;
 		right: 3.8%;
 		top: 5px;
-		font-size: 19px;
+		font-size: 20px;
 		color: #fafafa;
 		cursor: pointer;
 		&:hover{
 			color: #fff;
 		}
+		.point{
+			position: absolute;
+			width: 7.2px;
+			height: 7.2px;
+			border: 1.2px solid #fff;
+			border-radius: 50%;
+			background-color: #ff6a6a;
+			left: 12px;
+			top: 1px;
+		}
 		ng-icon:nth-child(2){
 			font-size: 17px;
 			transform: translateY(-1px);
-			padding-left: 3px;
+			padding-left: 1px;
 		}
-		&:hover{
-			>div{
-				display: block;
-				animation: contenedorNotificaciones .4s ease;
-				height: auto;
-			}
+		.mostraNotificaciones{
+			opacity: 1;
+			width: 400px;
 		}
 		> div{
-			display: none;
+			opacity: 0;
+			height: var(--height);
+			transition: .2s height;
 			position: absolute;
 			top: 25px;
 			left: -320px;
-			width: 400px;
+			width: 0;
 			background-color: #fff;
 			border: 1px solid #ddd;
-			border-radius: 0 0 10px 10px;
+			border-radius: 0 0 8px 8px;
 			box-shadow: 2px 0 10px 2px rgba($color: #000000, $alpha: .1);
 			overflow: hidden;
 			color: #666;
@@ -376,17 +411,6 @@ ng-icon.cart{
 				color: #606060;
 			}
 
-		}
-		@keyframes contenedorNotificaciones {
-			0%{
-				height: 0;
-			}
-			50%{
-				height: 0;
-			}
-			100%{
-				height: auto;
-			}
 		}
 	}
 	.menu2{

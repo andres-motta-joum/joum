@@ -8,7 +8,7 @@ import { Producto } from 'src/app/interfaces/producto/producto';
   styleUrls: ['./retenciones.component.scss']
 })
 export class RetencionesComponent {
-  public retenciones: Array<Producto>= [
+  public retenciones: Array<any>= [ //Producto
     {
       precio: 0,
       descuento: false,

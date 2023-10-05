@@ -1,8 +1,8 @@
 <div class="contenidoDatosProducto">
     <div class="contenido">
-        <p class="texto1">+ {{producto.ventas}} vendidos</p>
+        <p class="texto1"><span>{{vendidos}}</span></p>
         <h2 class="tituloProducto">{{ producto.nombre }}</h2>
-        <div class="estrellas">
+        <div class="estrellas" *ngIf="producto.opiniones.length !== 0">
             <div class="starts-over" [ngClass]="'starts-' + promedioCalificacion">
                 <ng-icon name="matStarRound"></ng-icon>
                 <ng-icon name="matStarRound"></ng-icon>
@@ -18,7 +18,7 @@
                 <ng-icon name="matStarRound"></ng-icon>
             </div>
         </div>
-        <p (click)="opiniones()" class="opiniones"> {{producto.opiniones?.length}}</p>
+        <p *ngIf="producto.opiniones.length !== 0" (click)="opiniones()" class="opiniones"> {{producto.opiniones.length}}</p>
 
         <div class="contenidoPrecios">
             <div class="precio-descuento" *ngIf="producto.descuento">
@@ -44,16 +44,24 @@
         </div>
 
         <div class="linea-Menu"></div>
-        <div class="session3">
-            <label for="unidades">Cantidad:</label>
-            <select name="unidades" id="unidades" [style.width.px]="unaUnidad ? 90 : 117" (change)="unidadesChange($event)">
+        <div class="estilos" *ngIf="producto.estilos![1]">
+            <label for="estilos">Estilos</label><br>
+            <select id="estilos" [(ngModel)]="selectEstilo" (change)="seleccionarEstilo()">
+                <ng-container *ngFor="let estilo of producto.estilos; let index = index">
+                    <option [value]="index">{{estilo.nombre}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="session3" >
+            <label for="unidades">unidades:</label>
+            <select name="unidades" id="unidades" [style.width.px]="unaUnidad ? 90 : 117" (change)="cambiarUnidades($event)">
                 <option value="1" selected>1 unidad</option>
-                <option *ngFor="let i of [].constructor(producto.unidades! - 1); let idx = index" [value]="idx + 2">
-                  {{ idx + 2 }} unidad{{ idx + 1 !== 0 ? 'es' : '' }}
+                <option *ngFor="let i of [].constructor(producto.estilos![selectEstilo].unidades! - 1); let index = index" [value]="index + 2">
+                  {{ index + 2 }} unidad{{ index + 1 !== 0 ? 'es' : '' }}
                 </option>
             </select>
-            <p>(<span>{{producto.unidades}}</span> disponibles )</p>
+            <p>(<span>{{producto.estilos![selectEstilo].unidades!}}</span> disponibles )</p>
         </div>
-    <div (click)="navegar(['comprar/checkout/detalles-envio'], $event)" class="btnComprar"><p>Comprar ahora</p></div>
+    <div (click)="comprar()" class="btnComprar" ><p>Comprar ahora</p></div>
     <div class="proteccionCompra">Compra protegida:<span> Obtén lo que esperabas o recupera tu dinero.</span><ng-icon name="matGppGoodOutline"></ng-icon></div>
 </div>

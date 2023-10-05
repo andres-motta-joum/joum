@@ -1,18 +1,22 @@
 <div class="contenedor">
-    <div>
-        <app-producto-carrito (unidadEmitida)="cambiarUnidades($event)" [productoCarrito]="productoCarrito" [unidades]="unidades[i]" [indice]="i" *ngFor="let productoCarrito of productos; let i = index; " ></app-producto-carrito>
+    <div >
+        <app-producto-carrito (eliminar)="eliminar($event)" [carrito]="carrito" [productoCarrito]="productoCarrito" [unidad]="unidades[i]" [foto]="fotos[i]" [estilo]="estilos[i]" [indice]="i" [indexEstilo]="indexEstilos[i]" *ngFor="let productoCarrito of productos; let i = index;" ></app-producto-carrito>
+        <div *ngIf="sinCarrito" class="sinCarrito">
+            <img src="assets/img/logo/iconos/car-empty.svg">
+            <p>Tu carro de compras está vacío</p>
+        </div>
     </div>
     <div>
-        <button>Realizar compra</button>
+        <button (click)="comprar()">Realizar compra</button>
         <div>
-            <p>Productos({{cantidadProductos}})</p><p>$ {{precioProductos | number: '1.0-0'}}</p>
+            <p>Producto<span *ngIf="productosLenght >= 2">s ({{productosLenght}})</span></p><p>$ {{precioProductos | number: '1.0-0'}}</p>
         </div>
         <div>
-            <p>Envio</p><p>$ {{precioEnvio | number: '1.0-0'}}</p>
+            <p>Envio</p><p>$ {{precioEnvios | number: '1.0-0'}}</p>
         </div>
         <div class="linea"></div>
         <div>
-            <p>Total</p><p>$ {{precioEnvio + precioProductos | number: '1.0-0'}}</p>
+            <p>Total</p><p>$ {{ (+precioProductos) + (+precioEnvios) | number: '1.0-0' }}</p>
         </div>
     </div>
 </div>

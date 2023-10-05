@@ -1,8 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { Auth, PhoneAuthCredential, PhoneAuthProvider, RecaptchaVerifier, sendPasswordResetEmail, updatePhoneNumber } from '@angular/fire/auth';
+import { Auth, EmailAuthProvider, PhoneAuthCredential, PhoneAuthProvider, RecaptchaVerifier, linkWithCredential, sendPasswordResetEmail, signInWithCredential, signInWithPhoneNumber, updatePhoneNumber, updateProfile } from '@angular/fire/auth';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationResult } from 'firebase/auth';
+import { ConfirmationResult, signInWithEmailAndPassword } from 'firebase/auth';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { DataSharingService } from 'src/app/servicios/usuarios/data-sharing.service';
 
@@ -17,19 +17,24 @@ interface ErrorResponse  {
   styleUrls: ['./codigo-sms.component.scss']
 })
 export class CodigoSMSComponent implements OnInit{
-  constructor(private authService: AuthService, private auth: Auth, private router: Router, private route: ActivatedRoute, private dataSharingService: DataSharingService, private firestore: Firestore){}
+  constructor(private authService: AuthService, private auth: Auth, private router: Router, private dataSharingService: DataSharingService, private firestore: Firestore){}
   @ViewChildren('verificationInput') verificationInputs!: QueryList<ElementRef>;
   @ViewChild('firstInput') firstInput!: ElementRef;
+  private verificationId!: string;
+  capcha = false;
   private datos!: any;
-  public numero!: string;
+  numero!: string;
   private algo: boolean = false;
-  public codigoIncorrecto = false;
-  public check = false;
-  public recaptchaVerifier!: RecaptchaVerifier;
+  codigoIncorrecto = false;
+  check = false;
+  recaptchaVerifier!: RecaptchaVerifier;
 
-  public confirmationResult!: ConfirmationResult;
+  confirmationResult!: ConfirmationResult;
 
   enteredCodes: string[] = ['', '', '', '', '', ''];
+  cargando = false;
+
+
 
   ngOnInit(): void {
     const formData = this.dataSharingService.getFormData();
@@ -52,14 +57,16 @@ export class CodigoSMSComponent implements OnInit{
 
   async sendVerificationCode() {
     this.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-      size: 'invisible',
+      size: 'normal',
       callback: () => {
       },
     }, this.auth);
 
-    await this.authService.sendCode(this.numero, this.recaptchaVerifier)
+    await signInWithPhoneNumber(this.auth, this.numero, this.recaptchaVerifier)
       .then((confirmationResult) => {
-        this.confirmationResult = confirmationResult;
+        this.verificationId = confirmationResult.verificationId;
+        this.capcha = true;
+        this.firstInput.nativeElement.focus();
       })
       .catch((error) => {
         console.log(error)
@@ -68,25 +75,30 @@ export class CodigoSMSComponent implements OnInit{
   }
 
   async verifyCode() {
-    const enteredCode = this.enteredCodes.join('');
+    this.cargando = true;
+    const enteredCode = this.enteredCodes.join(''); //Codigo ingresado por el usuario
+    const phoneCredential: PhoneAuthCredential = PhoneAuthProvider.credential(this.verificationId, enteredCode); // Creación de credencial
     try {
-      const verificationId = this.confirmationResult.verificationId;
-      if(this.datos.tipo === 'singUp'){
-        await this.authService.singUp(this.datos.email, this.datos.password, this.datos.name, this.datos.lastname);
-      }else if(this.datos.tipo === 'singIn'){
-        await this.authService.singIn(this.datos.email, this.datos.password);
+      if(this.datos.tipo === 'singIn'){
+        await signInWithCredential(this.auth, phoneCredential); //verificación de credencial
+      } else if(this.datos.tipo === 'singUp'){
+        const singCredential = await signInWithCredential(this.auth, phoneCredential);// ya creó la cuenta con el numero o inició la cuenta con el numero. 
+        const emailCredential = EmailAuthProvider.credential(this.datos.email, this.datos.password);
+        const currentUser = this.auth.currentUser;
+        await linkWithCredential(currentUser!, emailCredential);
+        await updateProfile(singCredential.user, {
+          displayName: `${this.datos.name} ${this.datos.lastname}`
+        });
+        await this.authService.addUserFirestore();
+        await this.authService.sendEmail(singCredential.user);
+        await updateDoc(doc(this.firestore, "usuarios", currentUser?.uid!), { telefono: this.numero });
+      } else if(this.datos.tipo === 'singUpGoogle' || this.datos.tipo === 'singInGoogle'){
+        const currentUser = this.auth.currentUser;
+        await updatePhoneNumber(currentUser!, phoneCredential);
+        await updateDoc(doc(this.firestore, "usuarios", currentUser?.uid!), { telefono: this.numero });
       }
-
       //-----------------------------------------------------------
       if(this.datos.tipo !== 'forgotPassword'){
-        const currentUser = this.auth.currentUser; //agregar numero UserAuht y a Firestore
-        const phoneCredential: PhoneAuthCredential = PhoneAuthProvider.credential(verificationId, enteredCode);
-
-        //No tienen un numero asignado.
-        if(this.datos.tipo === 'singUpGoogle' || this.datos.tipo === 'singUp'){ //Agregar numero "Firestore"
-          await updateDoc(doc(this.firestore, "usuarios", currentUser?.uid!), { telefono: this.numero });
-          await updatePhoneNumber(currentUser!, phoneCredential);
-        }
         this.dataSharingService.deleteData();
         this.check = true;
         this.router.navigate(['']);
@@ -104,6 +116,7 @@ export class CodigoSMSComponent implements OnInit{
         });
       }
     } catch (error) {
+      this.cargando = false;
       const {code, message} = error as ErrorResponse;
       if (code === 'auth/invalid-verification-code') {
         this.codigoIncorrecto = true;
@@ -114,6 +127,7 @@ export class CodigoSMSComponent implements OnInit{
     }
   }
 
+  //--- funcionalidad Inputs ----------------------------------------------------------------------
   onInput(event: Event,keyboardEvent: KeyboardEvent, index: number): void {
     const input = event.target as HTMLInputElement;
     const enteredCode = input.value;
@@ -169,11 +183,6 @@ export class CodigoSMSComponent implements OnInit{
       this.algo = false;
     }
 
-  }
-
-
-  ngAfterViewInit(): void {
-    this.firstInput.nativeElement.focus();
   }
 
   ngOnDestroy(): void {

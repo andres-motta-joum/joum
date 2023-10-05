@@ -10,6 +10,8 @@ import { Producto } from 'src/app/interfaces/producto/producto';
 })
 export class ProductoComponent {
   @Input() producto!: Producto;
+  @Input() unidad!: number;
+  @Input() foto!: string;
   constructor(private zone: NgZone, private router: Router){
   }
 

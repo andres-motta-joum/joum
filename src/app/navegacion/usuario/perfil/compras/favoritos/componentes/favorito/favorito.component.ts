@@ -10,6 +10,7 @@ import { Producto } from 'src/app/interfaces/producto/producto';
 })
 export class FavoritoComponent {
   @Input() favorito!: Producto;
+  @Input() foto!: string;
   subMenu: boolean = false;
   constructor(private zone: NgZone, private router: Router){
   }

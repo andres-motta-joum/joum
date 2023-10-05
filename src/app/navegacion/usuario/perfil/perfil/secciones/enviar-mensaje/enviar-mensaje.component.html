@@ -1,12 +1,15 @@
-<div class="body">
+<div class="body" *ngIf="venta">
     <app-menu-simple></app-menu-simple>
-    <h1>Venta <span>#{{venta?.numVenta}}</span></h1>
+    <h1>Venta <span>#{{venta.numVenta}}</span></h1>
     <div class="contenido">
         <div class="left">
             <div class="encabezado">
                 <img src="assets/img/usuarios/user.svg">
                 <div>
-                    <h3>{{usuarioDos?.nombre}}</h3>
+                    <h3>
+                        <span *ngIf="tipoUsuario == 'vendedor'">{{usuarioCliente?.nombre}}</span>
+                        <span *ngIf="tipoUsuario == 'cliente'">{{usuarioVendedor?.nombre}}</span>
+                    </h3>
                 </div>
                 <div>
                     <img src="assets/img/logo/iconos/ver-mas.svg">
@@ -14,12 +17,13 @@
                 </div>
             </div> 
             <div class="chat">
-                <div class="contenedorMensajes">
+                <div class="contenedorMensajes" #contenidoMensajes>
                     <app-mensaje [mensaje]="mensaje" [tipoUsuario]="tipoUsuario" *ngFor="let mensaje of chat?.mensajes"></app-mensaje>
                 </div>
                 <div>
-                    <div class="message-input" contenteditable="true"></div>
-                    <img src="assets/img/logo/iconos/Msg-full.svg" alt="">
+                    <div class="message-input" contenteditable="true" contenteditableModel #mensajeElement (input)="inputMensaje()"></div>
+                    <p class="placeHolder" *ngIf="!mensaje">Escribe un mensaje</p>
+                    <img src="assets/img/logo/iconos/send-message.svg" (click)="enviar()">
                 </div>
             </div>
         </div>
@@ -29,7 +33,7 @@
                 <p>Compra: 14 de julio 15:20</p>
             </div>
             <div class="contenedorMensajes">
-                <app-producto [producto]="producto" *ngFor="let producto of productos"></app-producto>
+                <app-producto [producto]="producto" [unidad]="unidades[i]" [foto]="fotos[i]" *ngFor="let producto of productos; let i = index"></app-producto>
             </div>
         </div>
     </div>

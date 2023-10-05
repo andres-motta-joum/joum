@@ -1,0 +1,47 @@
+<div class="contenedor" *ngIf="usuario">
+    <h2>Tus datos</h2>
+
+    <div *ngIf="!usuario.correoVerificado" (click)="editarContenido('correo')">
+        <div>
+            <h4>Correo</h4>
+            <p>{{usuario.correo}}</p>
+        </div>
+        <p class="edit"><span>Editar</span>  <span *ngIf="usuario.correoVerificado" class="verificado"><ng-icon name="heroCheckCircle"></ng-icon>Verificado</span></p>
+    </div>
+    <div *ngIf="usuario.correoVerificado">
+        <div>
+            <h4>Correo</h4>
+            <p>{{usuario.correo}}</p>
+        </div>
+        <p class="edit"><span class="verificado"><ng-icon name="heroCheckCircle"></ng-icon>Verificado</span></p>
+    </div>
+
+    <div (click)="editarContenido('usuario')">
+        <div>
+            <h4>Usuario</h4>
+            <p>{{usuario.usuario}}</p>
+        </div>
+        <p class="edit">Editar</p>
+    </div>
+    <div (click)="editarContenido('telefono')">
+        <div>
+            <h4>Teléfono</h4>
+            <p>{{usuario.telefono}}</p>
+        </div>
+        <p class="edit">Editar</p>
+    </div>
+    <div (click)="editarContenido('documento')">
+        <div>
+            <h4>Documento</h4>
+            <p><span *ngIf="usuario.documento">{{usuario.tipoDocumento! + ' ' + usuario.documento}}</span><span *ngIf="!usuario.documento" class="sinDocumento">Sin documento</span></p>
+        </div>
+        <p class="edit"><span *ngIf="usuario.documento">Editar</span><span *ngIf="!usuario.documento">Agregar</span></p>
+    </div>
+    <div (click)="editarContenido('nombre')">
+        <div>
+            <h4>Nombre y apellido</h4>
+            <p>{{usuario.nombre}}</p>
+        </div>
+        <p class="edit">Editar</p>
+    </div>
+</div>

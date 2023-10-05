@@ -6,24 +6,27 @@
 		<p>Ayudanos a identificar tu producto</p>
 	
 		<div class="inputs">
-			<div class="input">
-				<label >Artista o fabricante:</label>
-				<input formControlName='autoria' type="text" class="field" placeholder="Ej.: Tu o alguna empresa" id="Fabricante"> <br />
+			<div class="input fabricante" [ngClass]="{'disabled': hechoPorMi}">
+				<label for="fabricante" >Artista o fabricante:</label>
+				<input formControlName='autoria' type="text" class="field" placeholder="Fabricante" id="fabricante" (input)="validar()"> <br />
+			</div>
+			<div class="checkbox">
+				<input formControlName='hechoPorMi' type="checkbox" id="checkbox" (change)="validar()"> <label for="checkbox">Hecho por mi</label>
 			</div>
 	
 			<div class="input">
-				<label for><b class="option"></b> Marca:</label>
-				<input formControlName='marca' type="text" class="field" id="Marca"> <br />
+				<label for="marca"><b class="option"></b> Marca:</label>
+				<input formControlName='marca' type="text" class="field" id="marca"> <br />
 			</div>
 	
 			<div class="input">
-				<label for><b class="option"></b> Modelo:</label>
-				<input formControlName='modelo' type="text" class="field" id="Marca"> <br />
+				<label for="modelo"><b class="option"></b> Modelo:</label>
+				<input formControlName='modelo' type="text" class="field" id="modelo"> <br />
 			</div>
 		</div>
 	
 		<div class="center-content">
-            <button class="botonInvalid" value="Continuar" name="boton" [disabled]='form.invalid' [ngClass]="{'botonValid': form.valid}">Continuar</button>
+            <button class="botonInvalid" value="Continuar" name="boton" [disabled]='!submitValue' [ngClass]="{'botonValid': submitValue}">Continuar</button>
         </div>
 	
 	</form>

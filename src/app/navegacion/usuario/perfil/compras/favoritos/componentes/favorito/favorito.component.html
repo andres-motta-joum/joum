@@ -1,5 +1,5 @@
 <div (click)="navegar(['prod/'+ favorito.id], $event)"class="contenedor">
-    <img src="{{favorito.detalles?.fotos![0][0]}}">
+    <img [src]="foto">
     <div>
         <p>{{favorito.nombre}}</p>
         <div *ngIf="favorito.descuento">

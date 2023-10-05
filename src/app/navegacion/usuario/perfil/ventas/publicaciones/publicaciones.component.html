@@ -11,4 +11,4 @@
         </select>
     </div>
 </div>
-<app-publicacion [publicacion]="publicacion" *ngFor="let publicacion of publicaciones"></app-publicacion>
+<app-publicacion [publicacion]="publicacion" [foto]="fotos[index]" *ngFor="let publicacion of publicaciones; let index = index"></app-publicacion>

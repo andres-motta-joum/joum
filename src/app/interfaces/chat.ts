@@ -1,11 +1,12 @@
 export interface Chat {
     numVenta?: number;
     mensajes?: Mensaje[];
-    bloqueo?: boolean;
+    bloqueoCliente?: boolean;
+    bloqueoVendedor?: boolean;
     //productos?: Producto[];
 }
 export interface Mensaje{
-    fecha?: Date;
-    contenido?: string;
-    remitente?: string; //Cliente / vendedor
+    fecha: Date;
+    contenido: string;
+    remitente: string; //Cliente / vendedor
 }

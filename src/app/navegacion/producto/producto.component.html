@@ -3,53 +3,56 @@
         <div (click)="sombraBool = false" class="sombra"></div>
         <ng-icon name="heroChevronLeftSolid" (click)="fotoPrev()"></ng-icon>
         <div class="cuadro" (click)="sombraBool = false">
-            <img [src]="producto.detalles?.fotos![0][currentIndex]">
+            <img [src]="fotos[estiloSelec][indexFoto]">
         </div>
         <ng-icon name="heroChevronRightSolid" (click)="fotoNex()"></ng-icon>
-        <div class="cantidadFotos">{{ currentIndex + 1 }}/{{ producto.detalles?.fotos![0].length }}</div>
+        <div class="cantidadFotos">{{ indexFoto + 1 }}/{{ fotos[estiloSelec].length }}</div>
         <div (click)="sombraBool = false" class="x">X</div>
     </div>
+    <div class="productoPropio" *ngIf="productoPropio" [ngClass]="{'productoPropioFixed': productoPropioFixed}"><p>Tu producto</p></div>
     <app-barra-menu></app-barra-menu>
-    <div class="contenidoTotalProducto">
-        <div class="encabezado">
-            <div class="seccion1">
-                <p>Volver al listado</p>
+    <ng-container *ngIf="producto">
+        <div class="contenidoTotalProducto">
+            <div class="encabezado">
+                <div class="seccion1">
+                    <p>Volver al listado</p>
+                </div>
+                <div class="seccion2" style="display: flex;">
+                    <p>Compartir</p>
+                </div>
             </div>
-            <div class="seccion2" style="display: flex;">
-                <p>Compartir</p>
+            <div class="seccioIzquierda">
+                <ng-icon class="corazon" name="heroHeart" (click)="editarFavorito()"></ng-icon>
+                <ng-icon class="corazon-full" name="heroHeartSolid" [class.corazon-click] = "enFavoritos == true"></ng-icon>
+    
+                <ng-icon class="carrito" name="matAddShoppingCart" [class.carrito-click-over] = "enCarrito == true" (click)="editarCarrito()"></ng-icon>
+                <ng-icon class="carrito-full" name="matShoppingCart" [class.carrito-click] = "enCarrito == true"></ng-icon>
+    
+                <app-fotos-producto *ngIf="fotos" [fotos]="fotos" [estiloSelec]="estiloSelec" [sombraPadre]="sombraBool" [indexPadre]="indexFoto" (sombraHijo)="nuevoDatoHijoSombra($event)" (fotoIndex)="nuevoIndex($event)" ></app-fotos-producto>
+                <div class="linea-Menu"></div>
+                <h1 class="titulos">Productos similares que te podrían gustar</h1>
+                <div class="carrusel">
+                    <app-carrusel *ngIf="productos.length !== 0" [carousel]='3' [elements]="productos"></app-carrusel>
+                </div>
+                <br>
+                <div class="linea-Menu"></div>
+                <br>
+                <app-descripcion [descripcion]="producto.descripcion!"></app-descripcion>
+                <br>
+                <div class="linea-Menu"></div>
+                <app-datos-vendedor *ngIf="usuarioVendedor" [usuario]="usuarioVendedor"></app-datos-vendedor>
+                <br>
+                <app-opiniones [opiniones]="producto.opiniones"></app-opiniones>
+            
+            </div>
+
+            <div class="seccioDerecha">
+                <app-datos-producto [productoCargado]="productoCargado" [producto]="producto" (estilo)="cambioDeEstilo($event)" (unidadeS)="unidades = $event"></app-datos-producto>
+                <app-datos-producto-dos></app-datos-producto-dos>
+                <app-datos-producto-tres [producto]="producto"></app-datos-producto-tres>
             </div>
         </div>
-        <div class="seccioIzquierda">
-            <ng-icon class="corazon" name="heroHeart" (click)="agregarFavorito()"></ng-icon>
-            <ng-icon class="corazon-full" name="heroHeartSolid" [class.corazon-click] = "corazonClick == true"></ng-icon>
-
-            <ng-icon class="carrito" name="matAddShoppingCart" [class.carrito-click-over] = "carritoClick == true" (click)="agregarCarrito()"></ng-icon>
-            <ng-icon class="carrito-full" name="matShoppingCart" [class.carrito-click] = "carritoClick == true"></ng-icon>
-
-            <app-fotos-producto [producto]="producto" [sombraPadre]="sombraBool" [indexPadre]="currentIndex" (sombraHijo)="nuevoDatoHijoSombra($event)" (fotoIndex)="nuevoIndex($event)" ></app-fotos-producto>
-            <div class="linea-Menu"></div>
-            <h1 class="titulos">Productos similares que te podrían gustar</h1>
-            <div class="carrusel">
-                <app-carrusel [carousel]='3' [elements]="productos"></app-carrusel>
-            </div>
-            <br>
-            <div class="linea-Menu"></div>
-            <br>
-            <app-descripcion [descripcion]="producto.descripcion!"></app-descripcion>
-            <br>
-            <div class="linea-Menu"></div>
-            <app-datos-vendedor [usuario]="usuario"></app-datos-vendedor>
-            <br>
-            <app-opiniones [opiniones]="producto.opiniones"></app-opiniones>
-        
-        </div>
-
-        <div class="seccioDerecha">
-            <app-datos-producto [usuario]="usuario" [producto]="producto"></app-datos-producto>
-            <app-datos-producto-dos></app-datos-producto-dos>
-            <app-datos-producto-tres [producto]="producto"></app-datos-producto-tres>
-        </div>
-    </div>
-    <app-footer></app-footer>
+        <app-footer></app-footer>
+    </ng-container>
 </div>
 

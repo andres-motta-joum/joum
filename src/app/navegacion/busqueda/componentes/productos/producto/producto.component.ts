@@ -23,6 +23,7 @@ export class ProductoComponent {
   @Input() listadoLineadoInp: boolean;
 
   @Input() producto!: Producto;
+  @Input() foto!: string;
 
   public promedioCalificacion!: number;
   public promedio!: number;

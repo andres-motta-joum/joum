@@ -1,9 +1,9 @@
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { Usuario } from 'src/app/interfaces/usuario/usuario';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { Component, NgZone} from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { Router, NavigationEnd } from '@angular/router';
+import { Subscription, first } from 'rxjs';
+import { Usuario, porComprar } from 'src/app/interfaces/usuario/usuario';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
   selector: 'app-carrito',
@@ -11,33 +11,35 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
   styleUrls: ['./carrito.component.scss']
 })
 export class CarritoComponent {
+  constructor(private zone: NgZone, private router: Router, private authService: AuthService, private auth: Auth){}
+  private subscription!: Subscription;
+  usuario!: Usuario;
+  url!: string;
 
-  constructor(private zone: NgZone, private router: Router, private route: ActivatedRoute, private userService: UsuarioService){}
-
-  private routeSubscription!: Subscription;
-  public usuario!: Usuario | undefined;
-
-
-  public url!: string;
   ngOnInit() {
     this.obtenerSeccion();
-    this.usuario = this.userService.getUserUsuario('MOTTAANDRES20221130093921');
-    this.routeSubscription = this.router.events.subscribe(async event => { // Se escucha rutas especificas declaradas en el mismo componente
+    this.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.authService.getUsuarioId(user.uid).pipe(first()).subscribe((usuario)=>{
+          this.usuario = usuario;
+        })
+      } else {
+        this.router.navigate(['cuenta/iniciar-sesion']);
+      }
+    });
+
+    this.subscription = this.router.events.subscribe(async event => { // Se escucha rutas especificas declaradas en el mismo componente
       if (event instanceof NavigationEnd) {
         this.obtenerSeccion();
       }
     });
   }
 
+//----------------------------------------------------------
   obtenerSeccion(){
     const urlSegments = this.router.url.split('/');
     this.url = urlSegments[urlSegments.length - 1];
   }
-
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
-  }
-  
 
   navegar(ruta: any[], event: Event):void{
     event.preventDefault();
@@ -45,6 +47,12 @@ export class CarritoComponent {
       this.router.navigate(ruta);
       window.scroll(0,0)
     })
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
   
   

@@ -4,12 +4,12 @@
         <h1>Notificaciones</h1>
         <div class="secciones">
             <div>
-                <app-notificacion *ngFor="let notificacion of usuario?.notificaciones"></app-notificacion>
+                <app-notificacion [notificacion]="notificacion" *ngFor="let notificacion of notificaciones" ></app-notificacion>
             </div>
             <div>
                 <div>
                     <p>Ofertas y descuentos</p>
-                    <button (click)="onButtonClick('descuentos')">
+                    <button (click)="configuracionNotificaciones('descuentos')">
                         <div class="rectangle" [ngClass]="{'clicked': descuentos}">
                           <div class="circle"></div>
                         </div>
@@ -17,7 +17,7 @@
                 </div>
                 <div>
                     <p>Nuevas ventas</p>
-                    <button (click)="onButtonClick('ventas')">
+                    <button (click)="configuracionNotificaciones('ventas')">
                         <div class="rectangle" [ngClass]="{'clicked': ventas}">
                           <div class="circle"></div>
                         </div>
@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <p>Publicaciones</p>
-                    <button (click)="onButtonClick('publicaciones')">
+                    <button (click)="configuracionNotificaciones('publicaciones')">
                         <div class="rectangle" [ngClass]="{'clicked': publicaciones}">
                           <div class="circle"></div>
                         </div>
@@ -33,7 +33,7 @@
                 </div>
                 <div>
                     <p>Sobre mis reclamos</p>
-                    <button (click)="onButtonClick('reclamos')">
+                    <button (click)="configuracionNotificaciones('reclamos')">
                         <div class="rectangle" [ngClass]="{'clicked': reclamos}">
                           <div class="circle"></div>
                         </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div>
                     <p>Nuevos mensajes</p>
-                    <button (click)="onButtonClick('mensajes')">
+                    <button (click)="configuracionNotificaciones('mensajes')">
                         <div class="rectangle" [ngClass]="{'clicked': mensajes}">
                           <div class="circle"></div>
                         </div>

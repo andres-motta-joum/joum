@@ -1,9 +1,9 @@
-<div class="contenido">
-    <img src="assets/img/categoria/cuadros/13.jpg">
+<div class="contenido" (click)="navegar(notificacion.link)">
+    <img [src]="notificacion.foto">
     <div>
-        <h4>Entregado el 9 de Julio</h4>
-        <p>Conjunto de cuadros decorativos para el hogar. Leon minimalista</p>
+        <h4>{{notificacion.titulo}}</h4>
+        <p>{{notificacion.contenido}}</p>
     </div>
-    <p>15:40</p>
+    <p>{{fecha}}</p>
 </div>
 <div class="linea"></div>

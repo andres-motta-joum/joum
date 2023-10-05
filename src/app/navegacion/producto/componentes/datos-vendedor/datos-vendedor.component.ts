@@ -15,7 +15,6 @@ import { matPlagiarism } from '@ng-icons/material-icons/baseline';
   providers: [provideIcons({heroChatBubbleLeft, heroTruck, matPlagiarism})]
 })
 export class DatosVendedorComponent {
-  @Input() producto!: Producto;
   @Input() usuario!: Usuario;
 
   constructor(private zone: NgZone, private router: Router){

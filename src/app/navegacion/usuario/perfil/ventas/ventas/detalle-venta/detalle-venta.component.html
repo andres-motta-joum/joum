@@ -1,48 +1,48 @@
 <app-menu-simple></app-menu-simple>
-<div class="body">
-    <h1>Detalle de venta <span>#84948585</span></h1>
+<div class="body" *ngIf="usuarioCliente">
+    <h1>Detalle de venta <span>#{{venta.numVenta}}</span></h1>
     <div class="contenido">
 
         <div class="left">
             <div class="encabezado">
-                <img src="assets/img/usuarios/user.svg" (click)="navegar([usuarioCliente?.usuario+'/perfil/informacion'], $event)">
+                <img src="assets/img/usuarios/user.svg" (click)="navegar([usuarioCliente.usuario+'/perfil/informacion'], $event)">
                 <div>
-                    <h3>{{usuarioCliente?.nombre}}</h3>
-                    <p>{{usuarioCliente?.tipoDocumento}} {{usuarioCliente?.documento}}</p>
+                    <h3>{{usuarioCliente.nombre}}</h3>
+                    <p>{{usuarioCliente.tipoDocumento}} {{usuarioCliente.documento}}</p>
                 </div>
                 <div>
                     <img src="assets/img/logo/iconos/Msg.svg">
-                    <img (click)="navegar([usuario?.usuario+'/' + usuarioCliente?.usuario +'/' + numVenta +'/enviar-mensaje'], $event)" src="assets/img/logo/iconos/Msg-full.svg">
+                    <img (click)="navegar([usuario?.usuario+'/' + usuarioCliente.usuario +'/' + venta.numVenta +'/enviar-mensaje'], $event)" src="assets/img/logo/iconos/Msg-full.svg">
                 </div>
             </div> 
-            <app-producto-venta [producto]="producto" [venta]="ventas[i]" [unidad]="unidades[i]" *ngFor="let producto of productos; let i = index"></app-producto-venta>
+            <app-producto-venta [producto]="producto" [venta]="venta" [unidad]="unidades[i]" [foto]="fotos[i]" [estilo]="estilos[i]" *ngFor="let producto of productos; let i = index"></app-producto-venta>
             <div class="envio">
-                <h4 *ngIf="!ventas[0].entregado">Día de entrega: Del 4 al 8 de Julio</h4>
-                <h4 *ngIf="ventas[0].entregado">Entregado</h4>
+                <h4 *ngIf="!venta.entregado">Día de entrega: Del 4 al 8 de Julio</h4>
+                <h4 *ngIf="venta.entregado">Entregado</h4>
                 <span><ng-icon name="matQuestionMark"></ng-icon></span>
                 <div class="info-entrega">
                     <ng-icon name="aspectsPlatformDropbox"></ng-icon>
-                    <ng-icon [ngClass]="{'check': ventas[0].enCamino, 'noCheck': !ventas[0].enCamino}" name="heroTruckSolid"></ng-icon>
-                    <ng-icon [ngClass]="{'check': ventas[0].entregado, 'noCheck': !ventas[0].enCamino}" name="heroCheckCircleSolid"></ng-icon>
+                    <ng-icon [ngClass]="{'check': venta.enCamino, 'noCheck': !venta.enCamino}" name="heroTruckSolid"></ng-icon>
+                    <ng-icon [ngClass]="{'check': venta.entregado, 'noCheck': !venta.enCamino}" name="heroCheckCircleSolid"></ng-icon>
     
                     <div class="linea"></div>
-                    <div class="linea-color" [ngStyle]="{'width': ventas[0].enCamino === true && ventas[0].entregado === false ? '50%' : ( ventas[0].entregado === true ? '100%' : '5%' )}"></div>
+                    <div class="linea-color" [ngStyle]="{'width': venta.enCamino === true && venta.entregado === false ? '50%' : ( venta.entregado === true ? '100%' : '5%' )}"></div>
                     <div class="en-preparacion"></div>
-                    <div class="en-camino" [ngStyle]="{'border-color': ventas[0].enCamino === true ? '#ff9e57': '#bbb'}"></div>
-                    <div class="entregado" [ngStyle]="{'border-color': ventas[0].entregado === true ? '#ff9e57': '#bbb'}"></div>
+                    <div class="en-camino" [ngStyle]="{'border-color': venta.enCamino === true ? '#ff9e57': '#bbb'}"></div>
+                    <div class="entregado" [ngStyle]="{'border-color': venta.entregado === true ? '#ff9e57': '#bbb'}"></div>
                 </div>
                 <div class="textos">
                     <div>
                         <h5>En preparación</h5>
-                        <p>{{ventas[0].fechaVenta | date:'d \' MMMM'}} 9:45</p>
+                        <p>{{fecha | date:'d \' MMMM'}} 9:45</p>
                     </div>
                     <div>
-                        <h5 [ngStyle]="{'color': ventas[0].enCamino === true ? '#606060': '#999', 'transform': ventas[0].enCamino === true ? 'translateX(-10px)' : 'translateX(-32px)'}" >En camino</h5>
-                        <p *ngIf="ventas[0].enCamino">{{ventas[0].fechaVenta | date:'d \' MMMM'}} 14:24</p>
+                        <h5 [ngStyle]="{'color': venta.enCamino === true ? '#606060': '#999', 'transform': venta.enCamino === true ? 'translateX(-10px)' : 'translateX(-32px)'}" >En camino</h5>
+                        <p *ngIf="venta.enCamino">{{fecha | date:'d \' MMMM'}} 14:24</p>
                     </div>
                     <div>
-                        <h5 [ngStyle]="{'color': ventas[0].entregado === true ? '#606060': '#999'}">Llegó</h5>
-                        <p *ngIf="ventas[0].entregado">{{ventas[0].fechaVenta | date:'d \' MMMM'}} 7:49</p>
+                        <h5 [ngStyle]="{'color': venta.entregado === true ? '#606060': '#999'}">Llegó</h5>
+                        <p *ngIf="venta.entregado">{{fecha | date:'d \' MMMM'}} 7:49</p>
                     </div>
                 </div>
             </div>
@@ -59,11 +59,11 @@
             </div>
             <h5>Detalles de pago</h5>
             <div class="precios">
-                <ng-container *ngIf="productos.length === 1">
+                <ng-container *ngIf="cantidadUnidades === 1">
                     <div>Producto</div><div>$ {{precio | number: '1.0-0'}}</div>
-                </ng-container>
-                <ng-container *ngIf="productos.length !== 1">
-                    <div>Productos ({{productos.length}})</div><div>$ {{precio | number: '1.0-0'}}</div>
+                </ng-container> 
+                <ng-container *ngIf="cantidadUnidades !== 1">
+                    <div>Productos ({{cantidadUnidades}})</div><div>$ {{precio | number: '1.0-0'}}</div>
                 </ng-container>
                 <div>Envío</div><div>- $ {{precioEnvio | number: '1.0-0'}}</div>
                 <div>Cargo por venta</div><div>- $ {{cargoPorVenta | number: '1.0-0'}}</div>

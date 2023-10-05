@@ -1,5 +1,5 @@
-import { Component, NgZone } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { heroChatBubbleLeftEllipsisSolid } from '@ng-icons/heroicons/solid';
 import { matQuestionMark } from '@ng-icons/material-icons/baseline';
@@ -11,9 +11,11 @@ import { heroBanknotes } from '@ng-icons/heroicons/outline';
 import { heroDocumentText } from '@ng-icons/heroicons/outline';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { Producto } from 'src/app/interfaces/producto/producto';
-import { Venta } from 'src/app/interfaces/usuario/subInterfaces/venta';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
+import { Venta } from 'src/app/interfaces/venta';
+import { Subscription, first } from 'rxjs';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { ProductosService } from 'src/app/servicios/productos/productos.service';
 
 @Component({
   selector: 'app-detalle-venta',
@@ -21,56 +23,79 @@ import { ProductoService } from 'src/app/servicios/producto/producto.service';
   styleUrls: ['./detalle-venta.component.scss'],
   providers: [provideIcons({heroChatBubbleLeftEllipsisSolid, matQuestionMark, matMoveToInbox, heroTruckSolid, heroCheckCircleSolid, aspectsPlatformDropbox, heroBanknotes, heroDocumentText})]
 })
-export class DetalleVentaComponent {
+export class DetalleVentaComponent implements OnInit, OnDestroy{
+  constructor(private zone: NgZone,private router: Router, private authService: AuthService, private firestore: Firestore, private prdsService: ProductosService) {}
+  private routeSubscription!: Subscription | undefined;
+  usuario!: Usuario | null;
+  usuarioCliente!: Usuario;
+  productos: Producto[] = [];
+  estilos: string[] = [];
+  fotos: string[] = [];
+  unidades: number[] = [];
+  cantidadUnidades: number = 0;
+  fecha!: Date;
+  venta!: Venta;
 
-  public usuario!: Usuario | undefined;
-  public productos!: Producto[];
-  public ventas!: Venta[]
-  public numVenta!: string;
-  public usuarioCliente!: Usuario | undefined;
-  public unidades!: number[];
+  precio: number = 0;
+  precioEnvio: number = 0;
+  impuestos: number = 0;
+  cargoPorVenta: number = 0;
 
-  public precio = 0;
-  public precioEnvio = 0;
-  public impuestos = 0;
-  public cargoPorVenta = 0;
+  porPreparar = 0;
+  enCamino = 0;
+  finalizadas = 0;
 
-  constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private userService: UsuarioService, private prdService: ProductoService) {}
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      const segmentsUser = this.route.snapshot.url.map(segment => segment.path);
-      const userId = segmentsUser[0];
-      this.usuario = this.userService.getUserUsuario(userId);
-      const segmentsNumVenta = this.route.snapshot.url.map(segment => segment.path);
-      this.numVenta =  segmentsNumVenta[segmentsNumVenta.length - 1];
-      this.obtenerprecios();
-    });
-  }
-
-  async obtenerDatos() {
-    this.ventas = [];
-    this.productos = [];
-    if (this.usuario) {
-      for (const venta of this.usuario.ventas!){ 
-        for(const id of venta.productos!){
-          if(venta.numVenta === parseInt(this.numVenta)){
-            this.ventas.push(venta);
-            this.productos.push(this.prdService.getProductsId(id.id!)!);
-            this.usuarioCliente = this.userService.getUserId(this.ventas[0].idCliente!);
-            this.unidades = this.ventas[0].unidades!;
-          }
-        }
-      }
+  async ngOnInit() {
+    const url = this.router.url.split('/');
+    const userId = url[1];
+    this.usuario = await this.authService.getUsuarioUser(userId);
+    if(this.usuario){
+      await this.obtenerVenta();
+      this.authService.getUsuarioId(this.venta.idCliente!).pipe(first()).subscribe(usuario =>{
+        this.usuarioCliente = usuario;
+      })
+      await this.obtenerProductos();
+    }else{
+      this.router.navigate(['']);
     }
   }
 
-  async obtenerprecios(){
-    await this.obtenerDatos();
+  async obtenerVenta() {
+    const url = this.router.url.split('/');
+    const ventaRef = doc(this.firestore, `ventas/${url[url.length - 1]}`);
+    const snapshot = await getDoc(ventaRef);
+    this.venta = snapshot.data() as Venta;
+
+    const timestamp = this.venta.fechaVenta!;
+    this.fecha = new Date(timestamp.seconds * 1000);
+  }
+
+  async obtenerProductos(){
+    const productosRef = await Promise.all(this.venta.referencias.map(ref => {
+      this.estilos.push(ref.estilo);
+      this.unidades.push(ref.unidades);
+      this.cantidadUnidades += ref.unidades; 
+      return getDoc(ref.producto);
+    }));
+    productosRef.forEach(snapshot => {
+      const prd = snapshot.data() as Producto;
+      prd.id = snapshot.id
+      this.productos.push(prd);
+    });
+    this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilos);
+    this.obtenerprecios();
+  }
+
+  obtenerprecios(){
     for(const [index, producto] of this.productos.entries()){
       this.precio += (producto.precio! * this.unidades[index]);
       if(producto.envioGratis){
         this.precioEnvio += producto.precioEnvio!;
+      }
+      if(producto.tipoPublicacion == 'premium'){
+        this.cargoPorVenta += (producto.precio! * this.unidades[index]) * 0.11;
+      }else if(producto.tipoPublicacion == 'basica'){
+        this.cargoPorVenta += (producto.precio! * this.unidades[index]) * 0.07;
       }
     }
     const fuente = this.precio * 0.015;
@@ -84,5 +109,11 @@ export class DetalleVentaComponent {
       this.router.navigate(ruta);
       window.scroll(0,0)
     })
+  }
+
+  ngOnDestroy(): void {
+    if(this.routeSubscription){
+      this.routeSubscription.unsubscribe();
+    }
   }
 }

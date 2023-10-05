@@ -1,16 +1,18 @@
 <div class="contenedor">
     <div>
-        <img src="{{productoCarrito.detalles?.fotos![0][0]}}" alt="">
+        <div class="cuadroImg">
+            <img *ngIf="foto" [src]="foto" (click)="navegar(['prod/' + productoCarrito.id])">
+        </div>
         <div>
             <p>{{productoCarrito.nombre}}</p>
-            <p>Color de la estructura: Lampara OBS</p>
+            <p>Estilo: {{estiloString}}</p>
             <p *ngIf="productoCarrito.envioGratis" class="envioGratis">Envio gratis</p>
             <p *ngIf="!productoCarrito.envioGratis" class="envioPrecio"><span>Recíbelo</span> por <span>$ {{productoCarrito.precioEnvio | number: '1.0-0'}}</span></p>
         </div>
         <div>
-            <p>Eliminar</p>
-            <p>Más productos del vendedor</p>
-            <p>Guardar para después</p>
+            <p (click)="eliminarCarrito()">Eliminar</p>
+            <p (click)="navegar([userUsuario + '/perfil/productos'])">Más productos del vendedor</p>
+            <p (click)="agregarGuardado()">Guardar para después</p>
         </div>
     </div>
     <div>
@@ -24,9 +26,9 @@
             <p>$ {{productoCarrito.precio | number: '1.0-0'}}</p>
             <p></p>
         </ng-container>
-        <p>{{productoCarrito.unidades}} disponibles</p>
+        <p>{{productoCarrito.estilos![indexEstilo].unidades}} disponibles</p>
         <div>
-            <button (click)="cambiarUnidad('-')">-</button><p>{{unidades}}</p><button (click)="cambiarUnidad('+')">+</button>
+            <button (click)="cambiarUnidad('-', indice, productoCarrito.estilos![indexEstilo].unidades)">-</button><p>{{unidad}}</p><button (click)="cambiarUnidad('+', indice, productoCarrito.estilos![indexEstilo].unidades)">+</button>
         </div>
     </div>
 </div>

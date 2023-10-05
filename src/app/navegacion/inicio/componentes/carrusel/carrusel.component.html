@@ -17,7 +17,7 @@
                 'slick-track2':carousel === 2,
                 'slick-track3':carousel === 3
             }">
-            <div *ngFor='let element of elements' style="margin-left: -18px;" [ngClass]="{
+            <div *ngFor='let element of elements; let i = index' style="margin-left: -18px;" [ngClass]="{
                     'slick':carousel === 1,
                     'slick2':carousel === 2,
                     'slick3':carousel === 3
@@ -29,8 +29,8 @@
                     <p class="slick-text"> {{ element.nombre }} </p>
                 </div>
                 <div (click)="navegar(['prod/', element.id])" *ngIf='carousel === 2' class="slick-content2">
-                    <picture *ngIf="element && element.detalles && element.detalles.fotos && element.detalles.fotos[0][0]">
-                        <img [src]='element.detalles.fotos[0][0]' alt="Image">
+                    <picture *ngIf="element">
+                        <img *ngIf="fotos[i]" [src]='fotos[i]' alt="Image">
                     </picture>
                     <div style="height: 100px;">
                         <p class="precio-final" *ngIf="!element.descuento">$ {{ element.precio | number:'1.0-0' }}</p>
@@ -43,8 +43,8 @@
                     </div>
                 </div>
                 <div (click)="navegar(['prod/',element.id])" *ngIf='carousel === 3' class="slick-content3">
-                    <picture *ngIf="element && element.detalles && element.detalles.fotos && element.detalles.fotos[0][0]">
-                        <img [src]='element.detalles.fotos[0][0]' alt="Image">
+                    <picture *ngIf="element">
+                        <img *ngIf="fotos[i]" [src]='fotos[i]' alt="Image">
                     </picture>
                     <div>
                         <div style="display: flex;">

@@ -20,7 +20,7 @@
         <div class="inputs">
           <div>
             <label for="unidades">Unidades</label>
-            <input [value]="estilo.unidades" name="unidades" type="number" maxlength="3" required (input)="actualizarDatosInputs($event, i, 'unidades')" (keydown)="validadCampo($event, $event)">
+            <input [value]="estilo.unidades" name="unidades" type="number" maxlength="3" required (input)="actualizarDatosInputs($event, i, 'unidades')" (keydown)="validadCampo($event, $event)" onpaste="return false;">
           </div>
           <div>
             <label for="SKU">SKU (Opcional)</label>

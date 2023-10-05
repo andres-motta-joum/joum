@@ -2,8 +2,8 @@
     <button class="back" (click)='atras()'><ng-icon name="heroArrowSmallLeft"></ng-icon></button>
     <form class="paso2" (ngSubmit)="submit()">
 
-        <h1>Estilos</h1>
-        <p>Si tienes varios estilos de tu producto, agregalos según como consideres sus diferencias.</p>
+        <h1>Estilos <ng-icon name="ionInformationCircleOutline" (click)="inf = true"></ng-icon></h1>
+        <p>Si tienes varios diseños de tu producto, agregalos según como consideres sus diferencias.</p>
     
         <div class="field-container">
             <ng-container *ngFor="let input of inputs; let i = index">
@@ -19,4 +19,15 @@
             <button type="submit" class="botonInvalid" value="Continuar" name="boton" [disabled]='!btnSubmit' [ngClass]="{'botonValid': btnSubmit}">Continuar</button>
         </div>
     </form>
+
+    <div class="alerta" *ngIf="inf" (click)="info()">
+        <div class="content" (click)="$event.stopPropagation()">
+          <h1>Estilos de mi producto</h1>
+          <p>Son las diferentes versiones o diseños de tu producto que deseas ofrecer. Por ejemplo, si estás vendiendo {{descripcion}}. Esto te permite brindar opciones variadas a tus clientes.</p>
+          <div>
+            <button (click)="info()">Aceptar</button>
+          </div>
+          <p class="close" (click)="info()">x</p>
+        </div>
+      </div>
 </div>

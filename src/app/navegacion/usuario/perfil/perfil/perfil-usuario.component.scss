@@ -1,40 +1,41 @@
 .todo {
-  width: 100%;
+  width: 94.5%;
+  margin-left: 2%;
 
   /*--- SECCION DERECHA ---*/
   .mainPerfilMenu {
     display: flex;
     width: 100%;
-    border: 1px solid #dedede;
-    border-radius: 10px;
-    background: white;
+    box-shadow: 0 -0.2px 2.6px rgba(0,0,0,0.18), 0 3.1px 2.3px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    background: #fff;
     overflow: hidden;
     position: relative;
-	  margin-bottom: 25px;
-    height: 135px;
+	  margin-bottom: 20px;
+    height: 130px;
 
     .circulo{
       width: 300px;
       height: 240px;
-      background-color: #e5e5e5;
+      background-color: #e3e3e3;
       border-radius: 50%;
       position: absolute;
       top: -165px;
       left: -130px;
     }
     .picPerfil {
-      margin: 20px 40px 20px 50px;
+      margin: 20px 35px 20px 50px;
       object-fit: cover;
-      width: 90px;
-      height: 90px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       z-index: 10;
     }
     .nombre {
-      font-size: 26px;
-      font-weight: 500;
+      font-size: 23px;
+      font-weight: 490;
       word-spacing: 2px;
-      color: #4a4a4a;
+      color: #505050;
       width: 800px;
       height: 40px;
       margin-bottom: 0;
@@ -104,32 +105,6 @@
       
     }
     div:nth-child(5){
-      margin: 15px;
-      position: absolute;
-      right: 82px;
-      img:nth-child(1){
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 31px;
-          height: 31px;
-      }
-      img:nth-child(2){
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 31px;
-          height: 31px;
-          opacity: 0;
-          transition: .2s;
-          cursor: pointer;
-          &:hover{
-              opacity: 1;
-          }
-      }
-      
-    }
-    div:nth-child(6){
       position: absolute;
       bottom: 40px;
       right: 55px;
@@ -151,6 +126,14 @@
               opacity: 1;
           }
       }
+      img:nth-child(3){
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 31px;
+        transition: .2s;
+        cursor: pointer;
+    }
       
     }
 
@@ -168,14 +151,15 @@
 
   /* -------- CONTENIDO PERFIL --------------*/
   .contenidoPerfil {
+    margin-top: 4px;
     display: flex;
     width: 100%;
-    border: 1px solid #dedede;
-    border-radius: 10px;
+    border-radius: 8px;
     background: white;
     overflow: hidden;
     position: relative;
-    height: 40px;
+    height: 38px;
+    box-shadow: 0 -0.1px 2.6px rgba(0,0,0,0.17), 0 3.1px 2.3px rgba(0,0,0,0.05);
 
     .opcionContenido {
       position: relative;
@@ -195,35 +179,35 @@
         }
       }
       ng-icon{
-        margin: 9px 12px;
-        font-size: 20px;
+        margin: 10px 12px;
+        font-size: 17px;
         color: #aaa;
       }
 
       p {
         margin-top: 10px;
         color: #888;
-        font-size: 16px;
+        font-size: 15px;
         letter-spacing: 1px;
-        font-weight: 550;
+        font-weight: 480;
         text-align: center;
         position: relative;
       }
     }
 
-    .classAddContenidoPerfil {
+    .selected {
       z-index: 1;
       background-color: #fff;
       ng-icon{
-        color: #FF9E57;
-        font-size: 21px;
+        color: #fbac73;
+        font-size: 18px;
       }
       p {
         margin-top: 9px;
         transition: .2s;
         color: #555;
-        font-weight: 550;
-        font-size: 17px;
+        font-weight: 500;
+        font-size: 16px;
         transition: .1s;
         transform: translateY(1px);
       }

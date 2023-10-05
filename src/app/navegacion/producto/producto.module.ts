@@ -13,8 +13,6 @@ import { DatosProductoDosComponent } from './componentes/datos-producto-dos/dato
 import { fotosProductoComponent } from './componentes/fotos-producto/fotos-producto.component';
 import { OpinionesComponent } from './componentes/opiniones/opiniones.component';
 import { DatosProductoTresComponent } from './componentes/datos-producto-tres/datos-producto-tres.component';
-
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
 import { FormsModule } from '@angular/forms';
 
 import localeEs from '@angular/common/locales/es';
@@ -39,7 +37,6 @@ registerLocaleData(localeEs);
     RouterModule.forChild(routes)
   ],
   providers: [
-    ProductoService,
     { provide: LOCALE_ID, useValue: 'es-CO' }
   ]
 })

@@ -1,8 +1,8 @@
 <div class="producto">
-    <img [src]="producto.detalles?.fotos![0][0]">
+    <img [src]="foto">
     <div>
         <h4>{{producto.nombre}}</h4>
-        <p>Color: Blanco</p>
+        <p>Estilo {{estilo}}</p>
         <p>$ {{producto.precio | number:'1.0-0'}}</p>
     </div>
     <p> {{unidad}} Unidades</p>

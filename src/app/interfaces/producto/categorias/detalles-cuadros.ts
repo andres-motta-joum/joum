@@ -13,7 +13,8 @@ export interface DetallesCuadros {
     ancho?: number,
     unidadMedidaAncho?: number,
 
-    tipoPanel?: string,     /*--- preguntas si/no ---*/
+    panel?: boolean,
+        tipoPanel?: string     /*--- preguntas si/no ---*/
     marco?: boolean,
         materialMarco?: string,
     frase?: boolean,

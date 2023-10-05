@@ -1,0 +1,10 @@
+<div class="content">
+    <h2>Eliminar usuario</h2>
+    <label for="email">Eliminar</label>
+    <input type="text" id="email" [value]="direccion">
+    <div>
+        <button type="submit" value="Continuar" name="boton">Editar</button>
+        <button value="Continuar" name="boton" (click)="Cerrar()">Cancelar</button>
+    </div>
+    <ng-icon name="ionClose" (click)="Cerrar()"></ng-icon>
+</div>

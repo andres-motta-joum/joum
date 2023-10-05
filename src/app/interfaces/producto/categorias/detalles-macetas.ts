@@ -19,7 +19,6 @@ export interface DetallesMacetas {
     unidadMedidaAncho?: string,
     largo?: number,
     unidadMedidaLargo?: string,
-    forma?: string, //BORRAR
     material?: string,
     volumen?: number;
     unidadMedidaVolumen?: string,

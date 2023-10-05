@@ -34,12 +34,8 @@ export class IniciarSesionComponent {
   private initForm():void {
     this.form = this.fb.group(
       {
-        email: ['', [
-          Validators.required
-        ]],
-        password: ['', [
-          Validators.required
-        ]]
+        email: ['', [Validators.required]],
+        password: ['', [Validators.required]]
       }
     )
   }

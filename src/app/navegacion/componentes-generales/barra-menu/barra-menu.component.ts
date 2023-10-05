@@ -33,12 +33,12 @@ import { heroArrowTrendingUp, } from '@ng-icons/heroicons/outline';
 
 import { heroDocumentText } from '@ng-icons/heroicons/outline';
 import { heroArrowRightOnRectangle } from '@ng-icons/heroicons/outline';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { Auth, User } from '@angular/fire/auth';
-import { Firestore} from '@angular/fire/firestore'; 
-import { doc, getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc} from '@angular/fire/firestore'; 
+import { Notificacion } from 'src/app/interfaces/usuario/subInterfaces/notificacion';
+import { InformacionPerfilService } from 'src/app/servicios/informacionPerfil/informacion-perfil.service';
 
 @Component({
   selector: 'app-barra-menu',
@@ -47,18 +47,25 @@ import { doc, getDoc } from '@angular/fire/firestore';
   viewProviders: [provideIcons({ heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle, ionNotificationsOutline, ionChevronDownOutline})]
 })
 export class BarraMenuComponent{
-  constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private authService: AuthService, private auth: Auth, private firestore: Firestore){}
+  constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private authService: AuthService, private auth: Auth, private firestore: Firestore, private perfilService: InformacionPerfilService){}
   public ultimoDatoUrl!: string;
   public scrollDisplay: Boolean = true;
   private routeSubscription!: Subscription;
   @ViewChild(MenuLateralComponent, {static: false})
   menuLateral: MenuLateralComponent = new MenuLateralComponent(this.changeDetectorRef, this.zone,this.router);
 
-  public usuario!: Usuario | null;
-  public nombre!: string;
-  public inUser!: boolean;
+  usuario!: Usuario | null;
+  nombre!: string;
+  inUser!: boolean;
 
-  public routeStateSubsCription!: Subscription;
+  routeStateSubsCription!: Subscription;
+  notificaciones!: Notificacion[];
+  nuevaNotificacion!: boolean;
+
+  isMouseOver = false;
+  height = '0px';
+
+  productosEnCarrito: number = 0;
 
   ngOnInit() {
     this.routeSubscription = this.route.paramMap.subscribe(()=> {
@@ -72,13 +79,69 @@ export class BarraMenuComponent{
       } else {this.inUser = false;}
     });
   }
+  //Mostrar notificaciones -------
+  mouseIn(){
+    if(this.notificaciones){
+      if (!this.isMouseOver) {
+        this.isMouseOver = true;
+        setTimeout(()=>{
+          if(this.isMouseOver){
+            if(this.notificaciones.length > 4){
+              this.height = '497px';
+            }else{
+              this.height = (this.notificaciones.length * 115.5) + 31 + 'px';
+            }
+            this.marcarComoVisto(this.usuario?.notificaciones!)
+          }
+        }, 100)
+      }
+    }
+  }
+  mouseOut(){
+    if(this.notificaciones){
+      this.isMouseOver = false;
+      setTimeout(()=>{
+        if(!this.isMouseOver){
+          this.height = '0px';
+        }
+      }, 200)
+    }
+  }
 
+  async marcarComoVisto(notificaciones: Notificacion[]) {
+    // Comienza desde el final del array y continúa hasta que hayas marcado 4 objetos o llegues al inicio del array
+    for (let i = notificaciones.length - 1; i >= 0 && i >= notificaciones.length - 4; i--) {
+      notificaciones[i].visto = true;
+    }
+    const usuarioRef = doc(this.firestore, `usuarios/${this.usuario?.id}`);
+    await setDoc(usuarioRef, {notificaciones: notificaciones}, {merge: true});
+  }
+  //-------------------------
   obtenerUsuario(){
     this.routeSubscription = this.authService.getUsuarioId(this.auth.currentUser?.uid!).subscribe(usuario =>{
       this.usuario = usuario;
+      //--- nombre ----
       const palabras = this.usuario.nombre!.trim().split(' ');
       this.nombre = palabras.slice(0, 2).join(' ');
-      
+      //---- notificaciones----
+      let notificaciones: Notificacion[] = []
+      if(usuario.notificaciones){
+        for(let notificacion of usuario.notificaciones){
+          notificaciones.unshift(notificacion);
+        }
+        this.nuevaNotificacion = usuario.notificaciones?.some(notificacion => notificacion.visto == false);
+      }else{
+        this.nuevaNotificacion = false;
+      }
+      this.notificaciones = notificaciones;
+      //---- productos en carrito ------
+      let cantidad = 0;
+      if(this.usuario.carrito){
+        for(let carrito of this.usuario.carrito){
+          cantidad += carrito.unidades;
+        }
+      }
+      this.productosEnCarrito = cantidad;
     });
   }
 
@@ -122,6 +185,11 @@ export class BarraMenuComponent{
         window.scroll(0,0)
       })
     }
+  }
+
+  direccionarDirecciones(){
+    this.perfilService.selected = 'direcciones';
+    this.router.navigate([this.usuario?.usuario + '/perfil/informacion'])
   }
 
 //---------------------------

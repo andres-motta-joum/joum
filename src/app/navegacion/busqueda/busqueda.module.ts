@@ -14,7 +14,6 @@ import { CarritoModule } from './secciones/carrito/carrito.module';
 import { HistorialComponent } from './secciones/historial/historial.component';
 import { RecomendacionesComponent } from './secciones/recomendaciones/recomendaciones.component';
 
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
 import { ProductoHistorialComponent } from './secciones/historial/producto-historial/producto-historial.component';
 
 @NgModule({
@@ -40,9 +39,6 @@ import { ProductoHistorialComponent } from './secciones/historial/producto-histo
     ProductoComponent,
     HistorialComponent,
     RecomendacionesComponent
-  ],
-  providers: [
-    ProductoService
   ]
 })
 export class BusquedaModule { }

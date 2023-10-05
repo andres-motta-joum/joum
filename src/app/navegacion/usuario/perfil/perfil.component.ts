@@ -28,9 +28,8 @@ import { heroChartPie } from '@ng-icons/heroicons/outline';
 import { heroDocumentTextSolid } from '@ng-icons/heroicons/solid';
 
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
-import { filter } from 'rxjs/operators';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-perfil',
@@ -61,19 +60,8 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 })
 export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
 
-  constructor(private router: Router,private route: ActivatedRoute,private renderer: Renderer2,private changeDetector: ChangeDetectorRef,private zone: NgZone, private authService: AuthService) {}
-  public footer: any;
-  public footerHeight: any;
-  public footerSlide!: number;
-  public fotosombra!: boolean;
-  public mouseInMenu = false;
-  public screenWidth: number = window.innerWidth;
-  public screenHeight: number = window.innerHeight;
-  public interruptor = true;
-  public photoText = 'Arrastra aquí tu fotos';
-  public stateSubMenu: string[] = ['inactive', 'inactive', 'inactive'];
-  public statefotos = 'inactive';
-
+  constructor(private router: Router,private route: ActivatedRoute,private renderer: Renderer2,private changeDetector: ChangeDetectorRef,private zone: NgZone, private authService: AuthService, private auth: Auth) {}
+  private routerSubscription!: Subscription;
   private subscripciones: Subscription[] = [];
   private listenMouseEnterMenu!: () => void;
   private listenMouseLeaveMenu!: () => void;
@@ -81,10 +69,18 @@ export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
   @ViewChild('principalUL') principalUL!: ElementRef;
   @ViewChild('body') body1!: ElementRef;
 
-  public idUsuario!: string;
-  private routerSubscription: Subscription | undefined;
-  public datosUsuario!: Usuario;
+  footer: any;
+  footerHeight: any;
+  footerSlide!: number;
+  fotosombra!: boolean;
+  mouseInMenu = false;
+  screenWidth: number = window.innerWidth;
+  screenHeight: number = window.innerHeight;
+  interruptor = true;
+  stateSubMenu: string[] = ['inactive', 'inactive', 'inactive'];
 
+  miNombre!: string;
+  miUsuario!: string;
 
   ngOnInit(): any { 
     this.obtenerUsuario();
@@ -95,13 +91,42 @@ export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
     });
   }
 
-  async obtenerUsuario() {
-    this.idUsuario = this.route.snapshot.paramMap.get('id')!;
-    await this.authService.getUsuarioUser(this.idUsuario).then((usuario)=>{
-      if(!usuario){
-        this.router.navigate(['']);
+  obtenerUsuario(){
+    const url = (this.router.url).split('/');
+    this.auth.onAuthStateChanged(async (usuario)=>{
+      if(usuario){
+        const miUsuario = await this.authService.getUsuarioIdPromise(usuario.uid);
+        if(miUsuario.usuario == url[1]){
+          //---- en caso de estár en mi perfil
+          this.miNombre = miUsuario.nombre!.split(' ').slice(0, 2).join(' ');
+          this.miUsuario = miUsuario.usuario;
+        }else{
+          if(url[2] == 'perfil' && (url[3] == 'informacion' || url[3] == 'productos')){
+            //---- en caso de estár en un perfil de otro usuario, ya con cuenta iniciada
+            const usuarioUrl = await this.authService.getUsuarioUser(url[1]);
+            if(usuarioUrl){
+              this.miNombre = miUsuario.nombre!.split(' ').slice(0, 2).join(' ');
+              this.miUsuario = miUsuario.usuario!;
+            }else{
+              this.router.navigate(['']); // usuario de la url no existe
+            }
+          }else{
+            this.router.navigate(['']);
+          }
+        }
+      }else{
+        if(url[2] == 'perfil' && (url[3] == 'informacion' || url[3] == 'productos')){
+          const usuarioUrl = await this.authService.getUsuarioUser(url[1]);
+          if(!usuarioUrl){
+            this.router.navigate(['']); // usuario de la url no existe
+          }
+          //---- en caso de estár en un perfil de otro usuario, sin cuenta iniciada
+        }else{
+          this.router.navigate(['cuenta/iniciar-sesion']);
+        }
       }
-    })
+      
+    });
   }
 
 
@@ -139,14 +164,6 @@ ngAfterViewInit(): void {
   desplegarSubmenu(i: number): any {
     this.stateSubMenu[i] = this.stateSubMenu[i] === 'active' ? 'inactive' : 'active';
   }
-
-
-  getfotos(fileInput: HTMLInputElement): void {
-    if (fileInput.files !== null) {
-      this.photoText = fileInput.files[0].name;
-    }
-  }
-
 
   getFooter(element: any): any {
     this.footer = element;

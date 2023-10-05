@@ -1,31 +1,113 @@
-<div class="reputacion">
-    <div>
-        <h1>27</h1>
-        <p>Ventas realizadas</p>
-    </div>
-    <div>
-        <img src="assets/img/logo/iconos/Mensajes-check.svg">
-        <p>Brinda buena atención</p>
-    </div>
-    <div>
-        <img src="assets/img/logo/iconos/Envios-check.svg">
-        <p>Su entrega de productos es impecable</p>
-    </div>
-</div>
-<div class="opiniones">
-    <div>
-        <h1>0</h1>
-        <p>Opiniones</p>
-    </div>
-    <div>
-        <div>
-            <div></div><p>Buena</p>
+<ng-container *ngIf="usuario">
+    <ng-container *ngIf="usuarioDiferente; else datosUsuario">
+        <div class="reputacion">
+            <div>
+                <h1 *ngIf="usuario.ventas">{{usuario.ventas.length}}</h1>
+                <h1 *ngIf="!usuario.ventas">0</h1>
+                <p>Ventas realizadas</p>
+            </div>
+            <div>
+                <img src="assets/img/logo/iconos/mensajes-none.svg">
+                <div>
+                    <p>Atención al cliente</p>
+                    <p>Sin datos aún</p>
+                </div>
+            </div>
+            <div>
+                <img src="assets/img/logo/iconos/envios-none.svg">
+                <div>
+                    <p>Entrega de productos</p>
+                    <p>Sin datos aún</p>
+                </div>
+            </div>
         </div>
-        <div>
-            <div></div><p>Regular</p>
+        <div class="opiniones">
+            <div>
+                <h1>0</h1>
+                <p>Opiniones</p>
+            </div>
+            <div>
+                <div>
+                    <div></div><p>Buena</p>
+                </div>
+                <div>
+                    <div></div><p>Regular</p>
+                </div>
+                <div>
+                    <div></div><p>Mala</p>
+                </div>
+            </div>
         </div>
-        <div>
-            <div></div><p>Mala</p>
+    </ng-container>
+
+    <ng-template #datosUsuario>
+        <div class="datos">
+            <div> <!-- Parte izquierda -->
+                <div [ngClass]="{'selected': selected == 'datosPersonales'}" (click)="cambiarInformacion('datosPersonales')">
+                    <img src="assets/img/logo/iconos/user-data.svg">
+                    <div>
+                        <h4>Tus datos</h4>
+                        <p>Tu datos principales de identidad</p>
+                    </div>
+                    <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+                </div>
+                <div [ngClass]="{'selected': selected == 'seguridad'}" (click)="cambiarInformacion('seguridad')">
+                    <ng-icon name="heroLockClosed"></ng-icon>
+                    <div>
+                        <h4>Seguridad</h4>
+                        <p>Configura datos de protección</p>
+                    </div>
+                    <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+                </div>
+                <div [ngClass]="{'selected': selected == 'direcciones'}" (click)="cambiarInformacion('direcciones')">
+                    <ng-icon name="heroMapPin"></ng-icon>
+                    <div>
+                        <h4>Direcciones</h4>
+                        <p>Agrega o modifica tus direcciones</p>
+                    </div>
+                    <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+                </div>
+                <div [ngClass]="{'selected': selected == 'privacidad'}" (click)="cambiarInformacion('privacidad')">
+                    <ng-icon name="heroShieldCheck"></ng-icon>
+                    <div>
+                        <h4>Privacidad</h4>
+                        <p>Modificar datos de privacidad</p>
+                    </div>
+                    <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+                </div>
+                <div [ngClass]="{'selected': selected == 'e-mails'}" (click)="cambiarInformacion('e-mails')">
+                    <ng-icon name="iconoirMailOut" class="email-icon"></ng-icon>
+                    <div>
+                        <h4>E-mails</h4>
+                        <p>Correos que quieres recibir</p>
+                    </div>
+                    <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+                </div>
+            </div>
+            <div>
+                <app-datos-personales *ngIf="selected == 'datosPersonales'" (mostrarContenido)="mostrarContenido($event)"></app-datos-personales>
+                <app-seguridad *ngIf="selected == 'seguridad'" (mostrarContenido)="mostrarContenido($event)"></app-seguridad>
+                <app-direcciones *ngIf="selected == 'direcciones'" (mostrarContenido)="mostrarContenido($event)"></app-direcciones>
+                <app-privacidad *ngIf="selected == 'privacidad'" (mostrarContenido)="mostrarContenido($event)"></app-privacidad>
+                <app-e-mails *ngIf="selected == 'e-mails'"></app-e-mails>
+            </div> <!-- Parte derecha -->
         </div>
-    </div>
-</div>
+        <div class="contentEdit" *ngIf="habilitarEdicion">
+            <div class="sombra" (click)="habilitarEdicion = false"></div>
+            <app-editar-correo *ngIf="recuadroContenido == 'correo'" [correo]="usuario.correo" (cerrar)="habilitarEdicion = false"></app-editar-correo>
+            <app-editar-usuario *ngIf="recuadroContenido == 'usuario'" [usuario]="usuario.usuario" (cerrar)="habilitarEdicion = false"></app-editar-usuario>
+            <app-editar-telefono *ngIf="recuadroContenido == 'telefono'" [telefono]="usuario.telefono.toString()" (cerrar)="habilitarEdicion = false"></app-editar-telefono>
+            <app-editar-documento *ngIf="recuadroContenido == 'documento'" [documento]="usuario.documento!" [tipoDocumento]="usuario.tipoDocumento!" (cerrar)="habilitarEdicion = false"></app-editar-documento>
+            <app-editar-nombre *ngIf="recuadroContenido == 'nombre'" [nombre]="usuario.nombre" (cerrar)="habilitarEdicion = false"></app-editar-nombre>
+
+            <app-editar-direccion *ngIf="recuadroContenido == 'direccion'" (cerrar)="habilitarEdicion = false"></app-editar-direccion>
+
+            <app-editar-contrasena *ngIf="recuadroContenido == 'contrasena'" (cerrar)="habilitarEdicion = false"></app-editar-contrasena>
+            <!--<app-editar-telefono></app-editar-telefono>-->
+
+            <app-editar-permisos-privacidad *ngIf="recuadroContenido == 'permisos-privacidad'" (cerrar)="habilitarEdicion = false"></app-editar-permisos-privacidad>
+            <app-eliminar-cuenta *ngIf="recuadroContenido == 'cuenta'" (cerrar)="habilitarEdicion = false"></app-eliminar-cuenta>
+        </div>
+    </ng-template>
+
+</ng-container>

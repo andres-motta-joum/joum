@@ -1,6 +1,6 @@
 export interface Dinero {
-    disponible?: number;
-    aLiberar?: number;
+    disponible: number;
+    aLiberar: number;
     transacciones?: transacion[];
 }
 

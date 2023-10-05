@@ -8,7 +8,7 @@
     
     <div (click)="navegar(['prod/',producto.id], $event)" >
         <picture>
-        <img [src]="producto.detalles!.fotos![0][0]">
+        <img [src]="foto">
         </picture>
         <div style="height: 100px; position: relative;">
             <p class="titulo-producto">{{ producto.nombre }}</p>
@@ -34,8 +34,8 @@
                     <ng-icon name="matStarRound"></ng-icon>
                 </div>
             </div>
-            <p class="numVotos">({{producto.opiniones?.length}})</p>
+            <p class="numVotos">({{index}})</p>
         </div>
-        <p class="eliminar">Eliminar</p>
+        <p class="eliminar" (click)="eliminarProductoHistorial(); $event.stopPropagation();">Eliminar</p>
     </div>
 </div>

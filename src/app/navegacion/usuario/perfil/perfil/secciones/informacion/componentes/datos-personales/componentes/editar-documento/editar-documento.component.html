@@ -1,0 +1,26 @@
+<div class="content">
+    <h2>
+        <span *ngIf="documentoDefecto !== undefined">Editar documento</span>
+        <span *ngIf="documentoDefecto == undefined">Agregar documento</span>
+    </h2>
+    <label for="email">Documento</label>
+    <div class="contentSelect">
+        <select class="select" [(ngModel)]="tipoDocumento" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}">
+            <option value="CC">CC</option>
+            <option value="CE">CE</option>
+        </select>
+        <ng-icon class="down" name="ionChevronDown"></ng-icon>
+        <input type="number" id="email" [(ngModel)]="documento" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}" maxlength="10">
+    </div>
+    <p class="error" *ngIf="error !== ''">{{error}}</p>
+    <div>
+        <button [disabled]="cargando" (click)="submit()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+            <span *ngIf="!cargando && documentoDefecto !== undefined">Editar</span> 
+            <span *ngIf="!cargando && documentoDefecto == undefined">Agregar</span>
+            <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+            <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+        </button>
+        <button (click)="cerrarContenido()">Cancelar</button>
+    </div>
+    <ng-icon name="ionClose" (click)="cerrarContenido()"></ng-icon>
+</div>

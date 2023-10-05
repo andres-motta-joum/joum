@@ -7,12 +7,13 @@ import { heroDocumentTextSolid } from '@ng-icons/heroicons/solid';
 import { heroPlaySolid } from '@ng-icons/heroicons/solid';
 import { heroShareSolid } from '@ng-icons/heroicons/solid';
 
-import { Component, NgZone, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router} from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { Subscription } from 'rxjs';
+import { Auth } from '@angular/fire/auth';
+import { Firestore, arrayUnion, doc, increment, setDoc, updateDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -20,46 +21,99 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./perfil-usuario.component.scss'],
   providers: [provideIcons({matCameraAlt, matPersonAddAlt, matPerson, heroBuildingStorefrontSolid, heroDocumentTextSolid, heroPlaySolid, heroShareSolid})]
 })
-export class PerfilUsuarioComponent implements OnInit{
-  constructor(private route: ActivatedRoute, private zone: NgZone, private router: Router, private userService: UsuarioService, private authService: AuthService) {}
+export class PerfilUsuarioComponent implements OnInit, OnDestroy{
+  constructor(private zone: NgZone, private router: Router, private authService: AuthService, private auth: Auth, private firestore: Firestore) {}
   private routeSubscription!: Subscription;
   public state!: string;
   public url!: string;
 
   public userUsuario!: string;
-  private usuario!: Usuario | undefined;
-  public datosUsuario!: Usuario | undefined;
-  public diasJoum!: string | undefined;
+  private usuario!: Usuario;
+  public datosUsuario!: any;
+  public diasJoum!: string;
+
+  usuarioDiferente!: boolean;
+  usuariosSiguiendo: string[] = []; //Mi usuario
+  miIdUsuario!: string;
+  siguiendo!: boolean;
 
   ngOnInit(): any { 
-    this.obtenerUsuario();
+    this.obtenerDatos();
     const urlSegments = this.router.url.split('/');
     this.url = urlSegments[urlSegments.length - 1];
 
     this.routeSubscription = this.router.events.subscribe(async event => {
       if (event instanceof NavigationEnd) {
+          this.obtenerDatos();
           const urlSegments = this.router.url.split('/');
           this.url = urlSegments[urlSegments.length - 1];
         }
     });
+    
   }
 
-  async obtenerUsuario(){
-    this.userUsuario = this.route.parent?.snapshot.paramMap.get('id')!;
-    await this.authService.getUsuarioUser(this.userUsuario).then((usuario)=>{
+  obtenerDatos(){
+    const usuarioUrl = (this.router.url).split('/')[1];
+    this.auth.onAuthStateChanged(async (usuario)=>{
       if(usuario){
-        this.usuario = usuario;
+        const miUsuario = await this.authService.getUsuarioIdPromise(usuario.uid);
+        if(miUsuario.siguiendo && miUsuario.siguiendo.length !== 0){
+          this.usuariosSiguiendo = miUsuario.siguiendo!;
+        }else{
+          this.siguiendo = false;
+        }
+        this.miIdUsuario = miUsuario.id!;
+
+        if(miUsuario.usuario == usuarioUrl){
+          this.usuarioDiferente = false;
+        }else{
+          this.usuarioDiferente = true;
+        }
+      }else{
+        this.usuarioDiferente = true;
+      }
+
+      const user = await this.authService.getUsuarioUser(usuarioUrl);
+      if(user){
+        this.usuario = user;
         this.datosPublicosUsuario();
         this.diasJoum = this.obtenerTiempoTranscurrido(this.usuario?.diasComoVendedor!);
+        if(this.usuariosSiguiendo){
+          this.siguiendo = this.usuariosSiguiendo.some(seguidor => seguidor === user.id)
+        }
+      }else{
+        this.router.navigate(['']);
       }
-    })
+    });
   }
 
+  async funcionSeguidor(){
+    const miUsuarioRef = doc(this.firestore, `usuarios/${this.miIdUsuario}`);
+    const usuarioRef = doc(this.firestore, `usuarios/${this.usuario.id}`);
+    if(this.siguiendo){
+      this.siguiendo = false;
+      const index = this.usuariosSiguiendo.findIndex(seguidor => seguidor === this.usuario.id);
+      this.usuariosSiguiendo.splice(index, 1);
+
+      this.datosUsuario!.seguidores! -= 1;
+      await updateDoc(usuarioRef, {seguidores: increment(-1)});
+      await setDoc(miUsuarioRef, {siguiendo: this.usuariosSiguiendo}, {merge: true});
+    }else{
+      this.siguiendo = true;
+      this.usuariosSiguiendo.push(this.usuario.id!);
+
+      this.datosUsuario!.seguidores! += 1;
+      await updateDoc(usuarioRef, {seguidores: increment(1)});
+      await updateDoc(miUsuarioRef, {siguiendo: arrayUnion(this.usuario.id)});
+    }
+
+  }
   datosPublicosUsuario(){
     this.datosUsuario = {
-      nombre: this.usuario?.nombre,
-      seguidores: this.usuario?.seguidores,
-      diasComoVendedor: this.usuario?.diasComoVendedor
+      nombre: this.usuario.nombre,
+      seguidores: this.usuario.seguidores,
+      diasComoVendedor: this.usuario.diasComoVendedor,
+      usuario: this.usuario.usuario
     }
   }
 
@@ -109,6 +163,12 @@ export class PerfilUsuarioComponent implements OnInit{
       this.router.navigate(['']);
       window.scroll(0,0)
     });
+  }
+
+  ngOnDestroy(): void {
+    if(this.routeSubscription){
+      this.routeSubscription.unsubscribe();
+    }
   }
 
 }

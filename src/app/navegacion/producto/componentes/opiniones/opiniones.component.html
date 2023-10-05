@@ -1,6 +1,7 @@
 <div class="opiniones-contenedor">
     <div style="display: flex;">
-        <h1>{{promedio}}</h1>
+        <h1 *ngIf="tieneOpiniones">{{promedio}}</h1>
+        <h1 *ngIf="!tieneOpiniones">0</h1>
         <div>
             <div class="estrellas">
                 <div class="starts-over" [ngClass]="'starts-' + promedioCalificacion">
@@ -18,7 +19,7 @@
                     <ng-icon name="heroStarSolid"></ng-icon>
                 </div>
             </div>
-            <p class="calificaciones">{{opiniones?.length}} calificaciones</p>
+            <p class="calificaciones"><span *ngIf="!tieneOpiniones">Sin</span><span *ngIf="tieneOpiniones">{{opiniones.length}}</span> calificaciones</p>
         </div>
     </div>
     <div class="barras">

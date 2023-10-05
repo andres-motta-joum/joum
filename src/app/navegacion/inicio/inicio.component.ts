@@ -1,18 +1,20 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
 import { Producto } from 'src/app/interfaces/producto/producto';
-import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { ProductosService } from 'src/app/servicios/productos/productos.service';
 
 @Component({
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.scss']
 })
 export class InicioComponent implements OnInit{
-  constructor( private zone: NgZone, private router: Router, private productoService: ProductoService, private authService: AuthService) {window.scroll(0,0)}
-
+  constructor( private zone: NgZone, private router: Router, private prdService: ProductosService) {window.scroll(0,0)}
+  public productos!: Producto[];
+  
   ngOnInit(){
-    this.productos = this.productoService.getProducts();
+    this.prdService.obtenerProductos().then((productos)=>{
+      this.productos = productos;
+    })
   }
  //-----------------
 
@@ -22,9 +24,8 @@ export class InicioComponent implements OnInit{
     'assets/img/anuncios/slider-uno.svg'
   ];
 
-  public productos!: Producto[];
 
-  public categorias: Producto[] = 
+  public categorias: any[] = 
   [
     {
       nombre: 'Cuadros',

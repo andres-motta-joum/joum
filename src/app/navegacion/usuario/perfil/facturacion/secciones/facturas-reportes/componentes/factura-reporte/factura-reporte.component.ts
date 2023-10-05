@@ -9,14 +9,9 @@ import { Producto } from 'src/app/interfaces/producto/producto';
   styleUrls: ['./factura-reporte.component.scss']
 })
 export class FacturaReporteComponent {
-  @Input() facturaReporte: Producto;
+  @Input() facturaReporte!: Producto;
   subMenu: boolean = false;
-  constructor(private zone: NgZone, private router: Router){
-    this.facturaReporte = {
-      precio: 0,
-      descuento: false
-    }
-  }
+  constructor(private zone: NgZone, private router: Router){}
   navegar(ruta: any[], event: Event){
     event.preventDefault();
     this.zone.run(()=>{

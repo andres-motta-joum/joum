@@ -1,15 +1,16 @@
-import { ChangeDetectorRef, Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasosVenderService } from '../../../../../../servicios/vender/vender.service';
 import { provideIcons } from '@ng-icons/core';
 import { heroArrowSmallLeft } from '@ng-icons/heroicons/outline';
+import { ionInformationCircleOutline } from '@ng-icons/ionicons';
 
 @Component({
   selector: 'app-paso-cuatro',
   templateUrl: './paso-cuatro.component.html',
   styleUrls: ['./paso-cuatro.component.scss'],
-  providers: [provideIcons({heroArrowSmallLeft})]
+  providers: [provideIcons({heroArrowSmallLeft, ionInformationCircleOutline})]
 })
 export class PasoCuatroComponent {
   constructor( private pasos: PasosVenderService, private router: Router, private changeDetector: ChangeDetectorRef, private formBuilder: FormBuilder, private renderer: Renderer2) {}
@@ -20,13 +21,42 @@ export class PasoCuatroComponent {
   btnSubmit!: boolean;
   estilosErrors: boolean[] = [];
   error = false;
+  inf = false;
+
+  descripcion!: string;
 
   ngOnInit(): void {
     this.pasos.paso4 ? true : this.router.navigate(['/vender', 'formulario', 'paso2']);
     if(this.pasos.producto){
       this.inputs = [];
       this.definirArrays(this.pasos.producto.estilos);
+      this.ejemplosSegunCategoria();
     }
+  }
+
+  ejemplosSegunCategoria(){
+    const categoria = this.pasos.producto.categoria;
+    if(categoria == 'Cuadros'){
+      this.descripcion = "cuadros decorativos. Podrías ofrecer diferentes temas, como 'Naturaleza', 'Arte abstracto' o 'Paisajes'.";
+    } else if (categoria == 'Repisas') {
+      this.descripcion = "repisas. Podrías ofrecer diferentes colores, como 'Negro', 'Blanco', 'Gris', etc.";
+    } else if (categoria == 'Iluminacion') {
+      this.descripcion = "lámparas. Podrías ofrecer diferentes colores, como 'Blanco', 'Negro', 'Gris', etc.";
+    } else if (categoria == 'Macetas') {
+      this.descripcion = "macetas. Podrías ofrecer diferentes diseños únicos, como 'Rosas', 'Leones', 'Gatos', o también puedes ofrecer de diferentes colores.";
+    } else if (categoria == 'Relojes') {
+      this.descripcion = "relojes. Podrías ofrecer diferentes colores, como 'Blanco', 'Negro', 'Gris', etc.";
+    } else if (categoria == 'Difusores') {
+      this.descripcion = "difusores. Podrías ofrecer diferentes colores de luz, como 'rojo', 'azul', 'verde', etc.";
+    } else if (categoria == 'Vinilos') {
+      this.descripcion = "vinilos. Podrías ofrecer diferentes tipos de frases, como 'Frase de motivación', 'Frase de amor', 'Frase graciosa', etc.";
+    } else if (categoria == 'Adornos') {
+      this.descripcion = "adornos. Podrías ofrecer diferentes diseños, como 'Batman', 'Superman', 'Venom', etc. (En caso de ser figuras de personajes).";
+    }
+  }
+
+  info(){
+    this.inf = false;
   }
 
   definirArrays(estiloService: any[]){
@@ -146,5 +176,10 @@ export class PasoCuatroComponent {
   atras(): void {
     this.pasos.producto.estilos = this.estilosSubmit;
     this.router.navigate(['/vender', 'formulario', 'paso3']);
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload($event: any): void {
+      $event.returnValue = true;
   }
 }

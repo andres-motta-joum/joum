@@ -1,7 +1,7 @@
 <div class="contenido" [ngClass]="{'chat-contrario': mensaje.remitente !== tipoUsuario}">
     <div class="mensaje">
-        <p>{{mensaje.contenido}}</p>
-        <p>7:56</p>
+        <p [innerHTML]="contenido"></p>
+        <p>{{fecha}}</p>
     </div>
 </div>
 

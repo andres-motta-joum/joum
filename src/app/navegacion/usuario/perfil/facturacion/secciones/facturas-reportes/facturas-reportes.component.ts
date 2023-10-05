@@ -7,7 +7,7 @@ import { Producto } from 'src/app/interfaces/producto/producto';
   styleUrls: ['./facturas-reportes.component.scss']
 })
 export class FacturasReportesComponent {
-  public facturacionesReportes: Array<Producto>= [
+  public facturacionesReportes: Array<any>= [ //Producto
     {
       precio: 0,
       descuento: false,

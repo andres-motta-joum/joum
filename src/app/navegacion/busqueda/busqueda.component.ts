@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Producto } from 'src/app/interfaces/producto/producto';
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Fuse from 'fuse.js';
+import { ProductosService } from 'src/app/servicios/productos/productos.service';
 
 @Component({
   selector: 'app-busqueda',
@@ -15,7 +15,7 @@ export class BusquedaComponent implements OnDestroy {
   private fuse!: Fuse<Producto>;
   public productosFiltrados!: Producto[];
 
-  constructor(private prdService: ProductoService,private route: ActivatedRoute,private router: Router) {}
+  constructor(private prdService: ProductosService,private route: ActivatedRoute,private router: Router) {}
 
   ngOnInit(): void {
     this.busquedaNombre();
@@ -83,7 +83,9 @@ export class BusquedaComponent implements OnDestroy {
   }
 
   async obtenerProductos() {
-    this.productos = await this.prdService.getProducts();
+    await this.prdService.obtenerProductos().then((productos)=>{
+      this.productos = productos
+    })
   }
 
   //-------------------------- Funciones secundarias ------------------------------------

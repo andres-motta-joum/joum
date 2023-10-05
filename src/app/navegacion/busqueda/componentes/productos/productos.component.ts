@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
+import { Storage, getDownloadURL, listAll, ref } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/interfaces/producto/producto';
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
 
 @Component({
   selector: 'app-productos',
@@ -9,13 +9,27 @@ import { ProductoService } from 'src/app/servicios/producto/producto.service';
   styleUrls: ['./productos.component.scss']
 })
 export class ProductosComponent {
-  constructor( private router: Router, private productoService: ProductoService){}
+  constructor( private router: Router, private storage: Storage){}
   @Input() listadoCuadradosInp!: boolean;
   @Input() listadoLineadoInp!: boolean;
   @Input() productos!: Producto[];
+  fotos: string[] = [];
   public checkHeart = false;
 
-  ngOnInit(): void {
-    this.productos = this.productoService.getProducts();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['productos'] && changes['productos'].currentValue) {
+      const productos = changes['productos'].currentValue;
+      let fotos = productos.map(async (producto:any) => {
+        const imgRef = ref(this.storage, `${producto.id}/1:${producto.estilos[0].nombre}`);
+        const response = await listAll(imgRef);
+        return await getDownloadURL(response.items[0]);
+      });
+      
+      Promise.all(fotos)
+      .then(urls => {
+          this.fotos = urls;
+      });
+    }
   }
+
 }

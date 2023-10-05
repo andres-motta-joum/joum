@@ -1,3 +1,3 @@
-<div class="contenidoProductos">
-  <app-producto [producto]="producto" *ngFor="let producto of productos"></app-producto>
+<div class="contenidoProductos" *ngIf="fotos">
+  <app-producto [producto]="producto" [foto]="fotos[index]" *ngFor="let producto of productos; let index = index"></app-producto>
 </div>

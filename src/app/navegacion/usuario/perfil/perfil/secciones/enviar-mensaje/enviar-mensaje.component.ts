@@ -1,62 +1,131 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, firstValueFrom } from 'rxjs';
 import { Chat, Mensaje } from 'src/app/interfaces/chat';
 import { Producto } from 'src/app/interfaces/producto/producto';
-import { Venta } from 'src/app/interfaces/usuario/subInterfaces/venta';
+import { Venta } from 'src/app/interfaces/venta';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { ChatsService } from 'src/app/servicios/chats/chats.service';
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { Firestore, arrayUnion, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { ProductosService } from 'src/app/servicios/productos/productos.service';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-enviar-mensaje',
   templateUrl: './enviar-mensaje.component.html',
   styleUrls: ['./enviar-mensaje.component.scss']
 })
-export class EnviarMensajeComponent {
-  constructor(private zone: NgZone, private router: Router,private route: ActivatedRoute, private chatService: ChatsService, private userService: UsuarioService, private prdService: ProductoService){}
-  public chat!: Chat | undefined;
-  public usuario!: Usuario | undefined;
-  public usuarioDos!: Usuario | undefined;
-  public venta!: Venta | undefined;
+export class EnviarMensajeComponent implements OnInit, OnDestroy{
+  constructor(private zone: NgZone, private router: Router,private route: ActivatedRoute, private chatService: ChatsService, private prdsService: ProductosService, private firestore: Firestore, private authService: AuthService, private auth: Auth){}
+  private routeSubscription!: Subscription;
+  @ViewChild('mensajeElement') mensajeElement!: ElementRef;
+  @ViewChild('contenidoMensajes') contenidoMensajes!: ElementRef;
+  chat!: Chat | undefined;
+  usuarioVendedor!: Usuario | null;
+  usuarioCliente!: Usuario | null;
+  venta!: Venta;
 
-  public productos!: Producto[] | undefined;
+  productos: Producto[] = [];
+  estilos: string[] = [];
+  fotos: string[] = [];
+  unidades: number[] = [];
+  cantidadUnidades: number = 0;
 
-  public vendedor!: string | undefined;
-  public cliente!: string | undefined;
+  tipoUsuario!: string;
 
-  public tipoUsuario!: string;
-
+  isEditable: boolean = true;
+  mensaje!: any;
   ngOnInit(){
-    this.route.params.subscribe(params => {
-      const { id } = params;
-      const [userId, userIdDos] = this.route.snapshot.url.map(segment => segment.path);
-
-      this.chat = this.chatService.getChatId(+id);
-      this.usuario = this.userService.getUserUsuario(userId);
-      this.usuarioDos = this.userService.getUserUsuario(userIdDos);
-      this.venta = this.userService.getVenta(+id);
-      this.obtenerProductos();
-
-      this.cliente = this.userService.getUserId(this.venta?.idCliente!)?.usuario;
-      this.vendedor = this.userService.getUserId(this.productos![0].idUsuario!)?.usuario;
-
-      this.obtenerTipoUsuario();
-    });
+    this.auth.onAuthStateChanged( user =>{
+      if(user){
+        this.routeSubscription = this.route.params.subscribe(async (params) => {
+          const { id } = params;
+          const [userId, userIdDos] = this.route.snapshot.url.map(segment => segment.path);
+    
+          this.chatService.getChatId(+id).subscribe(chat => {
+            chat ? this.chat = chat : this.router.navigate(['']);
+            if(this.contenidoMensajes){
+              setTimeout(()=>{
+                this.contenidoMensajes.nativeElement.scrollTop = this.contenidoMensajes.nativeElement.scrollHeight;
+              })
+            }
+          });
+          this.usuarioVendedor = await this.authService.getUsuarioUser(userId);
+          this.usuarioCliente = await this.authService.getUsuarioUser(userIdDos);
+          if(this.usuarioVendedor && this.usuarioCliente){
+            if(user.uid == this.usuarioVendedor.id){
+              this.tipoUsuario = 'vendedor';
+            }else if(user.uid == this.usuarioCliente.id){
+              this.tipoUsuario = 'cliente';
+            }else{
+              this.router.navigate(['']);
+            }
+            await this.obtenerVenta(id);
+            await this.obtenerProductos();
+            const cliente$ = this.authService.getUsuarioId(this.venta?.idCliente!);
+            this.usuarioCliente = (await firstValueFrom(cliente$));
+      
+            const vendedor$ = this.authService.getUsuarioId(this.venta?.idVendedor!);
+            this.usuarioVendedor = (await firstValueFrom(vendedor$));
+            
+          }else{
+            this.router.navigate(['']);
+          }
+        });
+      }else{
+        this.router.navigate(['']);
+      }
+    })
   }
-  obtenerProductos(){
-    this.productos = [];
-    for(let producto of this.venta?.productos!){
-      this.productos.push(this.prdService.getProductsId(producto.id!)!);
+
+  async obtenerVenta(id: string) {
+    const ventaRef = doc(this.firestore, `ventas/${id}`);
+    const snapshot = await getDoc(ventaRef);
+    this.venta = snapshot.data() as Venta;
+  }
+  async obtenerProductos(){
+    const productosRef = await Promise.all(this.venta.referencias.map(ref => {
+      this.estilos.push(ref.estilo);
+      this.unidades.push(ref.unidades);
+      this.cantidadUnidades += ref.unidades; 
+      return getDoc(ref.producto);
+    }));
+    productosRef.forEach(snapshot => {
+      const prd = snapshot.data() as Producto;
+      prd.id = snapshot.id
+      this.productos.push(prd);
+    });
+    this.contenidoMensajes.nativeElement.scrollTop = this.contenidoMensajes.nativeElement.scrollHeight;
+    this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilos);
+  }
+
+  inputMensaje(){
+    this.mensaje = (this.mensajeElement.nativeElement.textContent).trim();
+  }
+
+  async enviar(){
+    if(this.mensaje !== ''){
+      const correccionMensaje = this.mensaje.replace(/\n+$/, "");
+      this.mensajeElement.nativeElement.innerHTML = '';
+      this.mensaje = '';
+      const chatRef = doc(this.firestore, `chats/${this.chat?.numVenta}`);
+      await updateDoc(chatRef, {
+        mensajes: arrayUnion({
+          contenido: correccionMensaje,
+          fecha: new Date(),
+          remitente: this.tipoUsuario
+        })
+      });
     }
   }
-  obtenerTipoUsuario(){
-    if(this.usuario?.usuario == this.cliente && this.usuarioDos?.usuario == this.vendedor){
-      this.tipoUsuario = 'cliente';
-    }else if(this.usuario?.usuario == this.vendedor && this.usuarioDos?.usuario == this.cliente){
-      this.tipoUsuario = 'vendedor';
-    }else{
-      this.router.navigate(['']);
+  @HostListener('document:keydown', ['$event'])
+  handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      if (!event.shiftKey) {
+        this.enviar(); 
+        event.preventDefault();
+      }
     }
   }
 
@@ -68,11 +137,15 @@ export class EnviarMensajeComponent {
       window.scroll(0,0)
     })
   }
-
   expanded = false;
 
   toggleExpand() {
     this.expanded = !this.expanded;
   }
 
+  ngOnDestroy(): void {
+    if(this.routeSubscription){
+      this.routeSubscription.unsubscribe();
+    }
+  }
 }

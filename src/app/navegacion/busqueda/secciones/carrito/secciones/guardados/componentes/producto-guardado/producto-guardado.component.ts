@@ -1,38 +1,93 @@
-import { Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { Subscription, first, firstValueFrom } from 'rxjs';
 import { Producto } from 'src/app/interfaces/producto/producto';
+import { Usuario, porComprar } from 'src/app/interfaces/usuario/usuario';
+import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
   selector: 'app-producto-guardado',
   templateUrl: './producto-guardado.component.html',
   styleUrls: ['./producto-guardado.component.scss']
 })
-export class ProductoGuardadoComponent {
+export class ProductoGuardadoComponent implements OnInit, OnDestroy{
+  @Output() eliminar = new EventEmitter<number>();
+  @Input() guardados!: porComprar[];
   @Input() productoGuardado!: Producto;
-  @Input() unidades!: number;
+  @Input() unidad!: number;
+  @Input() foto!: string;
+  @Input() estilo!: string;
   @Input() indice!: number;
-  @Output() unidadEmitida = new EventEmitter<{ unidad: number, indice: number }>();
+  @Input() indexEstilo!: number;
+  imagenCargada = false;
+  private subscription!: Subscription;
+  private usuario!: Usuario;
+  userUsuario!: string;
+  estiloString!: string;
   
-  constructor(private zone: NgZone, private router: Router){}
+  constructor(private zone: NgZone, private router: Router, private firestore: Firestore, private auth:Auth, private authService: AuthService, private comprarService: ComprarService){}
 
-  cambiarUnidad(accion: string){
+  ngOnInit() {
+    this.estiloString = this.estilo.slice(2);
+    this.auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        this.subscription = this.authService.getUsuarioId(user.uid).subscribe((usuario)=>{
+          this.usuario = usuario;
+        })
+      }
+      const usuario$ = this.authService.getUsuarioId(this.productoGuardado.idUsuario!);
+      this.userUsuario = (await firstValueFrom(usuario$)).usuario!;
+    });
+  }
+
+  async cambiarUnidad(accion: string, index: number, unidadesTotales: number){
+    const userRef = doc(this.firestore, `usuarios/${this.auth.currentUser?.uid}`);
     if(accion === '+'){
-      if(this.unidades < this.productoGuardado.unidades!){
-        this.unidadEmitida.emit({ unidad: this.unidades + 1, indice: this.indice });
+      if(this.unidad < unidadesTotales){
+        this.guardados![index].unidades += 1; 
+        this.unidad += 1;
+        await setDoc(userRef, {guardados: this.guardados}, {merge: true});
       }
     }
     if(accion === '-'){
-      if(this.unidades !== 1){
-        this.unidadEmitida.emit({ unidad: this.unidades - 1, indice: this.indice });
+      if(this.unidad !== 1){
+        this.guardados![index].unidades -= 1; 
+        this.unidad -= 1;
+        await setDoc(userRef, {guardados: this.guardados}, {merge: true})
       }
     }
   }
 
-  navegar(ruta: any[], event: Event){
-    event.preventDefault();
+  agregarCarrito(){
+    if(this.foto){
+      const estilo = this.estilo.split(':');
+      this.eliminar.emit(this.indice);
+      this.comprarService.eliminarReferenciaGuardado(this.usuario, this.indice);
+      this.comprarService.agregarReferenciaCarrito(this.productoGuardado.id!, this.auth.currentUser?.uid!, estilo[1] ,this.indexEstilo + 1,  this.unidad);
+    }
+    
+  }
+
+  eliminarGuardado(){
+    if(this.foto){
+      this.eliminar.emit(this.indice);
+      this.comprarService.eliminarReferenciaGuardado(this.usuario, this.indice);
+    }
+  }
+  
+  navegar(ruta: any[]){
     this.zone.run(()=>{
       this.router.navigate(ruta);
       window.scroll(0,0)
     })
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 }

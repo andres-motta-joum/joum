@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasosVenderService } from '../../../../../../servicios/vender/vender.service';
@@ -48,24 +48,20 @@ export class PasoOchoComponent {
     this.subscriptions.forEach(subs => subs.unsubscribe());
   }
 
-  transformar(i: string): number {
-      const primero = i.slice(1);
-      const segundo = primero.split(',');
-      const tercero = segundo.join('');
-      // tslint:disable-next-line: radix
-      return parseInt(tercero);
-  }
-
   submit(){
     this.pasos.paso9 = true;
-    this.pasos.producto.precio = this.form.value.precio.replace('.', '').replace(',', '');
+    this.pasos.producto.precio = this.form.value.precio.replace(/\./g, '').replace(/,/g, '');
     this.router.navigate(['/vender', 'formulario', 'paso9']);
   }
 
   atras(): void {
     if(this.form.value.precio != null){
-      this.pasos.producto.precio = this.form.value.precio.replace('.', '').replace(',', '');
+      this.pasos.producto.precio = this.form.value.precio.replace(/\./g, '').replace(/,/g, '');
     }
     this.router.navigate(['/vender', 'formulario', 'paso7']);
+  }
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload($event: any): void {
+      $event.returnValue = true;
   }
 }

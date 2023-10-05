@@ -13,6 +13,7 @@ import { heroChevronDownMini } from '@ng-icons/heroicons/mini';
 })
 export class PublicacionComponent {
   @Input() publicacion!: Producto;
+  @Input() foto!: string;
   subMenu: boolean = false;
   unidades: boolean = false;
 

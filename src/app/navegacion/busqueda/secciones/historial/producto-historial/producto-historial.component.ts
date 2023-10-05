@@ -1,4 +1,4 @@
-import { Component, Input, NgZone } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/interfaces/producto/producto';
 import { provideIcons } from '@ng-icons/core';
@@ -16,10 +16,12 @@ import { heroHeartSolid } from '@ng-icons/heroicons/solid';
   providers: [provideIcons({heroHeart,matStarRound, heroHeartSolid})]
 })
 export class ProductoHistorialComponent {
+  @Input() producto!: Producto;
+  @Input() foto!: string;
+  @Input() index!: number;
+  @Output() eliminarIndex =  new EventEmitter<number>();
   public corazonClick: boolean = false;
   public corazonOver: boolean = false;
-
-  @Input() producto!: Producto;
 
   public promedioCalificacion!: number;
   public promedio!: number;
@@ -49,7 +51,7 @@ export class ProductoHistorialComponent {
     const promedio = sumaCalificaciones / opiniones!.length;
     this.promedio = Number(promedio.toFixed(1));
     return this.redondearCalificacion(promedio);
-}
+  }
 
   redondearCalificacion(calificacion: number): number {
     const valoresPosibles = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
@@ -67,4 +69,10 @@ export class ProductoHistorialComponent {
 
     return Math.round(valorCercano * 20);
   }
+  eliminarProductoHistorial(){
+    this.eliminarIndex.emit(this.index);
+  }
+
 }
+
+

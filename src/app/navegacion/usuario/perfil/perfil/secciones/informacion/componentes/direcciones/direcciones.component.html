@@ -1,0 +1,26 @@
+<div class="contenedor">
+    <h2>Direcciones</h2>
+    <div class="direccion" *ngFor="let direccion of direcciones; let index = index" >
+        <ng-icon name="heroMapPin"></ng-icon>
+        <div class="dir">
+            <h2>{{direccionesString[index]}}</h2>
+            <p>{{direccion.barrio}}, Bogotá D.C.</p>
+            <p>{{direccion.nombresApellidos}}</p>
+        </div>
+        <div class="eleccion" *ngIf="direcciones.length !== 1" (click)="$event.stopPropagation()">
+            <ng-icon name="matDelete"></ng-icon>
+        </div>
+        <!--------- POSITION ABSOLUTE --------->
+        <div class="verMas">
+            <img src="assets/img/logo/iconos/ver-mas.svg">
+            <img (click)="desplegarSubMenu()"  src="assets/img/logo/iconos/ver-mas-full.svg">
+        </div>
+        <div *ngIf="subMenu" class="submenu">
+            <p (click)="editarContenido('direccion')">Editar</p>
+            <p>Eliminar</p>
+        </div>  
+    </div>
+    <div class="agregarDireccion" (click)="editarContenido('direccion')">
+        <p>+ Agregar dirección</p>
+    </div>
+</div>

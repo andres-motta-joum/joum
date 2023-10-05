@@ -1,20 +1,20 @@
-<div class="body">
-    <app-menu-simple></app-menu-simple>
+<app-menu-simple></app-menu-simple>
+<div class="body" *ngIf="productos.length !== 0">
     <div class="contenido-compra">
         <div class="izquierda">
             <router-outlet></router-outlet>
         </div>
         <div class="derecha">
-            <button>Finalizar compra</button>
+            <button (click)="comprar()" [ngClass]="{'cargando': cargando}"><span *ngIf="!cargando">Procesar compra</span> <span class="loading" *ngIf="cargando"></span></button>
             <div>
-                <p>Productos(3)</p><p>$ 613.000</p>
+                <p>Producto<span *ngIf="productosLenght !== 1">s ({{productosLenght}})</span></p><p>$ {{precioProductos | number: '1.0-0'}}</p>
             </div>
             <div>
-                <p>Envio</p><p>$ 6.000</p>
+                <p>Envio</p><p>$ {{precioEnvios | number: '1.0-0'}}</p>
             </div>
             <div class="linea"></div>
             <div>
-                <p>Total</p><p>$ 619.000</p>
+                <p>Total</p><p>$ {{ (+precioProductos) + (+precioEnvios) | number: '1.0-0' }}</p>
             </div>
         </div>
     </div>

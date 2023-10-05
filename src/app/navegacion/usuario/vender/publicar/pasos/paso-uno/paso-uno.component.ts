@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './paso-uno.component.html',
   styleUrls: ['./paso-uno.component.scss']
 })
-export class PasoUnoComponent implements OnInit, OnDestroy{
+export class PasoUnoComponent implements OnInit{
   constructor(private pasos: PasosVenderService,private router: Router,private changeDetector: ChangeDetectorRef) {}
   boxes: string[] = ['check1', 'check2', 'check3', 'check4', 'check5', 'check6', 'check7', 'check8'];
   images: string[] = [ 'assets/img/categoria/cuadros/22.jpg', 'assets/img/categoria/repisas/12.jpg', 'assets/img/categoria/iluminacion/6.jpg', 'assets/img/categoria/macetas/1.jpg', 'assets/img/categoria/relojes/14.jpg', 'assets/img/categoria/difusores/1.jpg', 'assets/img/categoria/vinilos/9.jpg', 'assets/img/categoria/adornos/19.jpg' ];
@@ -21,10 +21,8 @@ export class PasoUnoComponent implements OnInit, OnDestroy{
   alerta = false;
   nuevoInput!: number;
 
-  private routeSubscription!: Subscription;
-
   ngOnInit(): void {
-    if (this.pasos.producto !== undefined) {
+    if (this.pasos.producto !== undefined && this.pasos.producto.categoria) {
       this.formValue = this.pasos.producto.categoria;
       this.disabled = false;
       this.changeDetector.detectChanges();
@@ -76,11 +74,4 @@ export class PasoUnoComponent implements OnInit, OnDestroy{
     }
   }
 
-  //---------------------------------------------------
-
-  ngOnDestroy(): void {
-    if(this.routeSubscription){
-      this.routeSubscription.unsubscribe()
-    }
-  }
 }

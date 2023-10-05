@@ -1,11 +1,11 @@
-<div class="contenidoTotal">
+<div class="contenidoTotal" > 
     <div class="seccionIzquierda" (scroll)="onScroll($event)">
-        <ng-container *ngFor="let fotoUrl of producto.detalles!.fotos![0]; let i = index">
+        <ng-container *ngFor="let fotoUrl of fotos[estiloSelec]; let i = index">
             <div *ngIf="fotoUrl" (click)="index = i; cambiarImagen()" class="div">
                 <img [src]="fotoUrl">
             </div>
         </ng-container>
-        <div *ngIf="producto.detalles!.fotos![0].length > 5 && linea" class="linea">
+        <div *ngIf="fotos && fotos[estiloSelec] && fotos[estiloSelec].length > 5 && linea" class="linea">
             <div class="sombra"></div>
         </div>
     </div>

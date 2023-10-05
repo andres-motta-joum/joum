@@ -3,8 +3,8 @@
 	position: relative;
 	min-height: 100vh;
 	padding-bottom: 460px;
-	background: #fbfbfb;
-	min-width: 870px;
+	background: #f8f8f8;
+	min-width: 1200px;
 	overflow: hidden;
 }
 .contenidoUsuario{
@@ -23,7 +23,7 @@
 }
 .contenidoInfoUsuario .contenido2{
 	max-width: 1400px;
-    width: 94%;
+    width: 100%;
 	display: block;
 	margin: 0 0 0 5%;
 	border-radius: 5px;
@@ -49,7 +49,7 @@
   	opacity: 1;
   }
 }
-@media (max-width: 2140px){
+@media (max-width: 1950px){
 	.contenidoUsuario{
 		grid-template-columns: 60px 1fr;
 	}
@@ -149,14 +149,14 @@
 .headercuenta ul.principalUL{
 	margin-top:-1px;
 	padding: 0;
-	background: #fcfcfc;
+	background: #fdfdfd;
 	width: 260px;
 	height: 1250px;
 	list-style: none;
 	transition: left .4s;
 	overflow-y: auto;
 	overflow-x: hidden;
-	box-shadow: 3px 2px 12px #dcdcdc;
+	box-shadow: 3px 2px 12px rgba($color: #000000, $alpha: .1);
 	z-index: 60;
 	.IdPicUser4{
 		margin-top: 20px;
@@ -166,7 +166,7 @@
 		transition: 3s;
 		object-fit: cover;
 	}
-	@media (max-width: 2140px) {
+	@media (max-width: 1950px) {
 		width: 60px;
 		.icono-next{
 			display: none;
@@ -251,11 +251,13 @@
 
 .headercuenta .principalUL li.titleMenu{
 	padding: 10px 0px 20px 0px;
-	background: #fcfcfc;
+	background: #fdfdfd;
 	color: #555;
 	font-size: 20px;
 	text-align: center;
-	font-weight: 600;
+	font-weight: 550;
+	letter-spacing: .5px;
+	word-spacing: 1px;
 }
 .headercuenta .principalUL ng-icon{
 	margin-right: 14px;

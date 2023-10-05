@@ -12,19 +12,9 @@
 					  </tr>
 					</ng-container>
 				</ng-container>
-				<ng-container *ngIf="detallesSubCategoria !== []">
-					<ng-container *ngFor="let detalle of detallesSubCategoria">
-						<ng-container *ngIf="!ValoresAEvitar(detalle[0])">
-						  <tr>
-							<th>{{ detalle[0] }}</th>
-							<td>{{ detalle[1] }}</td>
-						  </tr>
-						</ng-container>
-					</ng-container>
-				</ng-container>
 			</table>
 		</div>
-		<ng-container *ngIf="!subCategoria && producto.categoria !== 'difusores'">
+		<ng-container *ngIf="producto.categoria !== 'difusores'">
 			<h2 class="sub-titulo">Medidas</h2>
 			<div class="tabla">	
 				<table>
@@ -33,14 +23,6 @@
 							<th>{{ detalle[0] }}</th>
 							<td>{{ detalle[1] }}</td>
 						</tr>
-					</ng-container>
-					<ng-container *ngIf="detallesSubCategoriaDimensiones !== []">
-						<ng-container *ngFor="let detalle of detallesSubCategoriaDimensiones">
-							<tr>
-								<th>{{ detalle[0] }}</th>
-								<td>{{ detalle[1] }}</td>
-							</tr>
-						</ng-container>
 					</ng-container>
 				</table>
 			</div>

@@ -1,13 +1,14 @@
 <div class="contenidoPersona">
     <div style="display: flex;">
         <div>
-            <img (click)="navegar(['MOTTAANDRES20221130093921/perfil/informacion'],$event)" class="img1" src="assets/img/usuarios/user.svg" alt="">
+            <img (click)="navegar([usuario.usuario + '/perfil/informacion'],$event)" class="img1" src="assets/img/usuarios/user.svg" alt="">
         </div>
         <div class="seccion2">
-            <h2>Andres Yesid<span class="numSeguidores">• 102 <span class="seguidores">Seguidores</span></span></h2>
+            <h2>{{usuario.usuario}}<span class="numSeguidores">• {{usuario.seguidores}} <span class="seguidores">Seguidores</span></span></h2>
             <div class="seccion3">
                 <div class="ventas">
-                    <p>27</p>
+                    <p *ngIf="usuario.ventas">{{usuario.ventas.length}}</p>
+                    <p *ngIf="!usuario.ventas">0</p>
                     <p>Ventas</p>
                 </div>
                 <div class="atencion">
@@ -20,6 +21,6 @@
                 </div>
             </div>
         </div>
-        <ng-icon (click)="navegar(['MOTTAANDRES20221130093921/perfil/informacion'],$event)" class="ver-perfil" name="matPlagiarism"></ng-icon>
+        <ng-icon (click)="navegar([usuario.usuario + '/perfil/informacion'],$event)" class="ver-perfil" name="matPlagiarism"></ng-icon>
     </div>
 </div>

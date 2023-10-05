@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, Input, NgZone } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, Input, NgZone, SimpleChanges } from '@angular/core';
+import { Storage, getDownloadURL, listAll, ref } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 
@@ -6,6 +7,7 @@ import { heroChevronLeftSolid } from '@ng-icons/heroicons/solid';
 import { heroChevronRightSolid } from '@ng-icons/heroicons/solid';
 
 import { Producto } from 'src/app/interfaces/producto/producto';
+import { ProductosService } from 'src/app/servicios/productos/productos.service';
 
 @Component({
   selector: 'app-carrusel',
@@ -27,11 +29,9 @@ export class CarruselComponent {
 
   public botonPrev: Boolean = false;
 
-  constructor( 
-    private renderer: Renderer2,
-    private zone: NgZone,
-    private router: Router
-    ) { }
+  public fotos: string[] = [];
+
+  constructor(private renderer: Renderer2,private zone: NgZone,private router: Router, private storage: Storage, private prdService: ProductosService) { }
 
   navegar( ruta: any[]): any {
     this.zone.run(() => {
@@ -49,6 +49,16 @@ export class CarruselComponent {
     }else
     if (this.carousel === 3){
         this.slickWidth = 252;
+    }  
+
+  }
+
+  async ngOnChanges(changes: SimpleChanges) {
+    if (changes['elements'] && changes['elements'].currentValue) {
+      const productos = changes['elements'].currentValue;
+      if(productos[0].nombre !== 'Cuadros'){ //Verificamos que no sean los elementos de las categorías
+        this.fotos = await this.prdService.obtenerFotos(productos);
+      } 
     }
   }
 

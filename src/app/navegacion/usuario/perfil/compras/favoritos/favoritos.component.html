@@ -1,7 +1,7 @@
 <h1>Favoritos</h1>
 
 <div class="encabezado">
-    <p>4 Favoritos</p>
+    <p>{{favoritos.length}} Favoritos</p>
 </div>
 
-<app-favorito [favorito]="favorito" *ngFor="let favorito of favoritos"></app-favorito>
+<app-favorito [favorito]="favorito" [foto]="fotos[index]" *ngFor="let favorito of favoritos; let index = index"></app-favorito>

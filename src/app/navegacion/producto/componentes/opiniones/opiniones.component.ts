@@ -1,7 +1,7 @@
 import { Component, Input, SimpleChanges} from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { heroStarSolid } from '@ng-icons/heroicons/solid';
-import { Producto } from 'src/app/interfaces/producto/producto';
+import { Opinion, Producto } from 'src/app/interfaces/producto/producto';
 
 @Component({
   selector: 'app-opiniones',
@@ -11,37 +11,61 @@ import { Producto } from 'src/app/interfaces/producto/producto';
 })
 export class OpinionesComponent {
   @Input() opiniones!: Producto['opiniones'];
-  public promedioCalificacion!: number;
-  public promedio!: number;
-  public calificaciones!: any[];
-  public opinionesSelecionadas: Producto['opiniones'];
+  promedioCalificacion: number = 0;
+  promedio!: number;
+  calificaciones!: any[];
+  opinionesSelecionadas!: Opinion[];
+
+  tieneOpiniones: boolean = false;
+
   ngOnInit(){
-    this.promedioCalificacion = this.calcularPromedioCalificaciones(this.opiniones);
+    this.inicializarDatos();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['opiniones']) {
+      this.inicializarDatos();
+    }
+  }
+
+  inicializarDatos(){
+    if(this.opiniones?.length !== 0){
+      let opinionesCheck: Opinion[] = [];
+      for(let opinion of this.opiniones){
+        if(opinion.check){
+          opinionesCheck.unshift(opinion);
+        }
+      }
+      if(opinionesCheck.length !== 0){
+        this.tieneOpiniones = true;
+        this.promedioCalificacion = this.calcularPromedioCalificaciones(this.opiniones);
+      }
+      this.opiniones = opinionesCheck;
+    }
     this.calcularPorcentajes();
     this.opcionSeleccionada = '0';
     this.opinionesSelecionadas = this.opiniones?.sort((a, b) => (b.fecha ? b.fecha.getTime() : 0) - (a.fecha ? a.fecha.getTime() : 0));
-  }
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['opiniones']) {
-      this.promedioCalificacion = this.calcularPromedioCalificaciones(this.opiniones);
-      this.calcularPorcentajes();
-      this.opcionSeleccionada = '0';
-      this.opinionesSelecionadas = this.opiniones?.sort((a, b) => (b.fecha ? b.fecha.getTime() : 0) - (a.fecha ? a.fecha.getTime() : 0));
-    }
   }
 
   calcularPorcentajes() {
     const totalOpiniones = this.opiniones!.length;
     const calificacionFrecuencia: number[] = [0, 0, 0, 0, 0, 0];
 
-    this.opiniones!.forEach(opinion => {
+    if(this.tieneOpiniones){
+      this.opiniones.forEach(opinion => {
         calificacionFrecuencia[opinion.calificacion!] += 1;
-    });
+      });
 
-    this.calificaciones = calificacionFrecuencia.slice(1).reverse().map((frecuencia, index) => ({
+      this.calificaciones = calificacionFrecuencia.slice(1).reverse().map((frecuencia, index) => ({
+          estrellas: 5 - index,
+          porcentaje: (frecuencia / totalOpiniones) * 100
+      }));
+    }else{
+      this.calificaciones = calificacionFrecuencia.slice(1).reverse().map((frecuencia, index) => ({
         estrellas: 5 - index,
-        porcentaje: (frecuencia / totalOpiniones) * 100
-    }));
+        porcentaje: 0
+      }));
+    }
   }
 
   calcularPromedioCalificaciones(opiniones: Producto['opiniones']): number {

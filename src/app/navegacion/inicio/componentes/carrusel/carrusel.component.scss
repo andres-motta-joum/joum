@@ -89,7 +89,7 @@
           }
     }
     .slick-prev, .slick-next{
-        display: none
+        display: none !important;
     }
 }
   
@@ -126,7 +126,6 @@
         margin-right:2px
       }
     }
-  s
     &.slick-next {
       right: 20px;
       width: 43px;

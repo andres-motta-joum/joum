@@ -4,6 +4,7 @@ import { EnviarMensajeComponent } from './enviar-mensaje.component';
 import { ComponentesGeneralesModule } from 'src/app/navegacion/componentes-generales/componentes-generales.module';
 import { MensajeComponent } from './componentes/mensaje/mensaje.component';
 import { ProductoComponent } from './componentes/producto/producto.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { ProductoComponent } from './componentes/producto/producto.component';
     ProductoComponent
   ],
   imports: [
+    FormsModule,
     CommonModule,
     ComponentesGeneralesModule
   ],

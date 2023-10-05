@@ -1,5 +1,5 @@
 <div (click)="navegar(['prod/' + producto.id])" class="contenedor">
-    <img src="{{producto.detalles?.fotos![0][0]}}">
+    <img [src]="foto">
     <div>
         <p>{{producto.nombre}}</p>
         <div *ngIf="producto.descuento">

@@ -1,7 +1,7 @@
 import { Component, Input, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/interfaces/producto/producto';
-import { Venta } from 'src/app/interfaces/usuario/subInterfaces/venta';
+import { Venta } from 'src/app/interfaces/venta';
 
 @Component({
   selector: 'app-producto-venta',
@@ -13,6 +13,8 @@ export class ProductoComponent {
   @Input() producto!: Producto;
   @Input() venta!: Venta;
   @Input() unidad!: number;
+  @Input() foto!: string;
+  @Input() estilo!: string;
 
   navegar(ruta: any[], event: Event){
     event.preventDefault();

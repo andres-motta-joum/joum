@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasosVenderService } from '../../../../../../servicios/vender/vender.service';
@@ -59,5 +59,10 @@ export class PasoNueveComponent {
   atras(): void {
     this.pasos.producto.envioGratis = this.envioGratis;
     this.router.navigate(['/vender', 'formulario', 'paso8']);
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload($event: any): void {
+      $event.returnValue = true;
   }
 }

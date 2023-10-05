@@ -1,6 +1,6 @@
 .contenedor{
     width: 100%;
-    height: 230px;
+    min-height: 220px;
     margin-top: 16px;
     display: grid;
     grid-template-columns: 2.8fr 1fr;
@@ -8,10 +8,10 @@
     > div{
         background-color: white;
         border: 1px solid #ddd;
-        border-radius: 8px;
+        border-radius: 7px;
     }
     >div:nth-child(1){
-        padding-bottom: 30px; 
+        min-height: 235px; 
         app-producto-carrito:nth-child(1) div{
             border: none;
         }  
@@ -56,6 +56,27 @@
         }
         .linea{
             border-bottom: 1px solid #ddd;
+        }
+    }
+
+    .sinCarrito{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fdfdfd;
+        border-radius: 7px;
+        height: 235px;
+        img{
+            width: 110px;
+        }
+        p{
+            margin-top: 15px;
+            font-size: 20px;
+            color: #707070;
+            font-weight: 450;
+            letter-spacing: .5px;
+            word-spacing: 1px;
         }
     }
 }

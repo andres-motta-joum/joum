@@ -1,4 +1,6 @@
 import { Component, HostListener, NgZone, OnDestroy } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
@@ -10,7 +12,7 @@ import { DataSharingService } from 'src/app/servicios/usuarios/data-sharing.serv
   styleUrls: ['./validar-telefono.component.scss']
 })
 export class ValidarTelefonoComponent implements OnDestroy{
-  constructor(private fb: FormBuilder,private zone: NgZone, private router: Router, private dataSharingService: DataSharingService, private authService: AuthService) {}
+  constructor(private fb: FormBuilder,private zone: NgZone, private router: Router, private dataSharingService: DataSharingService, private authService: AuthService, private auth: Auth) {}
   form!: FormGroup;
   datosRegistros!: any;
   public numeroLength = 0;
@@ -19,6 +21,7 @@ export class ValidarTelefonoComponent implements OnDestroy{
 
   ngOnInit(): void {
     const formData = this.dataSharingService.getFormData();
+
     if (formData) {
       this.datosRegistros = formData;
       if(formData.tipo === 'singIn'){

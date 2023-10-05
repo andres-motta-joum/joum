@@ -1,0 +1,30 @@
+<div class="content">
+    <h2>Editar correo</h2>
+    <label for="email">Correo</label>
+    <input type="text" id="email" [(ngModel)]="correo" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}">
+    <p class="error" *ngIf="error !== ''">{{error}}</p>
+    <div>
+        <button [disabled]="cargando" (click)="submit()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+            <span *ngIf="!cargando">Editar</span> 
+            <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+            <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+        </button>
+        <button (click)="cerrarContenido()">Cancelar</button>
+    </div>
+    <ng-icon name="ionClose" (click)="cerrarContenido()"></ng-icon>
+</div>
+<div class="ingresarContrasena" *ngIf="ingresarContrasena">
+    <h2>Validación</h2>
+    <label for="password">Ingresa tu contraseña</label>
+    <input type="password" id="password" placeholder="* * * *" [(ngModel)]="password" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}">
+    <p class="error" *ngIf="error !== ''">{{error}}</p>
+    <div>
+        <button [disabled]="cargando" (click)="validarcontrasena()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+            <span *ngIf="!cargando">Validar</span> 
+            <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+            <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+        </button>
+        <button (click)="cerrarcontrasena()">Cancelar</button>
+    </div>
+    <ng-icon name="ionClose" (click)="cerrarcontrasena()"></ng-icon>
+</div>

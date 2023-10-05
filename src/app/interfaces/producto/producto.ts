@@ -6,54 +6,55 @@ import { DetallesRelojes } from "./categorias/detalles-relojes";
 import { DetallesDifusores } from "./categorias/detalles-difusores";
 import { DetallesVinilos } from "./categorias/detalles-vinilos";
 import { DetallesAdornos } from "./categorias/detalles-adornos";
+import { DocumentData, DocumentReference } from "@angular/fire/firestore";
 
 export interface Producto {
-  unidades?: number; // BORRAR
+  unidades?: number, // BORRAR
   //--------------------------------------------------------------
-  id?: string; 
-  idUsuario?: string; 
-  verificado?: boolean,
+  id?: string, 
+  idUsuario: string, 
+  verificado?: boolean, //BORRAR
 
 //------------------------ FORMULARIO -----------
-  categoria?: string; 
+  categoria: string, 
 
-  nombre?: string;
+  nombre: string,
 
-  autoria?: string,
-  marca?: string,       /*--- Principales ---*/
-  modelo?: string,
+  autoria: string,
+  marca: string,       /*--- Principales ---*/
+  modelo: string,
 
-  estilos?: Estilos[],   /*--- visual ---*/
+  estilos: Estilos[],   /*--- visual ---*/
   
 
-  detalles?: DetallesCuadros | DetallesRepisas | DetallesIluminacion | DetallesMacetas | DetallesRelojes | DetallesDifusores | DetallesVinilos | DetallesAdornos;
+  detalles?: DetallesCuadros | DetallesRepisas | DetallesIluminacion | DetallesMacetas | DetallesRelojes | DetallesDifusores | DetallesVinilos | DetallesAdornos,
 
-  descripcion?: string;
+  descripcion?: string,
 
-  precio?: number;  
+  precio: number,  
 
-  envioGratis?: boolean,
+  envioGratis: boolean,
 
-  tipoPublicacion?: string,
+  tipoPublicacion: string,
 
 //-----------------
-  precioEnvio?: number;
-  vistas?: number,
-  descuento?: boolean; 
-    porcentajeDescuento?: number;
-    diasDescuento?: number;
+  precioEnvio?: number,
+  vistas: number,
+  descuento?: boolean, 
+    porcentajeDescuento?: number,
+    diasDescuento?: number,
     fechaDescuento?: Date,
-  opiniones?: Opinion[],
+  opiniones: Opinion[],
     calificacion?: number,
 
-  ventas?: number,
+  ventas: number, // No es necesario agregar la referencias, ya que no necesito los datos de las ventas aquí
   estado?: boolean
 }
 
 export interface Opinion {
   id?: string,
   idUsuario?: string,
-  idProducto?: string,
+  producto?: DocumentReference<DocumentData>,
   calificacion?: number,
   fecha?: Date,
   contenido?: string,
@@ -62,8 +63,8 @@ export interface Opinion {
 }
 
 interface Estilos {
-  nombre?: string;
-  fotos?: string[];
-  unidades?: number;
-  sku?: string;
+  nombre: string,
+  fotos: string[],
+  unidades: number,
+  sku?: string
 }

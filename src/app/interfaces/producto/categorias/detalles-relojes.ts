@@ -9,7 +9,6 @@ export interface DetallesRelojes {
     tipo?: string, //pared o mesa
     estilo?: string,
     material?: string,
-    panel?: string | boolean,
     alimentacion?: string, //pilas,enchufe,etc...
     montaje?: string, //descripción
 
@@ -23,4 +22,6 @@ export interface DetallesRelojes {
 
     formatoVenta?: string,
         unidadesPack?: number,
+    panel?: boolean,
+        tipoPanel?: string
 }

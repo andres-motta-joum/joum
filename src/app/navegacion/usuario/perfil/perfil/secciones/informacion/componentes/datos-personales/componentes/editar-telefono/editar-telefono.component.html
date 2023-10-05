@@ -1,0 +1,72 @@
+<div class="content" *ngIf="ingresarNumero">
+    <h2>Editar telefono</h2>
+    <label for="email">Teléfono</label>
+    <input type="number" id="email" [(ngModel)]="telefono" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}" (keydown)="validarInput($event)">
+    <span class="numeral">+57</span>
+    <p class="error" *ngIf="error !== ''">{{error}}</p>
+    <div>
+        <button [disabled]="cargando" (click)="submit()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+            <span *ngIf="!cargando">Editar</span> 
+            <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+            <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+        </button>
+        <button (click)="cerrarContenido()">Cancelar</button>
+    </div>
+    <ng-icon name="ionClose" (click)="cerrarContenido()"></ng-icon>
+</div>
+
+<div class="ingresarContrasena" *ngIf="ingresarContrasena">
+    <h2>Validación</h2>
+    <label for="password">Ingresa tu contraseña</label>
+    <input type="password" id="password" placeholder="* * * *" [(ngModel)]="password" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}">
+    <p class="error" *ngIf="error !== ''">{{error}}</p>
+    <div>
+        <button [disabled]="cargando" (click)="validarcontrasena()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+            <span *ngIf="!cargando">Validar</span> 
+            <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+            <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+        </button>
+        <button (click)="cerrarcontrasena()">Cancelar</button>
+    </div>
+    <ng-icon name="ionClose" (click)="cerrarcontrasena()"></ng-icon>
+</div>
+
+<div class="ingresarCodigoEmail" *ngIf="ingresarCodigoEmail">
+    <h2>Confirmación de Identidad</h2>
+    <h4>Para garantizar la seguridad de tu cuenta, se confirmará que eres el titular de la cuenta a través de tu cuenta de Gmail.</h4>
+    <p class="errorGmail" *ngIf="error !== ''">{{error}}</p>
+    <div>
+        <button [disabled]="cargando" (click)="reautenticarGmail()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+            <span *ngIf="!cargando">Verificar</span> 
+            <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+            <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+        </button>
+        <button (click)="cerrarCodigoEmail()">Cancelar</button>
+    </div>
+    <ng-icon name="ionClose" (click)="cerrarCodigoEmail()"></ng-icon>
+</div>
+
+
+<div class="ingresarCodigoSMS" *ngIf="ingresarSMS">
+    <ng-container *ngIf="capcha">
+        <h1>Código SMS</h1>
+        <p>Ingresa el código que enviamos por SMS al +57{{telefono}}</p>
+        <br>
+        <div class="verification-code">
+            <input #firstInput class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 0)" (keydown)="onInputBefore($event, $event, 0)" [ngClass]="{ 'error': codigoIncorrecto }"  #verificationInput />
+            <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 1)" (keydown)="onInputBefore($event, $event, 1)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+            <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 2)" (keydown)="onInputBefore($event, $event, 2)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+            <div></div>
+            <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 3)" (keydown)="onInputBefore($event, $event, 3)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+            <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 4)" (keydown)="onInputBefore($event, $event, 4)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+            <input class="verification-input" type="number" max="9" maxlength="1" (keyup)="onInput($event, $event, 5)" (keydown)="onInputBefore($event, $event, 5)" [ngClass]="{ 'error': codigoIncorrecto }" #verificationInput />
+        </div>
+        <button [disabled]="cargando && !capcha" (click)="validarCodigo()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+            <span *ngIf="!cargando">Validar</span> 
+            <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+            <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+        </button>
+        <ng-icon name="ionClose" (click)="cerrarSMS()"></ng-icon>
+    </ng-container>
+    <div *ngIf="!capcha" id="recaptcha-container"></div>
+</div>

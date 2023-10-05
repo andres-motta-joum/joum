@@ -1,38 +1,58 @@
-import { Component} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { Producto } from 'src/app/interfaces/producto/producto';
-import { ProductoService } from 'src/app/servicios/producto/producto.service';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { Auth } from '@angular/fire/auth';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { ProductosService } from 'src/app/servicios/productos/productos.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.scss']
 })
-export class ProductosComponent {
-  public usuario!: Usuario | undefined;
-  public productos!: Producto[];
+export class ProductosComponent implements OnInit, OnDestroy{
+  private routeSubscription!: Subscription;
+  private usuario!: Usuario | undefined;
+  productos: Producto[] = [];
+  fotos!: string[];
 
-  constructor(private route: ActivatedRoute, private userService: UsuarioService, private prdService: ProductoService) {}
+  constructor(private route: ActivatedRoute,private prdService: ProductosService, private authService: AuthService, private auth: Auth, private firestore: Firestore) {}
 
   ngOnInit() {
-    this.route.parent?.parent?.params.subscribe(params => {
+    this.routeSubscription = this.route.parent!.parent!.params.subscribe(params => {
       const userId = params['id'];
-      this.usuario = this.userService.getUserUsuario(userId);
-      this.obtenerProductos();
+      this.obtenerusuario(userId);
     });
   }
 
-  obtenerProductos() {
-    this.productos = [];
-    if (this.usuario?.publicaciones) {
-      for (const id of this.usuario.publicaciones) {
-        const producto = this.prdService.getProductsId(id.id!);
-        if (producto) {
-          this.productos.push(producto);
-        }
+  async obtenerusuario(usuario: string){
+    await this.authService.getUsuarioUser(usuario).then((usuario)=>{
+      if(usuario){
+        this.usuario = usuario
       }
+    })
+    this.obtenerProductos();
+  }
+
+  async obtenerProductos() {
+    if (this.usuario?.publicaciones) {
+      const productosRef = await Promise.all(this.usuario?.publicaciones.map((ref:any) => getDoc(ref)));
+      productosRef.forEach(productSnapshot => {
+        const prd = productSnapshot.data() as Producto;
+        prd.id = productSnapshot.id;
+        this.productos.push(prd);
+      });
+      this.fotos = await this.prdService.obtenerFotos(this.productos);
     }
   }
+
+  ngOnDestroy(): void {
+    if(this.routeSubscription){
+      this.routeSubscription.unsubscribe();
+    }
+  }
+
 }
