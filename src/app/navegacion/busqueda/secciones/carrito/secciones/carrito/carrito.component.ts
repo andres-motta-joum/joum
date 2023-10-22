@@ -1,10 +1,10 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, first, firstValueFrom } from 'rxjs';
-import { Producto } from 'src/app/interfaces/producto/producto';
-import { Usuario, porComprar } from 'src/app/interfaces/usuario/usuario';
+import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Usuario, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { ProductosService } from 'src/app/servicios/productos/productos.service';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
@@ -14,14 +14,15 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
   styleUrls: ['./carrito.component.scss']
 })
 export class CarritoSeccionComponent implements OnInit, OnDestroy{
-  constructor(private zone: NgZone, private router: Router, private route: ActivatedRoute, private authService: AuthService, private prdsService: ProductosService, private auth:Auth, private comprarService: ComprarService){}
+  constructor(private zone: NgZone, private router: Router, private firestore: Firestore, private authService: AuthService, private prdsService: ProductosService, private auth:Auth, private comprarService: ComprarService){}
   private subscription!: Subscription;
   private usuario!: Usuario;
-  carrito!: porComprar[];
+  carrito!: referenciaCompra[];
   productos: Producto[] = [];
   unidades: number[] = [];
   fotos: string[] = [];
-  estilos: string[] = [];
+  estilosId: string[] = [];
+  estilos: Estilo[] = [];
   indexEstilos: number[] = [];
 
   cantidadProductos = 0;
@@ -39,7 +40,7 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
         this.authService.getUsuarioId(user.uid).pipe(first()).subscribe((usuario)=>{
           if(usuario.carrito && usuario.carrito.length !== 0){
             this.usuario = usuario;
-            this.carrito = usuario.carrito
+            this.carrito = usuario.carrito;
             this.obtenerProductos();
             this.sinCarrito = false;
           }else{
@@ -55,17 +56,22 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
   async obtenerProductos() {
     if (this.usuario?.carrito) {
       const productosRef = await Promise.all(this.usuario?.carrito.map((ref:any) => getDoc(ref.producto)));
-      productosRef.forEach((productSnapshot, index) => {
+      await Promise.all(productosRef.map(async (productSnapshot, index) => {
         const prd = productSnapshot.data() as Producto;
         prd.id = productSnapshot.id;
         this.productos.push(prd);
-        this.estilos.push(this.usuario.carrito![index].estilo!);
-      });
+        this.estilosId.push(this.usuario.carrito![index].estilo!);
+        const estiloRef = doc(this.firestore, `productos/${prd.id}/estilos/${this.usuario.carrito![index].estilo!}`);
+        const estiloSnapshot = await getDoc(estiloRef);
+        const estilo = estiloSnapshot.data() as Estilo;
+        estilo.id = estiloSnapshot.id;
+        this.estilos.push(estilo);
+      }));
       this.indexEstilos = this.usuario.carrito!.map((carrito)=>{
         const partes = carrito.estilo.split(':');
         return Number(partes[0]) - 1;
       })
-      this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilos);
+      this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilosId);
       this.unidades = this.usuario.carrito!.map((carrito)=>{
         return carrito.unidades;
       })
@@ -86,7 +92,7 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
     this.productos.splice(index, 1);
     this.unidades.splice(index, 1);
     this.fotos.splice(index, 1);
-    this.estilos.splice(index, 1);
+    this.estilosId.splice(index, 1);
     this.indexEstilos.splice(index, 1);
     if(this.carrito.length !== 0){
       this.sinCarrito = false;
@@ -95,7 +101,7 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
     }
   }
 
-  obtenerPrecios(carrito: porComprar[]){
+  obtenerPrecios(carrito: referenciaCompra[]){
     let precioProductos = 0;
     let precioEnvios = 0;
     if(this.productosLenght == 1){

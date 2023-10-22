@@ -5,7 +5,6 @@ import { PerfilUsuarioComponent } from './perfil/perfil-usuario.component';
 /*---------  Secciones Perfil Usuario  -----------*/
   import { InformacionComponent } from './perfil/secciones/informacion/informacion.component';
   import { ProductosComponent } from './perfil/secciones/productos/productos.component';
-  import { EditarDatosComponent } from '../perfil/perfil/secciones/editar-datos/editar-datos.component';
 
 import { ComprasComponent } from './compras/compras/compras.component';
   import { DetalleCompraComponent } from './compras/compras/detalle-compra/detalle-compra.component';
@@ -16,7 +15,6 @@ import { MetricasComponent } from './ventas/metricas/metricas.component';
   import { NegocioComponent } from './ventas/metricas/secciones/negocio/negocio.component';
   import { AtencionCompradoresComponent } from './ventas/metricas/secciones/atencion-compradores/atencion-compradores.component';
   import { StockComponent } from './ventas/metricas/secciones/stock/stock.component';
-  import { PuntosComponent } from './ventas/metricas/secciones/puntos/puntos.component';
 import { NovedadesComponent } from './ventas/novedades/novedades.component';
 import { PublicacionesComponent } from './ventas/publicaciones/publicaciones.component';
 import { ReputacionComponent } from './ventas/reputacion/reputacion.component';
@@ -28,6 +26,7 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
 /*---------  Secciones facturación  -----------*/
   import { FacturasReportesComponent } from './facturacion/secciones/facturas-reportes/facturas-reportes.component';
   import { RetencionesComponent } from './facturacion/secciones/retenciones/retenciones.component';
+import { EditarPublicacionComponent } from './ventas/publicaciones/editar-publicacion/editar-publicacion.component';
 
   export const routes: Routes = [
   {
@@ -48,14 +47,7 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
           }
         ]
       },
-      {
-        path: 'perfil/editar-datos',
-        component: EditarDatosComponent
-      },
-      {
-        path: 'facturacion/editar-datos',
-        component: EditarDatosComponent
-      },/*-----------------------------------------*/
+      /*-----------------------------------------*/
       {
         path: 'compras',
         component: ComprasComponent
@@ -87,11 +79,7 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
           {
             path: 'stock',
             component: StockComponent
-          },
-          {
-            path: 'puntos',
-            component: PuntosComponent
-          },
+          }
         ]
       },
       {
@@ -101,6 +89,10 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
       {
         path: 'publicaciones',
         component: PublicacionesComponent
+      },
+      {
+        path: 'editar-publicacion/:id',
+        component: EditarPublicacionComponent
       },
       {
         path: 'reputacion',
@@ -123,16 +115,18 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
       /*---------  Seccion Facturación  ----------*/
       {
         path: 'facturacion',
-        component: FacturacionComponent
+        component: FacturacionComponent,
+        children: [
+          {
+            path: 'facturas-reportes',
+            component: FacturasReportesComponent
+          },
+          {
+            path: 'retenciones',
+            component: RetencionesComponent
+          }
+        ]
       },
-      {
-        path: 'facturacion/facturas-reportes',
-        component: FacturasReportesComponent
-      },
-      {
-        path: 'facturacion/retenciones',
-        component: RetencionesComponent
-      }
 
     ]
   }

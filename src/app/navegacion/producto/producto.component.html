@@ -47,7 +47,7 @@
             </div>
 
             <div class="seccioDerecha">
-                <app-datos-producto [productoCargado]="productoCargado" [producto]="producto" (estilo)="cambioDeEstilo($event)" (unidadeS)="unidades = $event"></app-datos-producto>
+                <app-datos-producto [productoCargado]="productoCargado" [producto]="producto" [estilos]="estilos" (estilo)="cambioDeEstilo($event)" (unidadeS)="unidades = $event"></app-datos-producto>
                 <app-datos-producto-dos></app-datos-producto-dos>
                 <app-datos-producto-tres [producto]="producto"></app-datos-producto-tres>
             </div>

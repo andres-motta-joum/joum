@@ -7,20 +7,17 @@
             <p>{{direccion.barrio}}, Bogotá D.C.</p>
             <p>{{direccion.nombresApellidos}}</p>
         </div>
-        <div class="eleccion" *ngIf="direcciones.length !== 1" (click)="$event.stopPropagation()">
-            <ng-icon name="matDelete"></ng-icon>
-        </div>
         <!--------- POSITION ABSOLUTE --------->
         <div class="verMas">
             <img src="assets/img/logo/iconos/ver-mas.svg">
-            <img (click)="desplegarSubMenu()"  src="assets/img/logo/iconos/ver-mas-full.svg">
+            <img (click)="desplegarSubMenu(index)"  src="assets/img/logo/iconos/ver-mas-full.svg">
         </div>
-        <div *ngIf="subMenu" class="submenu">
-            <p (click)="editarContenido('direccion')">Editar</p>
-            <p>Eliminar</p>
+        <div *ngIf="subMenu[index]" class="submenu">
+            <p (click)="editarContenido('direccion', 'editar', index)">Editar</p>
+            <p (click)="editarContenido('direccion', 'eliminar', index)">Eliminar</p>
         </div>  
     </div>
-    <div class="agregarDireccion" (click)="editarContenido('direccion')">
+    <div class="agregarDireccion" (click)="editarContenido('direccion', 'agregar')">
         <p>+ Agregar dirección</p>
     </div>
 </div>

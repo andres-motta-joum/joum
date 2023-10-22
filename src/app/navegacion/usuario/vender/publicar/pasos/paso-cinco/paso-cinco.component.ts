@@ -155,6 +155,7 @@ export class PasoCincoComponent {
   submit(): any {
     this.fotos.forEach((fotos:any, index: any) => { //Asignar fotos FILE a estilos.
         this.estilos[index].fotos = fotos;
+        this.estilos[index].unidades = Number(this.estilos[index].unidades);
     });
     this.pasos.paso6 = true;
     this.pasos.producto.estilos = this.estilos;

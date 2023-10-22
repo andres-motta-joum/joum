@@ -13,6 +13,7 @@ export class CorreoEnviadoComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     const formData = this.dataSharingService.getFormData();
     if (formData) {
+      console.log(formData)
       if(Object.keys(formData).length === 0){
         this.router.navigate(['']);
       }else{

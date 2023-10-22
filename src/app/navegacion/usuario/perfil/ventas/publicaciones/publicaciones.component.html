@@ -2,13 +2,17 @@
 <div class="encabezado">
     <p>{{publicaciones.length}} publicaciones</p>
     <div>
-        <input type="text" placeholder="Buscar ">
-        <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
-        <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
-        <select id="">
-            <option value="">Todas</option>
-            <option value="">compra tipo1</option>
-        </select>
+        <div>
+            <input type="text" placeholder="Buscar ">
+            <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+        </div>
+        <div>
+            <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+            <select id="">
+                <option value="">Todas</option>
+                <option value="">compra tipo1</option>
+            </select>
+        </div>
     </div>
 </div>
 <app-publicacion [publicacion]="publicacion" [foto]="fotos[index]" *ngFor="let publicacion of publicaciones; let index = index"></app-publicacion>

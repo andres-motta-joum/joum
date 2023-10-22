@@ -4,38 +4,45 @@
     display: grid;
     grid-template-columns: .5fr;
     > div{
-        border: 1px solid #ddd;
+        box-shadow: 0 -0.1px 2.6px rgba(0,0,0,0.18), 0 3.1px 2.3px rgba(0,0,0,0.05);
         border-radius: 8px;
         background: #fff;
     }
     .graficaCircular{
         position: relative;
+        .sombra{
+            box-shadow: 0 0px 3px rgba(0,0,0,0.04) inset !important;
+            &::before{
+                box-shadow: 0 1px 3px rgba(0,0,0,0.10), 0 3.1px 4px rgba(0,0,0,0.05) !important;
+            }
+        }
         .color{
-            transform: rotate(45deg);
             position: relative;
             margin-top: 60px;
-            margin-left: 30px;
+            margin-left: 35px;
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            background: conic-gradient(#f7f7f7 0% 1%,#aaa 2% 20%,#f7f7f7 21% 23%, #83b7ec 24% 98%, #f6f6f6 99% 99%);
+            background: conic-gradient(#f0f0f0 0 100%);
+            box-shadow: 0 0px 2.6px rgba(0,0,0,0.02) inset;
             &::before{
                 content: "";
-                width: 160px;
-                height: 160px;
+                width: 108px;
+                height: 108px;
                 position: absolute;
                 top: 0;
                 left: 0;
-                background: white content-box;
+                background: #fff content-box;
                 border-radius: 50%;
-                padding: 26px;
+                margin: 26px;
                 box-sizing: border-box;
+                box-shadow: 0 0px 2.6px rgba(0,0,0,0.03);
             }
         }
         > div:nth-child(2){
             position: absolute;
             top: 60px;
-            left: 30px;
+            left: 35px;
             width: 160px;
             height: 160px;
             border-radius: 50%;
@@ -52,13 +59,14 @@
             }
             p:nth-child(1){
                 font-size: 22px;
-                margin-top: -5px;
+                margin-top: -10px;
+                color: #666;
             }
         }
         > div:nth-child(3){
             position: absolute;
             top: 65px;
-            right: 11%;
+            right: 18%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -87,14 +95,14 @@
                 &::before{
                     left: 10px;
                     top: 0;
-                    background-color: #aaa;
+                    background-color: #4f7fc8;
                 }
             }
         }
         > p:nth-child(4){
             position: absolute;
             top: 5px;
-            left: 32px;
+            left: 36px;
             font-size: 13px;
             font-weight: 450;
             letter-spacing: .4px;
@@ -103,7 +111,7 @@
         > p:nth-child(5){
             position: absolute;
             bottom: 25px;
-            right: 10%;
+            right: 18%;
             font-size: 11px;
             font-weight: 450;
             letter-spacing: .6px;

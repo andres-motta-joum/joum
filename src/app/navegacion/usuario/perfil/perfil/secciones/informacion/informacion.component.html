@@ -67,14 +67,6 @@
                     </div>
                     <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
                 </div>
-                <div [ngClass]="{'selected': selected == 'privacidad'}" (click)="cambiarInformacion('privacidad')">
-                    <ng-icon name="heroShieldCheck"></ng-icon>
-                    <div>
-                        <h4>Privacidad</h4>
-                        <p>Modificar datos de privacidad</p>
-                    </div>
-                    <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
-                </div>
                 <div [ngClass]="{'selected': selected == 'e-mails'}" (click)="cambiarInformacion('e-mails')">
                     <ng-icon name="iconoirMailOut" class="email-icon"></ng-icon>
                     <div>
@@ -87,9 +79,8 @@
             <div>
                 <app-datos-personales *ngIf="selected == 'datosPersonales'" (mostrarContenido)="mostrarContenido($event)"></app-datos-personales>
                 <app-seguridad *ngIf="selected == 'seguridad'" (mostrarContenido)="mostrarContenido($event)"></app-seguridad>
-                <app-direcciones *ngIf="selected == 'direcciones'" (mostrarContenido)="mostrarContenido($event)"></app-direcciones>
-                <app-privacidad *ngIf="selected == 'privacidad'" (mostrarContenido)="mostrarContenido($event)"></app-privacidad>
-                <app-e-mails *ngIf="selected == 'e-mails'"></app-e-mails>
+                <app-direcciones *ngIf="selected == 'direcciones'" [direcciones]="usuario.direcciones" (mostrarContenido)="mostrarContenido($event)" (editarDireccion)="editarDireccionIndex = $event" (agregarDireccion)="editarDireccionIndex = undefined"></app-direcciones>
+                <app-e-mails *ngIf="selected == 'e-mails'" [emailsRecibidos]="usuario.emailsRecibidos"></app-e-mails>
             </div> <!-- Parte derecha -->
         </div>
         <div class="contentEdit" *ngIf="habilitarEdicion">
@@ -100,13 +91,10 @@
             <app-editar-documento *ngIf="recuadroContenido == 'documento'" [documento]="usuario.documento!" [tipoDocumento]="usuario.tipoDocumento!" (cerrar)="habilitarEdicion = false"></app-editar-documento>
             <app-editar-nombre *ngIf="recuadroContenido == 'nombre'" [nombre]="usuario.nombre" (cerrar)="habilitarEdicion = false"></app-editar-nombre>
 
-            <app-editar-direccion *ngIf="recuadroContenido == 'direccion'" (cerrar)="habilitarEdicion = false"></app-editar-direccion>
+            <app-editar-direccion *ngIf="recuadroContenido == 'direccion'" [direccionIndex]="editarDireccionIndex" [direccion]="usuario.direcciones![editarDireccionIndex!]" (cerrar)="habilitarEdicion = false"></app-editar-direccion>
 
             <app-editar-contrasena *ngIf="recuadroContenido == 'contrasena'" (cerrar)="habilitarEdicion = false"></app-editar-contrasena>
             <!--<app-editar-telefono></app-editar-telefono>-->
-
-            <app-editar-permisos-privacidad *ngIf="recuadroContenido == 'permisos-privacidad'" (cerrar)="habilitarEdicion = false"></app-editar-permisos-privacidad>
-            <app-eliminar-cuenta *ngIf="recuadroContenido == 'cuenta'" (cerrar)="habilitarEdicion = false"></app-eliminar-cuenta>
         </div>
     </ng-template>
 

@@ -20,7 +20,7 @@ export class ProductosComponent {
     if (changes['productos'] && changes['productos'].currentValue) {
       const productos = changes['productos'].currentValue;
       let fotos = productos.map(async (producto:any) => {
-        const imgRef = ref(this.storage, `${producto.id}/1:${producto.estilos[0].nombre}`);
+        const imgRef = ref(this.storage, `productos/${producto.id}/1:${producto.estilos[0].nombre}`);
         const response = await listAll(imgRef);
         return await getDownloadURL(response.items[0]);
       });

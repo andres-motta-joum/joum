@@ -3,8 +3,8 @@ import { Auth } from '@angular/fire/auth';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Subscription, first, firstValueFrom } from 'rxjs';
-import { Producto } from 'src/app/interfaces/producto/producto';
-import { Usuario, porComprar } from 'src/app/interfaces/usuario/usuario';
+import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Usuario, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
@@ -15,11 +15,11 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 })
 export class ProductoGuardadoComponent implements OnInit, OnDestroy{
   @Output() eliminar = new EventEmitter<number>();
-  @Input() guardados!: porComprar[];
+  @Input() guardados!: referenciaCompra[];
   @Input() productoGuardado!: Producto;
   @Input() unidad!: number;
   @Input() foto!: string;
-  @Input() estilo!: string;
+  @Input() estilo!: Estilo | undefined;
   @Input() indice!: number;
   @Input() indexEstilo!: number;
   imagenCargada = false;
@@ -31,7 +31,6 @@ export class ProductoGuardadoComponent implements OnInit, OnDestroy{
   constructor(private zone: NgZone, private router: Router, private firestore: Firestore, private auth:Auth, private authService: AuthService, private comprarService: ComprarService){}
 
   ngOnInit() {
-    this.estiloString = this.estilo.slice(2);
     this.auth.onAuthStateChanged(async (user) => {
       if (user) {
         this.subscription = this.authService.getUsuarioId(user.uid).subscribe((usuario)=>{
@@ -63,10 +62,9 @@ export class ProductoGuardadoComponent implements OnInit, OnDestroy{
 
   agregarCarrito(){
     if(this.foto){
-      const estilo = this.estilo.split(':');
       this.eliminar.emit(this.indice);
       this.comprarService.eliminarReferenciaGuardado(this.usuario, this.indice);
-      this.comprarService.agregarReferenciaCarrito(this.productoGuardado.id!, this.auth.currentUser?.uid!, estilo[1] ,this.indexEstilo + 1,  this.unidad);
+      this.comprarService.agregarReferenciaCarrito(this.productoGuardado.id!, this.auth.currentUser?.uid!, this.estilo!.id , this.unidad);
     }
     
   }

@@ -110,6 +110,7 @@ export class AuthService {
       correoVerificado: currentUser?.emailVerified,
       dinero: { disponible: 0, aLiberar: 0, },
       notificacionesRecibidas: { ofertasDecuentos: true, ventas: true, publicaciones: true, reclamos: true, mensajes: true},
+      emailsRecibidos: { ofertas: true, mensajes: true, opiniones: true, ventas: true, publicacionesPorFinalizar: true, publicacionesFinalizadas: true, compras: true},
       fechaRegistro: new Date(),
       notificaciones: [{
         foto: 'https://firebasestorage.googleapis.com/v0/b/joum-b86f6.appspot.com/o/joum%2Fbienvenido.png?alt=media&token=243366d0-8607-44af-9392-24fc39f806b8',

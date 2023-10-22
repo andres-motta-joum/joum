@@ -43,7 +43,6 @@ export class PasoOchoComponent {
     }
   }
 
-
   ngOnDestroy(): void {
     this.subscriptions.forEach(subs => subs.unsubscribe());
   }
@@ -56,7 +55,7 @@ export class PasoOchoComponent {
 
   atras(): void {
     if(this.form.value.precio != null){
-      this.pasos.producto.precio = this.form.value.precio.replace(/\./g, '').replace(/,/g, '');
+      this.pasos.producto.precio = Number(this.form.value.precio.replace(/\./g, '').replace(/,/g, ''));
     }
     this.router.navigate(['/vender', 'formulario', 'paso7']);
   }

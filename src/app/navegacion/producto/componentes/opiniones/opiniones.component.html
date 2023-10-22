@@ -39,7 +39,7 @@
         <option value="1">1 estrellas</option>
         <option value="todas">Todas</option>
     </select>
-    <ng-container *ngFor="let opinion of opinionesSelecionadas">
+    <ng-container *ngFor="let opinion of opinionesSelecionadas; let index = index">
         <div class="opinion">
             <div style="display: flex;">
                 <div class="estrellas-opinion">
@@ -58,7 +58,7 @@
                         <ng-icon name="heroStarSolid"></ng-icon>
                     </div>
                 </div>
-                <p>{{ opinion.fecha | date:'d \'/\' MMMM \'/\' y' }}</p>
+                <p>{{ fechas[index] | date:'d \'/\' MMMM \'/\' y' }}</p>
             </div>
             <p class="texto-opinion">{{opinion.contenido}}</p>
             <div class="linea-opinion"></div>

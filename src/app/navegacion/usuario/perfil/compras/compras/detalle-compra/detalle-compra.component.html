@@ -12,7 +12,7 @@
                 <img (click)="navegar([usuarioVendedor.usuario+'/' + usuario?.usuario +'/' + compra.numVenta +'/enviar-mensaje'], $event)" src="assets/img/logo/iconos/Msg-full.svg">
             </div>
         </div> 
-        <app-producto [producto]="producto" [compra]="compra" [unidad]="unidades[i]" [foto]="fotos[i]" [estilo]="estilos[i]" *ngFor="let producto of productos; let i = index"></app-producto>
+        <app-producto [compra]="compra" [referencia]="referencia" *ngFor="let referencia of compra.referencias; let i = index"></app-producto>
         <div class="envio">
             <h4 *ngIf="!compra.entregado">Día de entrega: Del 4 al 8 de Julio</h4>
             <h4 *ngIf="compra.entregado">Entregado</h4>

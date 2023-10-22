@@ -1,44 +1,45 @@
-<div class="contenedor" [ngClass]="{'masUnidades': unidades}">
-    <img [src]="foto">
-    <div>
-        <p>{{publicacion.nombre}}</p>
-        <p>#{{publicacion.id}}</p>
-        <p (click)="desplegarUnidades()">{{publicacion.unidades}} unidades<ng-icon name="heroChevronDownMini"></ng-icon></p>
-    </div>
-    <div>
-        <p>Publicación</p>
-        <p>Gratuita</p>
-        <p>Precio</p>
-        <p>$ {{publicacion.precio | number:'1.0-0'}}</p>
-    </div>
-    <div>
-        <p>Envío</p>
-        <p *ngIf="publicacion.envioGratis">Gratuita</p>
-        <p *ngIf="!publicacion.envioGratis">Pago</p>
-    </div>
-    <!--------- POSITION ABSOLUTE --------->
-    <div>
-        <img src="assets/img/logo/iconos/ver-mas.svg">
-        <img (click)="desplegarSubMenu()"  src="assets/img/logo/iconos/ver-mas-full.svg">
-    </div>
-    <div *ngIf="subMenu" class="submenu">
-        <p>Republicar</p>
-        <p (click)="navegar(['prod/'+ publicacion.id],$event)">Ver publicación</p>
-        <p>Eliminar</p>
-    </div>     
-
-    <p class="vistas">{{publicacion.vistas}} vistas | {{publicacion.ventas}} ventas</p>
-    <p class="fecha">12 de junio 2023</p>
-
-    <!------- SUB MENU UNIDADES------>
-    <div class="linea"></div>
-    <div class="unidades">
-        <div *ngFor="let estilo of publicacion.estilos">
-            <img [src]='foto'>
-            <div>
-                <p>Estilo: {{estilo.nombre}} </p>
-                <p>{{estilo.unidades}} unidades</p>
+<div class="content">
+    <div class="contenedor" [ngClass]="{'masUnidades': unidades, 'pausada': !estado, 'masUnidadesDosFilas': unidadesMasEstilos}">
+        <img [src]="foto">
+        <div>
+            <p>{{publicacion.nombre}}</p>
+            <p>#{{publicacion.id}}</p>
+            <p (click)="desplegarUnidades()">{{totalUnidades}} unidad<span *ngIf="totalUnidades !== 1">es</span><ng-icon name="heroChevronDownMini"></ng-icon></p>
+        </div>
+        <div>
+            <p>Publicación</p>
+            <p>Gratuita</p>
+            <p>Precio</p>
+            <p>$ {{publicacion.precio | number:'1.0-0'}}</p>
+        </div>
+        <div>
+            <p>Envío</p>
+            <p *ngIf="publicacion.envioGratis">Gratuita</p>
+            <p *ngIf="!publicacion.envioGratis">Pago</p>
+        </div>
+    
+        <p class="vistas">{{vistas}} vistas | {{publicacion.ventas}} ventas</p>
+        <p class="fecha">{{fecha | date:'d \'de\' MMMM \'.\' y'}}</p>
+    
+        <!------- SUB MENU UNIDADES------>
+        <div class="linea"></div>
+        <div class="unidades">
+            <div *ngFor="let estilo of estilos; let i = index">
+                <img *ngIf="fotosEstilos" [src]='fotosEstilos[i]'>
+                <div>
+                    <p>{{estilo.nombre}} </p>
+                    <p>{{estilo.unidades}} unidad<span *ngIf="estilo.unidades !== 1">es</span></p>
+                </div>
             </div>
         </div>
     </div>
+    <div class="iconos">
+        <img src="assets/img/logo/iconos/ver-mas.svg">
+        <img (click)="desplegarSubMenu($event)"  src="assets/img/logo/iconos/ver-mas-full.svg">
+    </div>
+    <div *ngIf="subMenu" class="submenu">
+        <p (click)="editarProducto()">Editar</p>
+        <p (click)="navegar(['prod/'+ publicacion.id],$event)">Ver publicación</p>
+        <p>Eliminar</p>
+    </div>  
 </div>

@@ -1,15 +1,16 @@
 <div class="contenido">
     <div class="graficaCircular">
-        <div class="color"></div>
+        <div *ngIf="!sinProductos" class="color sombra" [style.background]="'conic-gradient(#82bef5 0 ' + productosPorcentaje + '%, #4f7fc8 ' + productosPorcentaje + '% '+ productosEnCaminoPorcentaje +'%)'"></div>
+        <div *ngIf="sinProductos" class="color"></div>
         <div>
-            <p>10</p>
+            <p>{{stockTotal}}</p>
             <p>Productos</p>
         </div>
         <div>
-            <p>8 | Disponibles</p>
-            <p>2 | En envío</p>
+            <p>{{productos}} | Disponibles</p>
+            <p>{{productosEnCamino}} | En envío</p>
         </div>
-        <p>Stock</p>
-        <p>16 julio 2023</p>
+        <p class="subTituloCircular">Stock</p>
+        <p class="hoyCircular">A día de hoy</p>
     </div>
 </div>

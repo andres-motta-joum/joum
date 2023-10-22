@@ -6,14 +6,12 @@ import { DetallesRelojes } from "./categorias/detalles-relojes";
 import { DetallesDifusores } from "./categorias/detalles-difusores";
 import { DetallesVinilos } from "./categorias/detalles-vinilos";
 import { DetallesAdornos } from "./categorias/detalles-adornos";
-import { DocumentData, DocumentReference } from "@angular/fire/firestore";
+import { DocumentData, DocumentReference, Timestamp } from "@angular/fire/firestore";
 
 export interface Producto {
-  unidades?: number, // BORRAR
   //--------------------------------------------------------------
   id?: string, 
   idUsuario: string, 
-  verificado?: boolean, //BORRAR
 
 //------------------------ FORMULARIO -----------
   categoria: string, 
@@ -24,7 +22,7 @@ export interface Producto {
   marca: string,       /*--- Principales ---*/
   modelo: string,
 
-  estilos: Estilos[],   /*--- visual ---*/
+  estilos: DocumentReference<DocumentData>[],   /*--- visual ---*/
   
 
   detalles?: DetallesCuadros | DetallesRepisas | DetallesIluminacion | DetallesMacetas | DetallesRelojes | DetallesDifusores | DetallesVinilos | DetallesAdornos,
@@ -37,9 +35,11 @@ export interface Producto {
 
   tipoPublicacion: string,
 
+  fecha: Timestamp;
+
 //-----------------
   precioEnvio?: number,
-  vistas: number,
+  vistas: Vistas[],
   descuento?: boolean, 
     porcentajeDescuento?: number,
     diasDescuento?: number,
@@ -53,18 +53,26 @@ export interface Producto {
 
 export interface Opinion {
   id?: string,
-  idUsuario?: string,
-  producto?: DocumentReference<DocumentData>,
+  idUsuario: string,
+  idProducto: string,
+  tituloProducto: string,
+  foto: string,
   calificacion?: number,
-  fecha?: Date,
+  fecha: Timestamp,
   contenido?: string,
-  numVenta?: number,
-  check?: boolean,
+  numVenta: number,
+  check: boolean,
 }
 
-interface Estilos {
+export interface Estilo {
+  id: string;
   nombre: string,
-  fotos: string[],
+  fotos: DocumentReference<DocumentData>[],
   unidades: number,
   sku?: string
+}
+
+interface Vistas{
+  fecha: Timestamp,
+  cantidad: number
 }

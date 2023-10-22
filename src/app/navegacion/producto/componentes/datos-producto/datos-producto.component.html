@@ -43,25 +43,27 @@
             
         </div>
 
-        <div class="linea-Menu"></div>
-        <div class="estilos" *ngIf="producto.estilos![1]">
-            <label for="estilos">Estilos</label><br>
-            <select id="estilos" [(ngModel)]="selectEstilo" (change)="seleccionarEstilo()">
-                <ng-container *ngFor="let estilo of producto.estilos; let index = index">
-                    <option [value]="index">{{estilo.nombre}}</option>
-                </ng-container>
-            </select>
-        </div>
-        <div class="session3" >
-            <label for="unidades">unidades:</label>
-            <select name="unidades" id="unidades" [style.width.px]="unaUnidad ? 90 : 117" (change)="cambiarUnidades($event)">
-                <option value="1" selected>1 unidad</option>
-                <option *ngFor="let i of [].constructor(producto.estilos![selectEstilo].unidades! - 1); let index = index" [value]="index + 2">
-                  {{ index + 2 }} unidad{{ index + 1 !== 0 ? 'es' : '' }}
-                </option>
-            </select>
-            <p>(<span>{{producto.estilos![selectEstilo].unidades!}}</span> disponibles )</p>
-        </div>
+        <ng-container *ngIf="estilos">
+            <div class="linea-Menu"></div>
+            <div class="estilos">
+                <label for="estilos">Estilos</label><br>
+                <select id="estilos" [(ngModel)]="selectEstilo" (change)="seleccionarEstilo()">
+                    <ng-container *ngFor="let estilo of estilos; let index = index">
+                        <option [value]="index">{{estilo.nombre}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div class="session3">
+                <label for="unidades">unidades:</label>
+                <select name="unidades" id="unidades" [style.width.px]="unaUnidad ? 90 : 117" (change)="cambiarUnidades($event)">
+                    <option value="1" selected>1 unidad</option>
+                    <option *ngFor="let i of [].constructor(estilos![selectEstilo].unidades! - 1); let index = index" [value]="index + 2">
+                    {{ index + 2 }} unidad{{ index + 1 !== 0 ? 'es' : '' }}
+                    </option>
+                </select>
+                <p>(<span>{{estilos![selectEstilo].unidades!}}</span> disponibles )</p>
+            </div>
+        </ng-container>
     <div (click)="comprar()" class="btnComprar" ><p>Comprar ahora</p></div>
     <div class="proteccionCompra">Compra protegida:<span> Obtén lo que esperabas o recupera tu dinero.</span><ng-icon name="matGppGoodOutline"></ng-icon></div>
 </div>

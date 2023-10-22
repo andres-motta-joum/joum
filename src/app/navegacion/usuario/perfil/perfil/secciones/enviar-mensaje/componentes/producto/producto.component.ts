@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
 import { Producto } from 'src/app/interfaces/producto/producto';
+import { porComprar } from 'src/app/interfaces/usuario/usuario';
 
 @Component({
   selector: 'app-producto',
@@ -9,11 +10,8 @@ import { Producto } from 'src/app/interfaces/producto/producto';
   styleUrls: ['./producto.component.scss']
 })
 export class ProductoComponent {
-  @Input() producto!: Producto;
-  @Input() unidad!: number;
-  @Input() foto!: string;
-  constructor(private zone: NgZone, private router: Router){
-  }
+  @Input() referencia!: porComprar;
+  constructor(private zone: NgZone, private router: Router){}
 
   navegar(ruta: any[], event: Event){
     event.preventDefault();

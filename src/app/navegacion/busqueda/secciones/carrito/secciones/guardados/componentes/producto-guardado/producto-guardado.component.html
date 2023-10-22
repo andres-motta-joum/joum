@@ -5,13 +5,13 @@
         </div>
         <div>
             <p>{{productoGuardado.nombre}}</p>
-            <p>Estilo: {{estiloString}}</p>
+            <p>Estilo: {{estilo?.nombre}}</p>
             <p *ngIf="productoGuardado.envioGratis" class="envioGratis">Envio gratis</p>
             <p *ngIf="!productoGuardado.envioGratis" class="envioPrecio"><span>Recíbelo</span> por <span>$ {{productoGuardado.precioEnvio}}</span></p>
         </div>
         <div>
             <p (click)="eliminarGuardado()">Eliminar</p>
-            <p>Más productos del vendedor</p>
+            <p (click)="navegar([userUsuario + '/perfil/productos'])">Más productos del vendedor</p>
             <p (click)="agregarCarrito()">Enviar al carrito</p>
         </div>
     </div>
@@ -26,9 +26,9 @@
             <p>$ {{productoGuardado.precio | number: '1.0-0'}}</p>
             <p></p>
         </ng-container>
-        <p>{{productoGuardado.estilos![indexEstilo].unidades}} disponibles</p>
+        <p>{{estilo?.unidades}} disponibles</p>
         <div>
-            <button (click)="cambiarUnidad('-', indice, productoGuardado.estilos![indexEstilo].unidades)">-</button><p>{{unidad}}</p><button (click)="cambiarUnidad('+', indice, productoGuardado.estilos![indexEstilo].unidades)">+</button>
+            <button (click)="cambiarUnidad('-', indice, estilo!.unidades)">-</button><p>{{unidad}}</p><button (click)="cambiarUnidad('+', indice, estilo!.unidades)">+</button>
         </div>
     </div>
 </div>

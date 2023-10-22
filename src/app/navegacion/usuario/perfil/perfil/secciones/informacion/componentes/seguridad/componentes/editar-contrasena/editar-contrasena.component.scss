@@ -34,7 +34,7 @@
         font-weight: 420;
         width: 250px;
         text-align: left;
-        color: #707070;
+        color: #747474;
         word-spacing: 1px;
         font-weight: 450;
         letter-spacing: 0.5px;
@@ -108,15 +108,21 @@
             }
         }
     }
-    .error{
+    .error, .errorpassword, .errorpasswordVerify{
         position: absolute;
         margin: 4px 0 0 0;
         font-size: 13px;
         font-weight: 420;
         color: #ff6d6d;
-        letter-spacing: .3px;
+        letter-spacing: .4px;
         word-spacing: .8px;
         left: 42px;
+    }
+    .errorpassword{
+        top: 158px;
+    }
+    .errorpasswordVerify{
+        top: 261px;
     }
     .errorGmail{
         position: absolute;
@@ -131,7 +137,7 @@
         background-color: #ffeeee;
         border-radius: 4px;
     }
-    ng-icon{
+    > ng-icon{
         position: absolute;
         top: 22px;
         right: 27px;
@@ -229,6 +235,7 @@
         margin-top: 3px;
         font-size: 26px;
         animation: check .8s;
+        color: white;
     }
 }
 
@@ -261,5 +268,14 @@
 
 
 .ingresarNuevaContrasena{
-    height: 320px;
+    height: 375px;
+    input{
+        margin-bottom: 35px;
+    }
+    label{
+        color: #7a7a7a;
+    }
+    div{
+        margin-top: 15px;
+    }
 }

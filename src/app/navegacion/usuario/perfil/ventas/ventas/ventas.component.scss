@@ -6,56 +6,73 @@ h1{
     letter-spacing: .5x;
     word-spacing: 2px;
 }
-
 .encabezado{
     position: relative;
     display: flex;
     margin-top: 30px;
+    height: 38px;
     p{
         margin: 0;
         padding-top: 8px;
         color: #777;
-        font-weight: 500;
-        font-size: 15px;
+        font-weight: 460;
+        font-size: 16px;
+        letter-spacing: .5px;
     }
     div{
         position: absolute;
         right: 0;
         top: 0;
-        input{
-            width: 160px;
+        display: flex;
+        gap: 10px;
+        >div{
             position: relative;
-            margin-right: 10px;
-            padding: 7px 34px 7px 20px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            color: #444;
-            &:focus{
-                outline: none;
+        }
+        >div:nth-child(1){
+            input{
+                padding: 7.5px 34px 7.5px 20px;
+                border-radius: 8px;
+                border: 1px solid #d7d7d7;
+                color: #484848;
+                width: 240px;
+                letter-spacing: .4px;
+                font-size: 13.5px;
+                &:focus{
+                    outline: none;
+                }
+                &::placeholder{
+                    color: #999;
+                }
             }
-        }ng-icon:nth-child(2){
-            position: absolute;
-            top: 7px;
-            left: 185px;
-            color: #666;
-            font-size: 18px;
+            ng-icon{
+                position: absolute;
+                top: 9px;
+                right: 13px;
+                color: #686868;
+                font-size: 17.5px;
+            }
         }
-        ng-icon:nth-child(3){
-            position: absolute;
-            top: 7px;
-            left: 235px;
-            color: #666;
-            font-size: 19px;
-        }
-        select{
-            padding: 7px;
-            padding-left: 36px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            color: #444;
-            cursor: pointer;
-            &:focus{
-                outline: none;
+        >div:nth-child(2){
+            select{
+                padding: 7.5px;
+                padding-left: 41px;
+                border-radius: 8px;
+                border: 1px solid #d7d7d7;
+                color: #4a4a4a;
+                width: 190px;
+                letter-spacing: .4px;
+                font-size: 14px;
+                cursor: pointer;
+                &:focus{
+                    outline: none;
+                }
+            }
+            ng-icon{
+                position: absolute;
+                top: 9px;
+                left: 14px;
+                color: #686868;
+                font-size: 19px;
             }
         }
     }

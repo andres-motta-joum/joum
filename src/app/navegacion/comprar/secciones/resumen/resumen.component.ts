@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { Direccion } from 'src/app/interfaces/usuario/subInterfaces/direccion';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
-import { Producto } from 'src/app/interfaces/producto/producto';
+import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
 import { ProductosService } from 'src/app/servicios/productos/productos.service';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-resumen',
@@ -29,6 +29,7 @@ export class ResumenComponent implements OnInit{
   fotos!: string[];
   unidades!: number[];
   indexEstilos!: number[];
+  estilos: Estilo[] = [];
   ngOnInit(): void {
     this.authService.getUsuarioId(this.auth.currentUser?.uid!).pipe(first()).subscribe((usuario)=>{
       if(usuario.direcciones && usuario.direcciones.length !== 0){
@@ -75,9 +76,15 @@ export class ResumenComponent implements OnInit{
   async obtenerProductos(){
     const referencias$ = this.comprarService.$obtenerReferencias;
     const referencias = await firstValueFrom(referencias$);
-    const estilos = referencias.map((referencia)=>{
+    const estilos = await Promise.all(referencias.map(async (referencia)=>{
+      const estiloRef = doc(this.firestore, `productos/${referencia.producto.id}/estilos/${referencia.estilo}`);
+      const estiloSnapshot = await getDoc(estiloRef);
+      const estilo = estiloSnapshot.data() as Estilo;
+      estilo.id = estiloSnapshot.id;
+      this.estilos.push(estilo);
       return referencia.estilo!
-    })
+    }));
+
     this.productos = await this.comprarService.obtenerProductos(referencias);
     this.fotos = this.productos.map(()=> '');
     this.unidades = this.usuario.referenciaCompra!.map((referencia)=>{

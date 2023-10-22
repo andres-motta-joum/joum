@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { Firestore, doc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Direccion } from 'src/app/interfaces/usuario/subInterfaces/direccion';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
@@ -8,31 +9,38 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
   templateUrl: './direcciones.component.html',
   styleUrls: ['./direcciones.component.scss']
 })
-export class DireccionesComponent implements OnInit{
-  constructor(private auth: Auth, private authService: AuthService){}
+export class DireccionesComponent implements OnInit, OnChanges{
+  constructor(private auth: Auth, private firestore: Firestore){}
   @Output() mostrarContenido = new EventEmitter<string>(); 
-  direcciones: Direccion[] = [];
-  direccionesString: string[] = [];
-  subMenu: boolean = false;
+  @Output() editarDireccion = new EventEmitter<number>(); 
+  @Output() agregarDireccion = new EventEmitter<void>(); 
+  @Input() direcciones!: Direccion[] | undefined;
+  direccionesString!: string[];
+  subMenu: boolean[] = [];
 
   ngOnInit(): void {
-    this.obtenerUsuario();
+    if(this.direcciones){
+      this.obtenerDireccionString();
+      this.direcciones.forEach(()=>{
+        this.subMenu.push(false);
+      })
+    }else{
+      this.direcciones = [];
+    }
   }
 
-  async obtenerUsuario(){
-    if(this.auth.currentUser){
-      const usuario = await this.authService.getUsuarioIdPromise(this.auth.currentUser.uid);
-      if(usuario.direcciones){
-        for(let direccion of usuario.direcciones){
-          this.direcciones.push(direccion);
-        }
-        this.obtenerDireccionString();
-      }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['direcciones'] && changes['direcciones'].currentValue){
+      this.obtenerDireccionString();
+      this.subMenu = [];
+      this.direcciones!.forEach(()=>{
+        this.subMenu.push(false);
+      })
     }
   }
 
   obtenerDireccionString(){
-    this.direccionesString = this.direcciones.map((direccion)=>{
+    this.direccionesString = this.direcciones!.map((direccion)=>{
       const arrayModificado: string[] = direccion.direccion!.map((element, index) => {
         if (index === 2) {
           return `#${element}`;
@@ -51,11 +59,26 @@ export class DireccionesComponent implements OnInit{
     })
   }
 
-  editarContenido(editar: string){
-    this.mostrarContenido.emit(editar);
+  async editarContenido(mostrar: string,  accion: string, index?: number){
+    if(accion == 'agregar'){
+      this.agregarDireccion.emit();
+      this.mostrarContenido.emit(mostrar);
+    }else if(accion == 'editar'){
+      this.mostrarContenido.emit(mostrar);
+      if(index || index == 0){
+        this.editarDireccion.emit(index);
+      }
+    }else{
+      //eliminar dirección
+      this.direcciones!.splice(index!, 1);
+      const usuarioRef = doc(this.firestore, `usuarios/${this.auth.currentUser!.uid}`);
+      await setDoc(usuarioRef, {direcciones: this.direcciones}, {merge: true});
+    }
   }
 
-  desplegarSubMenu(){
-    this.subMenu = !this.subMenu;
+  desplegarSubMenu(index: number){
+    const valor = this.subMenu[index];
+    this.subMenu.fill(false);
+    this.subMenu[index] = !valor;
   }
 }

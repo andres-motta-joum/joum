@@ -28,9 +28,9 @@
             <p *ngIf="producto.envioGratis" class="envioGratis">Envío gratis</p>
             <p *ngIf="!producto.envioGratis" class="envioPrecio"><span>Recíbelo</span> por <span>$ {{producto.precioEnvio | number: '1.0-0'}}</span></p>
         </div>
-        <p>{{producto.estilos![indexEstilos[index]].unidades}} disponibles</p>
+        <p>{{estilos[index].unidades}} disponibles</p>
         <div>
-            <button (click)="cambiarUnidad('-', index, producto.estilos![indexEstilos[index]].unidades)">-</button><p>{{unidades[index]}}</p><button (click)="cambiarUnidad('+', index, producto.estilos![indexEstilos[index]].unidades)">+</button>
+            <button (click)="cambiarUnidad('-', index, estilos[index].unidades)">-</button><p>{{unidades[index]}}</p><button (click)="cambiarUnidad('+', index, estilos[index].unidades)">+</button>
         </div>
     </div>
 </ng-container>

@@ -1,10 +1,10 @@
-<ng-container *ngIf="fotos">
-    <div class="contenedor" *ngFor="let producto of productos, let index = index">
-        <img [src]="fotos[index]">
+<ng-container>
+    <div class="contenedor" *ngFor="let referencia of referencias, let index = index">
+        <img [src]="referencia.foto">
         <div>
             <h3>{{fecha | date:'d \'de\' MMMM \'.\' y'}}</h3>
-            <p>{{producto.nombre}}</p>
-            <p>ver producto</p>
+            <p>{{referencia.tituloProducto}}</p>
+            <p (click)="navegar(['prod/' + referencia.idProducto], $event)">ver producto</p>
         </div>
         <div>
             <div (click)="navegar([usuarioVendedor +'/perfil/informacion'], $event)">
@@ -27,7 +27,7 @@
         </div>
         <div>
             <button (click)="navegar([miUsuario+'/compras/detalle-compra/'+ compra.numVenta], $event)">Ver detalle</button>
-            <button (click)="navegar(['prod/' + producto.id], $event)">Volver a comprar</button>
+            <button (click)="navegar(['prod/' + referencia.idProducto], $event)">Volver a comprar</button>
         </div>
     </div>
 </ng-container>

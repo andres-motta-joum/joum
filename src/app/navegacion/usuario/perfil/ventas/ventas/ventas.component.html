@@ -1,17 +1,21 @@
 <h1>Ventas</h1>
 
-<div class="contenedor">
+<div class="contenedor" *ngIf="ventas">
     <div>
         <div class="encabezado">
-            <p>2 ventas</p>
+            <p>{{ventas.length}} ventas</p>
             <div>
-                <input type="text" placeholder="Buscar ">
-                <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
-                <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
-                <select id="">
-                    <option value="">Filtrar por</option>
-                    <option value="">compra tipo1</option>
-                </select>
+                <div>
+                    <input type="text" placeholder="Buscar ">
+                    <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+                </div>
+                <div>
+                    <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+                    <select id="">
+                        <option value="">Todas</option>
+                        <option value="">compra tipo1</option>
+                    </select>
+                </div>
             </div>
         </div>
         <app-venta [venta]="venta" [usuario]="usuario" [fecha]="fechas[i]" *ngFor="let venta of ventas; let i = index"></app-venta>

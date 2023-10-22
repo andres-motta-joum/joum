@@ -130,7 +130,7 @@
 	position: relative;
 	width: 100%;
 	display: flex;
-	gap: 14px;
+	gap: 15px;
 	> div:nth-child(1){ //Secciones izquierda y derecha
 		border: none;
 		box-shadow: 0 -0.1px 2.6px rgba(0,0,0,0.17), 0 3.1px 2.3px rgba(0,0,0,0.05);
@@ -139,11 +139,15 @@
 		overflow: hidden;
 		transition: .3s;
 		width: 35%;
+		max-height: 392px;
+		@media (max-width: 1250px) {
+			max-height: 412px;
+		}
 		> div{
 			position: relative;
 			width: 100%;
 			display: flex;
-			padding: 22px 0;
+			padding: 23px 0;
 			cursor: pointer;
 			border-bottom: 1px solid #eee;
 			border-left: #fff;
@@ -247,3 +251,4 @@
 		opacity: 1;
 	}
 }
+

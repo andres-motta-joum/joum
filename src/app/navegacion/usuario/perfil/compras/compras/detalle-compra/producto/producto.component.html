@@ -1,13 +1,13 @@
 <div class="producto">
-    <img [src]="foto">
+    <img [src]="referencia.foto">
     <div>
-        <h4>{{producto.nombre}}</h4>
-        <p>Estilo {{estilo}}</p>
-        <p>$ {{producto.precio | number:'1.0-0'}}</p>
+        <h4>{{referencia.tituloProducto}}</h4>
+        <p>Estilo {{referencia.nombreEstilo}}</p>
+        <p>$ {{referencia.precioProducto | number:'1.0-0'}}</p>
     </div>
-    <p> {{unidad}} Unidades</p>
+    <p> {{referencia.unidades}} Unidades</p>
     <div>
         <button (click)="navegar(['ayuda/'], $event)">Devolver</button>
-        <button (click)="navegar(['prod/' + producto.id], $event)">Volver a comprar</button>
+        <button (click)="navegar(['prod/' + referencia.idProducto], $event)">Volver a comprar</button>
     </div>
 </div>

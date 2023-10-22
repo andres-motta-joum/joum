@@ -11,6 +11,7 @@ import { Opinion, Producto } from 'src/app/interfaces/producto/producto';
 })
 export class OpinionesComponent {
   @Input() opiniones!: Producto['opiniones'];
+  fechas!: Date[];
   promedioCalificacion: number = 0;
   promedio!: number;
   calificaciones!: any[];
@@ -44,7 +45,15 @@ export class OpinionesComponent {
     }
     this.calcularPorcentajes();
     this.opcionSeleccionada = '0';
-    this.opinionesSelecionadas = this.opiniones?.sort((a, b) => (b.fecha ? b.fecha.getTime() : 0) - (a.fecha ? a.fecha.getTime() : 0));
+    this.opinionesSelecionadas = this.opiniones?.sort((a, b) => {
+      const fechaA = a.fecha ? a.fecha.toDate().getTime() : 0;
+      const fechaB = b.fecha ? b.fecha.toDate().getTime() : 0;
+      return fechaB - fechaA;
+    });
+
+    this.fechas = this.opiniones.map((opinion)=>{
+      return opinion.fecha.toDate();
+    })
   }
 
   calcularPorcentajes() {
@@ -95,7 +104,12 @@ export class OpinionesComponent {
   public opcionSeleccionada: string = '0';
   
   leccionarOpcion() {
-    let opinionesPorFecha = this.opiniones?.sort((a, b) => (b.fecha ? b.fecha.getTime() : 0) - (a.fecha ? a.fecha.getTime() : 0));
+    let opinionesPorFecha = this.opiniones?.sort((a, b) => {
+      const fechaA = a.fecha ? a.fecha.toDate().getTime() : 0;
+      const fechaB = b.fecha ? b.fecha.toDate().getTime() : 0;
+      return fechaB - fechaA;
+    });
+    
     if(this.opcionSeleccionada === 'todas') {
       this.opinionesSelecionadas =  opinionesPorFecha;
     } else if(this.opcionSeleccionada) {

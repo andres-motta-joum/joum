@@ -39,8 +39,7 @@ export const routes: Routes = [
       },
       {
         path: 'email-sent',
-        component: CorreoEnviadoComponent,
-        canActivate:[authGuard]
+        component: CorreoEnviadoComponent
       }
     ]
   }

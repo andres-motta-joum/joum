@@ -5,7 +5,7 @@
         </div>
         <div>
             <p>{{productoCarrito.nombre}}</p>
-            <p>Estilo: {{estiloString}}</p>
+            <p>Estilo: {{estilo?.nombre}}</p>
             <p *ngIf="productoCarrito.envioGratis" class="envioGratis">Envio gratis</p>
             <p *ngIf="!productoCarrito.envioGratis" class="envioPrecio"><span>Recíbelo</span> por <span>$ {{productoCarrito.precioEnvio | number: '1.0-0'}}</span></p>
         </div>
@@ -26,9 +26,9 @@
             <p>$ {{productoCarrito.precio | number: '1.0-0'}}</p>
             <p></p>
         </ng-container>
-        <p>{{productoCarrito.estilos![indexEstilo].unidades}} disponibles</p>
+        <p>{{estilo?.unidades}} disponibles</p>
         <div>
-            <button (click)="cambiarUnidad('-', indice, productoCarrito.estilos![indexEstilo].unidades)">-</button><p>{{unidad}}</p><button (click)="cambiarUnidad('+', indice, productoCarrito.estilos![indexEstilo].unidades)">+</button>
+            <button (click)="cambiarUnidad('-', indice, estilo!.unidades)">-</button><p>{{unidad}}</p><button (click)="cambiarUnidad('+', indice, estilo!.unidades)">+</button>
         </div>
     </div>
 </div>

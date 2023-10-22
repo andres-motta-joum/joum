@@ -2,7 +2,7 @@ import { Component, NgZone} from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription, first } from 'rxjs';
-import { Usuario, porComprar } from 'src/app/interfaces/usuario/usuario';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class CarritoComponent {
       }
     });
 
-    this.subscription = this.router.events.subscribe(async event => { // Se escucha rutas especificas declaradas en el mismo componente
+    this.subscription = this.router.events.subscribe( event => { // Se escucha rutas especificas declaradas en el mismo componente
       if (event instanceof NavigationEnd) {
         this.obtenerSeccion();
       }

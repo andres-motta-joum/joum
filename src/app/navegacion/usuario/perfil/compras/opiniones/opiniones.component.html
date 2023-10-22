@@ -1,5 +1,5 @@
 <h1>Opiniones</h1>
-<ng-container *ngIf="fotos.length !== 0">
+<ng-container>
     <div class="encabezado">
         <div>
             <select id="">
@@ -10,5 +10,5 @@
         </div>
         <p>0 / {{opiniones.length}} opiniones</p>
     </div>
-    <app-opinion [producto]="producto" [foto]="fotos[i]" [fechaVenta]="fechaVentas[i]" *ngFor="let producto of productos;let i = index"></app-opinion>
+    <app-opinion [opinion]="opinion" *ngFor="let opinion of opiniones;let i = index"></app-opinion>
 </ng-container>

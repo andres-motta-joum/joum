@@ -1,30 +1,75 @@
 <div class="contenido">
-    <div class="grafica">
+    <div class="grafica" *ngIf="periodoTiempo == 'semanal'">
         <div>
             <div>
-                <p>5</p><p>4</p><p>3</p><p>2</p><p>1</p>
+                <p *ngFor="let numero of divicionesDespachosDemorados">{{numero}}</p>
             </div>
         </div>
         <div>
             <div></div><div></div><div></div><div></div><div></div>
         </div>
-        <div>
-            <p>10 jul.</p><p>11 jul.</p><p>12 jul.</p><p>13 jul.</p><p>14 jul.</p><p>15 jul.</p><p>16 jul.</p>
+        <div *ngIf="porcentajesDespachosDemorados">
+            <p *ngFor="let height of porcentajesDespachosDemorados; let index = index" >{{fechasString[index]}} 
+                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+            </p>
         </div>
-        <p>Despachos demorados</p>
-        <p>A día de hoy: <span>2</span></p>
+        <p class="subTitulo">Despachos demorados</p>
+        <p class="hoy">A día de hoy: <span>{{despachosDemoradosHoy}}</span></p>
     </div>
-    <div class="graficaCircular">
-        <div class="color"></div>
+    <div class="grafica" *ngIf="periodoTiempo == 'mensual'">
         <div>
-            <p>5</p>
+            <div>
+                <p *ngFor="let numero of divicionesDespachosDemoradosMensual">{{numero}}</p>
+            </div>
+        </div>
+        <div>
+            <div></div><div></div><div></div><div></div><div></div>
+        </div>
+        <div *ngIf="porcentajesDespachosDemoradosMensual">
+            <p *ngFor="let height of porcentajesDespachosDemoradosMensual; let index = index" >{{fechasMensualString[index]}} 
+                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+            </p>
+        </div>
+        <p class="subTitulo">Despachos demorados</p>
+        <p class="hoy">Ultimos 4 días: <span>{{despachosDemoradosHoyMensual}}</span></p>
+    </div>
+<!-------------->
+    <div class="graficaCircular" *ngIf="periodoTiempo == 'semanal'">
+        <div *ngIf="!sinReclamos" class="color sombra" [style.background]="'conic-gradient(#82bef5 0 ' + cancelacionesPorcentaje + '%, #4f7fc8 ' + cancelacionesPorcentaje + '% '+ devolucionesPorcentaje +'%)'"></div>
+        <div *ngIf="sinReclamos" class="color"></div>
+        <div>
+            <p>{{reclamos}}</p>
             <p>Reclamos</p>
         </div>
         <div>
-            <p>3 | con cancelación</p>
-            <p>2 | con devolución</p>
+            <p>{{cancelaciones}} | con cancelación</p>
+            <p>{{devoluciones}} | con devolución</p>
         </div>
-        <p>Reclamos</p>
-        <p>16 julio 2023</p>
+        <p class="subTituloCircular">Reclamos</p>
+        <p class="hoyCircular">{{fechasString[0]}} - {{fechasString[6]}}</p>
     </div>
+    <div class="graficaCircular" *ngIf="periodoTiempo == 'mensual'">
+        <div *ngIf="!sinReclamos" class="color sombra" [style.background]="'conic-gradient(#82bef5 0 ' + cancelacionesPorcentajeMensual + '%, #4f7fc8 ' + cancelacionesPorcentajeMensual + '% '+ devolucionesPorcentajeMensual +'%)'"></div>
+        <div *ngIf="sinReclamos" class="color"></div>
+        <div>
+            <p>{{reclamosMensual}}</p>
+            <p>Reclamos</p>
+        </div>
+        <div>
+            <p>{{cancelacionesMensual}} | con cancelación</p>
+            <p>{{devolucionesMensual}} | con devolución</p>
+        </div>
+        <p class="subTituloCircular">Reclamos</p>
+        <p class="hoyCircular">{{fechasMensualString[0]}} - {{fechasMensualStringSubGrupos[6][3]}}</p>
+    </div>
+</div>
+
+<div [ngStyle]="{'top': y+'px', 'left': x+'px'}" *ngIf="showTooltip && periodoTiempo == 'semanal'" class="tooltip">
+    {{texto}}
+</div>
+<div [ngStyle]="{'top': y+'px', 'left': x+'px'}" *ngIf="showTooltip && periodoTiempo == 'mensual'" class="tooltipMensual">
+   <div><p>Total</p> <p>{{total}}</p></div>
+   <div *ngFor="let dia of fechasDiv; let index = index">
+    <p>{{dia}}</p><p>{{cantidadDia[index]}}</p>
+   </div>
 </div>

@@ -31,7 +31,7 @@ export class PasoUnoComponent implements OnInit{
 
   changeDisabled(event:Event, index:number, categoria: string): void {
     if(this.pasos.producto){
-      if(this.pasos.producto.nombre !== null){
+      if(this.pasos.producto.nombre){
         event.preventDefault();
         if(categoria !== this.pasos.producto.categoria){
           this.alerta = true;

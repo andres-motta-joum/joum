@@ -33,7 +33,7 @@
                 <p>Compra: 14 de julio 15:20</p>
             </div>
             <div class="contenedorMensajes">
-                <app-producto [producto]="producto" [unidad]="unidades[i]" [foto]="fotos[i]" *ngFor="let producto of productos; let i = index"></app-producto>
+                <app-producto [referencia]="referencia"  *ngFor="let referencia of venta.referencias; let i = index"></app-producto>
             </div>
         </div>
     </div>

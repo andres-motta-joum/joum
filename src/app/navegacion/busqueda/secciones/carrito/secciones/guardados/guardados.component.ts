@@ -1,10 +1,10 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, first } from 'rxjs';
-import { Producto } from 'src/app/interfaces/producto/producto';
-import { Usuario, porComprar } from 'src/app/interfaces/usuario/usuario';
+import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Usuario, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { ProductosService } from 'src/app/servicios/productos/productos.service';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
@@ -15,14 +15,15 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
   styleUrls: ['./guardados.component.scss']
 })
 export class GuardadosComponent implements OnInit{
-  constructor(private zone: NgZone, private router: Router, private route: ActivatedRoute, private authService: AuthService, private prdsService: ProductosService, private auth: Auth, private comprarService: ComprarService){}
+  constructor(private zone: NgZone, private router: Router, private firestore: Firestore, private authService: AuthService, private prdsService: ProductosService, private auth: Auth, private comprarService: ComprarService){}
   private subscription!: Subscription;
   private usuario!: Usuario;
-  guardados!: porComprar[];
+  guardados!: referenciaCompra[];
   productos: Producto[] = [];
   unidades: number[] = [];
   fotos: string[] = [];
-  estilos: string[] = [];
+  estilosId: string[] = [];
+  estilos: Estilo[] = [];
   indexEstilos: number[] = [];
 
   public cantidadProductos = 0;
@@ -54,17 +55,22 @@ export class GuardadosComponent implements OnInit{
   async obtenerProductos() {
     if (this.usuario?.guardados) {
       const productosRef = await Promise.all(this.usuario?.guardados.map((ref:any) => getDoc(ref.producto)));
-      productosRef.forEach((productSnapshot, index) => {
+      await Promise.all(productosRef.map(async (productSnapshot, index) => {
         const prd = productSnapshot.data() as Producto;
         prd.id = productSnapshot.id;
         this.productos.push(prd);
-        this.estilos.push(this.usuario.guardados![index].estilo!);
-      });
+        this.estilosId.push(this.usuario.guardados![index].estilo!);
+        const estiloRef = doc(this.firestore, `productos/${prd.id}/estilos/${this.usuario.guardados![index].estilo!}`);
+        const estiloSnapshot = await getDoc(estiloRef);
+        const estilo = estiloSnapshot.data() as Estilo;
+        estilo.id = estiloSnapshot.id;
+        this.estilos.push(estilo);
+      }));
       this.indexEstilos = this.usuario.guardados!.map((guardado)=>{
         const partes = guardado.estilo.split(':');
         return Number(partes[0]) - 1;
       })
-      this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilos);
+      this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilosId);
     }
     this.unidades = this.usuario.guardados!.map((guardados)=>{
       return guardados.unidades;

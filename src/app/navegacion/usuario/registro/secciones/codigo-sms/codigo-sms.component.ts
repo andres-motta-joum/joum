@@ -104,11 +104,12 @@ export class CodigoSMSComponent implements OnInit{
         this.router.navigate(['']);
       }else{
         sendPasswordResetEmail(this.auth, this.datos.email)
-        .then(() => {
+        .then(async () => {
           this.check = true;
           this.dataSharingService.setFormData({
             email: this.datos.email
           })
+          await signInWithCredential(this.auth, phoneCredential);
           this.router.navigate(['cuenta/email-sent']);
         })
         .catch((error) => {

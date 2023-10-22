@@ -23,7 +23,7 @@
         border-left: #fff;
         transition: .3s;
         cursor: pointer;
-        border-bottom: 1px solid #f6f6f6;
+        border-bottom: 1px solid #f6f5f5;
         > div{
             padding-left: 20px;
             display: flex;
@@ -34,9 +34,9 @@
                 padding-left: 13px;
                 padding-right: 30px;
                 margin: 0;
-                font-size: 15px;
+                font-size: 14.5px;
                 font-weight: 450;
-                color: #5c5c5c;
+                color: #606060;
             }
             
         }
@@ -48,6 +48,7 @@
             position: absolute;
             right: 35px;
             .rectangle {
+                transform: scale(.92);
                 width: 45px;
                 height: 20px;
                 background-color: #e8e8e8;
@@ -95,7 +96,7 @@
             }
         }
         &:hover{
-            background: linear-gradient(to bottom, #fbfbfa, #fcfcfb);
+            background: linear-gradient(to bottom, #fbfafa, #fcfbfb);
             .edit{
                 color: #585858;
             }

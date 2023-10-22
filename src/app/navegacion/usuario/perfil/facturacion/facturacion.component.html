@@ -2,23 +2,20 @@
 
 <div class="contenedor">
     <div>
-        <p>En curso</p>
-        <p>Si quieres ver información de meses anteriores ingresa a <span>Facturas y reportes de tus cargos</span></p>
+        <h2>Facturas y reportes</h2>
+        <p>Historial y datos de tus facturas realizadas por venta</p>
+        <ng-icon name="matKeyboardArrowDown" (click)="navegar(user + '/facturacion/facturas-reportes')" [ngClass]="{'selected': facturasReportes}"></ng-icon>
     </div>
     <div>
-        <p>Facturas y reportes</p>
-        <p>Si quieres ver información de meses anteriores ingresa a <span>Facturas y reportes de tus cargos</span></p>
-        <button (click)="navegar(['MOTTAANDRES20221130093921/facturacion/facturas-reportes'],$event)">Facturas y reportes</button>
+        <h2>Retenciones</h2>
+        <p>Puedes descargar la información de tus retenciones</p>
+        <ng-icon name="matKeyboardArrowDown" (click)="navegar(user + '/facturacion/retenciones')" [ngClass]="{'selected': retenciones}"></ng-icon>
     </div>
     <div>
-        <p>Datos de facturación</p>
-        <p>Andres Yesid Motta</p>
-        <p>CC 1000320938</p>
-        <button (click)="navegar(['MOTTAANDRES20221130093921/facturacion/editar-datos'],$event)">Editar mis datos</button>
-    </div>
-    <div>
-        <p>Impuestos</p>
-        <p><span>Retenciones:</span> Puedes descargar la información de tus retenciones</p>
-        <button (click)="navegar(['MOTTAANDRES20221130093921/facturacion/retenciones'],$event)">Retenciones</button>
+        <h2>Datos de facturación</h2>
+        <p>{{nombre}}</p>
+        <p>{{documento}}</p>
+        <ng-icon name="matEdit" (click)="navegar(user + '/perfil/informacion')"></ng-icon>
     </div>
 </div>
+<router-outlet></router-outlet>

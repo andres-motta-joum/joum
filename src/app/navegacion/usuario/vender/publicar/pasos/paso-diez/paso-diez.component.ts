@@ -6,7 +6,7 @@ import { heroArrowSmallLeft } from '@ng-icons/heroicons/outline';
 import { ionCheckmarkSharp } from '@ng-icons/ionicons';
 import { ionInformationCircleOutline } from '@ng-icons/ionicons';
 import { aspectsInformation } from '@ng-icons/ux-aspects';
-import { Producto } from 'src/app/interfaces/producto/producto';
+import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
 import { DocumentData, DocumentReference, Firestore, addDoc, arrayUnion, collection, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { ref, uploadBytes, Storage, getDownloadURL } from '@angular/fire/storage';
 import { Auth, user } from '@angular/fire/auth';
@@ -33,6 +33,11 @@ export class PasoDiezComponent implements OnInit{
 
   gratuita = true;
   verDetalles = false;
+
+  fotos!: any[][];
+  estilos!: any[];
+  estilosRef!: DocumentReference<DocumentData>[];
+  primerFotoProducto!: string;
 
   ngOnInit(): void {
     this.pasos.paso7 ? this.definirPrecios() : this.router.navigate(['/vender', 'formulario', 'paso6']);
@@ -112,13 +117,7 @@ export class PasoDiezComponent implements OnInit{
         delete detalles[clave];
       }
     }
-    for (const estilo of this.pasos.producto.estilos) {
-      for (const clave in estilo) {
-        if (estilo.hasOwnProperty(clave) && estilo[clave] === '') {
-          delete estilo[clave];
-        }
-      }
-    }
+
     this.pasos.producto.estilos.forEach((estilo: any, index: any) => {
       for (let i = estilo.fotos.length - 1; i >= 0; i--) {
         if (estilo.fotos[i] === '') {
@@ -167,6 +166,8 @@ export class PasoDiezComponent implements OnInit{
     const producto = this.pasos.producto;
     producto.nombre = this.capitalizarNombreProducto(producto.nombre); // Corregir nombre ingresado para mejorar motor de busqueda
     const detalles = this.estructurarDetalles(producto.detalles); //Modificar, eliminar o agregar datos importantes a los detalles
+    this.estilos = this.definirEstilosFotos(producto).estilos; //Definir las fotos y los estilos por separado
+    delete producto.estilos;
     producto.detalles = detalles;
     //----- Detalles secundarios -----
     producto.idUsuario = this.auth.currentUser?.uid;
@@ -178,17 +179,33 @@ export class PasoDiezComponent implements OnInit{
     producto.precioEnvio = 10000;
   }
 
-  get $excluirFotosProducto(): Producto { //Excluir fotos en Firestore
-    const productoCopy = JSON.parse(JSON.stringify(this.pasos.producto));
-    productoCopy.estilos.forEach((estilo: any) => { 
-      delete estilo.fotos;
-    });
+  definirEstilosFotos(producto: any): Producto { //Excluir fotos en Firestore
+    this.fotos = [];
+    for(let estilo of producto.estilos){
+      this.fotos.push(estilo.fotos);
+    }
+
+    const productoCopy = JSON.parse(JSON.stringify(producto));
+    for(let clave in productoCopy.estilos){
+      delete productoCopy.estilos[clave].fotos;
+    }
     return productoCopy;
   }
 
-  async subirProductoFirestore(producto: Producto): Promise<void>{
+  subirEstilos(estilos: Estilo[], productoId: string){
+    return Promise.all(estilos.map(async (estilo: Estilo)=>{
+      return await addDoc(collection(doc(this.firestore, `productos/${productoId}`), "estilos"), estilo);
+    }))
+  }
+
+//---------------------------------------------------------------------------------------------------
+
+  async subirProductoFirestore(): Promise<void>{
     this.cargando = true;
-    const productoRef = await addDoc(collection(this.firestore, "productos"), producto);
+    const productoRef = await addDoc(collection(this.firestore, "productos"), this.pasos.producto);
+    this.estilosRef = await this.subirEstilos(this.estilos, productoRef.id);
+    await updateDoc(productoRef, {estilos: this.estilosRef})
+
     const userRef = doc(this.firestore, "usuarios", this.auth.currentUser?.uid!);
     // Obtén el documento actual
     const snapshot = await getDoc(userRef);
@@ -205,33 +222,40 @@ export class PasoDiezComponent implements OnInit{
       });
     }
     
-    await this.subirFotos(productoRef.id);
+    await this.subirFotos(productoRef);
     await this.agregarNotificacion(userRef, productoRef.id);
     this.cargando = false;
   }
 
-  async subirFotos(idProducto: string){
-    await this.pasos.producto.estilos.forEach((estilo: any, i: any) => {
-      estilo.fotos.forEach((foto: any, index: any) => {
-        const storageRef = ref(this.storage, `${idProducto}/${i + 1}:${estilo.nombre}/${index + 1}`);
-        uploadBytes(storageRef, foto);
-      });
-    });
+  async subirFotos(productoRef: DocumentReference<DocumentData>){
+
+    const fotosRef = await Promise.all(this.estilosRef.map(async (referencia: any, i: number) => {
+      const estiloFotosRefs = await Promise.all(this.fotos[i].map(async () => {
+        const fotoRef = await addDoc(collection(referencia, "fotos"), { url: '' });
+        return fotoRef
+      }));
+      await updateDoc(referencia, {fotos: estiloFotosRefs})
+      return estiloFotosRefs
+    })) as DocumentReference<DocumentData>[][];
+
+    const fotosLinks = await Promise.all(this.estilosRef.map(async (referencia: any, i: number) => {
+      return await Promise.all(this.fotos[i].map(async (foto: any, index: number) => {
+        const storageRef = ref(this.storage, `productos/${productoRef.id}/${referencia.id}/${fotosRef[i][index].id}`);
+        await uploadBytes(storageRef, foto);
+        return getDownloadURL(storageRef);
+      }));
+    })); 
+
+    await Promise.all(fotosRef.flat().map(async (docRef: DocumentReference<DocumentData>, i: number) => {
+      return await updateDoc(docRef, { url: fotosLinks.flat()[i] });
+    }));
+    this.primerFotoProducto = fotosLinks.flat()[0];
   }
 
   async agregarNotificacion(usuarioRef: DocumentReference<DocumentData>, productoId: string){
-    const productoRef = ref(this.storage, `${productoId}`);
-    const response = await listAll(productoRef);
-    let url = '';
-    if (response.prefixes.length > 0) {
-      const firstFolderRef = response.prefixes[0];
-      const firstFolderResponse = await listAll(firstFolderRef);
-      url = await getDownloadURL(firstFolderResponse.items[0]);
-    }
-    
     await updateDoc(usuarioRef, {
       notificaciones: arrayUnion({
-        foto: url,
+        foto: this.primerFotoProducto,
         titulo: 'Felicidades',
         contenido: `Has publicado un nuevo producto`,
         fecha: new Date(),
@@ -245,7 +269,7 @@ export class PasoDiezComponent implements OnInit{
   async submit(): Promise<any> {
     this.tipoPublicacionSeleccionada();
     this.definirDetalles();
-    await this.subirProductoFirestore(this.$excluirFotosProducto);
+    await this.subirProductoFirestore();
     this.pasos.restablecerDatos();
     this.router.navigate(['']);
   }

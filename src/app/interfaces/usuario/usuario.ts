@@ -7,6 +7,7 @@ import { Notificacion, NotificacionesRecibidas } from "./subInterfaces/notificac
 import { AtencionCliente } from "./subInterfaces/atencion-cliente";
 import { DocumentData, DocumentReference } from "@angular/fire/firestore";
 import { Direccion } from "./subInterfaces/direccion";
+import { EmailsConfiguracion } from "./subInterfaces/emails-configuracion";
 
 export interface Usuario {
   //------------- perfil -------------- //
@@ -41,12 +42,13 @@ export interface Usuario {
   //-------------
   notificaciones?: Notificacion[];
   notificacionesRecibidas: NotificacionesRecibidas;
+  emailsRecibidos: EmailsConfiguracion;
   //-------------
   atencionCliente?: AtencionCliente[]; //--- Falta
   //---------------------------------------------
   referenciaCompra?: referenciaCompra[]; //-- nueva
-  carrito?: porComprar[];
-  guardados?: porComprar[];
+  carrito?: referenciaCompra[];
+  guardados?: referenciaCompra[];
   historial?: DocumentReference<DocumentData>[];
   siguiendo?: string[];
   
@@ -54,9 +56,17 @@ export interface Usuario {
 }
 
 export interface porComprar{
-  producto: DocumentReference<DocumentData>;
-  unidades: number;
-  estilo: string;
+  idProducto: string,
+  tituloProducto: string,
+  precioProducto: number,
+  nombreEstilo: string,
+  idEstilo: string,
+  skuEstilo: string,
+  foto: string,
+  unidades: number,
+  envioGratis: boolean,
+  precioEnvio: number,
+  tipoPublicacion: string
 }
 
 export interface referenciaCompra {

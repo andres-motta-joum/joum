@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { DocumentData, DocumentReference, Firestore, arrayUnion, collection, doc, docData, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore, arrayUnion, collection, doc, docData, getDoc, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Storage, getDownloadURL, listAll, ref } from '@angular/fire/storage';
 import { Observable, map } from 'rxjs';
-import { Producto } from 'src/app/interfaces/producto/producto';
+import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 
 @Injectable({
@@ -39,50 +39,57 @@ export class ProductosService {
     );
   }
 
-  async obtenerFotos(productos: Producto[]): Promise<string[]>{
-    let fotos = productos.map(async (producto:any) => {
-      const imgRef = ref(this.storage, `${producto.id}/1:${producto.estilos[0].nombre}`);
-      const response = await listAll(imgRef);
-      return await getDownloadURL(response.items[0]);
-    });
-    const urls = await Promise.all(fotos)
-    return urls;
+  async obtenerProductoIdPromise(id: string): Promise<Producto | null> {
+    const productoRef = doc(this.firestore, 'productos', id);
+    const productoSnapshot = await getDoc(productoRef);
+    let prd = productoSnapshot.data() as Producto;
+    if(prd){
+      prd['id'] = productoSnapshot.id;
+      return prd
+    }else{
+      return null
+    }
   }
+
+  async obtenerFotos(productos: Producto[]): Promise<string[]>{
+    return Promise.all(productos.map(async (producto:any) => {
+      const estiloSnapshot = await getDoc(producto.estilos[0]);
+      const estilo = await estiloSnapshot.data() as Estilo;
+      const imgRef = ref(this.storage, `productos/${producto.id}/${producto.estilos[0].id}/${estilo.fotos[0].id}`);
+      return await getDownloadURL(imgRef);
+    }));
+  }
+
   async obtenerFotosSegunEstilo(productos: Producto[], estilos: string[]): Promise<string[]>{
-    let fotos = productos.map(async (producto:any, index: number) => {
-      const imgRef = ref(this.storage, `${producto.id}/${estilos[index]}`);
-      const response = await listAll(imgRef);
-      return await getDownloadURL(response.items[0]);
-    });
-    const urls = await Promise.all(fotos)
-    return urls;
+    return Promise.all(productos.map(async (producto:any, index: number) => {
+      const estiloRef = doc(this.firestore, `productos/${producto.id}/estilos/${estilos[index]}`);
+      const estiloSnapshot = await getDoc(estiloRef);
+      const estilo = estiloSnapshot.data() as Estilo;
+      const imgRef = ref(this.storage, `productos/${producto.id}/${estilos[index]}/${estilo.fotos[0].id}`);
+      const url = await getDownloadURL(imgRef);
+      return url;
+    }));
   }
 
 
   async obtenerFotosProducto(producto: Producto): Promise<string[][]>{
-    const urlsArrays: string[][] = [];
-    
-    for (const [index, estilo] of (producto.estilos || []).entries()) {
-      const imgRef = ref(this.storage, `${producto.id}/${index + 1}:${estilo.nombre}`);
-      const response = await listAll(imgRef);
-      
-      const ulrsEstilo = await Promise.all(response.items.map(async (item) => {
-        return await getDownloadURL(item);
-      }));
-
-      urlsArrays.push(ulrsEstilo);
-    }
-
-    return urlsArrays;
+    return Promise.all(producto.estilos.map(async (estiloRef: any)=>{
+      const estiloSnapshot = await getDoc(estiloRef);
+      const estilo = estiloSnapshot.data() as Estilo;
+      return Promise.all(estilo.fotos.map(async (urlRef)=>{
+        const imgRef = ref(this.storage, `productos/${producto.id}/${estiloRef.id}/${urlRef.id}`);
+        return await getDownloadURL(imgRef);
+      }))
+    }))
   }
   
-  async obtenerFotoUno(producto: Producto): Promise<string[][]>{
+  async obtenerFotoUno(producto: any): Promise<string[][]>{
     const urlsArrays: string[][] = [['']];
-    
-    const imgRef = ref(this.storage, `${producto.id}/1:${producto.estilos![0].nombre}`);
-    const response = await listAll(imgRef);
-    const foto = await getDownloadURL(response.items[0]);
-    urlsArrays[0][0] = foto;
+
+    const estiloSnapshot = await getDoc(producto.estilos[0]);
+    const estilo = await estiloSnapshot.data() as Estilo;
+    const imgRef = ref(this.storage, `productos/${producto.id}/${producto.estilos[0].id}/${estilo.fotos[0].id}`);
+    urlsArrays[0][0] =  await getDownloadURL(imgRef);
     return urlsArrays;
   }
 

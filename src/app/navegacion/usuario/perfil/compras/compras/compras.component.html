@@ -1,14 +1,18 @@
 <h1>Compras</h1>
 <div class="encabezado">
-    <p>3 Compras</p>
+    <p><span *ngIf="compras">{{compras.length}}</span> compras</p>
     <div>
-        <input type="text" placeholder="Buscar ">
-        <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
-        <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
-        <select id="">
-            <option value="">Todas</option>
-            <option value="">compra tipo1</option>
-        </select>
+        <div>
+            <input type="text" placeholder="Buscar ">
+            <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+        </div>
+        <div>
+            <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+            <select id="">
+                <option value="">Todas</option>
+                <option value="">compra tipo1</option>
+            </select>
+        </div>
     </div>
 </div>
 

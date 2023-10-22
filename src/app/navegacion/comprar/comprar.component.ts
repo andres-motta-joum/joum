@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Firestore, doc, getDoc, increment, updateDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Subscription, first, firstValueFrom } from 'rxjs';
-import { Producto } from 'src/app/interfaces/producto/producto';
+import { Subscription} from 'rxjs';
+import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
 import { Direccion } from 'src/app/interfaces/usuario/subInterfaces/direccion';
-import { Usuario, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
+import { Usuario, porComprar, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
@@ -22,7 +22,7 @@ export class ComprarComponent implements OnInit, OnDestroy{
   productos: Producto[] = [];
   precioProductos!: number;
   precioEnvios!: number;
-  grupoReferencias: { [idUsuario: string]: referenciaCompra[] } = {};
+  grupoReferencias: { [idUsuario: string]: porComprar[] } = {};
 
   cargando = false;
 
@@ -88,38 +88,23 @@ export class ComprarComponent implements OnInit, OnDestroy{
 
 //-------------------------------------------------------------------------- Crear venta ---------------------------------
 
-  async agruparReferenciasPorVendedor(usuario: Usuario): Promise<void>{
-    const productosRef = await Promise.all(usuario.referenciaCompra!.map((ref:any) => getDoc(ref.producto))); //--Obtener referencias totales
-      productosRef.forEach((productSnapshot, index) => {
-        const prd = productSnapshot.data() as Producto;
-        const idVendedor = prd.idUsuario;
-
-        if (!this.grupoReferencias[idVendedor!]) { //Se agrega el id del producto de la referencia a grupoReferencias si aún no existe. Si ya existe, agrega la referencia al id.
-          this.grupoReferencias[idVendedor!] = [];
-        }
-
-        this.grupoReferencias[idVendedor!].push(usuario.referenciaCompra![index]);
-      });
-  }
-
   async comprar(){
     if(!this.cargando){
       this.cargando = true;
       this.usuario = await this.authService.getUsuarioIdPromise(this.auth.currentUser!.uid!);
       if(this.usuario.referenciaCompra && this.usuario.referenciaCompra.length !== 0){
         await this.agruparReferenciasPorVendedor(this.usuario);
-
         for(let idVendedor in this.grupoReferencias){
           //----- obtener numero de venta y sumarle 1 -----
           const refVenta = doc(this.firestore, 'informacion/1');
           await updateDoc(refVenta, {
             ventas: increment(1)
           });
-          const documento = await getDoc(refVenta);
+          const infoVentasRef = await getDoc(refVenta);
           const direcciones = this.usuario.direcciones;
           //----------------------------------------------- definir valores -------
           const referencias = this.grupoReferencias[idVendedor];
-          const numVenta = documento.data()!;
+          const numVenta = infoVentasRef.data()!;
           const fechaActual = new Date();
           let direccion!: Direccion;
           for(let dir of direcciones!){
@@ -134,7 +119,7 @@ export class ComprarComponent implements OnInit, OnDestroy{
             enCamino: false,
             entregado: false,
             aproxEntrega: new Date(fechaActual.setDate(fechaActual.getDate() + 10)),
-            idCliente: this.usuario.id,
+            idCliente: this.usuario.id!,
             idVendedor: idVendedor,
             datosEnvio: direccion,
             cancelada: false
@@ -147,6 +132,51 @@ export class ComprarComponent implements OnInit, OnDestroy{
     }
   }
   
+  async agruparReferenciasPorVendedor(usuario: Usuario): Promise<void>{
+    const referenciasCompra = await this.convertirReferenciasACompra(usuario.referenciaCompra!);
+    const productosSnapshot = await Promise.all(referenciasCompra.map(async (ref: porComprar) => {
+      return await getDoc(doc(this.firestore, `productos/${ref.idProducto}`))
+    })); //--Obtener referencias totales
+
+    productosSnapshot.forEach((productoSnapshot, index) => {
+      const prd = productoSnapshot.data() as Producto;
+      const idVendedor = prd.idUsuario;
+
+      if (!this.grupoReferencias[idVendedor!]) { //Se agrega el id del producto de la referencia a grupoReferencias si aún no existe. Si ya existe, agrega la referencia al id.
+        this.grupoReferencias[idVendedor!] = [];
+      }
+
+      this.grupoReferencias[idVendedor!].push(referenciasCompra[index]);
+    });
+  }
+
+  async convertirReferenciasACompra(referencias: referenciaCompra[]): Promise<porComprar[]>{
+    return await Promise.all(referencias!.map( async(referencia: referenciaCompra) => {
+      const productoSnapshot = await getDoc(referencia.producto);
+      const producto = productoSnapshot.data() as Producto;
+
+      const estiloRef = doc(this.firestore, `productos/${productoSnapshot.id}/estilos/${referencia.estilo}`);
+      const estiloSnapshot = await getDoc(estiloRef);
+      const estilo = estiloSnapshot.data() as Estilo;
+
+      const fotoRef = doc(this.firestore, `productos/${productoSnapshot.id}/estilos/${estiloSnapshot.id}/fotos/${estilo.fotos[0].id}`);
+      const fotoSnapshot = await getDoc(fotoRef);
+      const foto = fotoSnapshot.data() as any;
+      return {
+        idProducto: referencia.producto.id,
+        tituloProducto: producto.nombre,
+        precioProducto: producto.precio,
+        nombreEstilo: estilo.nombre,
+        idEstilo: estiloSnapshot.id,
+        skuEstilo: estilo.sku ? estilo.sku : '',
+        foto: foto.url,
+        unidades: referencia.unidades,
+        envioGratis: producto.envioGratis,
+        precioEnvio: producto.precioEnvio,
+        tipoPublicacion: producto.tipoPublicacion
+      } as porComprar
+    }));
+  }
 
   //-------------------------------------
   ngOnDestroy(): void {

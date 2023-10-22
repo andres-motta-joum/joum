@@ -31,17 +31,17 @@
 
 <div class="ingresarNuevaContrasena" *ngIf="ingresarNuevaContrasena">
     <h2>Cambiar contraseña</h2>
-    <label for="password">Ingresa tu contraseña Remplazo</label>
-    <input type="password" id="password" placeholder="* * * *" [(ngModel)]="password" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}">
-    <p class="error" *ngIf="error !== ''">{{error}}</p>
+    <label for="password">Ingresa tu nueva contraseña</label>
+    <input type="password" id="password" placeholder="* * * *" [(ngModel)]="nuevaContrasena" (click)="errorPasswordVerify = ''; errorPassword = '' " [ngClass]="{'errorInput': errorPassword !== ''}" autocomplete="off">
+    <p class="errorpassword" *ngIf="errorPassword !== ''">{{errorPassword}}</p>
 
-    <label for="password">Ingresa tu contraseña Remplazo</label>
-    <input type="password" id="password" placeholder="* * * *" [(ngModel)]="password" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}">
-    <p class="error" *ngIf="error !== ''">{{error}}</p>
+    <label for="passwordVerify">Confirma tu nueva contraseña</label>
+    <input type="password" id="passwordVerify" placeholder="* * * *" [(ngModel)]="nuevaContrasenaVerificacion" (click)="errorPasswordVerify = ''; errorPassword = '' " [ngClass]="{'errorInput': errorPasswordVerify !== ''}" autocomplete="off">
+    <p class="errorpasswordVerify" *ngIf="errorPasswordVerify !== ''">{{errorPasswordVerify}}</p>
     
     <div>
-        <button [disabled]="cargando" (click)="validarcontrasena()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
-            <span *ngIf="!cargando">Validar</span> 
+        <button [disabled]="cargando" (click)="submit()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+            <span *ngIf="!cargando">Actualizar</span> 
             <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
             <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
         </button>

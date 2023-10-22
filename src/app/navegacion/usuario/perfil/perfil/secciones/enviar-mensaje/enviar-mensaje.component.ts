@@ -26,10 +26,6 @@ export class EnviarMensajeComponent implements OnInit, OnDestroy{
   usuarioCliente!: Usuario | null;
   venta!: Venta;
 
-  productos: Producto[] = [];
-  estilos: string[] = [];
-  fotos: string[] = [];
-  unidades: number[] = [];
   cantidadUnidades: number = 0;
 
   tipoUsuario!: string;
@@ -62,13 +58,8 @@ export class EnviarMensajeComponent implements OnInit, OnDestroy{
               this.router.navigate(['']);
             }
             await this.obtenerVenta(id);
-            await this.obtenerProductos();
-            const cliente$ = this.authService.getUsuarioId(this.venta?.idCliente!);
-            this.usuarioCliente = (await firstValueFrom(cliente$));
-      
-            const vendedor$ = this.authService.getUsuarioId(this.venta?.idVendedor!);
-            this.usuarioVendedor = (await firstValueFrom(vendedor$));
-            
+            this.usuarioCliente = await this.authService.getUsuarioIdPromise(this.venta.idCliente);
+            this.usuarioVendedor = await this.authService.getUsuarioIdPromise(this.venta.idVendedor);
           }else{
             this.router.navigate(['']);
           }
@@ -83,21 +74,6 @@ export class EnviarMensajeComponent implements OnInit, OnDestroy{
     const ventaRef = doc(this.firestore, `ventas/${id}`);
     const snapshot = await getDoc(ventaRef);
     this.venta = snapshot.data() as Venta;
-  }
-  async obtenerProductos(){
-    const productosRef = await Promise.all(this.venta.referencias.map(ref => {
-      this.estilos.push(ref.estilo);
-      this.unidades.push(ref.unidades);
-      this.cantidadUnidades += ref.unidades; 
-      return getDoc(ref.producto);
-    }));
-    productosRef.forEach(snapshot => {
-      const prd = snapshot.data() as Producto;
-      prd.id = snapshot.id
-      this.productos.push(prd);
-    });
-    this.contenidoMensajes.nativeElement.scrollTop = this.contenidoMensajes.nativeElement.scrollHeight;
-    this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilos);
   }
 
   inputMensaje(){

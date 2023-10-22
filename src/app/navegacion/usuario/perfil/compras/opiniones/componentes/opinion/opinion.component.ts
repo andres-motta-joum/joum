@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { Producto } from 'src/app/interfaces/producto/producto';
+import { Opinion, Producto } from 'src/app/interfaces/producto/producto';
 import { Venta } from 'src/app/interfaces/venta';
 import { Timestamp } from '@angular/fire/firestore';
 
@@ -11,15 +11,13 @@ import { Timestamp } from '@angular/fire/firestore';
   styleUrls: ['./opinion.component.scss']
 })
 export class OpinionComponent implements OnInit{
-  @Input() producto!: Producto;
-  @Input() foto!: string;
-  @Input() fechaVenta!: Timestamp;
+  @Input() opinion!: Opinion;
   fecha!: Date;
   subMenu: boolean = false;
   constructor(private zone: NgZone, private router: Router){}
 
   ngOnInit(): void {
-    this.fecha = this.fechaVenta.toDate()
+    this.fecha = this.opinion.fecha.toDate()
   }
   desplegar(){
     this.subMenu = !this.subMenu;

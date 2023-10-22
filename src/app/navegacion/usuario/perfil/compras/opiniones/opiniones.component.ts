@@ -19,11 +19,9 @@ import { Firestore, Timestamp, doc, getDoc } from '@angular/fire/firestore';
   export class OpinionesComponent implements OnInit, OnDestroy{
     constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private authService: AuthService, private prdsService: ProductosService, private firestore: Firestore) {}
     private routeSubscription!: Subscription;
-    private usuario!: Usuario;
+    private usuario!: Usuario | null;
     opiniones: Opinion[] = [];
     fechaVentas: Timestamp[] = [];
-    productos: Producto[] = [];
-    fotos: string[] = [];
     
     ngOnInit() {
       this.routeSubscription = this.route.parent!.params.subscribe(params => {
@@ -33,12 +31,10 @@ import { Firestore, Timestamp, doc, getDoc } from '@angular/fire/firestore';
     }
   
     async obtenerusuario(usuario: string){
-      await this.authService.getUsuarioUser(usuario).then((usuario)=>{
-        if(usuario){
-          this.usuario = usuario
-        }
-      })
-      this.obtenerOpiniones();
+      this.usuario = await this.authService.getUsuarioUser(usuario);
+      if(this.usuario){
+        this.obtenerOpiniones();
+      }
     }
   
     async obtenerOpiniones() {
@@ -50,27 +46,6 @@ import { Firestore, Timestamp, doc, getDoc } from '@angular/fire/firestore';
           opinion.id = snapshot.id;
           this.opiniones.push(opinion);
         });
-
-        //Obtener ventas de las opiniones -------
-        const ventasRef = await Promise.all(this.opiniones.map((opinion: Opinion) => {
-          const ref = doc(this.firestore, `ventas/${opinion.numVenta}`);
-          return getDoc(ref!);
-        })); 
-        ventasRef.forEach(snapshot => {
-          const venta = snapshot.data() as Venta;
-          this.fechaVentas.push(venta.fechaVenta);
-        });
-
-        //Obtener productos de las opiniones -------
-        const productosRef = await Promise.all(this.opiniones.map((opinion:Opinion) => getDoc(opinion.producto!)));
-        productosRef.forEach(snapshot => {
-          const prd = snapshot.data() as Producto;
-          prd.id = snapshot.id;
-          this.productos.push(prd);
-        });
-
-        //obtener fotos de los productos
-        this.fotos = await this.prdsService.obtenerFotos(this.productos);
       }
     }
 

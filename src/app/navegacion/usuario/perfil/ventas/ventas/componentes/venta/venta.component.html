@@ -1,10 +1,10 @@
-<ng-container *ngIf="fotos">
-    <div class="venta" *ngFor="let producto of productos; let index = index">
-        <img *ngIf="fotos[index]" [src]="fotos[index]">
+<ng-container>
+    <div class="venta" *ngFor="let referencia of referencias; let index = index">
+        <img [src]="referencia.foto">
         <div>
-            <p>{{producto.nombre}}</p>
+            <p>{{referencia.tituloProducto}}</p>
             <p>#{{venta.numVenta}}</p>
-            <p>$ {{producto.precio | number: '1.0-0'}}</p>
+            <p>$ {{referencia.precioProducto| number: '1.0-0'}}</p>
         </div>
         <p>Estado: 
             <ng-container *ngIf="!venta.enCamino && !venta.entregado">
@@ -18,6 +18,6 @@
             </ng-container>
         </p>
         <p>{{fecha}}</p>
-        <div><p>{{unidades[index]}} unidades</p> <button (click)="navegar([usuario?.usuario + '/ventas/detalle-venta/'+venta.numVenta], $event)">Ver detalle</button></div>
+        <div><p>{{referencia.unidades}} unidades</p> <button (click)="navegar([usuario?.usuario + '/ventas/detalle-venta/'+venta.numVenta], $event)">Ver detalle</button></div>
     </div>
 </ng-container>

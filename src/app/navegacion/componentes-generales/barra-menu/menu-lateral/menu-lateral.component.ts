@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, ChangeDetectorRef, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { AnimationMenu } from './barra-menu-animation.component';
@@ -42,6 +42,8 @@ import { heroArrowTrendingUp, } from '@ng-icons/heroicons/outline';
 import { heroCurrencyDollar } from '@ng-icons/heroicons/outline';
 
 import { heroDocumentText } from '@ng-icons/heroicons/outline';
+import { Auth } from '@angular/fire/auth';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -50,13 +52,19 @@ import { heroDocumentText } from '@ng-icons/heroicons/outline';
   animations: AnimationMenu,
   providers: [provideIcons({ionNotificationsOutline, heroUserCircleSolid,aspectsContactCard, aspectsStatusErrorFilled, heroSquares2x2Solid, aspectsDeliver, heroNewspaper, heroCheckBadge, heroArrowUturnLeft, heroUsers, heroCalendarDays,/*-iconos- perfil*/ heroArrowSmallLeftMini, heroChevronRightMini, heroCheckCircle, heroQuestionMarkCircle, aspectsLineChart, heroLockClosed, heroFingerPrint, heroArrowRightOnRectangle, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes,heroCurrencyDollar, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText})]
 })
-export class MenuLateralComponent {
+export class MenuLateralComponent implements OnInit{
+  constructor(private auth: Auth, private authService: AuthService, private changeDetector: ChangeDetectorRef, private zone: NgZone, private router: Router){}
+  user!: string;
+  state = 'inactive';
+  submenuState: Array<string> = ['inactive', 'inactive', 'inactive'];
 
-  public state = 'inactive';
-  public submenuState: Array<string> = ['inactive', 'inactive', 'inactive'];
-
-  constructor(private changeDetector: ChangeDetectorRef, private zone: NgZone, private router: Router){
-
+  ngOnInit(): void {
+    this.auth.onAuthStateChanged(async (user)=>{
+      if(user){
+        const usuario = await this.authService.getUsuarioIdPromise(user.uid);
+        this.user = usuario.usuario;
+      }
+    })
   }
 
   navegar(ruta: any[], event: Event){

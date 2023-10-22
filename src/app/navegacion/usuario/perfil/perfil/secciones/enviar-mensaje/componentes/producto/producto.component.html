@@ -1,8 +1,8 @@
 <div class="producto">
-    <img [src]="foto">
+    <img [src]="referencia.foto">
     <div>
-        <p>{{producto.nombre}}</p>
-        <p>{{producto.precio | number:'1.0-0'}} x {{unidad}}u.</p>
+        <p>{{referencia.tituloProducto}}</p>
+        <p>{{referencia.precioProducto | number:'1.0-0'}} x {{referencia.unidades}}u.</p>
     </div>
 </div>
 

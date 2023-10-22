@@ -34,6 +34,7 @@ import { NovedadComponent } from './ventas/novedades/componentes/novedad/novedad
 import { ProductoComponent } from './compras/compras/detalle-compra/producto/producto.component';
 
 import { ChatsService } from 'src/app/servicios/chats/chats.service';
+import { EditarPublicacionModule } from './ventas/publicaciones/editar-publicacion/editar-publicacion.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ChatsService } from 'src/app/servicios/chats/chats.service';
   ],
   imports: [
     CommonModule,
+    EditarPublicacionModule,
     ComponentesGeneralesModule,
     NgIconsModule,
     PerfilUsuarioModule,

@@ -1,14 +1,13 @@
 <h1>Métricas</h1>
 <div class="encabezado">
-    <div [ngClass]="{'active': encabezadoUrl === 'negocio'}" (click)="navegar(['MOTTAANDRES20221130093921/metricas/negocio'], $event)" >Negocio</div>
-    <div [ngClass]="{'active': encabezadoUrl === 'atencion'}" (click)="navegar(['MOTTAANDRES20221130093921/metricas/atencion-compradores'], $event)" >Atención de clientes</div>
-    <div [ngClass]="{'active': encabezadoUrl === 'stock'}" (click)="navegar(['MOTTAANDRES20221130093921/metricas/stock'], $event)" >Stock</div>
-    <div [ngClass]="{'active': encabezadoUrl === 'puntos'}" (click)="navegar(['MOTTAANDRES20221130093921/metricas/puntos'], $event)" >Puntos</div>
+    <div [ngClass]="{'active': encabezadoUrl === 'negocio'}" (click)="navegar([user + '/metricas/negocio'])" >Negocio</div>
+    <div [ngClass]="{'active': encabezadoUrl === 'atencion'}" (click)="navegar([user + '/metricas/atencion-compradores'])" >Atención de clientes</div>
+    <div [ngClass]="{'active': encabezadoUrl === 'stock'}" (click)="navegar([user + '/metricas/stock'])" >Stock</div>
     <div>
         <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
-        <select>
-            <option> Ultimos 7 días</option>
-            <option>Este mes</option>
+        <select (change)="cambiarPeriodoTiempo($event)">
+            <option value="semanal">Ultimos 7 días</option>
+            <option value="mensual">Ultimo mes</option>
         </select>
     </div>
 </div>

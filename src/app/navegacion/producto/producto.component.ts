@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges, HostLis
 import { Router, NavigationEnd } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, first, firstValueFrom } from 'rxjs';
-import { Usuario, porComprar } from '../../interfaces/usuario/usuario';
-import { Producto } from '../../interfaces/producto/producto';
+import { Usuario } from '../../interfaces/usuario/usuario';
+import { Estilo, Producto } from '../../interfaces/producto/producto';
 import { provideIcons } from '@ng-icons/core';
 import { heroHeart } from '@ng-icons/heroicons/outline';
 import { heroHeartSolid } from '@ng-icons/heroicons/solid';
@@ -15,7 +15,7 @@ import { ProductosService } from 'src/app/servicios/productos/productos.service'
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { Auth } from '@angular/fire/auth';
-import { DocumentData, DocumentReference, Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore, Timestamp, arrayUnion, doc, getDoc, increment, runTransaction, updateDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-producto',
@@ -31,6 +31,7 @@ export class ProductoComponent implements OnInit{
   usuarioVendedor!: Usuario; //Proteger datos
   miUsuario!: Usuario; //Proteger datos
   productos!: Producto[];
+  estilos!: Estilo[];
   fotos: string[][] = [['assets/img/categoria/pic-loading.svg']];
 
   enFavoritos: boolean = false;
@@ -56,11 +57,12 @@ export class ProductoComponent implements OnInit{
     this.prdService.obtenerProductos().then(productos => {this.productos = productos});
     const producto = await this.obtenerProducto(idProducto);
     if(producto && producto.estado){
+      await this.obtenerEstilos(producto);
       this.productoPropio = false;
       if(this.auth.currentUser){
         this.authService.getUsuarioId(this.auth.currentUser?.uid!).pipe(first()).subscribe(usuario => {
           if(usuario.registroHistorial){
-            this.prdService.agregarHistorial(this.producto.id!, usuario.id!, usuario.historial!);
+            this.prdService.agregarHistorial(producto.id!, usuario.id!, usuario.historial!);
           }
           this.miUsuario = usuario;
           this.definirCarrito(producto.id!);
@@ -68,10 +70,14 @@ export class ProductoComponent implements OnInit{
         });
         if(producto.idUsuario == this.auth.currentUser.uid){
           this.productoPropio = true;
+        }else{
+          this.agregarVista(producto);
         }
+      }else{
+        this.agregarVista(producto);
       }
       this.producto = producto;
-      this.prdService.obtenerFotoUno(this.producto).then(fotos => this.fotos = fotos);
+      this.prdService.obtenerFotoUno(this.producto).then(fotos => {this.fotos = fotos});
       this.obtenerFotos(this.producto).then((fotos)=> this.fotos = fotos);
       this.usuarioVendedor = await this.authService.getUsuarioIdPromise(this.producto.idUsuario!);
 
@@ -93,6 +99,7 @@ export class ProductoComponent implements OnInit{
         const idProducto = urlSegments[urlSegments.length - 1];
         const producto = await this.obtenerProducto(idProducto);
         if(producto && producto.estado){
+          await this.obtenerEstilos(producto);
           this.productoPropio = false;
           if(this.auth.currentUser){
             this.authService.getUsuarioId(this.auth.currentUser.uid!).pipe(first()).subscribe(usuario => {
@@ -105,7 +112,11 @@ export class ProductoComponent implements OnInit{
             });
             if(producto.idUsuario == this.auth.currentUser.uid){
               this.productoPropio = true;
+            }else{
+              this.agregarVista(producto);
             }
+          }else{
+            this.agregarVista(producto);
           }
           this.producto = producto;
           this.productos = [];
@@ -122,6 +133,55 @@ export class ProductoComponent implements OnInit{
     });
   }
 
+  async obtenerEstilos(producto: Producto){
+    this.estilos = await Promise.all(producto.estilos.map(async (estiloRef: any)=>{
+      const estiloSnapshot = await getDoc(estiloRef);
+      let estilo = estiloSnapshot.data() as Estilo;
+      estilo.id = estiloSnapshot.id;
+      return estilo;
+    }))
+  }
+  //-------------------------------------
+
+  async agregarVista(producto: Producto){
+    const fechaActual = new Date();
+    if(producto.vistas){
+      const timestamp = producto.vistas[producto.vistas.length - 1].fecha;
+      const fechaFirestore = new Date(timestamp.seconds * 1000);
+      if(this.sonMismoDia(fechaActual, fechaFirestore)){
+        await runTransaction(this.firestore, async (transaction) => {
+          const vistas = producto.vistas;
+          const lastObject = vistas[vistas.length - 1];
+          lastObject.cantidad += 1;
+      
+          transaction.update(doc(this.firestore, `productos/${producto.id}`), { vistas: vistas });
+        });
+      }else{ //Es un día nuevo y aún no tiene vistas, así que se agrega
+        updateDoc(doc(this.firestore, `productos/${producto.id}`), {
+          vistas: arrayUnion({
+            fecha: new Date(),
+            cantidad: 1
+          })
+        });
+      }
+    }else{ //Es nuevo, y no tiene vistas
+      updateDoc(doc(this.firestore, `productos/${producto.id}`), {
+        vistas: arrayUnion({
+          fecha: new Date(),
+          cantidad: 1
+        })
+      });
+    }
+  }
+
+  sonMismoDia(fecha1: Date, fecha2: Date) {
+    return fecha1.getFullYear() === fecha2.getFullYear() &&
+      fecha1.getMonth() === fecha2.getMonth() &&
+      fecha1.getDate() === fecha2.getDate();
+  }
+
+  //-------------------------------------
+
   cambioDeEstilo(event : number){
     this.estiloSelec = event; this.indexFoto = 0;
     this.definirCarrito(this.producto.id!);
@@ -133,9 +193,9 @@ export class ProductoComponent implements OnInit{
     const snapshot = await getDoc(usuarioRef);
     const usuario = snapshot.data() as Usuario;
     if( usuario.carrito){
-      const carrito = usuario.carrito.filter(ref => ref.producto.id === productoId);
+      const carrito = usuario.carrito.filter(ref => ref.producto.id == productoId);
       if(carrito){
-        const existe = carrito.find(ref => Number(ref.estilo.split(':')[0]) === (this.estiloSelec + 1));
+        const existe = carrito.find(ref => ref.estilo == this.estilos[this.estiloSelec].id);
         if(existe){
           this.enCarrito = true;
         }else{
@@ -219,7 +279,7 @@ export class ProductoComponent implements OnInit{
     if(this.auth.currentUser){
       if(this.producto.idUsuario !== this.auth.currentUser.uid){
         this.enCarrito = true;
-        this.comprarService.agregarReferenciaCarrito(this.producto.id!, this.auth.currentUser.uid, this.producto.estilos![this.estiloSelec].nombre, this.estiloSelec + 1, Number(this.unidades));
+        this.comprarService.agregarReferenciaCarrito(this.producto.id!, this.auth.currentUser.uid, this.estilos![this.estiloSelec].id, Number(this.unidades));
       }else{
         //Este es tu producto
       }

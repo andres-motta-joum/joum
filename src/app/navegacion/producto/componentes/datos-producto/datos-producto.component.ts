@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, NgZone, OnChanges,OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { Producto } from '../../../../interfaces/producto/producto';
+import { Estilo, Producto } from '../../../../interfaces/producto/producto';
 import { Usuario } from '../../../../interfaces/usuario/usuario';
 
 import { provideIcons } from '@ng-icons/core';
@@ -22,9 +22,11 @@ import { DocumentData, DocumentReference, Firestore, doc, getDoc } from '@angula
 export class DatosProductoComponent implements OnChanges{
   constructor(private zone: NgZone, private router: Router, private comprarService: ComprarService, private auth: Auth, private authService: AuthService, private firestore: Firestore){}
   @Input() producto!: Producto;
+  @Input() estilos!: Estilo[];
   @Output() estilo = new EventEmitter<number>();
   @Output() unidadeS = new EventEmitter<number>();
   @Input() productoCargado!: boolean;
+
   promedioCalificacion!: number;
   promedio!: number;
   unidades: number = 1;
@@ -35,7 +37,7 @@ export class DatosProductoComponent implements OnChanges{
 
   productoPropio!: boolean;
 
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
     if (changes['producto'] && changes['producto'].currentValue) {
       this.promedioCalificacion = this.calcularPromedioCalificaciones(this.producto.opiniones);
       this.vendidos = this.calcularVentas(this.producto.ventas);
@@ -48,8 +50,12 @@ export class DatosProductoComponent implements OnChanges{
         }
       }
     }
-    const select: HTMLSelectElement | null = document.querySelector('#unidades');
-    select!.value = '1';
+    setTimeout(()=>{
+      const select: HTMLSelectElement | null = document.querySelector('#unidades');
+      if(select){
+        select!.value = '1';
+      }
+    })
     this.unaUnidad = true;
   }
 
@@ -126,7 +132,7 @@ export class DatosProductoComponent implements OnChanges{
           if(this.productoPropio){
             //Este es tu producto
           }else{
-            this.comprarService.agregarReferenciaCompra(this.producto.id!, this.auth.currentUser.uid, this.producto.estilos![this.selectEstilo].nombre, this.selectEstilo + 1, Number(this.unidades));
+            this.comprarService.agregarReferenciaCompra(this.producto.id!, this.auth.currentUser.uid, this.estilos[this.selectEstilo].id, Number(this.unidades));
             this.authService.getUsuarioId(this.auth.currentUser.uid).pipe(first()).subscribe((usuario)=>{
               if(usuario.direcciones && usuario.direcciones.length !== 0){
                 this.router.navigate(['comprar/checkout/resumen']);

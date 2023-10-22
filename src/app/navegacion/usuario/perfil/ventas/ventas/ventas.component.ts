@@ -43,7 +43,6 @@ export class VentasComponent implements OnInit, OnDestroy{
 
   async obtenerDatos() {
     this.ventas = [];
-    this.productos = [];
     this.unidades = [];
     this.fechas = [];
     await this.obtenerVentas();
@@ -72,8 +71,8 @@ export class VentasComponent implements OnInit, OnDestroy{
     if (this.usuario?.ventas) {
       const ventasRef = await Promise.all(this.usuario?.ventas.map((ref:any) => getDoc(ref)));
       ventasRef.forEach(productSnapshot => {
-        const prd = productSnapshot.data() as Venta;
-        this.ventas.push(prd);
+        const venta = productSnapshot.data() as Venta;
+        this.ventas.push(venta);
       });
     }
   }

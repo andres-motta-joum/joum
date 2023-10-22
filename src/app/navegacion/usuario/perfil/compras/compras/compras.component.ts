@@ -21,10 +21,8 @@ export class ComprasComponent implements OnInit, OnDestroy{
   private routeSubscription!: Subscription | undefined;
   private usuario!: Usuario | null;
   miUsuario!: string;
-  productos!: Producto[];
   fechas!: Date[];
   compras!: Venta[]
-  unidades!: number[]
 
   porPreparar = 0;
   enCamino = 0;
@@ -45,8 +43,6 @@ export class ComprasComponent implements OnInit, OnDestroy{
 
   async obtenerDatos() {
     this.compras = [];
-    this.productos = [];
-    this.unidades = [];
     this.fechas = [];
     await this.obtenerCompras();
     for (const compra of this.compras) {
@@ -64,7 +60,7 @@ export class ComprasComponent implements OnInit, OnDestroy{
 
   async obtenerCompras() {
     if (this.usuario?.compras) {
-      const compraRef = await Promise.all(this.usuario?.compras!.map((ref:any) => getDoc(ref)));
+      const compraRef = await Promise.all(this.usuario?.compras!.map( ref => getDoc(ref)));
       compraRef.forEach(productSnapshot => {
         const prd = productSnapshot.data() as Venta;
         this.compras.push(prd);

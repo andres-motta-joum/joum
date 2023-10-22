@@ -33,6 +33,8 @@ export class InformacionComponent implements OnInit, OnDestroy{
   habilitarEdicion: boolean = false;
   recuadroContenido!: string;
 
+  editarDireccionIndex!: number | undefined;
+
   ngOnInit(): void {
     if(this.perfilService.selected){
       this.selected = this.perfilService.selected;

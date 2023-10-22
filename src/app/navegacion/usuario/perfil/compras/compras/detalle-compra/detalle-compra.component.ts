@@ -26,10 +26,6 @@ export class DetalleCompraComponent implements OnInit, OnDestroy{
   private routeSubscription!: Subscription | undefined;
   usuario!: Usuario | null;
   usuarioVendedor!: Usuario;
-  productos: Producto[] = [];
-  estilos: string[] = [];
-  fotos: string[] = [];
-  unidades: number[] = [];
   cantidadUnidades: number = 0;
   fecha!: Date;
   compra!: Venta;
@@ -47,10 +43,7 @@ export class DetalleCompraComponent implements OnInit, OnDestroy{
     this.usuario = await this.authService.getUsuarioUser(userId);
     if(this.usuario){
       await this.obtenerCompra();
-      this.authService.getUsuarioId(this.compra.idVendedor!).pipe(first()).subscribe(usuario =>{
-        this.usuarioVendedor = usuario;
-      })
-      await this.obtenerProductos();
+      this.usuarioVendedor = await this.authService.getUsuarioIdPromise(this.compra.idVendedor);
     }else{
       this.router.navigate(['']);
     }
@@ -63,29 +56,16 @@ export class DetalleCompraComponent implements OnInit, OnDestroy{
     this.compra = snapshot.data() as Venta;
     const timestamp = this.compra.fechaVenta!;
     this.fecha = new Date(timestamp.seconds * 1000);
-  }
-
-  async obtenerProductos(){
-    const productosRef = await Promise.all(this.compra.referencias.map(ref => {
-      this.estilos.push(ref.estilo);
-      this.unidades.push(ref.unidades);
-      this.cantidadUnidades += ref.unidades; 
-      return getDoc(ref.producto);
-    }));
-    productosRef.forEach(snapshot => {
-      const prd = snapshot.data() as Producto;
-      prd.id = snapshot.id
-      this.productos.push(prd);
-    });
-    this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilos);
     this.obtenerprecios();
   }
 
+
   obtenerprecios(){
-    for(const [index, producto] of this.productos.entries()){
-      this.precio += (producto.precio! * this.unidades[index]);
-      if(producto.envioGratis){
-        this.precioEnvio += producto.precioEnvio!;
+    for(let referencia of this.compra.referencias){
+      this.precio += (referencia.precioProducto * referencia.unidades);
+      this.cantidadUnidades += referencia.unidades;
+      if(referencia.envioGratis){
+        this.precioEnvio += referencia.precioEnvio!;
       }
     }
   }
