@@ -36,7 +36,7 @@ import { Auth } from '@angular/fire/auth';
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss'],
   animations: [
-    trigger('subMenu', [
+    trigger('submenu', [
       state('active', style({
         maxHeight: '460px'
       })),
@@ -45,15 +45,6 @@ import { Auth } from '@angular/fire/auth';
       })),
       transition('inactive => active', animate('300ms')),
       transition('active => inactive', animate('300ms'))
-    ]),
-    trigger('fotoshow', [
-      state('active', style({
-        opacity: '100%'
-      })),
-      state('inactive', style({
-        opacity: '0%'
-      })),
-      transition('inactive => active', animate('150ms'))
     ])
   ],
   providers: [provideIcons({heroChevronDown, heroShoppingCartSolid, heroUserCircleSolid, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotesMini,heroRectangleGroup, heroBell,heroBuildingStorefront, heroChatBubbleLeftRight, heroCurrencyDollar, heroCurrencyDollarSolid, heroArrowTrendingUp, heroChartPie, heroDocumentTextSolid})]

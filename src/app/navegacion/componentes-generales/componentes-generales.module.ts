@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NgIconsModule } from '@ng-icons/core';
 import { FormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BarraMenuComponent } from './barra-menu/barra-menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { MenuLateralComponent } from './barra-menu/menu-lateral/menu-lateral.component';
 import { MenuSimpleComponent } from './barra-menu/menu-simple/menu-simple.component';
 import { NotificacionComponent } from './barra-menu/notificacion/notificacion.component';
+import { CargandoComponent } from './cargando/cargando.component';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,11 @@ import { NotificacionComponent } from './barra-menu/notificacion/notificacion.co
     FooterComponent,
     MenuLateralComponent,
     MenuSimpleComponent,
-    NotificacionComponent
+    NotificacionComponent,
+    CargandoComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     NgIconsModule,
     FormsModule
@@ -26,7 +30,8 @@ import { NotificacionComponent } from './barra-menu/notificacion/notificacion.co
     BarraMenuComponent,
     FooterComponent,
     MenuSimpleComponent,
-    MenuLateralComponent
+    MenuLateralComponent,
+    CargandoComponent
   ]
 })
 export class ComponentesGeneralesModule { }

@@ -1,0 +1,69 @@
+.body {
+	position: relative;
+	min-height: 100vh;
+	padding-bottom: 430px;
+	min-width: 870px;
+	overflow: hidden;
+	background-color: #f8f8f8;
+}
+.content{
+    width: 1400px;
+    margin: auto;
+    min-width: 800px;
+    @media screen and (max-width: 1450px) {
+        width: 90%;
+        margin: auto;
+    }
+    
+
+    .sinOfertas{
+        position: relative;
+        margin-top: 35px;
+        width: 100%;
+        height: 280px;
+        box-shadow: 0 -0.1px 2.6px rgba(0,0,0,0.17), 0 3.1px 2.3px rgba(0,0,0,0.05);
+        border-radius: 8px;
+        background: #fdfdfd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            width: 350px;
+            transform: translateX(-100px);
+        }
+        
+        div{
+            transform: translate(-20px, -30px);
+            h1{
+                font-size: 28px;
+                font-weight: 500;
+                color: #707070;
+                letter-spacing: .5px;
+            }
+            p{
+                font-size: 15px;
+                font-weight: 460;
+                color: #7b7b7b;
+                letter-spacing: .4px;
+                word-spacing: 1px;
+            }
+            button {
+                width: 150px;
+                height: 38px;
+                border-radius: 6px;
+                text-align: center;
+                transition: .2s;
+                background: #edf6ff;
+                border: none;
+                color: #1e8cf3;
+                font-size: 14px;
+                cursor: pointer;
+                font-weight: 450;
+                &:hover{
+                    background-color: #e1f0ff;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

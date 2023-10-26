@@ -28,27 +28,6 @@
 	margin: 0 0 0 5%;
 	border-radius: 5px;
 }
-
-@keyframes widthMenuSmallMouse {
-  0% {
-  	width: 60px;
-  }
-  20% {
-  	width: 61px;
-  }
-  100% {
-  	width: 260px;
-  }
-}
-@keyframes displayMenuSmall {
-  0% {
-  	opacity: 0;
-  }
-
-  100% {
-  	opacity: 1;
-  }
-}
 @media (max-width: 1950px){
 	.contenidoUsuario{
 		grid-template-columns: 60px 1fr;
@@ -76,18 +55,18 @@
 
 	/*--------------------------------------*/
 	.menuSmallMouse{
-		animation: widthMenuSmallMouse .3s;
 		width: 260px;
 		position: relative;
 		z-index: 100;
 		overflow-y: auto;
 		overflow-x: hidden;
 		box-shadow: 3px 2px 13px rgba(#000,0.32);
+		animation: widthMenuSmallMouse .3s;
 		li{
 			width: 260px;
 			span.menuSmall{
-				animation: displayMenuSmall .5s;
 				display: inline;
+				animation: displayMenuSmall .5s;
 			}
 			.title-menu{
 				padding: 40px;
@@ -337,3 +316,24 @@
 .headercuenta .principalUL li.item-submenu-ventas p .icono-submenu{
 	position: absolute;
 }
+
+@keyframes widthMenuSmallMouse {
+	0% {
+		width: 60px;
+	}
+	20% {
+		width: 61px;
+	}
+	100% {
+		width: 260px;
+	}
+  }
+  @keyframes displayMenuSmall {
+	0% {
+		opacity: 0;
+	}
+  
+	100% {
+		opacity: 1;
+	}
+  }

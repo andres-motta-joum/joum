@@ -19,6 +19,10 @@ export class PasosVenderService {
   
   producto!: any;
 
+  idProducto!: string | null;
+  fotoProducto!: string;
+  nombre!: string;
+
   restablecerDatos(){
     this.paso1 = true;
     this.paso2 = false;

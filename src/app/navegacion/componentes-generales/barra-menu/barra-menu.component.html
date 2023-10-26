@@ -102,7 +102,7 @@
     <nav class="menu2">
       <ul>
         <li><p (click)="direccionarDirecciones()" >Agrega tu envío</p></li>
-        <li><p (click)="navegar(['busqueda/ofertas-del-dia'],$event)">Ofertas del Día</p></li>
+        <li><p (click)="navegar(['ofertas-del-dia'],$event)">Ofertas</p></li>
         <li><p (click)="navegar([usuario?.usuario + '/historial'],$event)">Historial</p></li>
         <li *ngIf="inUser"><p (click)="navegar([usuario?.usuario + '/compras'],$event)">Mis compras</p></li>
         <li *ngIf="inUser"><p (click)="navegar([usuario?.usuario + '/favoritos'],$event)">Favoritos</p></li>

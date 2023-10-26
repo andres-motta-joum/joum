@@ -55,7 +55,7 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
 
   async obtenerProductos() {
     if (this.usuario?.carrito) {
-      const productosRef = await Promise.all(this.usuario?.carrito.map((ref:any) => getDoc(ref.producto)));
+      const productosRef = await Promise.all(this.usuario?.carrito.map((ref:referenciaCompra) => getDoc(ref.producto)));
       await Promise.all(productosRef.map(async (productSnapshot, index) => {
         const prd = productSnapshot.data() as Producto;
         prd.id = productSnapshot.id;

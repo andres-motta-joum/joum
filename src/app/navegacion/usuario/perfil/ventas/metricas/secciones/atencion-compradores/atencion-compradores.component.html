@@ -1,37 +1,43 @@
 <div class="contenido">
     <div class="grafica" *ngIf="periodoTiempo == 'semanal'">
-        <div>
+        <app-cargando *ngIf="!porcentajesDespachosDemorados"></app-cargando>
+        <ng-container *ngIf="porcentajesDespachosDemorados">
             <div>
-                <p *ngFor="let numero of divicionesDespachosDemorados">{{numero}}</p>
+                <div>
+                    <p *ngFor="let numero of divicionesDespachosDemorados">{{numero}}</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div *ngIf="porcentajesDespachosDemorados">
-            <p *ngFor="let height of porcentajesDespachosDemorados; let index = index" >{{fechasString[index]}} 
-                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
-            </p>
-        </div>
-        <p class="subTitulo">Despachos demorados</p>
-        <p class="hoy">A día de hoy: <span>{{despachosDemoradosHoy}}</span></p>
+            <div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div *ngIf="porcentajesDespachosDemorados">
+                <p *ngFor="let height of porcentajesDespachosDemorados; let index = index" >{{fechasString[index]}} 
+                    <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+                </p>
+            </div>
+            <p class="subTitulo">Despachos demorados</p>
+            <p class="hoy">A día de hoy: <span>{{despachosDemoradosHoy}}</span></p>
+        </ng-container>
     </div>
     <div class="grafica" *ngIf="periodoTiempo == 'mensual'">
-        <div>
+        <app-cargando *ngIf="!porcentajesDespachosDemoradosMensual"></app-cargando>
+        <ng-container *ngIf="porcentajesDespachosDemoradosMensual">
             <div>
-                <p *ngFor="let numero of divicionesDespachosDemoradosMensual">{{numero}}</p>
+                <div>
+                    <p *ngFor="let numero of divicionesDespachosDemoradosMensual">{{numero}}</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div *ngIf="porcentajesDespachosDemoradosMensual">
-            <p *ngFor="let height of porcentajesDespachosDemoradosMensual; let index = index" >{{fechasMensualString[index]}} 
-                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
-            </p>
-        </div>
-        <p class="subTitulo">Despachos demorados</p>
-        <p class="hoy">Ultimos 4 días: <span>{{despachosDemoradosHoyMensual}}</span></p>
+            <div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div *ngIf="porcentajesDespachosDemoradosMensual">
+                <p *ngFor="let height of porcentajesDespachosDemoradosMensual; let index = index" >{{fechasMensualString[index]}} 
+                    <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+                </p>
+            </div>
+            <p class="subTitulo">Despachos demorados</p>
+            <p class="hoy">Ultimos 4 días: <span>{{despachosDemoradosHoyMensual}}</span></p>
+        </ng-container>
     </div>
 <!-------------->
     <div class="graficaCircular" *ngIf="periodoTiempo == 'semanal'">

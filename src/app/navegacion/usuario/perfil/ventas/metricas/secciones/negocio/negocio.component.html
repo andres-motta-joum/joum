@@ -1,111 +1,129 @@
 <div class="contenido">
     <div class="grafica" *ngIf="periodoTiempo == 'semanal'">
-        <div>
+        <app-cargando *ngIf="!porcentajesVentasBrutas"></app-cargando>
+        <ng-container *ngIf="porcentajesVentasBrutas">
             <div>
-                <p *ngFor="let numero of divicionesVentasBrutas">$ {{numero | number: '1.0-0'}}</p>
+                <div>
+                    <p *ngFor="let numero of divicionesVentasBrutas">$ {{numero | number: '1.0-0'}}</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div *ngIf="porcentajesVentasBrutas">
-            <p *ngFor="let height of porcentajesVentasBrutas; let index = index" >{{fechasString[index]}} 
-                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 1)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
-            </p>
-        </div>
-        <p class="subTitulo">Ventas brutas</p>
-        <p class="hoy">A día de hoy: <span>$ {{ventasBrutasHoy | number: '1.0-0'}}</span></p>
+            <div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div>
+                <p *ngFor="let height of porcentajesVentasBrutas; let index = index" >{{fechasString[index]}} 
+                    <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 1)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+                </p>
+            </div>
+            <p class="subTitulo">Ventas brutas</p>
+            <p class="hoy">A día de hoy: <span>$ {{ventasBrutasHoy | number: '1.0-0'}}</span></p>
+        </ng-container>
     </div>
     <div class="grafica" *ngIf="periodoTiempo == 'mensual'">
-        <div>
+        <app-cargando *ngIf="!porcentajesVentasBrutasMensual"></app-cargando>
+        <ng-container *ngIf="porcentajesVentasBrutasMensual">
             <div>
-                <p *ngFor="let numero of divicionesVentasBrutasMensual">$ {{numero | number: '1.0-0'}}</p>
+                <div>
+                    <p *ngFor="let numero of divicionesVentasBrutasMensual">$ {{numero | number: '1.0-0'}}</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div *ngIf="porcentajesVentasBrutasMensual">
-            <p *ngFor="let height of porcentajesVentasBrutasMensual; let index = index" >{{fechasMensualString[index]}} 
-                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 1)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
-            </p>
-        </div>
-        <p class="subTitulo">Ventas brutas</p>
-        <p class="hoy">Ultimos 4 días: <span>$ {{ventasBrutasHoyMensual | number: '1.0-0'}}</span></p>
+            <div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div *ngIf="porcentajesVentasBrutasMensual">
+                <p *ngFor="let height of porcentajesVentasBrutasMensual; let index = index" >{{fechasMensualString[index]}} 
+                    <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 1)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+                </p>
+            </div>
+            <p class="subTitulo">Ventas brutas</p>
+            <p class="hoy">Ultimos 4 días: <span>$ {{ventasBrutasHoyMensual | number: '1.0-0'}}</span></p>
+        </ng-container>
     </div>
 
 <!----------------------------->
 
     <div class="grafica" *ngIf="periodoTiempo == 'semanal'">
-        <div>
+        <app-cargando *ngIf="!porcentajesVentas"></app-cargando>
+        <ng-container *ngIf="porcentajesVentas">
             <div>
-                <p *ngFor="let numero of divicionesVentas">{{numero}}</p>
+                <div>
+                    <p *ngFor="let numero of divicionesVentas">{{numero}}</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div *ngIf="porcentajesVentas">
-            <p *ngFor="let height of porcentajesVentas; let index = index" >{{fechasString[index]}} 
-                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 2)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
-            </p>
-        </div>
-        <p class="subTitulo">Unidades vendidas</p>
-        <p class="hoy">A día de hoy: <span>{{ventasHoy}}</span></p>
+            <div> 
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div *ngIf="porcentajesVentas">
+                <p *ngFor="let height of porcentajesVentas; let index = index" >{{fechasString[index]}} 
+                    <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 2)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+                </p>
+            </div>
+            <p class="subTitulo">Unidades vendidas</p>
+            <p class="hoy">A día de hoy: <span>{{ventasHoy}}</span></p>
+        </ng-container>
     </div>
     <div class="grafica" *ngIf="periodoTiempo == 'mensual'">
-        <div>
+        <app-cargando *ngIf="!porcentajesVentasMensual"></app-cargando>
+        <ng-container *ngIf="porcentajesVentasMensual">
             <div>
-                <p *ngFor="let numero of divicionesVentasMensual">{{numero}}</p>
+                <div>
+                    <p *ngFor="let numero of divicionesVentasMensual">{{numero}}</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div *ngIf="porcentajesVentasMensual">
-            <p *ngFor="let height of porcentajesVentasMensual; let index = index" >{{fechasMensualString[index]}} 
-                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 2)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
-            </p>
-        </div>
-        <p class="subTitulo">Unidades vendidas</p>
-        <p class="hoy">Ultimos 4 días: <span>{{ventasHoyMensual}}</span></p>
+            <div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div *ngIf="porcentajesVentasMensual">
+                <p *ngFor="let height of porcentajesVentasMensual; let index = index" >{{fechasMensualString[index]}} 
+                    <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 2)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+                </p>
+            </div>
+            <p class="subTitulo">Unidades vendidas</p>
+            <p class="hoy">Ultimos 4 días: <span>{{ventasHoyMensual}}</span></p>
+        </ng-container>
     </div>
 
 <!----------------------------->
 
     <div class="grafica" *ngIf="periodoTiempo == 'semanal'">
-        <div>
+        <app-cargando *ngIf="!porcentajesVistas"></app-cargando>
+        <ng-container *ngIf="porcentajesVistas">
             <div>
-                <p *ngFor="let numero of divicionesVistas">{{numero}}</p>
+                <div>
+                    <p *ngFor="let numero of divicionesVistas">{{numero}}</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div *ngIf="porcentajesVistas">
-            <p *ngFor="let height of porcentajesVistas; let index = index" >{{fechasString[index]}} 
-                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 3)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
-            </p>
-        </div>
-        <p class="subTitulo">Vistas</p>
-        <p class="hoy">A día de hoy: <span>{{vistasHoy}}</span></p>
+            <div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div *ngIf="porcentajesVistas">
+                <p *ngFor="let height of porcentajesVistas; let index = index" >{{fechasString[index]}} 
+                    <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 3)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+                </p>
+            </div>
+            <p class="subTitulo">Vistas</p>
+            <p class="hoy">A día de hoy: <span>{{vistasHoy}}</span></p>
+        </ng-container>
     </div>
     <div class="grafica" *ngIf="periodoTiempo == 'mensual'">
-        <div>
+        <app-cargando *ngIf="!porcentajesVistasMensual"></app-cargando>
+        <ng-container *ngIf="porcentajesVistasMensual">
             <div>
-                <p *ngFor="let numero of divicionesVistasMensual">{{numero}}</p>
+                <div>
+                    <p *ngFor="let numero of divicionesVistasMensual">{{numero}}</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div *ngIf="porcentajesVistasMensual">
-            <p *ngFor="let height of porcentajesVistasMensual; let index = index" >{{fechasMensualString[index]}} 
-                <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 3)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
-            </p>
-        </div>
-        <p class="subTitulo">Vistas</p>
-        <p class="hoy">Ultimos 4 días: <span>{{vistasHoyMensual}}</span></p>
+            <div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div *ngIf="porcentajesVistasMensual">
+                <p *ngFor="let height of porcentajesVistasMensual; let index = index" >{{fechasMensualString[index]}} 
+                    <span [style.height]="(157 * height) + 'px'" [style.transform]=" 'translateY(-' + (157 * height) + 'px)' " (mouseover)="onMouseOver($event, index, 3)" (mousemove)="onMouseMove($event)" (mouseout)="onMouseOut()"></span>
+                </p>
+            </div>
+            <p class="subTitulo">Vistas</p>
+            <p class="hoy">Ultimos 4 días: <span>{{vistasHoyMensual}}</span></p>
+        </ng-container>
     </div>
 
 <!----------------------------->

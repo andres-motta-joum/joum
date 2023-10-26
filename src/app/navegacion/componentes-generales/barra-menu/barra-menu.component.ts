@@ -52,7 +52,7 @@ export class BarraMenuComponent{
   public scrollDisplay: Boolean = true;
   private routeSubscription!: Subscription;
   @ViewChild(MenuLateralComponent, {static: false})
-  menuLateral: MenuLateralComponent = new MenuLateralComponent(this.auth, this.authService, this.changeDetectorRef, this.zone,this.router);
+  menuLateral: MenuLateralComponent = new MenuLateralComponent(this.auth, this.authService, this.changeDetectorRef, this.zone,this.router, this.perfilService);
 
   usuario!: Usuario | null;
   nombre!: string;

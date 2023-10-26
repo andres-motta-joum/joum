@@ -1,19 +1,31 @@
-<h1>Compras</h1>
-<div class="encabezado">
-    <p><span *ngIf="compras">{{compras.length}}</span> compras</p>
-    <div>
-        <div>
-            <input type="text" placeholder="Buscar ">
-            <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+<div class="content">
+    <h1>Compras</h1>
+    <section *ngIf="!datosCargados" class="cargando"><app-cargando></app-cargando></section>
+    <ng-container *ngIf="datosCargados">
+        <div class="encabezado">
+            <p *ngIf="compras">{{compras.length}} compra<span *ngIf="compras.length !== 1">s</span></p>
+            <p *ngIf="!compras">0 compras</p>
+            <div>
+                <div>
+                    <input type="text" placeholder="Buscar ">
+                    <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+                </div>
+                <div>
+                    <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+                    <select id="">
+                        <option value="">Todas</option>
+                        <option value="">compra tipo1</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div>
-            <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
-            <select id="">
-                <option value="">Todas</option>
-                <option value="">compra tipo1</option>
-            </select>
+        
+        <app-compra [compra]="compra" [miUsuario]="miUsuario" [fecha]="fechas[i]" *ngFor="let compra of compras; let i = index"></app-compra>
+        
+        <div class="sinCompras" *ngIf="!compras">
+            <img src="assets/img/logo/iconos/shopping-empty.svg">
+            <p>No tienes compras realizadas</p>
+            <a>Comprar ahora</a>
         </div>
-    </div>
+    </ng-container>
 </div>
-
-<app-compra [compra]="compra" [miUsuario]="miUsuario" [fecha]="fechas[i]" *ngFor="let compra of compras; let i = index"></app-compra>

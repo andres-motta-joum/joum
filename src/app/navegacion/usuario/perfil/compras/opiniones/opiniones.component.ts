@@ -19,9 +19,10 @@ import { Firestore, Timestamp, doc, getDoc } from '@angular/fire/firestore';
   export class OpinionesComponent implements OnInit, OnDestroy{
     constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private authService: AuthService, private prdsService: ProductosService, private firestore: Firestore) {}
     private routeSubscription!: Subscription;
-    private usuario!: Usuario | null;
-    opiniones: Opinion[] = [];
+    private usuario!: Usuario;
+    opiniones!: Opinion[];
     fechaVentas: Timestamp[] = [];
+    datosCargados = false;
     
     ngOnInit() {
       this.routeSubscription = this.route.parent!.params.subscribe(params => {
@@ -31,22 +32,24 @@ import { Firestore, Timestamp, doc, getDoc } from '@angular/fire/firestore';
     }
   
     async obtenerusuario(usuario: string){
-      this.usuario = await this.authService.getUsuarioUser(usuario);
-      if(this.usuario){
-        this.obtenerOpiniones();
-      }
+      await this.authService.getUsuarioUser(usuario).then((user)=>{
+        if(user){
+          this.usuario = user;
+          this.obtenerOpiniones();
+        }
+      });
     }
   
     async obtenerOpiniones() {
-      if (this.usuario?.opiniones) {
-        //Obtener opiniones -------
-        const opinionesRef = await Promise.all(this.usuario?.opiniones.map((ref:any) => getDoc(ref!))); 
-        opinionesRef.forEach(snapshot => {
+      if (this.usuario.opiniones && this.usuario.opiniones.length !== 0) {
+        const opinionesSnapshot = await Promise.all(this.usuario.opiniones.map((ref:any) => getDoc(ref!))); 
+        this.opiniones = opinionesSnapshot.map((snapshot)=>{
           const opinion = snapshot.data() as Opinion;
           opinion.id = snapshot.id;
-          this.opiniones.push(opinion);
-        });
+          return opinion
+        })
       }
+      this.datosCargados = true;
     }
 
     navegar(ruta: any[], event: Event){

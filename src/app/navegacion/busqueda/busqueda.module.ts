@@ -15,6 +15,7 @@ import { HistorialComponent } from './secciones/historial/historial.component';
 import { RecomendacionesComponent } from './secciones/recomendaciones/recomendaciones.component';
 
 import { ProductoHistorialComponent } from './secciones/historial/producto-historial/producto-historial.component';
+import { OfertasDelDiaComponent } from './secciones/ofertas-del-dia/ofertas-del-dia.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProductoHistorialComponent } from './secciones/historial/producto-histo
     ProductoComponent,
     HistorialComponent,
     RecomendacionesComponent,
-    ProductoHistorialComponent
+    ProductoHistorialComponent,
+    OfertasDelDiaComponent
   ],
   imports: [
     CommonModule,

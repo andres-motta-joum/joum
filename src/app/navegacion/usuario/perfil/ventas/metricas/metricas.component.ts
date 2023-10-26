@@ -61,8 +61,10 @@ export class MetricasComponent implements OnInit, OnDestroy{
   }
 
   navegar(ruta: any[]):void{
-    this.router.navigate(ruta);
-    window.scroll(0,0);
+    if(this.user){
+      this.router.navigate(ruta);
+      window.scroll(0,0);
+    }
   }
 
   ngOnDestroy(): void {

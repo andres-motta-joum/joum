@@ -6,13 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./ayuda.component.scss']
 })
 export class AyudaComponent{
-  public dato!:string;
-
-  over(dato:string){
-    if(dato !== ''){
-      this.dato = dato;
-    }else{
-      this.dato = '';
-    }
-  }
 }

@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { DocumentData, DocumentReference, getDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { Producto } from 'src/app/interfaces/producto/producto';
+import { porComprar } from 'src/app/interfaces/usuario/usuario';
 import { Venta } from 'src/app/interfaces/venta';
 import { MetricasService } from 'src/app/servicios/perfil/metricas/metricas.service';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
@@ -12,7 +13,7 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
   styleUrls: ['./negocio.component.scss']
 })
 export class NegocioComponent implements OnInit{
-  constructor(private auth: Auth, private authService: AuthService, private renderer: Renderer2, private el: ElementRef, private metricasService: MetricasService) {}
+  constructor(private auth: Auth, private authService: AuthService, private firestore: Firestore, private metricasService: MetricasService) {}
   periodoTiempo!: string;
   fechasString: string[] = [];
   fechas: Date[] = [];
@@ -57,7 +58,6 @@ export class NegocioComponent implements OnInit{
   porcentajesVistasMensual!: number[];
   vistasHoyMensual!: number;
   divicionesVistasMensual: number[] = [];
-
 
   ngOnInit(): void {
     this.metricasService.periodoTiempo.subscribe(valor => this.periodoTiempo = valor);
@@ -107,9 +107,30 @@ export class NegocioComponent implements OnInit{
       const ventasRef = usuario.ventas;
       if(productosRef){
         this.obtenerProductos(productosRef);
+      }else{
+        this.divicionesVistas = [5,4,3,2,1,0];
+        this.porcentajesVistas = [0,0,0,0,0,0,0];
+        this.divicionesVistasMensual = [5,4,3,2,1,0];
+        this.porcentajesVistasMensual = [0,0,0,0,0,0,0];
+        this.vistasHoy = 0;
+        this.vistasHoyMensual = 0;
       }
       if(ventasRef){
         this.obtenerVentas(ventasRef);
+      }else{
+        this.divicionesVentasBrutas = [5,4,3,2,1,0];
+        this.porcentajesVentasBrutas = [0,0,0,0,0,0,0];
+        this.divicionesVentasBrutasMensual = [5,4,3,2,1,0];
+        this.porcentajesVentasBrutasMensual = [0,0,0,0,0,0,0];
+        this.ventasBrutasHoy = 0;
+        this.ventasBrutasHoyMensual = 0;
+
+        this.divicionesVentas = [5,4,3,2,1,0];
+        this.porcentajesVentas = [0,0,0,0,0,0,0];
+        this.divicionesVentasMensual = [5,4,3,2,1,0];
+        this.porcentajesVentasMensual = [0,0,0,0,0,0,0];
+        this.ventasHoy = 0;
+        this.ventasHoyMensual = 0;
       }
     }
   }
@@ -150,7 +171,7 @@ export class NegocioComponent implements OnInit{
           const timestamp = venta.fechaVenta;
           const fechaFirestore = new Date(timestamp.seconds * 1000);
           if(this.sonMismoDia(fechaFirestore, fecha)){
-              const productosSnapshot = await Promise.all(venta.referencias.map((ref:any) => getDoc(ref.producto)));
+              const productosSnapshot = await Promise.all(venta.referencias.map((ref:porComprar) => getDoc(doc(this.firestore, `productos/${ref.idProducto}`))));
               productosSnapshot.forEach(productSnapshot => {
                   const prd = productSnapshot.data() as Producto;
                   cantidadVentasBrutas += prd.precio;
@@ -185,7 +206,7 @@ export class NegocioComponent implements OnInit{
           const timestamp = venta.fechaVenta;
           const fechaFirestore = new Date(timestamp.seconds * 1000);
           if(this.sonMismoDia(fechaFirestore, fecha)){
-              const productosSnapshot = await Promise.all(venta.referencias.map((ref:any) => getDoc(ref.producto)));
+              const productosSnapshot = await Promise.all(venta.referencias.map((ref:porComprar) => getDoc(doc(this.firestore, `productos/${ref.idProducto}`))));
               productosSnapshot.forEach(productSnapshot => {
                   const prd = productSnapshot.data() as Producto;
                   cantidadVentasBrutas += prd.precio;

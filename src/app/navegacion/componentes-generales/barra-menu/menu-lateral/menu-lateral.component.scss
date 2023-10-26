@@ -1,42 +1,35 @@
 .botonX {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 48%;
-  top: 10px;
+  top: 70px;
   position: absolute;
   margin-left: 330px;
   font-size: 25px;
-  background: #999;
   border: none;
   cursor: pointer;
   left: -420px;
-  transition: .2s;
-  padding: 0;
-
+  padding: 3px;
+  background: #fff;
   &:hover {
-    background: #FF9E57;
+    background: #ffa462;
+    ng-icon{
+      color: white;
+    }
   }
 
   ng-icon {
-    font-size: 30px;
-    color: #ffffff;
+    font-size: 22px;
+    color: #666;
   }
 }
 
-.header4 {
+.content {
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 510;
-}
-
-.menu4 {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 0%;
-  height: 100vh;
 }
 
 @keyframes transparencia {
@@ -55,33 +48,39 @@
   width: 0%;
   height: 100vh;
   background: rgba(0, 0, 0, 0);
-  z-index: 500;
+  z-index: 400;
   position: fixed;
   transition: background .2s;
 }
 
-.menu4 {
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0%;
+  height: 100vh;
   ul {
     position: absolute;
     margin: 0;
     padding: 0;
     background: white;
     width: 320px;
-    height: 100%;
+    height: calc(100% - 60px);
     list-style: none;
-    left: -420px;
-    transition: left .2s;
+    left: 0;
     overflow-y: hidden !important;
     overflow-x: hidden;
     z-index: 1;
+    top: 60px;
+    transition: .4s;
 
     &:hover {
-      overflow-y: scroll !important;
+      overflow-y: auto !important;
     }
 
     &::-webkit-scrollbar {
       width: 8px;
-      background-color: #eee;
+      background: #eee;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -89,14 +88,19 @@
       border-radius: 4px;
     }
 
-    li.title-menu {
-      padding: 20px;
-      background: #696968;
-      background: linear-gradient(to right, #f59855 46%, #feab71 74%, #f3b78d 100%);
+    .titulo {
+      border-bottom: 5px solid #ffae74;
+      padding: 9px 10px 14px 10px;
+      box-shadow: inset 0 10px 7px -7px rgba(0,0,0,0.2);
+      background: #767676;
       color: white;
       font-size: 22px;
-      font-weight: 580;
-      padding-left: 50px;
+      font-weight: 440;
+      padding-left: 40px;
+      ng-icon{
+        font-size: 30px;
+        transform: translate(-8px, 7px);
+      }
     }
 
     a {
@@ -155,8 +159,7 @@
 }
 
 .submenu {
-  top: 0;
-
+  top: 60px !important;
   &::-webkit-scrollbar {
     width: 8px;
     background-color: #ddd;
@@ -167,9 +170,27 @@
     border-radius: 5px;
   }
 
-  li.title-menu {
-    background: #fff;
-    color: #444;
+  .titulo {
+    padding: 13px 10px 15px 70px !important;
+    font-size: 21px !important;
+    ng-icon{
+      font-size: 26px !important;
+      transform: translate(-11px, 5px) !important;
+    }
+    .atras{
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      transform: none !important;
+      font-size: 23px;
+      padding: 4px;
+      border-radius: 50%;
+      background: #7e7e7e;
+      &:hover{
+        cursor: pointer;
+        background: #8b8b8b;
+      }
+    }
   }
 
   li.goBack {
@@ -190,7 +211,7 @@
   margin: 0px 13px 0px 0px;
 }
 
-.botones {
+.botone {
   display: flex;
 
   button {

@@ -1,67 +1,72 @@
-.header3{
+.header3 {
 	width: 100%;
 	height: 45px;
 	z-index: 20;
 	background-color: #fafafa;
 }
-.menu3 ul{
-	margin: 0;
-	list-style: none;
-	padding: 0;
-}
-.ContenidoMenu3{
-	display: flex;
-	max-width: 1400px;
-	margin: auto;
-	height: 100%;
-}
-.menu3 li{
-	padding: 18px 31px 10px 0;
-}
-.menu3 li a{
-	display: block;
-	color: #505050;
-	text-decoration: none;
-	font-size: 14.5px;
-	font-weight: 500;
-	flex-grow:1;
-	position: relative;
-	padding-left: 23px;
-}
-.menu3 li a ng-icon{
-	font-size: 20px;
-	position: absolute;
-	left: -5px;
-	top: 0;
-}
-.menu3 li a ng-icon.devoluciones-icono{
-	font-size: 18px; 
-	top: -2px; 
-	left: -1px;
-}
 
-.menu3 li a:hover{
-	transition: .2s;
-	color: #f57316;
-}
-@media screen and (max-width: 1450px){
-	.menu3 li a{
-		margin-top: -4px;
-		padding-left: 21px;
+.menu3 {
+	ul {
+		margin: 0;
+		list-style: none;
+		padding: 0;
+		.ContenidoMenu3 {
+			display: flex;
+			max-width: 1400px;
+			margin: auto;
+			height: 100%;
+			li {
+				padding: 13px 31px 10px 0;
+				a {
+					display: block;
+					color: #505050;
+					text-decoration: none;
+					font-size: 14.5px;
+					font-weight: 500;
+					flex-grow: 1;
+					position: relative;
+					padding-left: 26px;
+					ng-icon {
+						font-size: 20px;
+						position: absolute;
+						left: 0;
+						top: 0;
+						&.devoluciones-icono {
+							font-size: 18px;
+							top: -2px;
+							left: -1px;
+						}
+					}
+					&:hover {
+						transition: 0.2s;
+						color: #f57316;
+					}
+				}
+			}
+		}
+		
 	}
-}
-@media screen and (max-width: 930px){
-	.menu3 li a{
-		font-size: 15px;
-		padding-left: 12px;
+
+	@media screen and (max-width: 1450px) {
+		li a {
+			margin-top: -4px;
+			padding-left: 21px;
+		}
 	}
-	.menu3 li a ng-icon{
-		font-size: 18px;
-		left: -10px;
-	}
-	.menu3 li a ng-icon.devoluciones-icono{
-		font-size: 17px; 
-		top: -2px; 
-		left: -7px;
+
+	@media screen and (max-width: 930px) {
+		li a {
+			font-size: 15px;
+			padding-left: 12px;
+			ng-icon {
+				font-size: 18px;
+				left: -10px;
+				&.devoluciones-icono {
+					font-size: 17px;
+					top: -2px;
+					left: -7px;
+				}
+			}
+		}
 	}
 }

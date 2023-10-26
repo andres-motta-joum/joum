@@ -21,6 +21,7 @@ import { listAll } from 'firebase/storage';
 })
 export class PasoDiezComponent implements OnInit{
   constructor( private pasos: PasosVenderService, private router: Router, private firestore: Firestore, private storage: Storage, private auth: Auth) {}
+  private productoRef!: DocumentReference<DocumentData>
   submitValue = false;
   gratuito = false;
   basico = false;
@@ -202,9 +203,9 @@ export class PasoDiezComponent implements OnInit{
 
   async subirProductoFirestore(): Promise<void>{
     this.cargando = true;
-    const productoRef = await addDoc(collection(this.firestore, "productos"), this.pasos.producto);
-    this.estilosRef = await this.subirEstilos(this.estilos, productoRef.id);
-    await updateDoc(productoRef, {estilos: this.estilosRef})
+    this.productoRef = await addDoc(collection(this.firestore, "productos"), this.pasos.producto);
+    this.estilosRef = await this.subirEstilos(this.estilos, this.productoRef.id);
+    await updateDoc(this.productoRef, {estilos: this.estilosRef})
 
     const userRef = doc(this.firestore, "usuarios", this.auth.currentUser?.uid!);
     // Obtén el documento actual
@@ -214,16 +215,16 @@ export class PasoDiezComponent implements OnInit{
     if (!usuario.diasComoVendedor) { //Si no existe agregarla más publicaciones
       await updateDoc(userRef, {
         diasComoVendedor: 0,
-        publicaciones: arrayUnion(productoRef)
+        publicaciones: arrayUnion(this.productoRef)
       });
     } else { //Si existe agregar solo publicaciones
       await updateDoc(userRef, {
-        publicaciones: arrayUnion(productoRef)
+        publicaciones: arrayUnion(this.productoRef)
       });
     }
     
-    await this.subirFotos(productoRef);
-    await this.agregarNotificacion(userRef, productoRef.id);
+    await this.subirFotos(this.productoRef);
+    await this.agregarNotificacion(userRef, this.productoRef.id);
     this.cargando = false;
   }
 
@@ -270,8 +271,12 @@ export class PasoDiezComponent implements OnInit{
     this.tipoPublicacionSeleccionada();
     this.definirDetalles();
     await this.subirProductoFirestore();
+    const nombre = this.pasos.producto.nombre;
     this.pasos.restablecerDatos();
-    this.router.navigate(['']);
+    this.pasos.idProducto = this.productoRef.id;
+    this.pasos.fotoProducto = this.primerFotoProducto;
+    this.pasos.nombre = nombre;
+    this.router.navigate(['vender/producto-publicado/' + this.productoRef.id]);
   }
 
   atras(): void {

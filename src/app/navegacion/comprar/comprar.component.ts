@@ -46,7 +46,7 @@ export class ComprarComponent implements OnInit, OnDestroy{
 
   async obtenerProductos(){
     if(this.usuario.referenciaCompra){
-      const productosRef = await Promise.all(this.usuario?.referenciaCompra.map((ref:any) => getDoc(ref.producto)));
+      const productosRef = await Promise.all(this.usuario?.referenciaCompra.map((ref:referenciaCompra) => getDoc(ref.producto)));
       productosRef.forEach((productSnapshot, index) => {
         const prd = productSnapshot.data() as Producto;
         prd.id = productSnapshot.id;

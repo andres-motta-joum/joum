@@ -54,7 +54,7 @@ export class GuardadosComponent implements OnInit{
 
   async obtenerProductos() {
     if (this.usuario?.guardados) {
-      const productosRef = await Promise.all(this.usuario?.guardados.map((ref:any) => getDoc(ref.producto)));
+      const productosRef = await Promise.all(this.usuario?.guardados.map((ref:referenciaCompra) => getDoc(ref.producto)));
       await Promise.all(productosRef.map(async (productSnapshot, index) => {
         const prd = productSnapshot.data() as Producto;
         prd.id = productSnapshot.id;

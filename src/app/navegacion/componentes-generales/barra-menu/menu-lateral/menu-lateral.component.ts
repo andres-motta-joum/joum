@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { AnimationMenu } from './barra-menu-animation.component';
 
+import { heroBars3Solid } from '@ng-icons/heroicons/solid';
 import { heroUserCircleSolid } from '@ng-icons/heroicons/solid';
 import { aspectsContactCard } from '@ng-icons/ux-aspects';
-import { aspectsStatusErrorFilled } from '@ng-icons/ux-aspects';
+import { ionClose } from '@ng-icons/ionicons';
 import { heroSquares2x2Solid } from '@ng-icons/heroicons/solid';
 import { aspectsDeliver } from '@ng-icons/ux-aspects';
 import { heroNewspaper } from '@ng-icons/heroicons/outline';
@@ -23,6 +24,8 @@ import { aspectsLineChart } from '@ng-icons/ux-aspects';
 import { heroLockClosed } from '@ng-icons/heroicons/outline';
 import { heroFingerPrint } from '@ng-icons/heroicons/outline';
 import { heroArrowRightOnRectangle } from '@ng-icons/heroicons/outline';
+import { heroTruck } from '@ng-icons/heroicons/outline';
+import { heroArrowSmallLeft } from '@ng-icons/heroicons/outline';
 
 /*---------- Iconos Compras ---------*/
 import { heroShoppingCart, } from '@ng-icons/heroicons/outline';
@@ -44,25 +47,29 @@ import { heroCurrencyDollar } from '@ng-icons/heroicons/outline';
 import { heroDocumentText } from '@ng-icons/heroicons/outline';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { InformacionPerfilService } from 'src/app/servicios/informacionPerfil/informacion-perfil.service';
 
 @Component({
   selector: 'app-menu-lateral',
   templateUrl: './menu-lateral.component.html',
   styleUrls: ['./menu-lateral.component.scss'],
   animations: AnimationMenu,
-  providers: [provideIcons({ionNotificationsOutline, heroUserCircleSolid,aspectsContactCard, aspectsStatusErrorFilled, heroSquares2x2Solid, aspectsDeliver, heroNewspaper, heroCheckBadge, heroArrowUturnLeft, heroUsers, heroCalendarDays,/*-iconos- perfil*/ heroArrowSmallLeftMini, heroChevronRightMini, heroCheckCircle, heroQuestionMarkCircle, aspectsLineChart, heroLockClosed, heroFingerPrint, heroArrowRightOnRectangle, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes,heroCurrencyDollar, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText})]
+  providers: [provideIcons({heroBars3Solid, ionNotificationsOutline, heroTruck, heroUserCircleSolid,aspectsContactCard, heroArrowSmallLeft, ionClose, heroSquares2x2Solid, aspectsDeliver, heroNewspaper, heroCheckBadge, heroArrowUturnLeft, heroUsers, heroCalendarDays,/*-iconos- perfil*/ heroArrowSmallLeftMini, heroChevronRightMini, heroCheckCircle, heroQuestionMarkCircle, aspectsLineChart, heroLockClosed, heroFingerPrint, heroArrowRightOnRectangle, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes,heroCurrencyDollar, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText})]
 })
 export class MenuLateralComponent implements OnInit{
-  constructor(private auth: Auth, private authService: AuthService, private changeDetector: ChangeDetectorRef, private zone: NgZone, private router: Router){}
+  constructor(private auth: Auth, private authService: AuthService, private changeDetector: ChangeDetectorRef, private zone: NgZone, private router: Router, private perfilService: InformacionPerfilService){}
   user!: string;
   state = 'inactive';
   submenuState: Array<string> = ['inactive', 'inactive', 'inactive'];
+  sinUsuario = false;
 
   ngOnInit(): void {
     this.auth.onAuthStateChanged(async (user)=>{
       if(user){
         const usuario = await this.authService.getUsuarioIdPromise(user.uid);
         this.user = usuario.usuario;
+      }else{
+        this.sinUsuario = true;
       }
     })
   }
@@ -70,9 +77,19 @@ export class MenuLateralComponent implements OnInit{
   navegar(ruta: any[], event: Event){
     event.preventDefault();
     this.zone.run(()=>{
+      this.animarMenu();
       this.router.navigate(ruta);
       window.scroll(0,0)
     })
+  }
+
+  direccionarSeguridad(){
+    this.animarMenu();
+    this.perfilService.selected = 'seguridad';
+    this.router.navigate([this.user + '/perfil/informacion'])
+  }
+  singOut(){
+    this.authService.signOut();
   }
 
   animarMenu(): void {
@@ -84,7 +101,6 @@ export class MenuLateralComponent implements OnInit{
       }
     }
     this.state = this.state === 'inactive' ? 'active' : 'inactive';
-    
   }
 
   animarSubmenu(submenu: number): void {

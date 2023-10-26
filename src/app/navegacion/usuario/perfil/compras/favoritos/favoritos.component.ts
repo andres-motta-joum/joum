@@ -16,8 +16,9 @@ export class FavoritosComponent implements OnInit, OnDestroy{
   constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private authService: AuthService, private prdsService: ProductosService) {}
   private routeSubscription!: Subscription;
   private usuario!: Usuario;
-  favoritos: Producto[] = [];
+  favoritos!: Producto[];
   fotos: string[] = [];
+  datosCargados = false;
   
   ngOnInit() {
     this.routeSubscription = this.route.parent!.params.subscribe(params => {
@@ -27,24 +28,25 @@ export class FavoritosComponent implements OnInit, OnDestroy{
   }
 
   async obtenerusuario(usuario: string){
-    await this.authService.getUsuarioUser(usuario).then((usuario)=>{
-      if(usuario){
-        this.usuario = usuario
+    await this.authService.getUsuarioUser(usuario).then((user)=>{
+      if(user){
+        this.usuario = user;
+        this.obtenerProductos();
       }
     })
-    this.obtenerProductos();
   }
 
   async obtenerProductos() {
-    if (this.usuario?.favoritos) {
-      const productosRef = await Promise.all(this.usuario?.favoritos.map((ref:any) => getDoc(ref)));
-      productosRef.forEach(productSnapshot => {
-        const prd = productSnapshot.data() as Producto;
-        prd.id = productSnapshot.id;
-        this.favoritos.push(prd);
-      });
+    if (this.usuario.favoritos && this.usuario.favoritos.length !== 0) {
+      const favoritosSnapshot = await Promise.all(this.usuario?.favoritos.map((ref:any) => getDoc(ref)));
+      this.favoritos = favoritosSnapshot.map((favoritoSnapshot)=>{
+        const prd = favoritoSnapshot.data() as Producto;
+        prd.id = favoritoSnapshot.id;
+        return prd
+      })
       this.fotos = await this.prdsService.obtenerFotos(this.favoritos);
     }
+    this.datosCargados = true;
   }
 
   navegar(ruta: any[], event: Event){

@@ -1,4 +1,4 @@
-import { trigger, state, style } from '@angular/animations';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 export const AnimationMenu = [
     trigger('menu4', [
@@ -7,7 +7,13 @@ export const AnimationMenu = [
         })),
         state('inactive', style({
             left: '-250px',
-        }))
+        })),
+        transition('active => inactive', [
+            animate('.15s')
+        ]),
+        transition('inactive => active', [
+            animate('.45s') // Aquí se define el tiempo de la animación
+        ]),
     ]),
     trigger('submenu', [
         state('active', style({
@@ -16,8 +22,16 @@ export const AnimationMenu = [
             left: '0'
         })),
         state('inactive', style({
+            position: 'fixed',
             left: '-350px',
-        }))
+            top: '0',
+        })),
+        transition('active => inactive', [
+            animate('.35s')
+        ]),
+        transition('inactive => active', [
+            animate('.3s') // Aquí se define el tiempo de la animación
+        ]),
     ]),
     trigger('submenuULprincipal', [
         state('active', style({

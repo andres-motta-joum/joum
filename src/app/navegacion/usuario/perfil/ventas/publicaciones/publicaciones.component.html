@@ -1,18 +1,29 @@
-<h1>Publicaciones</h1>
-<div class="encabezado">
-    <p>{{publicaciones.length}} publicaciones</p>
-    <div>
-        <div>
-            <input type="text" placeholder="Buscar ">
-            <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+<div class="content">
+    <h1>Publicaciones</h1>
+    <section *ngIf="!datosCargados" class="cargando"><app-cargando></app-cargando></section>
+    <ng-container *ngIf="datosCargados">
+        <div class="encabezado">
+            <p *ngIf="publicaciones">{{publicaciones.length}}<span *ngIf="publicaciones.length !== 1"> publicaciones</span> <span *ngIf="publicaciones.length == 1"> publicación</span></p>
+            <p *ngIf="!publicaciones">0 publicaciones</p>
+            <div>
+                <div>
+                    <input type="text" placeholder="Buscar ">
+                    <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+                </div>
+                <div>
+                    <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+                    <select id="">
+                        <option value="">Todas</option>
+                        <option value="">compra tipo1</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div>
-            <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
-            <select id="">
-                <option value="">Todas</option>
-                <option value="">compra tipo1</option>
-            </select>
+        <app-publicacion [publicacion]="publicacion" [foto]="fotos[index]" *ngFor="let publicacion of publicaciones; let index = index"></app-publicacion>
+        <div class="sinPublicaciones" *ngIf="!publicaciones">
+            <img src="assets/img/logo/iconos/publications-empty.svg">
+            <p>No tienes publicaciones realizadas</p>
+            <a>Publicar un producto</a>
         </div>
-    </div>
+    </ng-container>
 </div>
-<app-publicacion [publicacion]="publicacion" [foto]="fotos[index]" *ngFor="let publicacion of publicaciones; let index = index"></app-publicacion>

@@ -1,72 +1,74 @@
-<h1>Resumen</h1>
+<div class="content">
+    <h1>Resumen</h1>
 
-<div class="contenedor">
-    <div (click)="navegar([usuario + '/reputacion'], $event)">
-        <div><h4>Reputación</h4> <p>Ver detalles ></p></div>
-        <div>
-            <div><img src="assets/img/logo/iconos/Mensajes-check.svg"> <p>Atención al cliente</p></div>
-            <div><img src="assets/img/logo/iconos/Envios-check.svg"> <p>Entrega de productos</p></div>
-            <div><img src="assets/img/logo/iconos/Envios-check.svg"> <p>Cancelación de ventas</p></div>
-        </div>
-    </div>
-    <div (click)="navegar([usuario + '/metricas/negocio'], $event)">
-        <div><h4>Métricas</h4> <p>Ultimas semanas ></p></div>
-        <div class="contenedor-metricas">
+    <div class="contenedor">
+        <div (click)="navegar([usuario + '/reputacion'], $event)">
+            <div><h4>Reputación</h4> <p>Ver detalles ></p></div>
             <div>
+                <div><img src="assets/img/logo/iconos/Mensajes-check.svg"> <p>Atención al cliente</p></div>
+                <div><img src="assets/img/logo/iconos/Envios-check.svg"> <p>Entrega de productos</p></div>
+                <div><img src="assets/img/logo/iconos/Envios-check.svg"> <p>Cancelación de ventas</p></div>
+            </div>
+        </div>
+        <div (click)="navegar([usuario + '/metricas/negocio'], $event)">
+            <div><h4>Métricas</h4> <p>Ultimas semanas ></p></div>
+            <div class="contenedor-metricas">
                 <div>
-                    <h5>60%</h5>
-                    <p>Ventas brutas</p>
-                    <p>$ 180.000</p>
+                    <div>
+                        <h5>60%</h5>
+                        <p>Ventas brutas</p>
+                        <p>$ 180.000</p>
+                    </div>
+                    <div class="grafica">
+                        <div class="barra" style="height: 40px;"></div>
+                        <div class="barra" style="height: 50px;"></div>
+                        <div class="barra" style="height: 80px; background: #FF9E57;"></div>
+                    </div>
                 </div>
-                <div class="grafica">
-                    <div class="barra" style="height: 40px;"></div>
-                    <div class="barra" style="height: 50px;"></div>
-                    <div class="barra" style="height: 80px; background: #FF9E57;"></div>
-                </div>
-            </div>
-            <div>
                 <div>
-                    <h5>60%</h5>
-                    <p>Ventas</p>
-                    <p>9</p>
-                </div>
-                <div class="grafica">
-                    <div class="barra" style="height: 40px;"></div>
-                    <div class="barra" style="height: 50px;"></div>
-                    <div class="barra" style="height: 80px; background: #58a1ff;"></div>
+                    <div>
+                        <h5>60%</h5>
+                        <p>Ventas</p>
+                        <p>9</p>
+                    </div>
+                    <div class="grafica">
+                        <div class="barra" style="height: 40px;"></div>
+                        <div class="barra" style="height: 50px;"></div>
+                        <div class="barra" style="height: 80px; background: #58a1ff;"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div (click)="navegar([usuario + '/tu-dinero'], $event)">
-        <h4>Tu dinero</h4>
-        <p>$ 1'605.000</p>
-        <button>Ver detalles</button>
-    </div>
-    <div (click)="navegar([usuario + '/novedades'], $event)">
-        <h4>Novedades</h4>
-        <div>
-            <p>Experimentamos problemas con las Métricas de competitividad desde el 9 al 20 de julio</p>
+        <div (click)="navegar([usuario + '/tu-dinero'], $event)">
+            <h4>Tu dinero</h4>
+            <p>$ 1'605.000</p>
+            <button>Ver detalles</button>
         </div>
-        <button>Ver novedades</button>
-    </div>
-    <div (click)="navegar([usuario + '/ventas'], $event)">
-        <h4>Ventas por preparar</h4>
-        <div>
-            <img src="assets/img/categoria/macetas/4.jpg">
+        <div (click)="navegar([usuario + '/novedades'], $event)">
+            <h4>Novedades</h4>
             <div>
-                <p>Venta: 4 de julio. 15:52 hs</p>
-                <p>Prepara tu producto y envíalo para antes del 10 de julio. </p>
+                <p>Experimentamos problemas con las Métricas de competitividad desde el 9 al 20 de julio</p>
             </div>
+            <button>Ver novedades</button>
         </div>
-        <button>Ver ventas</button>
-    </div>
-    <div (click)="navegar([usuario + '/publicaciones'], $event)">
-        <h4>Publicaciones</h4>
-        <div>
-            <p>1 activa</p>
-            <p>2 finalizadas</p>
+        <div (click)="navegar([usuario + '/ventas'], $event)">
+            <h4>Ventas por preparar</h4>
+            <div>
+                <img src="assets/img/categoria/macetas/4.jpg">
+                <div>
+                    <p>Venta: 4 de julio. 15:52 hs</p>
+                    <p>Prepara tu producto y envíalo para antes del 10 de julio. </p>
+                </div>
+            </div>
+            <button>Ver ventas</button>
         </div>
-        <button>Ver publicaciones</button>
+        <div (click)="navegar([usuario + '/publicaciones'], $event)">
+            <h4>Publicaciones</h4>
+            <div>
+                <p>1 activa</p>
+                <p>2 finalizadas</p>
+            </div>
+            <button>Ver publicaciones</button>
+        </div>
     </div>
 </div>

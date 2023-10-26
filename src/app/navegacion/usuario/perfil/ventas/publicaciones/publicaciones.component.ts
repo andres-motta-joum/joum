@@ -19,9 +19,10 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 export class PublicacionesComponent implements OnInit, OnDestroy{
   constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private authService: AuthService, private productosService: ProductosService) {}
   private routeSubscription!: Subscription;
-  public usuario!: Usuario;
-  public publicaciones: Producto[] = [];
+  usuario!: Usuario;
+  publicaciones!: Producto[];
   fotos: string[] = [];
+  datosCargados = false;
   
   ngOnInit() {
     this.routeSubscription = this.route.parent!.params.subscribe(params => {
@@ -33,22 +34,23 @@ export class PublicacionesComponent implements OnInit, OnDestroy{
   async obtenerusuario(usuario: string){
     await this.authService.getUsuarioUser(usuario).then((usuario)=>{
       if(usuario){
-        this.usuario = usuario
+        this.usuario = usuario;
+        this.obtenerProductos();
       }
     })
-    this.obtenerProductos();
   }
 
   async obtenerProductos() {
-    if (this.usuario?.publicaciones) {
-      const productosRef = await Promise.all(this.usuario?.publicaciones.map((ref:any) => getDoc(ref)));
-      productosRef.forEach(productSnapshot => {
-        const prd = productSnapshot.data() as Producto;
-        prd.id = productSnapshot.id;
-        this.publicaciones.push(prd);
-      });
+    if (this.usuario.publicaciones && this.usuario.publicaciones.length !== 0) {
+      const productosSnapshot = await Promise.all(this.usuario?.publicaciones.map((ref:any) => getDoc(ref)));
+      this.publicaciones = productosSnapshot.map((productoSnapshot)=>{
+        const prd = productoSnapshot.data() as Producto;
+        prd.id = productoSnapshot.id;
+        return prd
+      })
       this.fotos = await this.productosService.obtenerFotos(this.publicaciones);
     }
+    this.datosCargados = true;
   }
 
 

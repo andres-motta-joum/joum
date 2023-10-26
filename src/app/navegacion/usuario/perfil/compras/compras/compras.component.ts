@@ -19,53 +19,41 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 export class ComprasComponent implements OnInit, OnDestroy{
   constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private authService: AuthService) {}
   private routeSubscription!: Subscription | undefined;
-  private usuario!: Usuario | null;
+  private usuario!: Usuario;
   miUsuario!: string;
   fechas!: Date[];
-  compras!: Venta[]
-
-  porPreparar = 0;
-  enCamino = 0;
-  finalizadas = 0;
+  compras!: Venta[];
+  datosCargados = false;
 
   ngOnInit() {
     this.routeSubscription = this.route.parent?.params.subscribe(async (params) => {
       const userId = params['id'];
-      this.usuario = await this.authService.getUsuarioUser(userId);
-      this.miUsuario = this.usuario?.usuario!;
-      if(this.usuario){
-        this.obtenerDatos();
-      }else{
-        this.router.navigate(['']);
-      }
+      await this.authService.getUsuarioUser(userId).then((usuario)=>{
+        if(usuario){
+          this.usuario = usuario;
+          this.miUsuario = this.usuario.usuario!;
+          this.obtenerDatos();
+        }else{
+          this.router.navigate(['']);
+        }
+      })
     });
   }
 
   async obtenerDatos() {
-    this.compras = [];
-    this.fechas = [];
-    await this.obtenerCompras();
-    for (const compra of this.compras) {
-      const timestamp = compra.fechaVenta!;
-      let date = new Date(timestamp.seconds * 1000);
-      this.fechas.push(date);
-      if (!compra.entregado) {
-        this.porPreparar += !compra.enCamino ? 1 : 0;
-        this.enCamino += compra.enCamino ? 1 : 0;
-      } else {
-        this.finalizadas += 1;
+    if (this.usuario.compras && this.usuario.compras.length !== 0) {
+      this.fechas = [];
+      const comprasSnapshot = await Promise.all(this.usuario.compras.map( ref => getDoc(ref)));
+      this.compras = comprasSnapshot.map((productSnapshot)=>{
+        return productSnapshot.data() as Venta;
+      })
+      for (const compra of this.compras) {
+        const timestamp = compra.fechaVenta!;
+        let date = new Date(timestamp.seconds * 1000);
+        this.fechas.push(date);
       }
     }
-  }
-
-  async obtenerCompras() {
-    if (this.usuario?.compras) {
-      const compraRef = await Promise.all(this.usuario?.compras!.map( ref => getDoc(ref)));
-      compraRef.forEach(productSnapshot => {
-        const prd = productSnapshot.data() as Venta;
-        this.compras.push(prd);
-      });
-    }
+    this.datosCargados = true;
   }
 
   navegar(ruta: any[], event: Event){

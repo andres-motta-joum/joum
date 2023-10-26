@@ -1,37 +1,45 @@
-<h1>Ventas</h1>
-
-<div class="contenedor" *ngIf="ventas">
-    <div>
-        <div class="encabezado">
-            <p>{{ventas.length}} ventas</p>
-            <div>
+<div class="content">
+    <h1>Ventas</h1>
+    <section *ngIf="!datosCargados" class="cargando"><app-cargando></app-cargando></section>
+    <section class="contenedor" *ngIf="datosCargados">
+        <div>
+            <div class="encabezado">
+                <p *ngIf="ventas">{{ventas.length}} venta<span *ngIf="ventas.length !== 1">s</span></p>
+                <p *ngIf="!ventas">0 ventas</p>
                 <div>
-                    <input type="text" placeholder="Buscar ">
-                    <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
-                </div>
-                <div>
-                    <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
-                    <select id="">
-                        <option value="">Todas</option>
-                        <option value="">compra tipo1</option>
-                    </select>
+                    <div>
+                        <input type="text" placeholder="Buscar ">
+                        <ng-icon name="heroMagnifyingGlassMini"></ng-icon>
+                    </div>
+                    <div>
+                        <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+                        <select id="">
+                            <option value="">Todas</option>
+                            <option value="">compra tipo1</option>
+                        </select>
+                    </div>
                 </div>
             </div>
+            <app-venta [venta]="venta" [usuario]="usuario" [fecha]="fechas[i]" *ngFor="let venta of ventas; let i = index"></app-venta>
+            <div class="sinVentas" *ngIf="!ventas">
+                <img src="assets/img/logo/iconos/shopping-empty.svg">
+                <p>No tienes ventas realizadas</p>
+                <a>Publicar un producto</a>
+            </div>
         </div>
-        <app-venta [venta]="venta" [usuario]="usuario" [fecha]="fechas[i]" *ngFor="let venta of ventas; let i = index"></app-venta>
-    </div>
-    <div class="derecha">
-        <div>
-            <p>Por preparar</p>
-            <p>{{porPreparar}} venta</p>
+        <div class="derecha">
+            <div>
+                <p>Por preparar</p>
+                <p>{{porPreparar}} venta<span *ngIf="porPreparar !== 1">s</span></p>
+            </div>
+            <div>
+                <p>En camino</p>
+                <p>{{enCamino}} venta<span *ngIf="enCamino !== 1">s</span></p>
+            </div>
+            <div>
+                <p>Finalizadas</p>
+                <p>{{finalizadas}} venta<span *ngIf="finalizadas !== 1">s</span></p>
+            </div>
         </div>
-        <div>
-            <p>En camino</p>
-            <p>{{enCamino}} venta</p>
-        </div>
-        <div>
-            <p>Finalizadas</p>
-            <p>{{finalizadas}} venta</p>
-        </div>
-    </div>
+    </section>
 </div>

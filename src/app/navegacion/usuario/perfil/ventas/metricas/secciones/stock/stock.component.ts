@@ -46,8 +46,9 @@ export class StockComponent {
         }))
       }
       if(ventasRef){
-        this.obtenerVentas(ventasRef);
+        await this.obtenerVentas(ventasRef);
       }
+      this.obtenerPorcentajesReclamos();
     }
   }
 
@@ -61,7 +62,6 @@ export class StockComponent {
         })
       }
     });
-    this.obtenerPorcentajesReclamos();
   }
 
   obtenerPorcentajesReclamos(){

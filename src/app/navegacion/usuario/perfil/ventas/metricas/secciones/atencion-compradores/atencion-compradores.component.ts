@@ -90,6 +90,20 @@ export class AtencionCompradoresComponent {
       const ventasRef = usuario.ventas;
       if(ventasRef){
         this.obtenerVentas(ventasRef);
+      }else{
+        this.divicionesDespachosDemorados = [5,4,3,2,1,0];
+        this.porcentajesDespachosDemorados = [0,0,0,0,0,0,0];
+        this.despachosDemoradosHoy = 0;
+        this.divicionesDespachosDemoradosMensual = [5,4,3,2,1,0];
+        this.porcentajesDespachosDemoradosMensual = [0,0,0,0,0,0,0];
+        this.despachosDemoradosHoyMensual = 0;
+
+        this.reclamos = 0;
+        this.cancelaciones = 0;
+        this.devoluciones = 0;
+        this.reclamosMensual = 0;
+        this.cancelacionesMensual = 0;
+        this.devolucionesMensual = 0;
       }
     }
   }
