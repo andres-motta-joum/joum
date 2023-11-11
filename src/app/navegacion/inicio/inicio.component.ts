@@ -19,9 +19,9 @@ export class InicioComponent implements OnInit{
  //-----------------
 
   slider = [
-    'assets/img/anuncios/slider-uno.svg',
-    'assets/img/anuncios/slider-uno.svg',
-    'assets/img/anuncios/slider-uno.svg'
+    'assets/img/anuncios/joum.png',
+    'assets/img/anuncios/linio.png',
+    'assets/img/anuncios/mercado.png'
   ];
 
 

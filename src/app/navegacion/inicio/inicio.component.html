@@ -3,18 +3,12 @@
     <div id="contenidoTotal">
     <app-sub-menu></app-sub-menu>
     </div>
-    <app-slider [elements]="slider"></app-slider>
     <div id="contenidoTotal">
+        <app-slider [elements]="slider"></app-slider>
         <!-- CAROUSEL 1 -->
-        <br><br>
-        <app-carrusel [carousel]='1' [elements]="categorias">
-            <h3 class="titulos categoria">Categorías</h3>
-        </app-carrusel>
-        <br><br>
-        <div class="Linea"></div>
-
+        <app-categorias></app-categorias>
         <!-- CAROUSEL 2 -->
-        <br><br><br>
+        <br><br>
         <app-carrusel [carousel]='2' [elements]="productos">
             <h3 class="titulos categoria">Lo más destacado hoy</h3>
         </app-carrusel>

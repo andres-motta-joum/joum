@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class PasoUnoComponent implements OnInit{
   constructor(private pasos: PasosVenderService,private router: Router,private changeDetector: ChangeDetectorRef) {}
   boxes: string[] = ['check1', 'check2', 'check3', 'check4', 'check5', 'check6', 'check7', 'check8'];
-  images: string[] = [ 'assets/img/categoria/cuadros/22.jpg', 'assets/img/categoria/repisas/12.jpg', 'assets/img/categoria/iluminacion/6.jpg', 'assets/img/categoria/macetas/1.jpg', 'assets/img/categoria/relojes/14.jpg', 'assets/img/categoria/difusores/1.jpg', 'assets/img/categoria/vinilos/9.jpg', 'assets/img/categoria/adornos/19.jpg' ];
+  images: string[] = [ 'assets/img/categoria/iconos/cuadros.svg', 'assets/img/categoria/iconos/repisas.svg', 'assets/img/categoria/iconos/lamparas.svg', 'assets/img/categoria/iconos/macetas.svg', 'assets/img/categoria/iconos/relojes.svg', 'assets/img/categoria/iconos/difusores.svg', 'assets/img/categoria/iconos/vinilos.svg', 'assets/img/categoria/iconos/repisas.svg' ];
   titulos: string[] = [ 'Cuadros', 'Repisas', 'Iluminacion', 'Macetas', 'Relojes', 'Difusores', 'Vinilos', 'Adornos'];
 
   formValue!: string;

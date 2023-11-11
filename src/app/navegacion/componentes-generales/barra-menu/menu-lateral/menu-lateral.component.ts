@@ -13,6 +13,7 @@ import { heroNewspaper } from '@ng-icons/heroicons/outline';
 import { heroCheckBadge } from '@ng-icons/heroicons/outline';
 import { heroArrowUturnLeft } from '@ng-icons/heroicons/outline';
 import { heroUsers } from '@ng-icons/heroicons/outline';
+import { iconoirViewStructureUp } from '@ng-icons/iconoir';
 
 import { ionNotificationsOutline } from '@ng-icons/ionicons';
 import { heroCalendarDays } from '@ng-icons/heroicons/outline';
@@ -48,26 +49,34 @@ import { heroDocumentText } from '@ng-icons/heroicons/outline';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { InformacionPerfilService } from 'src/app/servicios/informacionPerfil/informacion-perfil.service';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-menu-lateral',
   templateUrl: './menu-lateral.component.html',
   styleUrls: ['./menu-lateral.component.scss'],
   animations: AnimationMenu,
-  providers: [provideIcons({heroBars3Solid, ionNotificationsOutline, heroTruck, heroUserCircleSolid,aspectsContactCard, heroArrowSmallLeft, ionClose, heroSquares2x2Solid, aspectsDeliver, heroNewspaper, heroCheckBadge, heroArrowUturnLeft, heroUsers, heroCalendarDays,/*-iconos- perfil*/ heroArrowSmallLeftMini, heroChevronRightMini, heroCheckCircle, heroQuestionMarkCircle, aspectsLineChart, heroLockClosed, heroFingerPrint, heroArrowRightOnRectangle, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes,heroCurrencyDollar, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText})]
+  providers: [provideIcons({iconoirViewStructureUp, heroBars3Solid, ionNotificationsOutline, heroTruck, heroUserCircleSolid,aspectsContactCard, heroArrowSmallLeft, ionClose, heroSquares2x2Solid, aspectsDeliver, heroNewspaper, heroCheckBadge, heroArrowUturnLeft, heroUsers, heroCalendarDays,/*-iconos- perfil*/ heroArrowSmallLeftMini, heroChevronRightMini, heroCheckCircle, heroQuestionMarkCircle, aspectsLineChart, heroLockClosed, heroFingerPrint, heroArrowRightOnRectangle, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes,heroCurrencyDollar, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText})]
 })
 export class MenuLateralComponent implements OnInit{
-  constructor(private auth: Auth, private authService: AuthService, private changeDetector: ChangeDetectorRef, private zone: NgZone, private router: Router, private perfilService: InformacionPerfilService){}
+  constructor(private auth: Auth, private authService: AuthService, private changeDetector: ChangeDetectorRef, private zone: NgZone, private router: Router, private perfilService: InformacionPerfilService, private firestore: Firestore){}
   user!: string;
+  idUsuario!: string;
   state = 'inactive';
   submenuState: Array<string> = ['inactive', 'inactive', 'inactive'];
   sinUsuario = false;
+  usuarioInterno = false;
 
   ngOnInit(): void {
     this.auth.onAuthStateChanged(async (user)=>{
       if(user){
         const usuario = await this.authService.getUsuarioIdPromise(user.uid);
         this.user = usuario.usuario;
+        this.idUsuario = usuario.id!;
+        const usuarioInternoSnapshot = await getDoc(doc(this.firestore, `usuarios-internos/${usuario.id}`));
+        if(usuarioInternoSnapshot.exists()){
+          this.usuarioInterno = true;
+        }
       }else{
         this.sinUsuario = true;
       }

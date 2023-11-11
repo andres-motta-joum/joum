@@ -1,0 +1,50 @@
+<ng-container *ngIf="datosCargados">
+    <section class="sinTickets">
+        <app-sin-tickets *ngIf="!tickets || tickets.length == 0" [texto]="'En este espacio verás todas los tickets que has realizado.'"></app-sin-tickets>
+    </section>
+    <section class="ticketsContent" *ngIf="tickets && tickets.length !== 0">
+        <div class="encabezado">
+            <h2>Tickets</h2>
+            <div>
+                <p>{{filtroTickets.length}} ticket<span *ngIf="filtroTickets.length !== 1">s</span></p>
+                <div>
+                    <ng-icon name="heroAdjustmentsHorizontal"></ng-icon>
+                    <select (change)="buscarTicketPorTipo($event)">
+                        <option value="" selected disabled class="placeholder">Tipo de pregunta | problema</option>
+                        <option value="Todos">Todos</option>
+                        <option value="Pregunta sobre el funcionamiento del sitio">Pregunta sobre el funcionamiento del sitio</option>
+                        <option value="Pregunta sobre productos o servicios">Pregunta sobre productos o servicios</option>
+                        <option value="Pregunta sobre políticas del sitio">Pregunta sobre políticas del sitio</option>
+                        <option value="Pregunta sobre pagos y facturación">Pregunta sobre pagos y facturación</option>
+                        <option value="Pregunta sobre la cuenta de usuario">Pregunta sobre la cuenta de usuario</option>
+                        <option value="Problema técnicos">Problema técnicos</option>
+                        <option value="Problema con productos o servicios">Problema con productos o servicios</option>
+                        <option value="Problema con cuenta de usuario">Problema con cuenta de usuario</option>
+                        <option value="Problema con pagos y facturación">Problema con pagos y facturación</option>
+                        <option value="Problema con el correo electrónico">Problema con el correo electrónico</option>
+                        <option value="Devoluciones">Devolución de producto</option>
+                        <option value="Consulta general">Otros</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="tickets">
+            <ng-container *ngFor="let ticket of filtroTickets; let index = index">
+                <div class="ticket" [ngClass]="{'finalizado': ticket.estado == 'Finalizado'}">
+                    <section>
+                        <p class="fecha">{{ticket.fecha}}</p>
+                        <h3>{{ticket.asunto}}</h3>
+                        <p>{{ticket.descripcion}}</p>
+                    </section>
+                    <ng-icon name="matDelete" class="eliminar" (click)="eliminarTicket(ticket, index)"></ng-icon>
+                    <ng-icon name="matEmail" class="verMensajes" (click)="navegar('atencion-cliente/ticket/' + ticket.id)"></ng-icon><span class="nuevoMensaje" *ngIf="ticket.respuesta && !ticket.respuesta.visto"></span>
+                    <p class="estado"><span></span>{{ticket.estado}}</p>
+                    <p class="tipo">{{ticket.tipo}}</p>
+                </div>
+            </ng-container>
+        </div>
+        <app-sin-tickets *ngIf="filtroTickets.length == 0" [texto]="'No hay tickets relacionados al filtro.'"></app-sin-tickets>
+    </section>
+</ng-container>
+
+<section *ngIf="!datosCargados" class="cargando"><app-cargando></app-cargando></section>

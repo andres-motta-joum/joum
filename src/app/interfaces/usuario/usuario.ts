@@ -8,6 +8,7 @@ import { AtencionCliente } from "./subInterfaces/atencion-cliente";
 import { DocumentData, DocumentReference } from "@angular/fire/firestore";
 import { Direccion } from "./subInterfaces/direccion";
 import { EmailsConfiguracion } from "./subInterfaces/emails-configuracion";
+import { Ticket } from "../ticket";
 
 export interface Usuario {
   //------------- perfil -------------- //
@@ -23,6 +24,8 @@ export interface Usuario {
   direcciones?: Direccion[],
   documento?: number,
   tipoDocumento?: string,
+  tickets?: DocumentReference<DocumentData>[],
+  reportes?: reportes,
   //------------------------------------------- 
   dinero: Dinero; 
   //-------------
@@ -51,8 +54,12 @@ export interface Usuario {
   guardados?: referenciaCompra[];
   historial?: DocumentReference<DocumentData>[];
   siguiendo?: string[];
-  
-  correoVerificado: boolean;
+
+}
+
+interface reportes {
+  atencionCliente?: number,
+  publicacion?: number
 }
 
 export interface porComprar{

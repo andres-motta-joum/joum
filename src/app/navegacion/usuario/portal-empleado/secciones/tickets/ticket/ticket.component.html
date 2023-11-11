@@ -1,0 +1,82 @@
+<div class="body">
+    <app-barra-menu></app-barra-menu>
+    <div class="contenido" *ngIf="ticket">
+        <h2>
+            <ng-icon name="iconoirMailOpened"></ng-icon>
+            <span *ngIf="!ticket.respuesta && tipoUsuario == 'usuario'">Pronto daremos respuesta a tu consulta</span>
+            <span *ngIf="ticket.respuesta && tipoUsuario == 'usuario'">Consulta atendida</span>
+            <span *ngIf="tipoUsuario == 'usuario-interno'">Usuario: <span class="idUsuario">{{ticket.idUsuario}}</span></span>
+        </h2>
+        <ng-icon class="reportar" name="heroExclamationCircle" *ngIf="!ticket.reportado && tipoUsuario == 'usuario-interno'" (click)="reporte()"></ng-icon>
+        <ng-icon class="reportado" name="heroExclamationCircleSolid" *ngIf="ticket.reportado && tipoUsuario == 'usuario-interno'" (click)="reporte()"></ng-icon>
+        <section class="ticket">
+            <h2>{{ticket.asunto}}</h2>
+            <p [innerHTML]="replaceNewlines(ticket.descripcion)"></p>
+        </section>
+
+        <section class="responder" *ngIf="!ticket.respuesta && tipoUsuario == 'usuario-interno'">
+            <div class="descripcion" contenteditable="true" (paste)="onPaste($event)" (input)="onInputChange($event)" (click)="focus()" [ngClass]="{'descripcionErr': descripcionError}" #texto>
+                <div *ngIf="descripcion == null || descripcion == '' " class="placeholder">Escribe la descripción detallada aquí...</div>
+            </div>
+            <p class="error" *ngIf="descripcionError">{{error}}</p>
+            <div class="fotosPorEnviar">
+                <div class="imagenFormulario" *ngFor="let foto of fotos; let index = index">
+                    <img [src]="foto">
+                    <ng-icon name="ionCloseCircleSharp" (click)="eliminarFoto(index)"></ng-icon>
+                    <div class="circulo"></div>
+                </div>
+            </div>
+            <button (click)="enviarRespuesta()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}" [disabled]="cargando">
+                <span *ngIf="!cargando">Enviar</span> 
+                <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+                <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+            </button>
+            <label for="addFoto"><ng-icon name="matImageOutline" class="agregarImagen"></ng-icon></label>
+            <input id="addFoto" type="file" accept="image/*" (change)="subirFoto($event)" style="display: none">
+        </section>
+
+        <section class="respuesta" *ngIf="ticket.respuesta">
+            <p [innerHTML]="replaceNewlines(ticket.respuesta.descripcion)"></p>
+            <div class="imagenes" *ngIf="ticket.respuesta.fotos">
+                <img [src]="foto" *ngFor="let foto of ticket.respuesta.fotos" (click)="verFoto(foto); $event.stopPropagation()">
+            </div>
+            <br><br>
+            <div class="encuesta" [ngClass]="{'opciones': seleccionarMotivo, 'check': check}" *ngIf="tipoUsuario == 'usuario'">
+                <ng-container *ngIf="!seleccionarMotivo && !check">
+                    <p>¿Te fue útil la información?</p>
+                    <div>
+                        <button (click)="si()">Si</button>
+                        <button (click)="no()">No</button>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="seleccionarMotivo && !check">
+                    <p>Cuéntanos por qué no te fue útil la información:</p>
+                    <div class="seleccionarMotivo">
+                        <section (click)="seleccionar('Solución no funciona')">
+                            <div class="input" [ngClass]="{'selected': seleccionado == 'Solución no funciona'}"><span></span></div>
+                            <p>La solución que propone no funciona.</p>
+                        </section>
+                        <section (click)="seleccionar('Información confusa')">
+                            <div class="input" [ngClass]="{'selected': seleccionado == 'Información confusa'}"><span></span></div>
+                            <p>La información es confusa.</p>
+                        </section>
+                        <section (click)="seleccionar('Otro motivo')">
+                            <div class="input" [ngClass]="{'selected': seleccionado == 'Otro motivo'}"><span></span></div>
+                            <p>Otro motivo.</p>
+                            <p></p>
+                        </section>
+                    </div>
+                    <button class="enviar" [ngClass]="{'enviarValid': seleccionado}" (click)="enviarEncuesta()">Enviar</button>
+                </ng-container>
+                <ng-container *ngIf="check">
+                    <h3>¡Gracias por tu opinión!</h3>
+                </ng-container>
+            </div>
+        </section>
+        <section *ngIf="fotoShow[1]" class="foto">
+            <div class="sombra"></div>
+            <img [src]="fotoShow[0]">
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>

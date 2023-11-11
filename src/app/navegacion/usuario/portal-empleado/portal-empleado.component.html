@@ -1,0 +1,41 @@
+<div class="body">
+    <app-barra-menu></app-barra-menu>
+    <div class="contenido">
+        <section class="header">
+            <section>
+                <h2>Portal de empleado</h2>
+            </section>
+            <section>
+                <div [ngClass]="{'seleccionado': seccion == 'tickets'}" (click)="navegar('portal-empleado/' + usuarioId + '/tickets')">
+                    <img src="assets/img/ayuda/iconos/preguntas-mis-datos.svg">
+                    <img [ngClass]="{ 'imagen-select': seccion == 'tickets'}" src="assets/img/ayuda/iconos/preguntas-mis-datos-color.svg">
+                    <p>Tickets</p>
+                    <span class="linea"></span>
+                </div>
+                <div [ngClass]="{'seleccionado': seccion == 'reportes'}" (click)="navegar('portal-empleado/' + usuarioId + '/reportes')">
+                    <img src="assets/img/ayuda/iconos/preguntas-ventas.svg">
+                    <img [ngClass]="{ 'imagen-select': seccion == 'reportes'}" src="assets/img/ayuda/iconos/preguntas-ventas-color.svg">
+                    <p>------</p>
+                    <span class="linea"></span>
+                </div>
+                <div [ngClass]="{'seleccionado': seccion == 'suspenciones'}" (click)="navegar('portal-empleado/' + usuarioId + '/suspenciones')">
+                    <img src="assets/img/ayuda/iconos/preguntas-mis-datos.svg">
+                    <img [ngClass]="{ 'imagen-select': seccion == 'suspenciones'}" src="assets/img/ayuda/iconos/preguntas-mis-datos-color.svg">
+                    <p>------</p>
+                    <span class="linea"></span>
+                </div>
+                <div [ngClass]="{'seleccionado': seccion == 'devoluciones'}" (click)="navegar('portal-empleado/' + usuarioId + '/devoluciones')">
+                    <img src="assets/img/ayuda/iconos/preguntas-generales.svg">
+                    <img [ngClass]="{ 'imagen-select': seccion == 'devoluciones'}" src="assets/img/ayuda/iconos/preguntas-generales-color.svg">
+                    <p>------</p>
+                </div>
+            </section>
+            <span class="left-line"></span>
+            <span class="right-line"></span>
+        </section>
+        <section>
+            <router-outlet></router-outlet>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>

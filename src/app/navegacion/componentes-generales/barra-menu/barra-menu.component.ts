@@ -1,9 +1,10 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef, NgZone, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 /*--------- Iconos ---------------*/
 import { provideIcons } from '@ng-icons/core';
+import { heroUserCircle } from '@ng-icons/heroicons/outline';
 import { ionNotificationsOutline } from '@ng-icons/ionicons';
 import { ionChevronDownOutline }from '@ng-icons/ionicons';
 import { heroBars3Solid } from '@ng-icons/heroicons/solid';
@@ -12,6 +13,7 @@ import { heroShoppingCartSolid } from '@ng-icons/heroicons/solid';
 import { matShoppingCart } from '@ng-icons/material-icons/baseline';
 import { heroMagnifyingGlassMini } from '@ng-icons/heroicons/mini';
 import { heroCurrencyDollarMini } from '@ng-icons/heroicons/mini';
+import { iconoirViewStructureUp } from '@ng-icons/iconoir';
 
 /*---- Componentes ----*/
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component'; 
@@ -36,7 +38,7 @@ import { heroArrowRightOnRectangle } from '@ng-icons/heroicons/outline';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 import { Auth, User } from '@angular/fire/auth';
-import { Firestore, doc, setDoc} from '@angular/fire/firestore'; 
+import { Firestore, doc, getDoc, setDoc} from '@angular/fire/firestore'; 
 import { Notificacion } from 'src/app/interfaces/usuario/subInterfaces/notificacion';
 import { InformacionPerfilService } from 'src/app/servicios/informacionPerfil/informacion-perfil.service';
 
@@ -44,7 +46,7 @@ import { InformacionPerfilService } from 'src/app/servicios/informacionPerfil/in
   selector: 'app-barra-menu',
   templateUrl: './barra-menu.component.html',
   styleUrls: ['./barra-menu.component.scss'],
-  viewProviders: [provideIcons({ heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle, ionNotificationsOutline, ionChevronDownOutline})]
+  viewProviders: [provideIcons({ heroUserCircle, heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, iconoirViewStructureUp,  heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle, ionNotificationsOutline, ionChevronDownOutline})]
 })
 export class BarraMenuComponent{
   constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private authService: AuthService, private auth: Auth, private firestore: Firestore, private perfilService: InformacionPerfilService){}
@@ -52,11 +54,13 @@ export class BarraMenuComponent{
   public scrollDisplay: Boolean = true;
   private routeSubscription!: Subscription;
   @ViewChild(MenuLateralComponent, {static: false})
-  menuLateral: MenuLateralComponent = new MenuLateralComponent(this.auth, this.authService, this.changeDetectorRef, this.zone,this.router, this.perfilService);
+  menuLateral: MenuLateralComponent = new MenuLateralComponent(this.auth, this.authService, this.changeDetectorRef, this.zone,this.router, this.perfilService, this.firestore);
 
+  usuarioInterno = false;
   usuario!: Usuario | null;
   nombre!: string;
   inUser!: boolean;
+  sign!: string;
 
   routeStateSubsCription!: Subscription;
   notificaciones!: Notificacion[];
@@ -72,12 +76,12 @@ export class BarraMenuComponent{
       this.decodificarURL();
     });
 
-    this.routeSubscription = this.authService.userState$.subscribe(user => {
-      if (user) {
+    this.auth.onAuthStateChanged(async (user)=>{
+      if(user){
         this.inUser = true;
-        this.obtenerUsuario()
+        this.obtenerUsuario();
       } else {this.inUser = false;}
-    });
+    })
   }
   //Mostrar notificaciones -------
   mouseIn(){
@@ -118,8 +122,14 @@ export class BarraMenuComponent{
   }
   //-------------------------
   obtenerUsuario(){
-    this.routeSubscription = this.authService.getUsuarioId(this.auth.currentUser?.uid!).subscribe(usuario =>{
+    this.routeSubscription = this.authService.getUsuarioId(this.auth.currentUser?.uid!).subscribe(async (usuario) =>{
       this.usuario = usuario;
+      const usuarioSnapshot = await getDoc(doc(this.firestore, `usuarios-internos/${usuario.id}`));
+      if(usuarioSnapshot.exists()){
+        this.usuarioInterno = true;
+      }else{
+        this.usuarioInterno = false;
+      }
       //--- nombre ----
       const palabras = this.usuario.nombre!.trim().split(' ');
       this.nombre = palabras.slice(0, 2).join(' ');
@@ -148,7 +158,63 @@ export class BarraMenuComponent{
   signOut(){
     this.authService.signOut();
   }
+  navegar(ruta: string): void{
+    if(ruta == 'ventas'){
+      if(this.inUser){
+        if(this.usuario){
+          this.router.navigate([this.usuario.usuario + '/ventas']);
+          window.scroll(0,0)
+        }
+      }else{
+        setTimeout(()=>{
+          this.sign = 'ventas';
+        }, 10)
+      }
+    } else if(ruta == 'historial'){
+      if(this.inUser){
+        if(this.usuario){
+          this.router.navigate([this.usuario.usuario + '/historial']);
+          window.scroll(0,0)
+        }
+      }else{
+        setTimeout(()=>{
+          this.sign = 'historial';
+        }, 10)
+      }
+    } else if(ruta == 'compras'){
+      if(this.inUser){
+        if(this.usuario){
+          this.router.navigate([this.usuario.usuario + '/compras']);
+          window.scroll(0,0)
+        }
+      }else{
+        setTimeout(()=>{
+          this.sign = 'compras';
+        }, 10)
+      }
+    } else if(ruta == 'favoritos'){
+      if(this.inUser){
+        if(this.usuario){
+          this.router.navigate([this.usuario.usuario + '/favoritos']);
+          window.scroll(0,0)
+        }
+      }else{
+        setTimeout(()=>{
+          this.sign = 'favoritos';
+        }, 10)
+      }
+    }  else{
+      this.router.navigate([ruta]);
+      window.scroll(0,0)
+    }
+  }
 
+  @HostListener('document:click')
+  closeSing() {
+    if(this.sign !== ''){
+      this.sign = '';
+    }
+  }
   //--------------------------------------------------  Funciones buscador ----------------------------------- //
   decodificarURL(){ // Saber el texto puesto en el Input
     const url = this.router.url;
@@ -157,13 +223,6 @@ export class BarraMenuComponent{
       if(segments[1] === 'busqueda'){
         this.ultimoDatoUrl = segments[segments.length - 1];
       }
-  }
-  navegar(ruta: any[], event: Event): void{
-    event.preventDefault();
-    this.zone.run(()=>{
-      this.router.navigate(ruta);
-      window.scroll(0,0)
-    })
   }
   buscar(busqueda: string){
     if(busqueda !== ''){
@@ -188,8 +247,17 @@ export class BarraMenuComponent{
   }
 
   direccionarDirecciones(){
-    this.perfilService.selected = 'direcciones';
-    this.router.navigate([this.usuario?.usuario + '/perfil/informacion'])
+    if(this.inUser){
+      if(this.usuario){
+        this.perfilService.selected = 'direcciones';
+        this.router.navigate([this.usuario?.usuario + '/perfil/informacion'])
+        window.scroll(0,0)
+      }
+    }else{
+      setTimeout(()=>{
+        this.sign = 'direcciones';
+      }, 10)
+    }
   }
 
 //---------------------------

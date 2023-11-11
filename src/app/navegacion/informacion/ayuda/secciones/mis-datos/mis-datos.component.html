@@ -1,0 +1,25 @@
+<h1>Acerca de mis datos</h1>
+<div class="datos">
+    <section> <!-- Parte izquierda -->
+        <div [ngClass]="{'selected': selected == 'cambiar-mis-datos'}" (click)="navegar('ayuda/mis-datos/cambiar-mis-datos')">
+            <h4>Cambiar mis datos</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+        <div [ngClass]="{'selected': selected == 'cambiar-contrasena'}" (click)="navegar('ayuda/mis-datos/cambiar-contrasena')">
+            <h4>Cambiar contraseña</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+        <div [ngClass]="{'selected': selected == 'seguridad'}" (click)="navegar('ayuda/mis-datos/seguridad')">
+            <h4>Seguridad</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+        <div [ngClass]="{'selected': selected == 'privacidad'}" (click)="navegar('privacidad')">
+            <h4>Privacidad</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+    </section>
+
+    <section >
+        <router-outlet></router-outlet>
+    </section>
+</div>

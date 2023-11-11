@@ -26,6 +26,7 @@ import { provideAuth,getAuth} from '@angular/fire/auth';
 import { provideFirestore, getFirestore} from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { FirebaseAppModule } from '@angular/fire/app';
+import { PortalEmpleadoModule } from './navegacion/usuario/portal-empleado/portal-empleado.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FirebaseAppModule } from '@angular/fire/app';
   ],
   imports: [
     InformacionModule,
+    PortalEmpleadoModule,
     BrowserModule,
     InicioModule,
     RegistroModule,

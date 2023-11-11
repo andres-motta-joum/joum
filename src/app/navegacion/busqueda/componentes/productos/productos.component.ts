@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { Storage, getDownloadURL, listAll, ref } from '@angular/fire/storage';
 import { Router } from '@angular/router';
-import { Producto } from 'src/app/interfaces/producto/producto';
+import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
 
 @Component({
   selector: 'app-productos',
@@ -9,26 +10,23 @@ import { Producto } from 'src/app/interfaces/producto/producto';
   styleUrls: ['./productos.component.scss']
 })
 export class ProductosComponent {
-  constructor( private router: Router, private storage: Storage){}
+  constructor( private firestore: Firestore, private storage: Storage){}
   @Input() listadoCuadradosInp!: boolean;
   @Input() listadoLineadoInp!: boolean;
   @Input() productos!: Producto[];
   fotos: string[] = [];
   public checkHeart = false;
 
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
     if (changes['productos'] && changes['productos'].currentValue) {
-      const productos = changes['productos'].currentValue;
-      let fotos = productos.map(async (producto:any) => {
-        const imgRef = ref(this.storage, `productos/${producto.id}/1:${producto.estilos[0].nombre}`);
-        const response = await listAll(imgRef);
-        return await getDownloadURL(response.items[0]);
-      });
-      
-      Promise.all(fotos)
-      .then(urls => {
-          this.fotos = urls;
-      });
+      const productos = changes['productos'].currentValue as Producto[];
+
+      this.fotos = await Promise.all(productos.map(async producto =>{
+        const estiloSnapshot = await getDoc(producto.estilos[0]);
+        const estilo = estiloSnapshot.data() as Estilo;
+        const fotoRef = ref(this.storage, `productos/${producto.id}/${estiloSnapshot.id}/${estilo.fotos[0].id}`);
+        return await getDownloadURL(fotoRef);
+      }))
     }
   }
 

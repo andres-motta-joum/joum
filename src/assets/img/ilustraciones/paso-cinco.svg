@@ -4,14 +4,14 @@
 <svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1917.45 1050.52" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <path d="M379.828 1009.22C24.2116 916.162-96.176 671.918 87.6856 501.26C275 327.397 556.016 520.834 770.141 531.263C896.531 537.419 1361.74 494.219 1453.02 478.944C1524.58 466.97 1705.77 351.276 1845.1 461.745C1962.79 555.059 1911.49 717.759 1847.83 768.009C1734.09 857.791 1626.33 843.77 1356.29 927.452C1175.4 983.507 906.656 1053.22 746.495 1051.42C646.021 1050.28 379.828 1009.22 379.828 1009.22Z" id="Fill"/>
-<path d="M799.295 562.4L799.295 654.624L1094.91 547.03L1096.24 607.775L1221.6 454.806L1094.91 393.323L1094.91 454.806L799.295 562.4Z" id="Fill_2"/>
+<path d="M789.625 577.634L789.625 660.646C789.625 664.234 792.358 666.148 795.73 664.921L1091.25 557.359C1094.63 556.132 1097.42 558.045 1097.5 561.632L1098.6 611.878C1098.68 615.465 1100.59 616.123 1102.86 613.348L1225.13 464.157C1227.4 461.382 1226.63 457.862 1223.4 456.295L1103.2 397.965C1099.98 396.398 1097.36 398.037 1097.36 401.625L1097.36 452.635C1097.36 456.223 1094.63 460.127 1091.25 461.354L795.73 568.916C792.358 570.143 789.625 574.046 789.625 577.634Z" id="Fill_2"/>
 </defs>
 <g id="Capa-1" vectornator:layerName="Capa 1"/>
 <clipPath id="ArtboardFrame">
 <rect height="1050.52" width="1917.45" x="0" y="0"/>
 </clipPath>
 <g clip-path="url(#ArtboardFrame)" id="Capa-3" vectornator:layerName="Capa 3">
-<use fill="#e5e4e4" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 1" xlink:href="#Fill"/>
+<use fill="#eeeeee" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 1" xlink:href="#Fill"/>
 <clipPath clip-rule="nonzero" id="ClipPath">
 <use xlink:href="#Fill"/>
 </clipPath>
@@ -42,12 +42,12 @@
 <path d="M1034.68 795.111C1037.02 801.238 1038.02 807.853 1038.02 807.853L1049.6 803.595C1047.83 797.953 1045.95 789.365 1045.95 789.365L1034.68 795.111Z" fill="#8c8c8c" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 17"/>
 <path d="M1482.22 447.296L1482.12 464.83L1525.99 450.047L1526 431.717L1482.22 447.296Z" fill="#dda075" fill-rule="nonzero" opacity="1" stroke="#7d7d7d" stroke-linecap="butt" stroke-linejoin="round" stroke-width="12.1434" vectornator:layerName="Curva 19"/>
 <g opacity="1" vectornator:layerName="Curva 20">
-<use fill="#fffaf6" fill-rule="nonzero" stroke="none" xlink:href="#Fill_2"/>
-<mask height="285.569" id="StrokeMask" maskUnits="userSpaceOnUse" width="446.573" x="787.161" y="381.189">
-<rect fill="#ffffff" height="285.569" stroke="none" width="446.573" x="787.161" y="381.189"/>
+<use fill="#f8f8f8" fill-rule="nonzero" stroke="none" xlink:href="#Fill_2"/>
+<mask height="287.619" id="StrokeMask" maskUnits="userSpaceOnUse" width="456.505" x="779.776" y="387.522">
+<rect fill="#ffffff" height="287.619" stroke="none" width="456.505" x="779.776" y="387.522"/>
 <use fill="#000000" fill-rule="evenodd" stroke="none" xlink:href="#Fill_2"/>
 </mask>
-<use fill="none" mask="url(#StrokeMask)" stroke="#7a7a7a" stroke-linecap="butt" stroke-linejoin="round" stroke-width="24.268" xlink:href="#Fill_2"/>
+<use fill="none" mask="url(#StrokeMask)" stroke="#7f7f7f" stroke-linecap="butt" stroke-linejoin="round" stroke-width="19.6973" xlink:href="#Fill_2"/>
 </g>
 <path d="M1480.08 270.108L1585.23 230.285C1598.54 225.432 1616.48 230.483 1625.3 241.566L1696.93 344.571L1482.41 416.656C1482.41 416.656 1479.52 271.227 1480.08 270.108Z" fill="#f8f3ef" fill-rule="nonzero" opacity="1" stroke="#7d7d7d" stroke-linecap="butt" stroke-linejoin="round" stroke-width="13.6944" vectornator:layerName="Curva 18"/>
 <path d="M505.362 320.291L505.021 536.034L504.522 851.337" fill="#fffaf6" fill-rule="nonzero" opacity="1" stroke="#7b7b7b" stroke-linecap="butt" stroke-linejoin="round" stroke-width="9.11972" vectornator:layerName="Curva 21"/>

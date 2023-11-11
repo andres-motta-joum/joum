@@ -33,11 +33,6 @@ export class PasosComponent {
       contenido: "Te daremos las instrucciones perfectas para que puedas guiarte y hacer un envío impecable. Ten en cuenta tomar fotos/videos cuando empeques el producto.",
       img: "assets/img/ilustraciones/paso-cinco.svg"
     },
-    {
-      titulo: "Recibe tu pago",
-      contenido: "Luego de que tu cliente reciba el pago, podrás ver tu saldo a liberar y tu dinero en total que podrás retirar. Al momento que tu cliente reciba el producto, recibirás el pago a en 5 días habiles.",
-      img: "assets/img/ilustraciones/paso-seis.svg"
-    },
   ];
 
 }

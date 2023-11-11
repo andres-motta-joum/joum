@@ -19,6 +19,7 @@ export class DatosPersonalesComponent implements OnInit{
   constructor(private fb: FormBuilder, private auth: Auth, private authService: AuthService){}
   @Output() mostrarContenido = new EventEmitter<string>(); 
   usuario!: Usuario;
+  correoVerificado!: boolean;
   subscription!: Subscription;
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class DatosPersonalesComponent implements OnInit{
       this.subscription = this.authService.getUsuarioId(this.auth.currentUser.uid).subscribe((usuario)=>{
         if(usuario){
           this.usuario = usuario;
+          this.correoVerificado = this.auth.currentUser!.emailVerified;
         }
       })
     }

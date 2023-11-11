@@ -5,23 +5,23 @@
       position: relative;
       display: flex;
       align-items: center;
-      height: 275px;
+      height: 370px;
       margin: 0 auto;
       max-width: 1400px;
       overflow: hidden;
 
-      $base-height: 240px;
-      $breakpoint: 1300px;
+      $base-height: 360px;
+      $breakpoint: 1520px;
 
       @media (max-width: #{$breakpoint}) {
-        height: 240px;
+        height: 360px;
       }
 
-      @for $i from 1 through 4 {
-        $breakpoint: $breakpoint - 100px;
+      @for $i from 1 through 13 {
+        $breakpoint: $breakpoint - 40px;
 
         @media (max-width: #{$breakpoint}) {
-          height: calc(#{$base-height} - #{$i * 15px});
+          height: calc(#{$base-height} - #{$i * 9.5px});
         }
       }
   
@@ -33,26 +33,26 @@
         transition: .4s ease-in-out;
         background-color: red;
         width: 400%;
-  
-        .slick {
+        padding: 0 1.5px;
+        .imagen {
           float: left;
           box-sizing: border-box;
           display: flex;
-  
+          
           img {
             position: absolute;
-            width: 25%;
+            top: 0;
+            width: calc(25% - 4px);
             object-fit: cover;
-            max-height: 265px;
-            border-radius: 7px 7px 0 0;
+            border-radius: 6px;
           }
         }
-        .slick:nth-child(2) {
+        .imagen:nth-child(2) {
           img {
             left: 25%;
           }
         }
-        .slick:nth-child(3) {
+        .imagen:nth-child(3) {
           img {
             left: 50%;
           }
@@ -62,7 +62,7 @@
   }
   
   .botones {
-    border-radius: 30px;
+    border-radius: 50%;
     background-color: #fff;
     position: absolute;
     z-index: 4;
@@ -83,23 +83,17 @@
   }
   
   .boton-prev, .boton-next {
-    width: 37px;
-    height: 38px;
     background: #fff;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    line-height: 45px;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 40%;
-    
+    border-radius: 50%;
     cursor: pointer;
     transition: .2s;
     ng-icon {
       color: #555;
       font-size: 25px;
+      margin-top: 16px;
     }
   }
   
