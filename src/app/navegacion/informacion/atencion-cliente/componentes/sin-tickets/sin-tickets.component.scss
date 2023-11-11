@@ -1,0 +1,35 @@
+.sinTickets{
+    position: relative;
+    width: 100%;
+    height: 160px;
+    box-shadow: 0 -0.1px 2.6px rgba(0,0,0,0.17), 0 3.1px 2.3px rgba(0,0,0,0.04);
+    border-radius: 8px;
+    background: #fbfbfb;
+    margin-bottom: 90px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+        width: 100px;
+    }
+    
+    section{
+        margin-left: 35px;
+        h3{
+            margin: 0;
+            font-size: 22px;
+            font-weight: 500;
+            color: #606060;
+            letter-spacing: .5px;
+        }
+        p{
+            font-size: 14px;
+            font-weight: 420;
+            line-height: 22px;
+            color: #777;
+            letter-spacing: .4px;
+            word-spacing: 1px;
+        }
+    }
+}

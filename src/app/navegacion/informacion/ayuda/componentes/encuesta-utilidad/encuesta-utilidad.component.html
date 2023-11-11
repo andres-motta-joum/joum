@@ -1,0 +1,36 @@
+<div class="encuesta" [ngClass]="{'opciones': seleccionarMotivo, 'check': check}">
+    <ng-container *ngIf="!seleccionarMotivo && !check">
+        <p>¿Te fue útil la información?</p>
+        <div>
+            <button (click)="si()">Si</button>
+            <button (click)="no()">No</button>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="seleccionarMotivo && !check">
+        <p>Cuéntanos por qué no te fue útil la información:</p>
+        <div class="seleccionarMotivo">
+            <section (click)="seleccionar('solucion-no-funciona')">
+                <div class="input" [ngClass]="{'selected': seleccionado == 'solucion-no-funciona'}"><span></span></div>
+                <p>La solución que propone no funciona.</p>
+            </section>
+            <section (click)="seleccionar('informacion-confusa')">
+                <div class="input" [ngClass]="{'selected': seleccionado == 'informacion-confusa'}"><span></span></div>
+                <p>La información es confusa.</p>
+            </section>
+            <section (click)="seleccionar('desacuerdo-con-la-politica')">
+                <div class="input" [ngClass]="{'selected': seleccionado == 'desacuerdo-con-la-politica'}"><span></span></div>
+                <p>No estoy de acuerdo con la política.</p>
+                <p></p>
+            </section>
+            <section (click)="seleccionar('otro-motivo')">
+                <div class="input" [ngClass]="{'selected': seleccionado == 'otro-motivo'}"><span></span></div>
+                <p>Otro motivo.</p>
+                <p></p>
+            </section>
+        </div>
+        <button class="enviar" [ngClass]="{'enviarValid': seleccionado}" (click)="enviarEncuesta()">Enviar</button>
+    </ng-container>
+    <ng-container *ngIf="check">
+        <h3>¡Gracias por tu opinión!</h3>
+    </ng-container>
+</div>

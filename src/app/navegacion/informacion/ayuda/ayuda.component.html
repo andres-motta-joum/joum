@@ -1,24 +1,43 @@
 <div class="body">
     <app-barra-menu></app-barra-menu>
     <div class="contenido">
-        <h1>Ayuda</h1>
-        <div class="secciones">
-            <div>
-                <img src="assets/img/logo/iconos/ayuda-cliente.svg">
-                <img src="assets/img/logo/iconos/ayuda-cliente-color.svg" class="color">
-                <p>Ayuda como comprador</p>
-            </div>
-            <div>
-                <img src="assets/img/logo/iconos/ayuda-vendedor.svg">
-                <img src="assets/img/logo/iconos/ayuda-vendedor-color.svg" class="color">
-                <p>Ayuda como vendedor</p>
-            </div>
-            <div>
-                <img src="assets/img/logo/iconos/ayuda-reportar.svg">
-                <img src="assets/img/logo/iconos/ayuda-reportar-color.svg" class="color">
-                <p>Hacer un reporte</p>
-            </div>
-        </div>
+        <h1>Centro de ayuda</h1>
+        <section class="header">
+            <section>
+                <h2>¿Tienes alguna otra consulta?</h2>
+                <button (click)="navegar('atencion-cliente')">Enviar consulta</button>
+            </section>
+            <section>
+                <div [ngClass]="{'seleccionado': categoria == 'compras'}" (click)="navegar('ayuda/compras')">
+                    <img src="assets/img/ayuda/iconos/preguntas-compras.svg">
+                    <img [ngClass]="{ 'imagen-select': categoria == 'compras'}" src="assets/img/ayuda/iconos/preguntas-compras-color.svg">
+                    <p>Compras</p>
+                    <span class="linea"></span>
+                </div>
+                <div [ngClass]="{'seleccionado': categoria == 'ventas'}" (click)="navegar('ayuda/ventas')">
+                    <img src="assets/img/ayuda/iconos/preguntas-ventas.svg">
+                    <img [ngClass]="{ 'imagen-select': categoria == 'ventas'}" src="assets/img/ayuda/iconos/preguntas-ventas-color.svg">
+                    <p>Ventas</p>
+                    <span class="linea"></span>
+                </div>
+                <div [ngClass]="{'seleccionado': categoria == 'mis-datos'}" (click)="navegar('ayuda/mis-datos')">
+                    <img src="assets/img/ayuda/iconos/preguntas-mis-datos.svg">
+                    <img [ngClass]="{ 'imagen-select': categoria == 'mis-datos'}" src="assets/img/ayuda/iconos/preguntas-mis-datos-color.svg">
+                    <p>Mis datos</p>
+                    <span class="linea"></span>
+                </div>
+                <div [ngClass]="{'seleccionado': categoria == 'general'}" (click)="navegar('ayuda/general')">
+                    <img src="assets/img/ayuda/iconos/preguntas-generales.svg">
+                    <img [ngClass]="{ 'imagen-select': categoria == 'general'}" src="assets/img/ayuda/iconos/preguntas-generales-color.svg">
+                    <p>General</p>
+                </div>
+            </section>
+            <span class="left-line"></span>
+            <span class="right-line"></span>
+        </section>
+        <section>
+            <router-outlet></router-outlet>
+        </section>
     </div>
     <app-footer></app-footer>
 </div>

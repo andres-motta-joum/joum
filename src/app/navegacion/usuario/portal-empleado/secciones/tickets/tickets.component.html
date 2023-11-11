@@ -1,0 +1,26 @@
+<ng-container *ngIf="datosCargados">
+    <section class="sinTickets" *ngIf="!tickets || tickets.length == 0">
+        <img src="assets/img/logo/iconos/nothing-found.svg">
+        <section>
+            <h3>Nada por aquí</h3>
+            <p>Los nuevos tickets aparecerán aquí</p>
+        </section>
+    </section>
+    <section class="ticketsContent" *ngIf="tickets && tickets.length !== 0">
+        <div class="tickets">
+            <ng-container *ngFor="let ticket of filtroTickets; let index = index">
+                <div class="ticket" [ngClass]="{'finalizado': ticket.estado == 'Finalizado'}">
+                    <section>
+                        <p class="fecha">{{ticket.fecha}}</p>
+                        <h3>{{ticket.asunto}}</h3>
+                        <p>{{ticket.descripcion}}</p>
+                    </section>
+                    <p class="tipo">{{ticket.tipo}}</p>
+                    <button (click)="navegar('portal-empleado/' + idUsuarioInterno + '/ticket/' + ticket.id)">Responder</button>
+                </div>
+            </ng-container>
+        </div>
+    </section>
+</ng-container>
+
+<section *ngIf="!datosCargados" class="cargando"><app-cargando></app-cargando></section>

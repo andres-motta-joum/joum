@@ -12,7 +12,6 @@ import { ProductosComponent } from './componentes/productos/productos.component'
 import { ProductoComponent } from './componentes/productos/producto/producto.component';
 import { CarritoModule } from './secciones/carrito/carrito.module';
 import { HistorialComponent } from './secciones/historial/historial.component';
-import { RecomendacionesComponent } from './secciones/recomendaciones/recomendaciones.component';
 
 import { ProductoHistorialComponent } from './secciones/historial/producto-historial/producto-historial.component';
 import { OfertasDelDiaComponent } from './secciones/ofertas-del-dia/ofertas-del-dia.component';
@@ -25,7 +24,6 @@ import { OfertasDelDiaComponent } from './secciones/ofertas-del-dia/ofertas-del-
     ProductosComponent,
     ProductoComponent,
     HistorialComponent,
-    RecomendacionesComponent,
     ProductoHistorialComponent,
     OfertasDelDiaComponent
   ],
@@ -39,8 +37,7 @@ import { OfertasDelDiaComponent } from './secciones/ofertas-del-dia/ofertas-del-
   exports:[
     ProductosComponent,
     ProductoComponent,
-    HistorialComponent,
-    RecomendacionesComponent
+    HistorialComponent
   ]
 })
 export class BusquedaModule { }

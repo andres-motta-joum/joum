@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { routes } from './informacion-routing.module';
 import { RouterModule } from '@angular/router';
+import { NgIconsModule } from '@ng-icons/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AtencionClienteComponent } from './atencion-cliente/atencion-cliente.component';
 import { AyudaComponent } from './ayuda/ayuda.component';
@@ -12,6 +14,12 @@ import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-co
 
 import { ComponentesGeneralesModule } from '../componentes-generales/componentes-generales.module';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
+import { TicketsComponent } from './atencion-cliente/componentes/tickets/tickets.component';
+import { AyudaComprasComponent } from './ayuda/secciones/compras/compras.component';
+import { AyudaVentasComponent } from './ayuda/secciones/ventas/ventas.component';
+import { AyudaMisDatosComponent } from './ayuda/secciones/mis-datos/mis-datos.component';
+import { AyudaGeneralComponent } from './ayuda/secciones/general/general.component';
+import { SinTicketsComponent } from './atencion-cliente/componentes/sin-tickets/sin-tickets.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +29,19 @@ import { NotificacionComponent } from './notificaciones/notificacion/notificacio
     PrivacidadComponent,
     QuienesSomosComponent,
     TerminosCondicionesComponent,
-    NotificacionComponent
+    NotificacionComponent,
+    TicketsComponent,
+    AyudaComprasComponent,
+    AyudaVentasComponent,
+    AyudaMisDatosComponent,
+    AyudaGeneralComponent,
+    SinTicketsComponent
   ],
   imports: [
+    NgIconsModule,
     CommonModule,
     ComponentesGeneralesModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })

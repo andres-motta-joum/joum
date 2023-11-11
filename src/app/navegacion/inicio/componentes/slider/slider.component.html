@@ -1,11 +1,10 @@
 <div class="Carousel">
-    <ng-content select='.categoria'></ng-content>
     <div #slickList Class="slick-list">
         <button (click)='Move(1)' Class="botones boton-prev">
             <ng-icon name="heroChevronLeftSolid"></ng-icon>
         </button>
         <div #track Class="slick-track">
-            <div *ngFor='let element of elements' class="slick">
+            <div *ngFor='let element of elements' class="imagen">
                 <img [src]='element' alt="Image">
             </div>
         </div>

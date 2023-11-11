@@ -1,7 +1,84 @@
 <div class="body">
     <app-barra-menu></app-barra-menu>
-    <div class="contenido">
-        <h1>Atención al cliente</h1>
+    <div class="content">
+        <section class="header">
+            <div class="informacion">
+                <div>
+                    <h1>Servicio al cliente de Joum</h1>
+                    <p>Estamos aquí para ayudarte con cualquier consulta o problema que puedas tener. Utiliza nuestro sistema de tickets para contactarnos y nos pondremos en contacto contigo lo más pronto posible. Tu satisfacción es nuestra prioridad. ¡Gracias por elegir Joum!</p>
+                    <button>Enviar pregunta <ng-icon name="heroArrowDownMini"></ng-icon> </button>
+                </div>
+                 <div>
+                    <img src="assets/img/logo/iconos/servicio-cliente.svg">
+                </div>
+            </div>
+        </section>
+        <section class="requisitos">
+            <div>
+                <section>
+                    <img src="assets/img/logo/iconos/in-user-check.svg" *ngIf="usuario !== undefined && usuario ">
+                    <img src="assets/img/logo/iconos/in-user-x.svg" *ngIf="usuario !== undefined && !usuario ">
+                    <h3>Usuario registrado</h3>
+                </section>
+                <section>
+                    <img src="assets/img/logo/iconos/email-verify-check.svg" *ngIf="correoVerificado !== undefined && correoVerificado ">
+                    <img src="assets/img/logo/iconos/email-verify-x.svg" *ngIf="correoVerificado !== undefined && !correoVerificado ">
+                    <h3>Correo verificado</h3>
+                </section>
+            </div>
+        </section>
+        <section class="formulario">
+            <form [formGroup]="form" (submit)="submit(texto)">
+                <h2>Consulta</h2>
+                <section>
+                    <input type="text" placeholder="Asunto" formControlName="asunto" [ngClass]="{'asuntoErr': asuntoError}">
+                    <select formControlName="tipo">
+                        <option value="" selected disabled class="placeholder">Tipo de pregunta | problema</option>
+                        <option value="Pregunta sobre el funcionamiento del sitio">Preguntas sobre el funcionamiento del sitio</option>
+                        <option value="Pregunta sobre productos o servicios">Preguntas sobre productos o servicios</option>
+                        <option value="Pregunta sobre políticas del sitio">Preguntas sobre políticas del sitio</option>
+                        <option value="Pregunta sobre pagos y facturación">Preguntas sobre pagos y facturación</option>
+                        <option value="Pregunta sobre la cuenta de usuario">Preguntas sobre la cuenta de usuario</option>
+                        <option value="Problema técnicos">Problemas técnicos</option>
+                        <option value="Problema con productos o servicios">Problemas con productos o servicios</option>
+                        <option value="Problema con cuenta de usuario">Problemas con la cuenta de usuario</option>
+                        <option value="Problema con pagos y facturación">Problemas con pagos y facturación</option>
+                        <option value="Problema con el correo electrónico">Problemas con el correo electrónico</option>
+                        <option value="Consulta general">Otro</option>
+                    </select>
+                    <p class="opcional">(opcional)</p>
+                </section>
+                <div class="descripcion" contenteditable="true" (paste)="onPaste($event)" (input)="onInputChange($event)" (click)="focus()" [ngClass]="{'descripcionErr': descripcionError}" #texto>
+                    <div *ngIf="descripcion == null || descripcion == '' " class="placeholder">Escribe la descripción detallada aquí...</div>
+                </div>
+                <p class="error" *ngIf="descripcionError">{{error}}</p>
+                <button type="submit" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}" [disabled]="cargando">
+                    <div class="sign" [ngClass]="{'visible': iniciaSesion || verificaCorreo || limiteTickets || reportado}" (click)="$event.stopPropagation()">
+                        <ng-container *ngIf="iniciaSesion">
+                            <section><ng-icon name="heroUserCircle"></ng-icon><p>Necesitas una cuenta.</p><button (click)="navegar('cuenta/iniciar-sesion')">Iniciar sesión</button></section>
+                            <span class="triangulo"></span><span class="sombra"></span>
+                        </ng-container>
+                        <ng-container *ngIf="verificaCorreo">
+                            <section><ng-icon name="iconoirMail"></ng-icon><p>Verifica tu correo electrónico.</p></section>
+                            <span class="triangulo"></span><span class="sombra"></span>
+                        </ng-container>
+                        <ng-container *ngIf="limiteTickets">
+                            <section><ng-icon name="iconoirSendMail"></ng-icon><p>Limite de tickets hoy.</p></section>
+                            <span class="triangulo"></span><span class="sombra"></span>
+                        </ng-container>
+                        <ng-container *ngIf="reportado">
+                            <section><ng-icon name="heroExclamationCircle"></ng-icon><p>Se ha bloqueado el envío de tickets.</p></section>
+                            <span class="triangulo"></span><span class="sombra"></span>
+                        </ng-container>
+                    </div>
+
+                    <span *ngIf="!cargando">Enviar</span> 
+                    <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+                    <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+                </button>
+            </form>
+        </section>
+        <app-tickets></app-tickets>
     </div>
     <app-footer></app-footer>
 </div>

@@ -1,14 +1,14 @@
 <div class="contenedor" *ngIf="usuario">
     <h2>Tus datos</h2>
 
-    <div *ngIf="!usuario.correoVerificado" (click)="editarContenido('correo')">
+    <div *ngIf="!correoVerificado" (click)="editarContenido('correo')">
         <div>
             <h4>Correo</h4>
             <p>{{usuario.correo}}</p>
         </div>
         <p class="edit"><span>Editar</span></p>
     </div>
-    <div *ngIf="usuario.correoVerificado">
+    <div *ngIf="correoVerificado">
         <div>
             <h4>Correo</h4>
             <p>{{usuario.correo}}</p>

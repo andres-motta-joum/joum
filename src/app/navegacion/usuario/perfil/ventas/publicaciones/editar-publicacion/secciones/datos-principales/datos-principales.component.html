@@ -23,7 +23,7 @@
 		</div>
 	
 		<div class="center-content">
-            <button class="botonInvalid" [disabled]="form.invalid || !submitValue || !cambios" type="submit" [ngClass]="{'success': actualizacionExitosa, 'botonValid': submitValue && cambios}">
+            <button class="botonInvalid" [disabled]="!submitValue || !cambios" type="submit" [ngClass]="{'success': actualizacionExitosa, 'botonValid': submitValue && cambios}">
                 <span *ngIf="!actualizacionExitosa">Actualizar</span> 
                 <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
             </button>

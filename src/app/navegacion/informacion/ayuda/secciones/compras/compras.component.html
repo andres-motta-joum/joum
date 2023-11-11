@@ -1,0 +1,32 @@
+<h1>Acerca de compras</h1>
+<div class="datos">
+    <section> <!-- Parte izquierda -->
+        <div [ngClass]="{'selected': selected == 'compra-segura'}" (click)="navegar('ayuda/compras/compra-segura')">
+            <h4>Compra segura</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+        <div [ngClass]="{'selected': selected == 'pasos-compra'}" (click)="navegar('ayuda/compras/pasos-compra')">
+            <h4>Pasos de compra</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+        <div [ngClass]="{'selected': selected == 'devoluciones'}" (click)="navegar('ayuda/compras/devoluciones')">
+            <h4>Devoluciones</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+        <div [ngClass]="{'selected': selected == 'cancelaciones'}" (click)="navegar('ayuda/compras/cancelaciones')">
+            <h4>Cancelaciones</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+        <div [ngClass]="{'selected': selected == 'envios'}" (click)="navegar('ayuda/compras/envios')">
+            <h4>Envios</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+        <div [ngClass]="{'selected': selected == 'opiniones'}" (click)="navegar('ayuda/compras/opiniones')">
+            <h4>Opiniones</h4>
+            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
+        </div>
+    </section>
+    <section >
+        <router-outlet></router-outlet>
+    </section>
+</div>

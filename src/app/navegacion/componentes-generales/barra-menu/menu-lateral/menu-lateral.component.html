@@ -42,6 +42,7 @@
             <li style="margin-bottom: 40px;"><a (click)="navegar(['busqeuda/repisas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Cuadros</a></li>
           </ul>
         </li>
+        <li *ngIf="usuarioInterno"><a (click)="navegar(['portal-empleado/' + idUsuario],$event)"><ng-icon class="menu-icon" name="iconoirViewStructureUp"></ng-icon>Portal de empleado</a></li>
         <li><a (click)="navegar([user + '/notificaciones'],$event)"><ng-icon class="menu-icon" name="ionNotificationsOutline"></ng-icon>Notificaciones</a></li>
         <li><a (click)="navegar([user + '/carrito'],$event)"><ng-icon class="menu-icon" name="heroShoppingCart"></ng-icon>Carrito</a></li>
         <li><a (click)="navegar([user + '/compras'],$event)"><ng-icon class="menu-icon" name="heroTruck"></ng-icon>Pedidos</a></li>

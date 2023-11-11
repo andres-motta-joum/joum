@@ -41,9 +41,6 @@ export class CarruselComponent {
   }
 
   ngOnInit(): void {
-    if (this.carousel === 1){
-        this.slickWidth = 200;
-    }else
     if (this.carousel === 2){
         this.slickWidth = 250;
     }else

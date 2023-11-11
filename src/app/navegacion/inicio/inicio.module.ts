@@ -7,13 +7,17 @@ import { ComponentesGeneralesModule } from '../componentes-generales/componentes
 import { SubMenuComponent } from './componentes/sub-menu/sub-menu.component';
 import { CarruselComponent } from './componentes/carrusel/carrusel.component';
 import { SliderComponent } from './componentes/slider/slider.component';
+import { CategoriasComponent } from './componentes/categorias/categorias.component';
+import { MetodosPagoComponent } from './componentes/metodos-pago/metodos-pago.component';
 
 @NgModule({
   declarations: [
     InicioComponent,
     SubMenuComponent,
     CarruselComponent,
-    SliderComponent
+    SliderComponent,
+    CategoriasComponent,
+    MetodosPagoComponent
   ],
   imports: [
     CommonModule,

@@ -10,19 +10,23 @@
   .body {
 	position: relative;
 	min-height: 100vh;
+	min-width: 940px;
 	padding-bottom: 430px;
-	min-width: 870px;
 	overflow: hidden;
-	background-color: #fafafa;
+	background-color: #f9f9f9;
   }
   
   #contenidoTotal {
 	width: 1400px;
 	margin: auto;
   
-	@media screen and (max-width: 1450px) {
+	@media screen and (max-width: 1550px) {
 	  width: 90%;
 	  margin: auto;
+	}
+	@media screen and (max-width: 1000px) {
+		width: 900px;
+		margin: auto;
 	}
   }
   

@@ -1,6 +1,4 @@
 <div class="contenidoTotal">
-
-    <h1>Que tienes que hacer?</h1>
     <div *ngFor='let paso of pasos; index as i;' [ngClass]='{"pasos2": i % 2 === 0, "pasos1": i % 2 !== 0}'>
         <div [ngClass]="i % 2 === 0 ? 'izquierda' : 'derecha'">
             <div *ngIf='i % 2 === 0'>

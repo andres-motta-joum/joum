@@ -34,6 +34,15 @@ export class AuthService {
     );
   }
 
+  getUsuarioInternoId(id: string): Observable<Usuario>{
+    const documentoUsuario = doc(this.firestore, 'usuarios-internos', id);
+    return docData(documentoUsuario).pipe(
+      map(usuario => {
+        return { ...usuario, id: id } as Usuario;
+      })
+    );
+  }
+
   async getUsuarioIdPromise(id: string): Promise<Usuario>{
     const usuarioRef = doc(this.firestore, 'usuarios', id);
     const snapshot = await getDoc(usuarioRef);
@@ -107,7 +116,6 @@ export class AuthService {
       correo: currentUser?.email!,
       seguidores: 0,
       registroHistorial: true,
-      correoVerificado: currentUser?.emailVerified,
       dinero: { disponible: 0, aLiberar: 0, },
       notificacionesRecibidas: { ofertasDecuentos: true, ventas: true, publicaciones: true, reclamos: true, mensajes: true},
       emailsRecibidos: { ofertas: true, mensajes: true, opiniones: true, ventas: true, publicacionesPorFinalizar: true, publicacionesFinalizadas: true, compras: true},
