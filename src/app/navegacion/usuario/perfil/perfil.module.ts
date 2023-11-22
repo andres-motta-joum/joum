@@ -19,7 +19,6 @@ import { MetricasModule } from './ventas/metricas/metricas.module';
 import { NovedadesComponent } from './ventas/novedades/novedades.component';
 import { PublicacionesComponent } from './ventas/publicaciones/publicaciones.component';
 import { ReputacionComponent } from './ventas/reputacion/reputacion.component';
-import { ResumenComponent } from './ventas/resumen/resumen.component';
 import { VentasModule } from './ventas/ventas/ventas.module';
 /*-- Facturación --*/
 import { FacturacionModule } from './facturacion/facturacion.module';
@@ -46,7 +45,6 @@ import { EditarPublicacionModule } from './ventas/publicaciones/editar-publicaci
     NovedadesComponent,
     PublicacionesComponent,
     ReputacionComponent,
-    ResumenComponent,
     PublicacionComponent,
     CompraComponent,
     FavoritoComponent,

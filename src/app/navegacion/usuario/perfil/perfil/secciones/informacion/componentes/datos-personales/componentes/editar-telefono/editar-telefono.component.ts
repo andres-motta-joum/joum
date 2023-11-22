@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { Auth, GoogleAuthProvider, PhoneAuthProvider, RecaptchaVerifier, fetchSignInMethodsForEmail, getAuth, reauthenticateWithPopup, sendEmailVerification, signInWithEmailAndPassword, signInWithPhoneNumber, updateEmail, updatePhoneNumber } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, PhoneAuthProvider, RecaptchaVerifier, getAuth, reauthenticateWithPopup, signInWithEmailAndPassword, signInWithPhoneNumber, updateEmail, updatePhoneNumber } from '@angular/fire/auth';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { provideIcons } from '@ng-icons/core';
 import { ionClose } from '@ng-icons/ionicons';

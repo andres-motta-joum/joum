@@ -23,6 +23,7 @@ import { DocumentData, DocumentReference, Firestore, Timestamp, arrayUnion, doc,
   styleUrls: ['./producto.component.scss'],
   providers: [provideIcons({heroHeart, heroHeartSolid,matAddShoppingCart,matShoppingCart, heroChevronLeftSolid, heroChevronRightSolid})]
 })
+
 export class ProductoComponent implements OnInit{
   constructor(private route: ActivatedRoute,private cd: ChangeDetectorRef, private authService: AuthService, private router: Router, private prdService: ProductosService, private comprarService: ComprarService, private auth: Auth, private firestore: Firestore) {}
   private routerSubscription!: Subscription;

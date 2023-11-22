@@ -1,0 +1,63 @@
+<div class="body" (mousemove)="onMouseMove($event)">
+    <section class="apoyo">
+        <section>
+            <h2>Contribuciones</h2>
+            <p>Como una nueva plataforma, Joum agradece profundamente el apoyo de su comunidad. Cada gesto de ayuda nos impulsa hacia adelante.</p>
+            <div class="circulo"></div><div class="circuloDos"></div>
+        </section>
+        <section>
+            <div>
+                <h3>Referir</h3>
+                <p>Ayúdanos a crecer compartiendo Joum con tus amigos y familiares. Cada recomendación nos acerca a más personas.</p>
+            </div>
+            <div>
+                <h3>Sugerencias</h3>
+                <p>Nos encantaría escuchar tus ideas y sugerencias. Tu feedback puede ayudarnos a hacer de Joum una plataforma aún mejor para todos.</p>
+                <button (click)="enviarSugerencia = true; $event.stopPropagation()">Enviar</button>
+            </div>
+            <div>
+                <h3>Económico</h3>
+                <p>Cada contribución económica nos permite seguir mejorando Joum, creando una experiencia más rica y gratificante para nuestra creciente comunidad.</p>
+                <button (click)="enviarApoyo = true; $event.stopPropagation()">Enviar</button>
+            </div>
+        </section>
+    </section>
+    <section class="economico" *ngIf="enviarApoyo" (click)="$event.stopPropagation()">
+        <ng-icon class="salir" name="heroXMark" (click)="cerrarVentanas()"></ng-icon>
+        <h2>Contribución económica</h2>
+        <p>Cualquier contribución ayudará a Joum crecer y llegar a más personas.</p>
+        <h3>COP {{precio | customNumber}}</h3>
+        <div class="contenido-barra">
+            <div class="barra">
+                <div class="contenedor-color" [style]="'width: ' + porcentajeSeleccionado"></div>
+            </div>
+            <div class="circulo-barra" >
+                <div class="circulo" [style]="'left: calc('+ porcentajeSeleccionado +' - 6px);'" [ngClass]="{'con-click': mouseDown}"></div>
+            </div>
+            <div class="contenedor-puntos">
+                <div #puntos class="puntos" (mousedown)="mouseDown = true" (mouseup)="mouseDown = false" >
+                    <div *ngFor="let porcentaje of cantidades; let index = index" 
+                        (mouseover)="mouseDown && cambiar(porcentaje, index)"
+                        (mousedown)="cambiar(porcentaje, index)"
+                        [ngClass]="{'cubierto': index <= indexSeleccionado}">
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <button (click)="donar()" [ngClass]="{'cargando': cargando}">
+            <span class="loading" *ngIf="cargando"></span>
+            <span class="fondo" *ngIf="!cargando"></span>
+            <p *ngIf="!cargando">Enviar</p>
+        </button>
+    </section>
+    <section class="sugerencias" *ngIf="enviarSugerencia" (click)="$event.stopPropagation()">
+        <ng-icon class="salir" name="heroXMark" (click)="cerrarVentanas()"></ng-icon>
+        <app-sugerencias (cerrar)="cerrarVentanas()"></app-sugerencias>
+    </section>
+    <section class="success" *ngIf="success" (click)="$event.stopPropagation()">
+        <ng-icon class="salir" name="heroXMark" (click)="cerrarVentanas()"></ng-icon>
+        <app-success (cerrar)="cerrarVentanas()"></app-success>
+    </section>
+    <div class="sombra" *ngIf="enviarApoyo || enviarSugerencia || success"></div>
+
+</div>

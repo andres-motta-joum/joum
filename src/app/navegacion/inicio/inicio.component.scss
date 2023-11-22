@@ -108,31 +108,39 @@
 	}
   }
   
-  .wave {
-	h2 {
-	  color: #555;
-	  font-size: 30px;
-	  margin-top: -80px;
-	  margin-left: 36%;
-	  font-weight: 500;
-	  font-size: 25px;
-  
-	  a button {
-		margin-top: 0;
-		margin-left: 20px;
-		border: none;
-		background: #ff9e57;
-		padding: 6px 24px;
-		border-radius: 6px;
-		transition: 0.3s;
-		color: #444;
-		font-size: 18px;
-		font-weight: 500;
-		cursor: pointer;
-  
-		&:hover {
-		  background: #fff;
+  .wave{
+	position: relative;
+	.text{
+		display: flex;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		top: 170px;
+		z-index: 100;
+		h2 {
+			margin: 0;
+			margin-top: 3px;
+			color: #555;
+			font-weight: 480;
+			font-size: 23px;
+			letter-spacing: .5px;
 		}
-	  }
+		button {
+			margin-left: 20px;
+			width: 100px;
+			height: 36px;
+			border: none;
+			background: #ff9e57;
+			border-radius: 6px;
+			color: #fff;
+			font-size: 16px;
+			font-weight: 500;
+			letter-spacing: .8px;
+			cursor: pointer;
+			&:hover {
+				background: #fff;
+				color: #ff9e57;
+			}
+		}
 	}
   }

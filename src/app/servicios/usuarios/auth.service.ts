@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, User, authState, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signInWithRedirect, updateProfile, RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult, getRedirectResult, getAdditionalUserInfo, signInWithCredential, PhoneAuthProvider} from '@angular/fire/auth';
+import { Auth, FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, User, authState, sendEmailVerification, signInWithEmailAndPassword, signInWithRedirect, updateProfile, RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult, getRedirectResult, getAdditionalUserInfo, signInWithCredential, PhoneAuthProvider} from '@angular/fire/auth';
 import { Firestore, arrayUnion, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { DataSharingService } from './data-sharing.service';
@@ -18,6 +18,7 @@ export class AuthService {
   private readonly googleProvider = new GoogleAuthProvider();
   private readonly facebookProvider = new FacebookAuthProvider();
   private readonly twitterProvider = new TwitterAuthProvider();
+  usuarioNuevo = false;
 
   get userState$(){
     return authState(this.auth);
@@ -63,6 +64,7 @@ export class AuthService {
       return null
     }
   }
+  //-------------- VERIFICAR EXISTENTE -----
   
   async getTelefonoExistente(telefono: string){
     const queri = query(collection(this.firestore, 'usuarios'), where('telefono', '==', telefono));
@@ -89,6 +91,17 @@ export class AuthService {
   get getUsuarios$(): Observable<Usuario[]>{
     const collectionUsuarios = collection(this.firestore, 'usuarios');
     return collectionData(collectionUsuarios, {idField: 'id'}) as Observable<Usuario[]>;
+  }
+
+  async getCorreoExistente(correo: string){
+    const queri = query(collection(this.firestore, 'usuarios'), where('correo', '==', correo));
+    const querySnapshot = await getDocs(queri);
+    const doc = querySnapshot.docs[0];
+    if(doc){
+      return true
+    }else{
+      return false
+    }
   }
 
   // --------------------------------------- AUTH ------------------------------------------- 

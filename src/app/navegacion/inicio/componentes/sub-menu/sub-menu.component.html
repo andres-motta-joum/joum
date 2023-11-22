@@ -3,7 +3,7 @@
         <ul>
             <div class="ContenidoMenu3">
                 <li (click)="navegar('vender')"><img src="assets/img/logo/iconos/store-icon.svg"><p>Empieza a vender en joum</p> </li>
-                <li (click)="navegar(''); mediosPago = !mediosPago; $event.stopPropagation()"><img src="assets/img/logo/iconos/card-icon.svg"><p>Medios de pago</p> </li>
+                <li (click)="metodosPago()"><img src="assets/img/logo/iconos/card-icon.svg"><p>Medios de pago</p> </li>
                 <li (click)="navegar('quienes-somos')"><img src="assets/img/logo/logo-icon.svg"><p>Sobre Joum</p></li>
                 <li (click)="navegar('favoritos')">
                     <div class="sign" [ngClass]="{'visible': sign}" (click)="$event.stopPropagation()">
@@ -16,4 +16,3 @@
         </ul>
     </nav>
 </div>
-<app-metodos-pago [visible]="mediosPago" (cerrar)="mediosPago = false"></app-metodos-pago>

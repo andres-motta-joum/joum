@@ -7,7 +7,7 @@ const ErrorMessages: ErrorMessage = {
     patternEmail: 'El correo debe ser válido',
     patternPassword: 'La contraseña no cumple con los requisitos mínimos de seguridad',
     minlength: 'Este campo debe tener 6 o más carácteres',
-    maxlength: 'Este campo debe tener 20 o menos carácteres'
+    maxlength: 'Este campo debe tener 25 o menos carácteres'
 };
 
 export function validatorErrorMessage(validatorName: string): string {

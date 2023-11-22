@@ -14,19 +14,14 @@
     <ng-container *ngIf="producto">
         <div class="contenidoTotalProducto">
             <div class="encabezado">
-                <div class="seccion1">
-                    <p>Volver al listado</p>
-                </div>
-                <div class="seccion2" style="display: flex;">
-                    <p>Compartir</p>
-                </div>
+                <app-encabezado-navegador *ngIf="producto" [producto]="producto"></app-encabezado-navegador>
             </div>
             <div class="seccioIzquierda">
                 <ng-icon class="corazon" name="heroHeart" (click)="editarFavorito()"></ng-icon>
                 <ng-icon class="corazon-full" name="heroHeartSolid" [class.corazon-click] = "enFavoritos == true"></ng-icon>
     
-                <ng-icon class="carrito" name="matAddShoppingCart" [class.carrito-click-over] = "enCarrito == true" (click)="editarCarrito()"></ng-icon>
-                <ng-icon class="carrito-full" name="matShoppingCart" [class.carrito-click] = "enCarrito == true"></ng-icon>
+                <ng-icon class="carrito" name="matAddShoppingCart" [class.carrito-click-over] = "enCarrito == true" (click)="editarCarrito()" *ngIf="!productoPropio"></ng-icon>
+                <ng-icon class="carrito-full" name="matShoppingCart" [class.carrito-click] = "enCarrito == true" *ngIf="!productoPropio"></ng-icon>
     
                 <app-fotos-producto *ngIf="fotos" [fotos]="fotos" [estiloSelec]="estiloSelec" [sombraPadre]="sombraBool" [indexPadre]="indexFoto" (sombraHijo)="nuevoDatoHijoSombra($event)" (fotoIndex)="nuevoIndex($event)" ></app-fotos-producto>
                 <div class="linea-Menu"></div>

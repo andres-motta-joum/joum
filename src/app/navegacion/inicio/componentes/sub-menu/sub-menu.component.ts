@@ -30,6 +30,10 @@ export class SubMenuComponent implements OnInit{
       }
     })
   }
+  metodosPago(){
+    this.router.navigate(['quienes-somos']);
+    window.scroll(0,690);
+  }
   navegar(ruta: string){
     if(ruta == 'favoritos'){
       if(this.usuario){

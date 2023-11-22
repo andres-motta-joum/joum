@@ -1,0 +1,28 @@
+<section class="sombra">
+    <section class="recuadro" (click)="$event.stopPropagation()">
+        <ng-icon class="salir" name="heroXMark" (click)="cerrarVentana()"></ng-icon>
+        <h2>Bienvenido {{nombre}}!</h2>
+        <h3>Ultimos pasos</h3>
+        <ul>
+            <li>Hemos enviado un enlace de confirmación para verificar tu correo electrónico.<button (click)="enviarCorreo()" [ngClass]="{'reenviado': reenviado}"><span *ngIf="!reenviado">Reenviar</span><span *ngIf="reenviado">Reenviado</span></button></li>
+            <div class="linea"></div>
+            <li><label for="documento">Agrega tu documento de identidad.</label></li>
+        </ul>
+        <div class="formulario">
+            <select class="select" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}" [(ngModel)]="tipoDocumento">
+                <option value="CC">CC</option>
+                <option value="CE">CE</option>
+            </select>
+            <ng-icon class="down" name="ionChevronDown"></ng-icon>
+            <input type="number" id="email" (click)="error = ''" [ngClass]="{'errorInput': error !== ''}" [(ngModel)]="documento" maxlength="10">
+        </div>
+        <p class="error" *ngIf="error !== ''">{{error}}</p>
+        <button [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}" (click)="enviarDocumento()" class="agregar">
+            <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+            <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+            <span class="fondo" *ngIf="!cargando"></span>
+            <p *ngIf="!cargando">Agregar</p>
+        </button> 
+        <button class="omitir" (click)="cerrarVentana()">Omitir</button>
+    </section>
+</section>

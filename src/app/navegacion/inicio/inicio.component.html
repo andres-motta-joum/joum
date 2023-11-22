@@ -1,4 +1,5 @@
 <div class="body">
+    <app-usuario-nuevo *ngIf="usuarioNuevo" (cerrar)="usuarioNuevo = false"></app-usuario-nuevo>
     <app-barra-menu></app-barra-menu>
     <div id="contenidoTotal">
     <app-sub-menu></app-sub-menu>
@@ -9,9 +10,8 @@
         <app-categorias></app-categorias>
         <!-- CAROUSEL 2 -->
         <br><br>
-        <app-carrusel [carousel]='2' [elements]="productos">
-            <h3 class="titulos categoria">Lo más destacado hoy</h3>
-        </app-carrusel>
+        <h3 class="titulos categoria">Lo más destacado hoy</h3>
+        <app-carrusel [carousel]='2' [elements]="productos"></app-carrusel>
         <br><br><br>
 
         <!-- PRIMER ITEM --> 
@@ -35,9 +35,8 @@
 
         <!-- CAROUSEL 2 -->
         <br><br><br><br>
-        <app-carrusel [carousel]='2' [elements]="productos">
-            <h3 class="titulos categoria">Lo más destacado hoy</h3>
-        </app-carrusel>
+        <h3 class="titulos categoria">Lo más destacado hoy</h3>
+        <app-carrusel [carousel]='2' [elements]="productos"></app-carrusel>
 
         <!-- ITEMS 2 -->
         <br><br><br><br>
@@ -61,20 +60,22 @@
 
         <!-- CAROUSEL 3 -->
         <br><br><br><br>
-        <app-carrusel [carousel]='2' [elements]="productos">
         <h3 class="titulos categoria">Ofertas para tu hogar</h3>
-        </app-carrusel>
+        <app-carrusel [carousel]='2' [elements]="productos"></app-carrusel>
         
         <!-- CAROUSEL 4 -->
         <br><br><br><br>
-        <app-carrusel [carousel]='2' [elements]="productos">
         <h3 class="titulos categoria">Lo más destacado</h3>
-        </app-carrusel>
+        <app-carrusel [carousel]='2' [elements]="productos"></app-carrusel>
 
     </div>
     <br>
 
     <div class="wave">
+        <div class="text">
+            <h2><span *ngIf="!enUsuario">Crea tu cuenta</span><span *ngIf="enUsuario">Empieza a vender</span></h2>
+            <button (click)="navegar()">Aquí</button>
+        </div>
         <div style="height: 250px; overflow: hidden;" >
             <svg viewBox="0 0 370 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
                 <path
@@ -82,10 +83,6 @@
                     style="stroke: none; fill: #ddd;">
                 </path>
             </svg>
-            <h2 style="display: flex;">
-                Crea tu cuenta
-                <a (click)="navegar(['cuenta/crear-cuenta'], $event)"><button>Aquí</button></a>
-            </h2>
         </div>
     </div>
     <app-footer></app-footer>

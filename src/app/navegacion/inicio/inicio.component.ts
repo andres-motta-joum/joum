@@ -1,17 +1,27 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/interfaces/producto/producto';
 import { ProductosService } from 'src/app/servicios/productos/productos.service';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
 @Component({
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.scss']
 })
-export class InicioComponent implements OnInit{
-  constructor( private zone: NgZone, private router: Router, private prdService: ProductosService) {window.scroll(0,0)}
-  public productos!: Producto[];
+export class InicioComponent implements OnInit, OnDestroy{
+  constructor( private auth: Auth, private router: Router, private prdService: ProductosService, private authService: AuthService){}
+  productos!: Producto[];
+  enUsuario!: boolean;
+  usuarioNuevo = false;
   
   ngOnInit(){
+    if(this.authService.usuarioNuevo){
+      this.usuarioNuevo = true;
+    }
+    this.auth.onAuthStateChanged((user)=>{
+      user ? this.enUsuario = true : this.enUsuario = false;
+    })
     this.prdService.obtenerProductos().then((productos)=>{
       this.productos = productos;
     })
@@ -24,63 +34,18 @@ export class InicioComponent implements OnInit{
     'assets/img/anuncios/mercado.png'
   ];
 
-
-  public categorias: any[] = 
-  [
-    {
-      nombre: 'Cuadros',
-      detalles:{
-        fotos: [['assets/img/categoria/cuadros/21.jpg']]
-      }
-    },
-    {
-      nombre: 'Repisas',
-      detalles:{
-        fotos: [['assets/img/categoria/repisas/15.jpg']]
-      }
-    },
-    {
-      nombre: 'Iluminación',
-      detalles:{
-        fotos: [['assets/img/categoria/iluminacion/6.jpg']]
-      }
-    },
-    {
-      nombre: 'Macetas',
-      detalles:{
-        fotos: [['assets/img/categoria/macetas/1.jpg']]
-      }
-    },
-    {
-      nombre: 'Relojes',
-      detalles:{
-        fotos: [['assets/img/categoria/relojes/14.jpg']]
-      }
-    },
-    {
-      nombre: 'Difusores',
-      detalles:{
-        fotos: [['assets/img/categoria/difusores/1.jpg']]
-      }
-    },
-    {
-      nombre: 'Vinilos',
-      detalles:{
-        fotos: [['assets/img/categoria/vinilos/9.jpg']]
-      }
-    },
-    {
-      nombre: 'Adornos',
-      detalles:{
-        fotos: [['assets/img/categoria/adornos/19.jpg']]
-      }
+  navegar(): void{
+    if(this.enUsuario){
+      this.router.navigate(['vender']);
+    }else{
+      this.router.navigate(['cuenta/crear-cuenta']);
     }
-  ];
-  navegar( ruta: any[], event: Event): void{
-    event.preventDefault();
-    this.zone.run(()=>{
-      this.router.navigate(ruta);
-      window.scroll(0,0)
-    })
+    window.scroll(0,0)
+  }
+
+  ngOnDestroy(): void {
+    if(this.authService.usuarioNuevo){
+      this.authService.usuarioNuevo = false;
+    }
   }
 }

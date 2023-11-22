@@ -4,7 +4,7 @@
 	padding-bottom: 430px;
 	min-width: 870px;
 	overflow: hidden;
-	background-color: #fafafa;
+	background-color: #f8f8f8;
 }
 .contenido{
     width: 1400px;
@@ -13,13 +13,29 @@
 	  width: 90%;
 	  margin: auto;
 	}
-    h1{
-        margin:0;
-        padding-top: 25px;
-        color: #606060;
-        font-weight:550;
-        font-size: 24px;
-        letter-spacing: .5x;
-        word-spacing: 2px;
-    }
+	.header{
+		margin-top: 40px;
+		margin-bottom: 40px;
+		img{
+			border-radius: 12px;
+			width: 100%;
+			box-shadow: 0 -0.1px 2.8px rgba(0,0,0,0.06), 0 3.1px 2.5px rgba(0,0,0,0.02);
+		}
+	}
+	> button{
+		opacity: .25;
+		margin-top: 30px;
+		width: 200px;
+		height: 40px;
+		border: none;
+		border-radius: 5px;
+		background-color: #999;
+		color: white;
+		font-weight: 420;
+		font-size: 15px;
+		cursor: pointer;
+		&:hover{
+			background-color: rgb(27, 205, 142);
+		}
+	}
 }

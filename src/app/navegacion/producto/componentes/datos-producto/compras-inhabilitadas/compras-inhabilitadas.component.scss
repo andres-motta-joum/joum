@@ -1,0 +1,50 @@
+.contenido{
+    box-shadow: 0 -0.1px 2.8px rgba(0,0,0,0.07), 0 3.1px 2.9px rgba(0,0,0,0.020);
+    position: fixed;
+    top: calc(50% - 195px);
+    left: calc(50% - 290px);
+    width: 580px;
+    height: 390px;
+    max-height: 90vh;
+    background: white;
+    border-radius: 10px;
+    z-index: 501;
+    overflow: hidden;
+    animation: mostrar .12s ease;
+    h2{
+        margin: 0;
+        padding: 15px 35px;
+        background: #949494;
+        border-bottom: 5px solid #ffa361;
+        color: white;
+        font-size: 22px;
+        font-weight: 480;
+        letter-spacing: .4px;
+    }
+}
+.salir{
+    position: absolute;
+    right: 14px;
+    font-size: 22.5px;
+    color: white;
+    padding: 5px;
+    top: 13px;
+    border-radius: 50%;
+    background: #a0a0a0;
+    z-index: 1;
+    &:hover{
+        cursor: pointer;
+        background: #f2f2f2;
+        color: #555;
+    }
+}
+@keyframes mostrar {
+    0%{
+        transform: scale(.7);
+        opacity: .8;
+    }
+    100%{
+        transform: scale(1);
+        opacity: 1;
+    }
+}

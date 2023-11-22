@@ -64,6 +64,10 @@
                 <p>(<span>{{estilos![selectEstilo].unidades!}}</span> disponibles )</p>
             </div>
         </ng-container>
-    <div (click)="comprar()" class="btnComprar" ><p>Comprar ahora</p></div>
-    <div class="proteccionCompra">Compra protegida:<span> Obtén lo que esperabas o recupera tu dinero.</span><ng-icon name="matGppGoodOutline"></ng-icon></div>
+        <div (click)="comprar(); $event.stopPropagation()" class="btnComprar" ><p>Comprar ahora</p></div>
+        <div class="proteccionCompra">Compra protegida:<span> Obtén lo que esperabas o recupera tu dinero.</span><ng-icon name="matGppGoodOutline"></ng-icon></div>
+    </div>
 </div>
+<section class="comprasDeshabilitadas" *ngIf="comprarProducto">
+    <app-compras-inhabilitadas></app-compras-inhabilitadas>
+</section>

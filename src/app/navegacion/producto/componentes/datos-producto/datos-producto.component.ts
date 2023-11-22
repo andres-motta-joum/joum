@@ -1,23 +1,22 @@
-import { Component, EventEmitter, Input, NgZone, OnChanges,OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, NgZone, OnChanges,OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Estilo, Producto } from '../../../../interfaces/producto/producto';
-import { Usuario } from '../../../../interfaces/usuario/usuario';
 
 import { provideIcons } from '@ng-icons/core';
 import { matStarRound } from '@ng-icons/material-icons/round';
 import { heroTruck } from '@ng-icons/heroicons/outline';
 import { matGppGoodOutline } from '@ng-icons/material-icons/outline';
+import { heroXMark } from '@ng-icons/heroicons/outline';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
-import { first } from 'rxjs';
 import { DocumentData, DocumentReference, Firestore, doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-datos-producto',
   templateUrl: './datos-producto.component.html',
   styleUrls: ['./datos-producto.component.scss'],
-  providers: [provideIcons({matStarRound, heroTruck, matGppGoodOutline})]
+  providers: [provideIcons({matStarRound, heroTruck, matGppGoodOutline, heroXMark})]
 })
 export class DatosProductoComponent implements OnChanges{
   constructor(private zone: NgZone, private router: Router, private comprarService: ComprarService, private auth: Auth, private authService: AuthService, private firestore: Firestore){}
@@ -36,6 +35,7 @@ export class DatosProductoComponent implements OnChanges{
   vendidos!: string;
 
   productoPropio!: boolean;
+  comprarProducto = false;
 
   async ngOnChanges(changes: SimpleChanges) {
     if (changes['producto'] && changes['producto'].currentValue) {
@@ -128,24 +128,31 @@ export class DatosProductoComponent implements OnChanges{
   async comprar(){
     if(this.productoCargado){
       if(this.producto){ //verificar que el producto ah cargado para no enviar datos undefined
-        if(this.auth.currentUser){
-          if(this.productoPropio){
-            //Este es tu producto
-          }else{
-            this.comprarService.agregarReferenciaCompra(this.producto.id!, this.auth.currentUser.uid, this.estilos[this.selectEstilo].id, Number(this.unidades));
-            this.authService.getUsuarioId(this.auth.currentUser.uid).pipe(first()).subscribe((usuario)=>{
-              if(usuario.direcciones && usuario.direcciones.length !== 0){
-                this.router.navigate(['comprar/checkout/resumen']);
-              }else{
-                this.comprarService.agregarDir = true;
-                this.router.navigate(['comprar/checkout/detalles-envio']);
-              }
-            })
-          }
-        }else{
-          this.router.navigate(['cuenta/iniciar-sesion']);
-        }
+        this.comprarProducto = true;
+        //if(this.auth.currentUser){
+        //  if(this.productoPropio){
+        //    //Este es tu producto
+        //  }else{
+        //    this.comprarService.agregarReferenciaCompra(this.producto.id!, this.auth.currentUser.uid, this.estilos[this.selectEstilo].id, Number(this.unidades));
+        //    this.authService.getUsuarioId(this.auth.currentUser.uid).pipe(first()).subscribe((usuario)=>{
+        //      if(usuario.direcciones && usuario.direcciones.length !== 0){
+        //        this.router.navigate(['comprar/checkout/resumen']);
+        //      }else{
+        //        this.comprarService.agregarDir = true;
+        //        this.router.navigate(['comprar/checkout/detalles-envio']);
+        //      }
+        //    })
+        //  }
+        //}else{
+        //  this.router.navigate(['cuenta/iniciar-sesion']);
+        //}
       }
+    }
+  }
+  @HostListener('document:click')
+  cerrarVentanas() {
+    if(this.comprarProducto){
+      this.comprarProducto = false;
     }
   }
 

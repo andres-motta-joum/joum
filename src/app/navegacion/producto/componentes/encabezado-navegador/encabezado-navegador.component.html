@@ -1,0 +1,5 @@
+<section class="encabezado">
+    <ng-container *ngFor="let dato of navegacion; let index = index">
+        <p>{{dato}}</p><ng-icon name="heroChevronRightMini" *ngIf="index !== navegacion.length - 1"></ng-icon>
+    </ng-container>
+</section>

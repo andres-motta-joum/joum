@@ -20,22 +20,28 @@ import { ProductoModule } from './navegacion/producto/producto.module';
 import { ComprarModule } from './navegacion/comprar/comprar.module';
 
 /*----------- FireBase --------*/
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth} from '@angular/fire/auth';
 import { provideFirestore, getFirestore} from '@angular/fire/firestore';
-import { provideStorage, getStorage } from '@angular/fire/storage';
-import { FirebaseAppModule } from '@angular/fire/app';
+import { FirebaseAppModule, getApp } from '@angular/fire/app';
 import { PortalEmpleadoModule } from './navegacion/usuario/portal-empleado/portal-empleado.module';
+import { provideFunctions, getFunctions } from '@angular/fire/functions';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    BrowserModule,
     InformacionModule,
     PortalEmpleadoModule,
-    BrowserModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFunctions(() => getFunctions()),
+    provideStorage(() => getStorage()),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
     InicioModule,
     RegistroModule,
     AppRoutingModule,
@@ -47,12 +53,10 @@ import { PortalEmpleadoModule } from './navegacion/usuario/portal-empleado/porta
     BusquedaModule,
     ProductoModule,
     ComprarModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+
   ],
   providers: [CurrencyPipe, FirebaseAppModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

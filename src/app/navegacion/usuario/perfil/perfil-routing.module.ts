@@ -18,7 +18,6 @@ import { MetricasComponent } from './ventas/metricas/metricas.component';
 import { NovedadesComponent } from './ventas/novedades/novedades.component';
 import { PublicacionesComponent } from './ventas/publicaciones/publicaciones.component';
 import { ReputacionComponent } from './ventas/reputacion/reputacion.component';
-import { ResumenComponent } from './ventas/resumen/resumen.component';
 import { VentasComponent } from './ventas/ventas/ventas.component';
 import { TuDineroComponent } from './perfil/secciones/tu-dinero/tu-dinero.component';
 
@@ -97,10 +96,6 @@ import { EditarPublicacionComponent } from './ventas/publicaciones/editar-public
       {
         path: 'reputacion',
         component: ReputacionComponent
-      },
-      {
-        path: 'resumen',
-        component: ResumenComponent
       },
       {
         path: 'tu-dinero',

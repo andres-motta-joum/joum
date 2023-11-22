@@ -20,6 +20,13 @@ import { AyudaVentasComponent } from './ayuda/secciones/ventas/ventas.component'
 import { AyudaMisDatosComponent } from './ayuda/secciones/mis-datos/mis-datos.component';
 import { AyudaGeneralComponent } from './ayuda/secciones/general/general.component';
 import { SinTicketsComponent } from './atencion-cliente/componentes/sin-tickets/sin-tickets.component';
+import { MetodosPagoComponent } from './quienes-somos/componentes/metodos-pago/metodos-pago.component';
+import { CategoriasComponent } from './quienes-somos/componentes/categorias/categorias.component';
+import { ApoyosComponent } from './quienes-somos/componentes/apoyos/apoyos.component';
+
+import { PrecioNumberPipe } from './quienes-somos/componentes/apoyos/precioNumber';
+import { SugerenciasComponent } from './quienes-somos/componentes/apoyos/sugerencias/sugerencias.component';
+import { SuccessComponent } from './quienes-somos/componentes/apoyos/success/success.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +42,13 @@ import { SinTicketsComponent } from './atencion-cliente/componentes/sin-tickets/
     AyudaVentasComponent,
     AyudaMisDatosComponent,
     AyudaGeneralComponent,
-    SinTicketsComponent
+    SinTicketsComponent,
+    MetodosPagoComponent,
+    CategoriasComponent,
+    ApoyosComponent,
+    PrecioNumberPipe,
+    SugerenciasComponent,
+    SuccessComponent
   ],
   imports: [
     NgIconsModule,

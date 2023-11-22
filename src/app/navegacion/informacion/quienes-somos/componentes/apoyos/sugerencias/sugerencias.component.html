@@ -1,0 +1,13 @@
+<h2>Enviar sugerencia</h2>
+<div class="descripcion" contenteditable="true" (paste)="onPaste($event)" (input)="onInputChange($event)" (click)="focus()" [ngClass]="{'descripcionErr': descripcionError}" #texto *ngIf="!actualizacionExitosa">
+    <div *ngIf="descripcion == null || descripcion == '' " class="placeholder">Escribe la descripción detallada aquí...</div>
+</div>
+<div class="gracias" *ngIf="actualizacionExitosa">
+
+</div>
+<button [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}" (click)="enviarEncuesta()">
+    <span class="loading" *ngIf="cargando"></span>
+    <span class="fondo" *ngIf="!cargando"></span>
+    <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+    <p *ngIf="!cargando">Enviar</p>
+</button> 

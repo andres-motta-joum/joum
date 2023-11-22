@@ -20,8 +20,8 @@ export class CarruselComponent {
   @Input() categorias!: Array<any>;
   @Input() carousel = 0;
 
-  @ViewChild('track') track!: ElementRef;
-  @ViewChild('slickList') slickList!: ElementRef;
+  @ViewChild('contenedor') contenedor!: ElementRef;
+  @ViewChild('lista') lista!: ElementRef;
 
   public slickWidth!: number;
 
@@ -60,15 +60,15 @@ export class CarruselComponent {
   }
 
   Move(value: number): void {
-    const trackWidth = this.track.nativeElement.offsetWidth;
-    const listWidth = this.slickList.nativeElement.offsetWidth;
+    const contenedorWidth = this.contenedor.nativeElement.offsetWidth;
+    const listWidth = this.lista.nativeElement.offsetWidth;
 
-    this.leftPosition = this.track.nativeElement.style.left === '' ? 0 : (parseFloat(this.track.nativeElement.style.left) * -1);
+    this.leftPosition = this.contenedor.nativeElement.style.left === '' ? 0 : (parseFloat(this.contenedor.nativeElement.style.left) * -1);
 
-    if (this.leftPosition < (trackWidth - listWidth) && value === 2) {
-      this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition + this.slickWidth)}px`);
+    if (this.leftPosition < (contenedorWidth - listWidth) && value === 2) {
+      this.renderer.setStyle(this.contenedor.nativeElement, 'left', `${-1 * (this.leftPosition + this.slickWidth)}px`);
     } else if (this.leftPosition > 0 && value === 1) {
-      this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition - this.slickWidth)}px`);
+      this.renderer.setStyle(this.contenedor.nativeElement, 'left', `${-1 * (this.leftPosition - this.slickWidth)}px`);
     }
 
     if(value == 1){

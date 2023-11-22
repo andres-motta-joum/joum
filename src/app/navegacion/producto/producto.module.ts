@@ -16,6 +16,8 @@ import { DatosProductoTresComponent } from './componentes/datos-producto-tres/da
 import { FormsModule } from '@angular/forms';
 
 import localeEs from '@angular/common/locales/es';
+import { ComprasInhabilitadasComponent } from './componentes/datos-producto/compras-inhabilitadas/compras-inhabilitadas.component';
+import { EncabezadoNavegadorComponent } from './componentes/encabezado-navegador/encabezado-navegador.component';
 registerLocaleData(localeEs);
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ registerLocaleData(localeEs);
     DatosProductoDosComponent,
     fotosProductoComponent,
     OpinionesComponent,
-    DatosProductoTresComponent
+    DatosProductoTresComponent,
+    ComprasInhabilitadasComponent,
+    EncabezadoNavegadorComponent
   ],
   imports: [
     CommonModule,

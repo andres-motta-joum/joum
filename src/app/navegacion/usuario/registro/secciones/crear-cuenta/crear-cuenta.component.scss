@@ -50,7 +50,7 @@
         padding: 11px 20px;
         border: 1px solid #d8d8d8;
         outline: none;
-        border-radius: 7px;
+        border-radius: 6.5px;
         color: #505050;
         font-weight: 420;
         letter-spacing: .3px;
@@ -60,6 +60,14 @@
         &::placeholder{
             color: #a5a5a5;
         }
+    }
+    p.correoExistente{
+        color: #ff6d6d;
+        transform: translate(0, -17px) !important;
+        font-size: 12px;
+        font-weight: 450; 
+        letter-spacing: .4px;
+        margin: 0;
     }
     .password::placeholder{
         transform: translateY(3px);
@@ -79,6 +87,36 @@
         &:hover{
             cursor: pointer;
             color: #777;
+        }
+    }
+    .requerimientos{
+        transform: translateY(-4px);
+        width: calc(100% - 80px);
+        margin-left: 40px;
+        margin-bottom: 21px;
+        background: linear-gradient(to right, #f9f9f9, #fcfcfc);
+        border-radius: 7px;
+        padding: 4px 0;
+        p{
+            margin: 0;
+            padding: 8px 10px;
+            font-size: 12.5px;
+            font-weight: 420;
+            color: #757575;
+            letter-spacing: .4px;
+            ng-icon.check{
+                background: #feb581;
+                color: #fff;
+            }
+            ng-icon{
+                font-size: 13px;
+                margin-right: 3.5px;
+                transform: translateY(1px);
+                padding: 1.5px;
+                border-radius: 50%;
+                color: #797979;
+                background: #ececec;
+            }
         }
     }
     .politicas{
@@ -163,6 +201,7 @@
         grid-template-columns: 1fr 1fr;
         column-gap: 20px;
         button{
+            position: relative;
             border-radius: 7px;
             padding: 12px;
             cursor: pointer;
@@ -262,4 +301,26 @@
     color: #555;
     letter-spacing: .4px;
     padding-bottom: 150px;
+}
+
+.loading{
+    width: 18px;
+	height: 18px;
+	border: 3px solid white;
+	border-radius: 50%;
+	position: absolute;
+	left: calc(50% - 8.5px);
+	top: 8px;
+	border-left-color: transparent;
+	animation: load 1s ease infinite;
+    z-index: 502;
+}
+
+@keyframes load {
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
 }

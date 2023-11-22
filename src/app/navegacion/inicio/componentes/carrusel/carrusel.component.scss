@@ -1,207 +1,53 @@
-@mixin slick-arrow {
-    border-radius: 30px;
-    background-color: #fff;
-    position: absolute;
-    z-index: 4;
-    width: 48px;
-    height: 48px;
-    text-align: center;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-    border: 0;
-    cursor: pointer;
-  
-    &:focus {
-      outline: 0;
-    }
-  
-    svg {
-      width: 12px;
-      height: 100%;
-      color: rgba(0, 0, 0, 0.7);
-    }
-  }
-  .Carousel {
-    width: 100%;
-  }
-  
-  /* images */
-  
-  .slick-list {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 195px;
-    padding-left: 1px;
-    margin: 0px auto;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .slick-track {
-    position: relative;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    transition: 0.4s ease-in-out;
-  }
-  
-  .slick-content {
-    background: #fffefd;
-    cursor: pointer;
-    transition: .1s;
-    border-radius: 7px;
-    border: 1px solid #e9e9e9;
-  
-    &:hover {
-      box-shadow: 0 0 10px 4px #ececec;
-    }
-  }
-  
-  .slick {
-    position: relative;
-    width: 180px;
-    padding: 0 18px;
-    float: left;
-    box-sizing: border-box;
-    display: flex;
-    height: 100%;
-  
-    img {
-      object-fit: cover;
-      height: 125px;
-      width: 145px;
-      border-radius: 7px 7px 0px 0px;
-    }
-    p{
-      color: #606060;
-      letter-spacing: .5px;
-
-    }
-
-  }
-  @media(min-width: 1450px){
-    .slick{
-        width: 195px;
-        img {
-            height: 138px;
-            width: 158px;
-          }
-    }
-    .slick-prev, .slick-next{
-        display: none !important;
-    }
-}
-  
-  /* buttons */
-  
-  .slick-arrow {
-    @include slick-arrow;
-  
-    &.slick-prev {
-      left: 15px;
-      width: 43px;
-      height: 43px;
-      background: white;
-      position: absolute;
-      top: 45%;
-      transform: translateY(-50%);
-      line-height: 45px;
-      font-size: 22px;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 45%;
-      
-      cursor: pointer;
-      box-shadow: 0 0 7px 3px rgba($color: #000, $alpha: .2);
-      color: #333;
-  
-      &:hover {
-        background: #ffa963;
-        color: white;
-      }
-      ng-icon{
-        margin-top: 4px;
-        font-size: 26px;
-        margin-right:2px
-      }
-    }
-    &.slick-next {
-      right: 20px;
-      width: 43px;
-      height: 43px;
-      background: white;
-      position: absolute;
-      top: 45%;
-      transform: translateY(-50%);
-      line-height: 40px;
-      font-size: 22px;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 45%;
-      cursor: pointer;
-      box-shadow: 0 0 7px 3px rgba($color: #000, $alpha: .2);
-      color: #333;
-
-      &:hover {
-        background: #ffa963;
-        color: white;
-      }
-      ng-icon{
-        margin-top: 4px;
-        font-size: 26px;
-        margin-left: 2px;
-      }
-    }
-  }
-  
-  .slick-text {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    margin-top: 3px;
+.boton {
+  position: absolute;
+  background: #fff;
+  top: 50%;
+  z-index: 4;
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  ng-icon{
     color: #333;
-    height: 10px;
+    font-size: 25px;
   }
-  
-  /*------------------------ SLICK 2 -----------------------------*/
-  
-  .slick-list2 {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 410px;
-    margin: 0px auto;
-    width: 100%;
-    overflow: hidden;
-    padding-left: 2px;
-  }
-  
-  .slick-track2 {
-    position: relative;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    transition: 0.4s ease-in-out;
-  }
-  
-  .slick-content2 {
-    height: 384px;
-    width: 230px;
-    background: #fff;
-    cursor: pointer;
-    transition: 0.1s;
-    border-radius: 5px;
-    box-shadow: 0 1px 4px 0 #e0e0e0;
-  
-    &:hover {
-      opacity: 0.96s;
-      box-shadow: 0 0 13px 4px #e3e3e3;
+  &.prev {
+    left: 10px;
+    ng-icon{
+      transform: translateX(-1px);
     }
   }
-  
-  .slick2 {
+
+  &.next {
+    right: 10px;
+    ng-icon{
+      transform: translateX(1px);
+    }
+  }
+  &:hover {
+    background: #ffa963;
+    ng-icon{
+      color: white;
+    }
+  }
+}
+
+.contenedor {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  transition: 0.4s ease-in-out;
+  .productos {  //Ajustar bordes
+    margin-left: -18px;
     position: relative;
     width: 270px;
     padding: 0 18px;
@@ -216,288 +62,155 @@
       margin: 8px;
       width: 215px;
       border-radius: 5px 5px 0 0;
+      padding-bottom: 2px;
     }
-  }
-  
-  /* buttons */
-  
-  .slick-arrow2 {
-    @include slick-arrow;
-  
-    &.slick-prev2 {
-      left: 10px;
-      width: 50px;
-      height: 50px;
-      background: white;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      line-height: 45px;
-      font-size: 30px;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 45%;
-      
-      cursor: pointer;
-      color: #333;
 
-      &:hover {
-        background: #ffa963;
-        color: white;
-      }
-      ng-icon{
-        margin-top: 8px;
-        font-size: 30px;
-        margin-right: 1px;
-      }
-    }
-  
-    &.slick-next2 {
-      right: 10px;
-      width: 50px !important;
-      height: 50px !important;
-      background: white;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      line-height: 40px;
-      font-size: 30px;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 45%;
-      
-      cursor: pointer;
-      color: #333;
-  
-      &:hover {
-        background: #ffa963;
-        color: white;
-      }
-      ng-icon{
-        margin-top: 10px;
-        font-size: 30px;
-        margin-left: 2px;
-      }
-    }
-  }
+    .informacion{
+      height: 100px;
+      .titulo{
+        margin: 0 20px 5px 15px;
 
-  .titulo-producto {
-    margin: 0 20px 5px 15px;
-    
-    font-size: 13px;
-    font-weight:500;
-    color: #777;
-  }
-  
-  .precio-anterior {
-    font-size: 16px;
-    color: #666;
-    margin: 0 8px 10px 20px;
-    text-decoration: line-through;
-    
-  }
-  
-  .precio-final {
-    font-size: 26px;
-    margin: 2px 8px 0 0;
-    color: #555;
-    font-weight: 450;
-    
-    padding: 6px 0;
-    margin-left: 15px;
-  }
-  
-  .porcentaje-rebaja {
-    font-size: 16px;
-    color: #00c600;
-    font-weight: 500;
-    margin-top: 1px;
-    margin-bottom: 0;
-  }
-
-  
-  /*------------------------ SLICK 3 -----------------------------*/
-  
-  .slick-list3 {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 365px;
-    margin-left: 25px;
-    width: 740px;
-    overflow: hidden;
-  }
-  
-  .slick-track3 {
-    position: relative;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    transition: 0.4s ease-in-out;
-  }
-  
-  .slick-content3 {
-    height: 360px;
-    background: #fff;
-    width: 230px;
-    cursor: pointer;
-    transition: 0.4s;
-    border-radius: 3px;
-    border: 1px solid #eee;
-  
-    &:hover {
-      opacity: 0.95;
-      border: 1px solid #ccc;
-    }
-  }
-  
-  .slick3 {
-    position: relative;
-    width: 270px;
-    padding: 0 5px 0 22px;
-    float: left;
-    box-sizing: border-box;
-    display: flex;
-    height: 100%;
-  }
-
-  .porcentaje-rebaja-3 {
-    font-size: 16px;
-    color: #00a900;
-    font-weight: 500;
-    
-    margin-top: 15px;
-  }
-  
-  .slick3 img {
-    object-fit: cover;
-    height: 230px;
-    width: 100%;
-    border-radius: 3px 3px 0px 0px;
-  }
-  
-  /* buttons */
-  
-  .slick-arrow3 {
-    @include slick-arrow;
-  
-    &.slick-prev3 {
-      left: 10px;
-      width: 50px;
-      height: 50px;
-      background: white;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      line-height: 45px;
-      font-size: 30px;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 45%;
+        font-size: 13px;
+        font-weight: 500;
+        color: #777;
+      }
+      h3 { //Precio final
+        font-size: 26px;
+        margin: 2px 8px 0 0;
+        color: #555;
+        font-weight: 450;
       
-      cursor: pointer;
-      outline: none;
-      color: #333;
-  
-      &:hover {
-        background: #ffa963;
-        color: white;
+        padding: 6px 0;
+        margin-left: 15px;
       }
-      ng-icon{
-        margin-top: 8px;
-        font-size: 30px;
+      section{
+        display: flex;
+        .precio-anterior {
+          font-size: 16px;
+          color: #666;
+          margin: 0 8px 10px 20px;
+          text-decoration: line-through;
+        }
       }
     }
-  
-    &.slick-next3 {
-      right: 10px;
-      width: 50px;
-      height: 50px;
-      background: white;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      line-height: 40px;
-      font-size: 30px;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 45%;
-      
+
+    .producto-inicio {
+      height: 384px;
+      width: 230px;
+      background: #fff;
       cursor: pointer;
-      outline: hidden;
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      color: #333;
-  
+      transition: 0.1s;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px 0 #e0e0e0;
+    
       &:hover {
-        background: #ffa963;
-        color: white;
+        opacity: 0.96s;
+        box-shadow: 0 0 13px 4px #e3e3e3;
       }
-      ng-icon{
-        margin-top: 10px;
-        font-size: 30px;
+
+      .porcentaje-rebaja {
+        font-size: 16px;
+        color: #00c600;
+        font-weight: 500;
+        margin-top: 1px;
+        margin-bottom: 0;
+      }
+    }
+
+    .producto-en-similares {
+      height: 360px;
+      background: #fff;
+      width: 230px;
+      cursor: pointer;
+      transition: 0.4s;
+      border-radius: 5px;
+      border: 1px solid #eee;
+    
+      &:hover {
+        opacity: 0.95;
+        border: 1px solid #ccc;
+      }
+
+      .porcentaje-rebaja {
+        font-size: 16px;
+        color: #00a900;
+        font-weight: 500;
+        margin-top: 15px;
       }
     }
   }
-  
-  @media (max-width: 1340px) {
-    .slick-list3 {
-      width: 700px;
-    }
-  
-    .slick-content3 {
+}
+
+.lista-uno {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 410px;
+  margin: 0px auto;
+  width: 100%;
+  overflow: hidden;
+  padding-left: 2px;
+}
+
+.lista-dos {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 365px;
+  margin-left: 25px;
+  width: 740px;
+  overflow: hidden;
+}
+
+@media (max-width: 1340px) {
+  .lista-dos {
+    width: 700px;
+    .producto-en-similares {
       height: 340px;
       background: #fff;
       width: 215px;
+      .productos{
+        width: 256px;
+        padding: 0 5px 0 22px;
+        height: 100%;
+        img {
+          height: 220px;
+          width: 100%;
+        }
+      }
     }
-  
-    .slick3 {
-      width: 256px;
-      padding: 0 5px 0 22px;
-      height: 100%;
-    }
-  
-    .slick3 img {
-      height: 220px;
-      width: 100%;
-    }
-  
-    .slick-next3 {
+    .next {
       width: 40px;
       height: 40px;
       font-size: 25px;
       top: 47%;
     }
   
-    .slick-prev3 {
+    .prev {
       width: 45px;
       height: 45px;
       font-size: 25px;
       top: 47%;
     }
   }
-  
-  @media (max-width: 1270px) {
-    .slick-list3 {
-      width: 660px;
-    }
-  
-    .slick-content3 {
+}
+
+@media (max-width: 1270px) {
+  .lista-dos {
+    width: 660px;
+    .producto-en-similares {
       height: 340px;
       background: #fff;
       width: 210px;
-    }
-  
-    .slick3 {
-      width: 240px;
-      padding: 0 5px 0 22px;
-      height: 100%;
-    }
-  
-    .slick3 img {
-      height: 200px;
-      width: 100%;
+      .productos {
+        width: 240px;
+        padding: 0 5px 0 22px;
+        height: 100%;
+        img {
+          height: 200px;
+          width: 100%;
+        }
+      }
     }
   }
+}
