@@ -4,9 +4,19 @@
             <ng-icon name="heroChevronLeftSolid"></ng-icon>
         </button>
         <div #track Class="slick-track">
-            <div *ngFor='let element of elements' class="imagen">
-                <img [src]='element' alt="Image">
-            </div>
+            <ng-container *ngIf="anchoPagina > 710">
+                <div *ngFor='let element of elements' class="imagen">
+                    <img [src]='element' alt="Image">
+                </div>
+            </ng-container>
+            <ng-container *ngIf="anchoPagina <= 710">
+                <div class="imagen">
+                    <img src="assets/img/anuncios/envios-movil.png" alt="Image">
+                </div>
+                <div class="imagen">
+                    <img src="assets/img/anuncios/envio-gratis-50.png" alt="Image">
+                </div>
+            </ng-container>
         </div>
         <button (click)='Move(2)' class="botones boton-next" id="button-next">
             <ng-icon name="heroChevronRightSolid"></ng-icon>

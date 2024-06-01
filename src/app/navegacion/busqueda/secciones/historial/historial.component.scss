@@ -9,8 +9,8 @@
 .contenido{
     width: 1400px;
 	margin: auto;
-	@media screen and (max-width: 1450px) {
-	  width: 90%;
+	@media screen and (max-width: 1520px) {
+	  width: 91%;
 	  margin: auto;
 	}
     h1{
@@ -68,7 +68,7 @@
 				}
 			}
 			.clicked {
-				background: #FF9E57;
+				background: #FF9C53;
 				.circle{
 					left: 24px;
 				}
@@ -85,7 +85,7 @@
             margin-left: 25px;
             margin-top: 10px;
             border: none;
-            background: #ffad72;
+            background: #57dd82;
             border-radius: 5px;
             color: white;
             font-size: 14px;
@@ -94,7 +94,7 @@
             word-spacing: 1px;
             cursor: pointer;
             &:hover{
-                background-color: #FF9E57;
+                background-color: #4bd376;
             }
         }
         p:nth-child(5){

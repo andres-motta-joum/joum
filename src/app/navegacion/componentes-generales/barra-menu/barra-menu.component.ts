@@ -14,6 +14,10 @@ import { matShoppingCart } from '@ng-icons/material-icons/baseline';
 import { heroMagnifyingGlassMini } from '@ng-icons/heroicons/mini';
 import { heroCurrencyDollarMini } from '@ng-icons/heroicons/mini';
 import { iconoirViewStructureUp } from '@ng-icons/iconoir';
+import { heroTruckSolid } from '@ng-icons/heroicons/solid';
+import { heroChartPie } from '@ng-icons/heroicons/outline';
+import { heroCurrencyDollar } from '@ng-icons/heroicons/outline';
+import { aspectsContactCard } from '@ng-icons/ux-aspects';
 
 /*---- Componentes ----*/
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component'; 
@@ -46,7 +50,7 @@ import { InformacionPerfilService } from 'src/app/servicios/informacionPerfil/in
   selector: 'app-barra-menu',
   templateUrl: './barra-menu.component.html',
   styleUrls: ['./barra-menu.component.scss'],
-  viewProviders: [provideIcons({ heroUserCircle, heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, iconoirViewStructureUp,  heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle, ionNotificationsOutline, ionChevronDownOutline})]
+  viewProviders: [provideIcons({ heroUserCircle, heroBars3Solid, heroMagnifyingGlassMini, heroUserCircleSolid, iconoirViewStructureUp,  heroShoppingCartSolid, matShoppingCart, heroCurrencyDollarMini,heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotes, heroRectangleGroup, heroBell, heroBuildingStorefront, heroChatBubbleLeftRight, heroBanknotesMini, heroDocumentChartBar, heroArrowTrendingUp, heroDocumentText, heroArrowRightOnRectangle, ionNotificationsOutline, ionChevronDownOutline, heroTruckSolid, heroChartPie, heroCurrencyDollar, aspectsContactCard})]
 })
 export class BarraMenuComponent{
   constructor(private changeDetectorRef: ChangeDetectorRef, private zone: NgZone, private router: Router, private route: ActivatedRoute, private authService: AuthService, private auth: Auth, private firestore: Firestore, private perfilService: InformacionPerfilService){}
@@ -61,6 +65,7 @@ export class BarraMenuComponent{
   nombre!: string;
   inUser!: boolean;
   sign!: string;
+  enBuscador: boolean =  false;
 
   routeStateSubsCription!: Subscription;
   notificaciones!: Notificacion[];
@@ -70,6 +75,13 @@ export class BarraMenuComponent{
   height = '0px';
 
   productosEnCarrito: number = 0;
+
+  anchoPagina: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.anchoPagina = event.target.innerWidth;
+  }
 
   ngOnInit() {
     this.routeSubscription = this.route.paramMap.subscribe(()=> {
@@ -159,15 +171,15 @@ export class BarraMenuComponent{
     this.authService.signOut();
   }
   navegar(ruta: string): void{
-    if(ruta == 'ventas'){
+    if(ruta == 'pedidos'){
       if(this.inUser){
         if(this.usuario){
-          this.router.navigate([this.usuario.usuario + '/ventas']);
+          this.router.navigate([this.usuario.usuario + '/compras']);
           window.scroll(0,0)
         }
       }else{
         setTimeout(()=>{
-          this.sign = 'ventas';
+          this.sign = 'pedidos';
         }, 10)
       }
     } else if(ruta == 'historial'){
@@ -217,12 +229,12 @@ export class BarraMenuComponent{
   }
   //--------------------------------------------------  Funciones buscador ----------------------------------- //
   decodificarURL(){ // Saber el texto puesto en el Input
-    const url = this.router.url;
-      const decodedUrl = decodeURIComponent(url);
-      const segments = decodedUrl.split('/');
-      if(segments[1] === 'busqueda'){
-        this.ultimoDatoUrl = segments[segments.length - 1];
-      }
+    const url = this.router.url.split('?')[0];
+    const decodedUrl = decodeURIComponent(url);
+    const segments = decodedUrl.split('/');
+    if(segments[1] === 'busqueda'){
+      this.ultimoDatoUrl = segments[segments.length - 1];
+    }
   }
   buscar(busqueda: string){
     if(busqueda !== ''){

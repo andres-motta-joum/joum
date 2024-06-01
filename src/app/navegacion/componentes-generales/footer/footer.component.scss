@@ -10,122 +10,127 @@ footer{
 	z-index: 100;
 	position: absolute;
 	bottom: 0;
+	.contenido-footer{
+		display: grid;
+		grid-template-columns: 1fr 180px 250px;
+		column-gap: 65px;
+		padding-top: 50px;
+		section{ //general
+			max-width: 590px;
+			width: 100%;
+			h2{
+				position: relative;
+				color: #fff;
+				font-weight: 500;
+				margin-bottom: 14px; 
+				font-size: 18px !important;
+				&::before{
+					content: '';
+					position: absolute;
+					bottom: -5px;
+					left: 0;
+					width: 50px;
+					height: 2px;
+					background: #FF9C53;
+				}
+			}
+			ul{
+				padding: 0;
+			}
+		}
+		.nosotros{
+			p{
+				color: #ccc;
+				font-size: 14.5px;
+				line-height: 20px;
+			}
+			.redes{
+				margin-top: 20px;
+				display: flex;
+				li{
+					list-style: none;
+					a{
+						display: inline-block;
+						width: 50px;
+						height: 50px;
+						background: #444;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						margin-right: 10px;
+						text-decoration: none;
+						border-radius: 4px;
+						font-size: 15px;
+						&:hover{
+							background: #4fd579f8;
+						}
+						ng-icon{
+							color: white;
+							font-size: 20px;
+						}
+					}
+				}
+			}
+		}
+
+		.links{
+			position: relative;
+			ul li{
+				list-style: none;
+				a{
+					color: #ccc;
+					text-decoration: none;
+					margin-bottom: 10px;
+					display: inline-block;
+					font-size: 14px;
+					&.hover{
+						color: #fff
+					}
+				}
+			}
+		}
+
+		.contactos{
+			margin-left: 0 !important;
+			font-size: 15px;
+			.info{
+				position: relative;
+				li{
+					display: flex;
+					margin-bottom: 16px;
+					span{
+						color: #ccc;
+					}
+					a{
+						color: #ccc;
+						text-decoration: none;
+						font-size: 14.5px;
+						&:hover{
+							color: #fff;
+						}
+					}
+				}
+			}
+			
+		}
+	}
+	@media (max-width: 900px) {
+		height: 550px;
+		.contenido-footer{
+			grid-template-columns: 1fr 170px;
+			grid-template-rows: 1fr 1fr;
+		}
+	}
+	@media (max-width: 560px) {
+		height: 850px;
+		.contenido-footer{
+			grid-template-columns: 1fr;
+			grid-template-rows: 200px 270px 200px;
+		}
+	}
 }
 
-footer .contenido-footer{
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	flex-direction: row;
-	padding-top: 50px;
-}
-footer .contenido-footer ul{
-	margin-left: -40px;
-}
-footer .contenido-footer .sec{
-	margin-right: 30px;
-}
 
-footer .contenido-footer .sec.aboutus{
-	width: 40%;
-}
-footer .contenido-footer h2{
-	position: relative;
-	color: #fff;
-	font-weight: 500;
-	margin-bottom: 14px; 
-	font-size: 18px !important;
-}
-footer .contenido-footer h2:before{
-	content: '';
-	position: absolute;
-	bottom: -5px;
-	left: 0;
-	width: 50px;
-	height: 2px;
-	background: #FF9E57;
-}
-footer p{
-	color: #ccc;
-	font-size: 14.5px;
-	line-height: 20px;
-}
-
-.sci{
-	margin-top: 20px;
-	display: flex;
-}
-
-.sci li{
-	list-style: none;
-}
-
-.sci li a{
-	display: inline-block;
-	width: 50px;
-	height: 50px;
-	background: #444;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-right: 10px;
-	text-decoration: none;
-	border-radius: 4px;
-	font-size: 15px;
-}
-.sci li a:hover{
-	background: #ee9022;
-}
-.sci li a ng-icon{
-	color: white;
-    font-size: 20px;
-}
-.quicklinks{
-	position: relative;
-	width: 25%;
-}
-.quicklinks ul li{
-	list-style: none;
-}
-.quicklinks ul li a{
-	color: #ccc;
-	text-decoration: none;
-	margin-bottom: 10px;
-	display: inline-block;
-	font-size: 14px;
-}
-.quicklinks ul li a:hover{
-	color: #fff
-}
-
-.contact{
-	width: calc(31% - 100px);
-	margin-left: 0 !important;
-	font-size: 15px;
-}
-
-
-.contact .info{
-	position: relative;
-}
-
-.contact .info li{
-	display: flex;
-	margin-bottom: 16px;
-}
-
-.contact .info li span{
-	color: #ccc;
-	
-}
-.contact .info li a{
-	color: #ccc;
-	text-decoration: none;
-	font-size: 14.5px;
-}
-.contact .info li a:hover{
-	color: #fff;
-}
 .copyrightText{
 	position: relative;
 	z-index: 100;

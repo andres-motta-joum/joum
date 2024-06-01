@@ -13,7 +13,7 @@
                 </div>
                 <div>
                     <img src="assets/img/logo/iconos/ver-mas.svg">
-                    <img (click)="navegar(['MOTTAANDRES20221130093921/MOTTAANDRES20221130093921/enviar-mensaje'], $event)" src="assets/img/logo/iconos/ver-mas-full.svg">
+                    <img src="assets/img/logo/iconos/ver-mas-full.svg">
                 </div>
             </div> 
             <div class="chat">
@@ -30,7 +30,7 @@
 
         <div class="right">
             <div class="encabezado">
-                <p>Compra: 14 de julio 15:20</p>
+                <p>Compra: {{fechaCompraString}} {{ this.fechaCompra| date:'HH:mm' }}</p>
             </div>
             <div class="contenedorMensajes">
                 <app-producto [referencia]="referencia"  *ngFor="let referencia of venta.referencias; let i = index"></app-producto>

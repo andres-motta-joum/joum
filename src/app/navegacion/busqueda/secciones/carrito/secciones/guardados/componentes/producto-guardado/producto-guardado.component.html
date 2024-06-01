@@ -1,11 +1,11 @@
 <div class="contenedor">
     <div>
         <div class="cuadroImg">
-            <img *ngIf="foto" [src]="foto" (click)="navegar(['prod/' + productoGuardado.id])">
+            <img [src]="'assets/img/productos/'+ productoGuardado.fotos[0] + '.png'" (click)="navegar(['prod/' + productoGuardado.id])">
         </div>
         <div>
-            <p>{{productoGuardado.nombre}}</p>
-            <p>Estilo: {{estilo?.nombre}}</p>
+            <p>{{productoGuardado.nombre}} <span *ngIf="tamanio !== 'false'">{{productoGuardado.tamanios![+tamanio].gramos}}</span></p>
+            <p>Sabor: {{productoGuardado.sabor}}</p>
             <p *ngIf="productoGuardado.envioGratis" class="envioGratis">Envio gratis</p>
             <p *ngIf="!productoGuardado.envioGratis" class="envioPrecio"><span>Recíbelo</span> por <span>$ {{productoGuardado.precioEnvio}}</span></p>
         </div>
@@ -17,18 +17,23 @@
     </div>
     <div>
         <ng-container *ngIf="productoGuardado.descuento">
-            <p>$ {{productoGuardado.precio! - (productoGuardado.precio! * (productoGuardado.porcentajeDescuento! / 100)) | number: '1.0-0'}}</p>
+            <p>$ {{productoGuardado.precio | number: '1.0-0'}}</p>
             <div>
-                <p>$ {{productoGuardado.precio}}</p><p>- {{productoGuardado.porcentajeDescuento}}%</p>
+                <p>$ {{productoGuardado.precioComparacion | number: '1.0-0'}}</p><p> Oferta</p>
             </div>
         </ng-container>
         <ng-container *ngIf="!productoGuardado.descuento">
-            <p>$ {{productoGuardado.precio | number: '1.0-0'}}</p>
+            <ng-container *ngIf="tamanio !== 'false'">
+                <p>$ {{productoGuardado.tamanios![+this.tamanio].precio | number: '1.0-0'}}</p>
+            </ng-container>
+            <ng-container *ngIf="tamanio == 'false'">
+                <p>$ {{productoGuardado.precio | number: '1.0-0'}}</p>
+            </ng-container>
             <p></p>
         </ng-container>
-        <p>{{estilo?.unidades}} disponibles</p>
+        <p></p>
         <div>
-            <button (click)="cambiarUnidad('-', indice, estilo!.unidades)">-</button><p>{{unidad}}</p><button (click)="cambiarUnidad('+', indice, estilo!.unidades)">+</button>
+            <button (click)="cambiarUnidad('-', indice)">-</button><p>{{unidad}}</p><button (click)="cambiarUnidad('+', indice)">+</button>
         </div>
     </div>
 </div>

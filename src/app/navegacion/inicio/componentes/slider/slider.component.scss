@@ -17,11 +17,21 @@
         height: 360px;
       }
 
-      @for $i from 1 through 13 {
+      @for $i from 1 through 20 {
         $breakpoint: $breakpoint - 40px;
 
         @media (max-width: #{$breakpoint}) {
           height: calc(#{$base-height} - #{$i * 9.5px});
+        }
+      }
+
+      $base-height-dos: 313px;
+      $breakpoint-dos: 740px;
+      @for $i from 1 through 12 {
+        $breakpoint-dos: $breakpoint-dos - 30px;
+
+        @media (max-width: #{$breakpoint-dos}) {
+          height: calc(#{$base-height-dos} - #{$i * 12px});
         }
       }
   
@@ -95,6 +105,9 @@
       font-size: 25px;
       margin-top: 16px;
     }
+    @media (max-width: 950px) {
+      transform: translateY(-50%) scale(0.9);
+    }
   }
   
   .boton-prev {
@@ -104,6 +117,10 @@
     padding-left: 8px;
     ng-icon{
       transform: translate(-2px,-8px)
+    }
+    @media (max-width: 500px) {
+      transform: translate(-20% ,-50%) scale(0.75);
+      opacity: 0.7;
     }
   }
   
@@ -115,10 +132,14 @@
     ng-icon{
       transform: translateY(-8px)
     }
+    @media (max-width: 500px) {
+      transform: translate(20% ,-50%) scale(0.75);
+      opacity: 0.7;
+    }
   }
   
   .boton-prev:hover, .boton-next:hover {
-    background: #FF9E57;
+    background: #FF9C53;
     &:hover ng-icon {
       color: white;
     }

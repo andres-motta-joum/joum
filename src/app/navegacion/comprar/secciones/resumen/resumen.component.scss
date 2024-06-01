@@ -17,10 +17,10 @@
     background-color: #fefefe;
     border: 1px solid #e8e8e8;
     border-radius: 6px;
-    border-left: 4px solid #ff9e57;
+    border-left: 4px solid #FF9C53;
     > ng-icon{
         font-size: 30px;
-        color: #ff9e57;
+        color: #FF9C53;
         margin: 10px;
     }
     .dir{
@@ -67,7 +67,7 @@
             padding-left: 4px;
         }
         ng-icon{
-            color: #ff9e57;
+            color: #FF9C53;
             font-size: 18px;
             transform: translateY(-1px);
         }
@@ -94,21 +94,26 @@
         border-radius: 8px;
         border: 1px solid #ddd;
         padding: 3px;
+        display: flex;
+        justify-content: center;
+        img{
+            object-fit: contain;
+            border-radius: 5px;
+            position: absolute;
+            cursor: pointer;
+            max-width: calc(100% - 4px);
+            max-height: calc(100% - 4px);
+            z-index: 1;
+        }
+    }
+    .fondoVisible{
         &::before{
             content: '';
-            width: calc(100% - 6px);
-            height: calc(100% - 6px);
+            width: calc(100% - 5px);
+            height: calc(100% - 5px);
             border-radius: 5px;
             background: linear-gradient(to right, #fafafa, #f0f0f0);
             position: absolute;
-        }
-        img{
-            position: absolute;
-            width: calc(100% - 6px);
-            height: calc(100% - 6px);
-            object-fit: contain;
-            border-radius: 5px;
-            z-index: 1;
         }
     }
     div:nth-child(2){

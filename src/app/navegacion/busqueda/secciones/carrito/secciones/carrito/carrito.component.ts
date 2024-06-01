@@ -3,7 +3,7 @@ import { Auth } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, first, firstValueFrom } from 'rxjs';
-import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { Usuario, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { ProductosService } from 'src/app/servicios/productos/productos.service';
@@ -20,10 +20,7 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
   carrito!: referenciaCompra[];
   productos: Producto[] = [];
   unidades: number[] = [];
-  fotos: string[] = [];
-  estilosId: string[] = [];
-  estilos: Estilo[] = [];
-  indexEstilos: number[] = [];
+  tamanios: (number | string)[] = [];
 
   cantidadProductos = 0;
 
@@ -48,7 +45,7 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
           }
         })
       } else {
-        this.router.navigate(['cuenta/iniciar-sesion']);
+        this.router.navigate(['cuenta/crear-cuenta']);
       }
     });
   }
@@ -56,25 +53,21 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
   async obtenerProductos() {
     if (this.usuario?.carrito) {
       const productosRef = await Promise.all(this.usuario?.carrito.map((ref:referenciaCompra) => getDoc(ref.producto)));
+      this.tamanios = this.usuario.carrito!.map((carrito)=>{
+        if(typeof carrito.tamanioIndex === 'number'){
+          return carrito.tamanioIndex
+        }else{
+          return 'false';
+        }
+      });
       await Promise.all(productosRef.map(async (productSnapshot, index) => {
         const prd = productSnapshot.data() as Producto;
         prd.id = productSnapshot.id;
         this.productos.push(prd);
-        this.estilosId.push(this.usuario.carrito![index].estilo!);
-        const estiloRef = doc(this.firestore, `productos/${prd.id}/estilos/${this.usuario.carrito![index].estilo!}`);
-        const estiloSnapshot = await getDoc(estiloRef);
-        const estilo = estiloSnapshot.data() as Estilo;
-        estilo.id = estiloSnapshot.id;
-        this.estilos.push(estilo);
       }));
-      this.indexEstilos = this.usuario.carrito!.map((carrito)=>{
-        const partes = carrito.estilo.split(':');
-        return Number(partes[0]) - 1;
-      })
-      this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilosId);
       this.unidades = this.usuario.carrito!.map((carrito)=>{
         return carrito.unidades;
-      })
+      });
 
       this.subscription = this.comprarService.$obtenerCarrito.subscribe(async (carrito)=>{
         let productosLenght = 0;
@@ -91,9 +84,7 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
     this.carrito.splice(index, 1);
     this.productos.splice(index, 1);
     this.unidades.splice(index, 1);
-    this.fotos.splice(index, 1);
-    this.estilosId.splice(index, 1);
-    this.indexEstilos.splice(index, 1);
+    this.tamanios.splice(index, 1);
     if(this.carrito.length !== 0){
       this.sinCarrito = false;
     }else{
@@ -105,13 +96,25 @@ export class CarritoSeccionComponent implements OnInit, OnDestroy{
     let precioProductos = 0;
     let precioEnvios = 0;
     if(this.productosLenght == 1){
-      precioProductos = this.productos[0].precio!;
+      let precio!: number;
+      if(typeof this.tamanios[0] == 'number'){
+        precio = this.productos[0].tamanios![this.tamanios[0] as number].precio!;
+      }else{
+        precio = this.productos[0].precio!;
+      }
+      precioProductos = precio;
       if(!this.productos[0].envioGratis){
         precioEnvios = this.productos[0].precioEnvio!;
       }
     }else{
       for (const [index, producto] of this.productos.entries()) {
-        precioProductos += producto.precio! * carrito[index].unidades;
+        let precio!: number;
+        if(producto.tamanios){
+          precio = producto.tamanios[this.tamanios[index] as number].precio! * carrito[index].unidades;
+        }else{
+          precio = producto.precio! * carrito[index].unidades;
+        }
+        precioProductos += precio;
         if(!producto.envioGratis){
           precioEnvios += producto.precioEnvio!;
         }else{

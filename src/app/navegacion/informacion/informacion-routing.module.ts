@@ -35,10 +35,6 @@ export const routes: Routes = [
         loadChildren: ()=> import('./ayuda/secciones/compras/compras.module').then( m => m.ComprasModule)
       },
       {
-        path: 'ventas',
-        loadChildren: ()=> import('./ayuda/secciones/ventas/ventas.module').then( m => m.VentasModule)
-      },
-      {
         path: 'mis-datos',
         loadChildren: ()=> import('./ayuda/secciones/mis-datos/mis-datos.module').then( m => m.MisDatosModule)
       },

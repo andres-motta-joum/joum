@@ -7,6 +7,10 @@ import { matStarRound } from '@ng-icons/material-icons/round';
 
 import { heroHeart } from '@ng-icons/heroicons/outline'; 
 import { heroHeartSolid } from '@ng-icons/heroicons/solid';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { Auth } from '@angular/fire/auth';
+import { DocumentData, DocumentReference, Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { ProductosService } from 'src/app/servicios/productos/productos.service';
 
 
 @Component({
@@ -17,19 +21,17 @@ import { heroHeartSolid } from '@ng-icons/heroicons/solid';
 })
 export class ProductoHistorialComponent {
   @Input() producto!: Producto;
-  @Input() foto!: string;
+  @Input() usuario!: Usuario | undefined;
   @Input() index!: number;
   @Output() eliminarIndex =  new EventEmitter<number>();
-  public corazonClick: boolean = false;
-  public corazonOver: boolean = false;
-
-  public promedioCalificacion!: number;
-  public promedio!: number;
+  corazonClick: boolean = false;
+  corazonOver: boolean = false;
+  enFavoritos: boolean = false;
   
-  constructor(private zone: NgZone, private router: Router){}
+  constructor(private zone: NgZone, private router: Router, private auth: Auth, private firestore: Firestore, private prdService: ProductosService){}
 
   ngOnInit(){
-    this.promedioCalificacion = this.calcularPromedioCalificaciones(this.producto.opiniones);
+    this.definirFavorito(this.usuario, this.producto.id!);
   }
 
   navegar(ruta: any[], event: Event){
@@ -39,38 +41,53 @@ export class ProductoHistorialComponent {
       window.scroll(0,0)
     })
   }
-  agregarFavorito(){
+  async agregarFavorito(){
     this.corazonClick = !this.corazonClick;
+    if(this.enFavoritos){
+      if(this.auth.currentUser){ //Eliminar
+        this.enFavoritos = false;
+        const usuarioRef = doc(this.firestore, `usuarios/${this.auth.currentUser.uid}`);
+        const productoRef = doc(this.firestore, `productos/${this.producto.id}`);
+        const snapshot = await getDoc(usuarioRef);
+        const usuario = snapshot.data();
+        const index = usuario!['favoritos'].findIndex((referencia: DocumentReference<DocumentData>) => referencia.id == productoRef.id);
+        usuario!['favoritos'].splice(index, 1);
+
+        this.prdService.eliminarFavorito(this.auth.currentUser.uid, usuario!['favoritos'], productoRef);
+      }else{
+        this.router.navigate(['cuenta/crear-cuenta']);
+      }
+    }else{
+      if(this.auth.currentUser){ //Agregar
+        this.enFavoritos = true;
+        this.prdService.agregarFavorito(this.producto.id!, this.auth.currentUser.uid);
+      }else{
+        this.router.navigate(['cuenta/crear-cuenta']);
+      }
+    }
   }
   mostrarCorazon(){
     this.corazonOver = !this.corazonOver;
   }
 
-  calcularPromedioCalificaciones(opiniones: Producto['opiniones']): number {
-    const sumaCalificaciones = opiniones!.reduce((total, calificacion) => total + calificacion.calificacion!, 0);
-    const promedio = sumaCalificaciones / opiniones!.length;
-    this.promedio = Number(promedio.toFixed(1));
-    return this.redondearCalificacion(promedio);
-  }
-
-  redondearCalificacion(calificacion: number): number {
-    const valoresPosibles = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
-
-    let valorCercano = valoresPosibles[0];
-    let diferenciaMinima = Math.abs(calificacion - valorCercano);
-
-    for (const valor of valoresPosibles) {
-        const diferencia = Math.abs(calificacion - valor);
-        if (diferencia < diferenciaMinima) {
-            valorCercano = valor;
-            diferenciaMinima = diferencia;
-        }
-    }
-
-    return Math.round(valorCercano * 20);
-  }
   eliminarProductoHistorial(){
     this.eliminarIndex.emit(this.index);
+  }
+
+  definirFavorito(usuario: Usuario | undefined, productoId: string){
+    if(usuario){
+      if(usuario.favoritos){
+        const favorito = usuario.favoritos.find(ref => ref.id === productoId);
+        if(favorito){
+          this.enFavoritos = true;
+          this.corazonClick = true;
+        }else{
+          this.enFavoritos = false;
+        }
+      }
+    }else{
+      this.enFavoritos = false;
+    }
   }
 
 }

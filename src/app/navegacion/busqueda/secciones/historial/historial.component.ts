@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
-import { Firestore, deleteField, doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentSnapshot, Firestore, deleteField, doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Producto } from 'src/app/interfaces/producto/producto';
@@ -21,7 +21,6 @@ export class HistorialComponent {
   public usuario!: Usuario | undefined;
   registroHistorial: boolean = true;
   productos: Producto[] = [];
-  fotos: string[] = [];
 
   public url!: string;
   ngOnInit() {
@@ -37,21 +36,19 @@ export class HistorialComponent {
           this.router.navigate(['']); //Existe, pero no es mi historial
         }
       }else{
-        this.router.navigate(['cuenta/iniciar-sesion']); //Fuera de usuario
+        this.router.navigate(['cuenta/crear-cuenta']); //Fuera de usuario
       }
     })
   }
 
   async obtenerProductos() {
     if (this.usuario?.historial) {
-      const productosRef = await Promise.all(this.usuario?.historial.map((ref:any) => getDoc(ref)));
+      const productosRef = await Promise.all(this.usuario?.historial.map((ref:any) => getDoc(ref) as Promise<DocumentSnapshot<DocumentData>>));
       productosRef.forEach(productSnapshot => {
         const prd = productSnapshot.data() as Producto;
         prd.id = productSnapshot.id;
         this.productos.unshift(prd);
-        this.fotos.push('');
       });
-      this.fotos = await this.prdsService.obtenerFotos(this.productos);
     }
   }
 
@@ -70,7 +67,6 @@ export class HistorialComponent {
 
   async eliminarHistorial(){
     this.productos = [];
-    this.fotos = [];
     const usaurioRef = doc(this.firestore, `usuarios/${this.usuario!.id}`);
     await updateDoc(usaurioRef, {historial: deleteField()});
   }
@@ -78,7 +74,6 @@ export class HistorialComponent {
   async eliminarProductoHistorial(index: number){
     const indexInverso = this.productos.length - 1 - index;
     this.productos.splice(indexInverso, 1);
-    this.fotos.splice(indexInverso, 1);
     this.usuario!.historial!.splice(index, 1);
     const usaurioRef = doc(this.firestore, `usuarios/${this.usuario!.id}`);
     await setDoc(usaurioRef, {historial: this.usuario!.historial}, {merge: true});

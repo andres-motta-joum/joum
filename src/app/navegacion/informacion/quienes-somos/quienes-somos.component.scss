@@ -5,6 +5,12 @@
 	min-width: 870px;
 	overflow: hidden;
 	background-color: #f8f8f8;
+	@media (max-width: 900px) {
+        padding-bottom: 550px;
+	}
+	@media (max-width: 560px) {
+		padding-bottom: 850px;
+	}
 }
 .contenido{
     width: 1400px;

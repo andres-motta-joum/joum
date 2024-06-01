@@ -1,9 +1,9 @@
 <div class="producto">
     <img [src]="referencia.foto">
     <div>
-        <h4>{{referencia.tituloProducto}}</h4>
+        <h4>{{referencia.tituloProducto}} <span *ngIf="referencia.gramosTamanio !== 'false'">{{referencia.gramosTamanio}}</span></h4>
         <p>Estilo {{referencia.nombreEstilo}}</p>
-        <p>$ {{referencia.precioProducto | number:'1.0-0'}}</p>
+        <p>$ {{referencia.precioProducto | number:'1.0-0'}} <span>COP</span></p>
     </div>
     <p> {{referencia.unidades}} Unidades</p>
 </div>

@@ -32,7 +32,6 @@ export class CompraComponent {
 
   async obtenerReferencias(){
     this.referencias = await Promise.all(this.compra.referencias.map(ref => ref));
-    console.log(this.referencias)
   }
 
   navegar(ruta: any[], event: Event){

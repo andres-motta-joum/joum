@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { aspectsSocialFacebook } from '@ng-icons/ux-aspects';
@@ -32,6 +32,13 @@ export class CrearCuentaComponent implements OnInit{
   requerimientos = [false, false, false];
   correoExistente = '';
   cargando = false;
+
+  anchoPagina: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.anchoPagina = event.target.innerWidth;
+  }
 
   ngOnInit(): void {
     this.initForm();

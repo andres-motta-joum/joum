@@ -1,5 +1,6 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { getDoc } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
+import { DocumentData, DocumentReference, Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Producto } from 'src/app/interfaces/producto/producto';
@@ -13,11 +14,10 @@ import { AuthService } from 'src/app/servicios/usuarios/auth.service';
   styleUrls: ['./favoritos.component.scss']
 })
 export class FavoritosComponent implements OnInit, OnDestroy{
-  constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private authService: AuthService, private prdsService: ProductosService) {}
+  constructor(private zone: NgZone,private router: Router, private route: ActivatedRoute, private authService: AuthService, private prdsService: ProductosService, private firestore: Firestore, private auth: Auth) {}
   private routeSubscription!: Subscription;
   private usuario!: Usuario;
   favoritos!: Producto[];
-  fotos: string[] = [];
   datosCargados = false;
   
   ngOnInit() {
@@ -44,9 +44,16 @@ export class FavoritosComponent implements OnInit, OnDestroy{
         prd.id = favoritoSnapshot.id;
         return prd
       })
-      this.fotos = await this.prdsService.obtenerFotos(this.favoritos);
     }
     this.datosCargados = true;
+  }
+
+  async eliminarFavorito(idProducto: string){
+    const productoRef = doc(this.firestore, `productos/${idProducto}`);
+    const index = this.usuario.favoritos!.findIndex((referencia: DocumentReference<DocumentData>) => referencia.id == productoRef.id);
+    this.usuario.favoritos!.splice(index, 1);
+    this.favoritos.splice(index, 1);
+    this.prdsService.eliminarFavorito(this.auth.currentUser!.uid, this.usuario.favoritos, productoRef);
   }
 
   navegar(ruta: any[], event: Event){

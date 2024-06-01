@@ -4,6 +4,9 @@
 	z-index: 20;
 	background-color: #fafafa;
 }
+.header3.eliminar{
+	height: 17px;
+}
 
 .menu3 {
 	ul {
@@ -45,7 +48,7 @@
 					cursor: pointer;
 					>p{
 						transition: 0.2s;
-						color: #f38b40;
+						color: #f89148;
 					}
 				}
 			}
@@ -88,14 +91,14 @@
 						width: 100%;
 						border: none;
 						border-radius: 4px;
-						background: #fff5ec;
-						color: #fd9347;
+						background: #ecf9f2;
+						color: #2cc75d;
 						font-weight: 480;
 						letter-spacing: .4px;
 						word-spacing: 1px;
 						cursor: pointer;
 						&:hover{
-							background: #ffa15e;
+							background: #52d77c;
 							color: #fff;
 						}
 					}

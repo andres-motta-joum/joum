@@ -97,7 +97,7 @@ export class MenuLateralComponent implements OnInit{
     this.perfilService.selected = 'seguridad';
     this.router.navigate([this.user + '/perfil/informacion'])
   }
-  singOut(){
+  signOut(){
     this.authService.signOut();
   }
 

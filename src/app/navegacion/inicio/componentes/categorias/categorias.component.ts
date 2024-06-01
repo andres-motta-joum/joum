@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,12 @@ import { Router } from '@angular/router';
 })
 export class CategoriasComponent{
   constructor(private router: Router){}
+  anchoPagina: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.anchoPagina = event.target.innerWidth;
+  }
 
   navegar(ruta: string){
     this.router.navigate([ruta]);

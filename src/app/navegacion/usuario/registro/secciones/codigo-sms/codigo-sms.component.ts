@@ -81,7 +81,6 @@ export class CodigoSMSComponent implements OnInit{
     try {
       if(this.datos.tipo === 'singIn'){
         await signInWithCredential(this.auth, phoneCredential); //verificación de credencial
-        this.authService.usuarioNuevo = true;
       } else if(this.datos.tipo === 'singUp'){
         const singCredential = await signInWithCredential(this.auth, phoneCredential);// ya creó la cuenta con el numero o inició la cuenta con el numero. 
         const emailCredential = EmailAuthProvider.credential(this.datos.email, this.datos.password);
@@ -93,6 +92,7 @@ export class CodigoSMSComponent implements OnInit{
         await this.authService.addUserFirestore();
         await this.authService.sendEmail(singCredential.user);
         await updateDoc(doc(this.firestore, "usuarios", currentUser?.uid!), { telefono: this.numero });
+        this.authService.usuarioNuevo = true;
       } else if(this.datos.tipo === 'singUpGoogle' || this.datos.tipo === 'singInGoogle'){
         const currentUser = this.auth.currentUser;
         await updatePhoneNumber(currentUser!, phoneCredential);

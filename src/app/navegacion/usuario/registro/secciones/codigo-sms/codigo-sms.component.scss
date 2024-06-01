@@ -1,6 +1,7 @@
 .formulario{
     position: relative;
     width: 410px;
+    min-width: 375px;
     height: 325px;
     background: white;
     border-radius: 12px;
@@ -69,17 +70,27 @@
         cursor: pointer;
         border: none;
         color: #fff;
-        background-color: #ffa260;
+        background-color: #FF9C53;
         font-weight: 500;
         letter-spacing: .5px;
         word-spacing: 1px;
         height: 40px;
         &:hover{
-            background-color: #ff9c56;
+            background-color: #FF9C53;
         }
     }
     .error{
         border: 2px solid rgb(245, 124, 124) !important;
+    }
+    @media (max-width: 430px) {
+        width: 100%;
+        height: calc(100vh - 60px);
+        border-radius: 0;
+        border: none;
+        transform: none;
+        margin: 0;
+        padding: 0;
+        left: 0;
     }
 }
 .invisible{
@@ -88,9 +99,9 @@
 }
 .cargando{
 	cursor: default !important;
-    background-color: #ffaa6d !important;
+    background-color: #FF9C53 !important;
 	&:hover{
-		background: #ffaa6d !important;
+		background: #FF9C53 !important;
 	}
 }
 .loading{

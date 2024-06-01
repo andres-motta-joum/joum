@@ -1,6 +1,17 @@
 .opiniones-contenedor{
     width: 95%;
     padding-left: 30px;
+    @media (max-width: 1090px) {
+        width: calc(100% - 90px);
+        padding: 0;
+        margin-left: 45px;
+    }
+    @media (max-width: 800px) {
+        width: calc(100% - 60px);
+        padding: 0;
+        margin-left: 30px;
+        border-top: 1px solid #e6e6e6;
+    }
 }
 
 h1{
@@ -12,12 +23,19 @@ h1{
     letter-spacing: 1px;
     margin-top: 50px;
     margin-bottom: 20px;
+    @media (max-width: 800px) {
+        margin-top: 30px;
+        font-size: 47px;
+    }
 }
 /*----------------- ESTRELLAS -----------------*/
 .estrellas{
     position: relative;
     width: 150px;
     margin-top: 58px;
+    @media (max-width: 800px) {
+        margin-top: 38px;
+    }
 }
 .estrellas .starts{
     margin-top: 0;
@@ -54,40 +72,64 @@ p.calificaciones{
 
 .barras{
     margin-bottom: 30px;
-}
-.linea{
-    display: flex;
-    height: 30px;
-    position: relative;
-}
-.linea p{
-    margin:-5px;
-    margin-left: 10px;
-    font-size: 14px;
-    color: #555;
-}
-.linea ng-icon{
-    margin:-5px;
-    margin-left: 10px;
-    color: #ffb578;
-    font-size: 16px;
-    position: absolute;
-    left: 435px;
-}
+    .linea{
+        display: flex;
+        height: 30px;
+        position: relative;
+        .linea-span{
+            position: relative;
+            width: 420px;
+            background-color: #ddd;
+            border-radius: 4px;
+            height: 9px;
+            .fondo-span{
+                position: absolute;
+                width: 70%;
+                background-color: #888;
+                border-radius: 4px;
+                height: 9px;
+            }
+        }
+        p{
+            margin:-5px;
+            margin-left: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        ng-icon{
+            margin:-5px;
+            margin-left: 10px;
+            color: #ffb578;
+            font-size: 16px;
+            position: absolute;
+            left: 435px;
+        }
+    }
 
-.linea-span{
-    position: relative;
-    width: 420px;
-    background-color: #ddd;
-    border-radius: 4px;
-    height: 9px;
-}
-.fondo-span{
-    position: absolute;
-    width: 70%;
-    background-color: #888;
-    border-radius: 4px;
-    height: 9px;
+    @media (max-width: 530px) {
+        .linea-span{
+            width: 320px !important;
+        }
+        ng-icon{
+            left: 335px !important;
+        }
+    }
+    @media (max-width: 420px) {
+        .linea-span{
+            width: 295px !important;
+        }
+        ng-icon{
+            left: 310px !important;
+        }
+    }
+    @media (max-width: 390px) {
+        .linea-span{
+            width: 270px !important;
+        }
+        ng-icon{
+            left: 285px !important;
+        }
+    }
 }
 /*---------- CALIFICACIÓN ---------------*/
 
@@ -110,6 +152,7 @@ select{
     position: relative;
     width: 90px;
     margin-top:20px;
+    margin-bottom: 5px;
 }
 .estrellas-opinion .starts{
     margin-top: 0;
@@ -138,8 +181,14 @@ select{
 
 /*-------------*/
 .opinion{
-    
     position: relative;
+    img{
+        width: 80px;
+        height: 80px;
+        object-fit:cover;
+        cursor: pointer;
+        border-radius: 7px;
+    }
 }
 .opinion div p{
     position: absolute;
@@ -149,7 +198,7 @@ select{
     top: 15px;
 }
 .texto-opinion{
-    margin-top: 10px;
+    margin-top: 5px;
     letter-spacing: .2px;
     line-height: 21px;
     font-size: 14.5px;

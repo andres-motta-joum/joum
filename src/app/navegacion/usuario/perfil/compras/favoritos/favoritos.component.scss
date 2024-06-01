@@ -1,11 +1,8 @@
 .content{
     position: relative;
-    width: 96%;
-    margin-left: 3%;
-    max-width: 1320px;
-    @media (max-width: 1580px) {
-        width: 93%;
-    }   
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 120px;
     .cargando{
         width: 100%;
         height: 52vh;

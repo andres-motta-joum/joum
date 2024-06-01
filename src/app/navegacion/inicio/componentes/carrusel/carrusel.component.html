@@ -1,26 +1,43 @@
-<div class="Carousel">
+<div class="Carousel" [ngClass]="{'carrusel-producto': carousel === 3}">
+    <button class="boton prev" *ngIf="scrollDerecha > 0" (click)='Move(1)'><ng-icon name="heroChevronLeftSolid"></ng-icon></button>
+    <button class="boton next" (click)='Move(2)'><ng-icon name="heroChevronRightSolid"></ng-icon></button>
+
     <div #lista [ngClass]="{'lista-uno':carousel === 2,'lista-dos':carousel === 3}">
-        <button class="boton next" *ngIf="botonPrev" (click)='Move(1)'><ng-icon name="heroChevronLeftSolid"></ng-icon></button>
         <div #contenedor class="contenedor">
             <ng-container *ngFor='let element of elements; let i = index'>
                 <div class="productos">
                     <section (click)="navegar(['prod/', element.id])" class="producto-inicio" [ngClass]="{'producto-inicio': carousel === 2, 'producto-en-similares': carousel === 3}">
-                        <picture *ngIf="element">
-                            <img *ngIf="fotos[i]" [src]='fotos[i]' alt="Image">
-                        </picture>
+                        <div *ngIf="element" class="img-content">
+                            <img [src]="'assets/img/productos/'+ element.fotos[0] + '.png'" alt="Image">
+                        </div>
                         <div class="informacion">
-                            <h3 *ngIf="!element.descuento">$ {{ element.precio | number:'1.0-0' }}</h3>
-                            <h3 *ngIf="element.descuento">$ {{ element.precio! - (element.precio! * (element.porcentajeDescuento! / 100)) | number:'1.0-0' }}</h3>
-                            <section>
-                                <p class="precio-anterior" *ngIf="element.descuento">$ {{ element.precio | number:'1.0-0'}}</p>
-                                <p class="porcentaje-rebaja"*ngIf="element.descuento">- {{ element.porcentajeDescuento}}% OFF</p>
-                            </section>
+                            <h3 *ngIf="!element.descuento">$ {{ element.precio | number:'1.0-0'}} <span>COP</span></h3>
+                            <ng-container *ngIf="element.descuento">
+                                <h3>$ {{ element.precio | number:'1.0-0'}} <span>COP</span></h3>
+                                <section>
+                                    <p class="precio-anterior">$ {{ element.precioComparacion | number:'1.0-0'}}</p>
+                                    <p class="oferta"*ngIf="element.descuento">Oferta</p>
+                                </section>
+                            </ng-container>
                             <section class="titulo">{{ element.nombre }}</section>
                         </div>
                     </section>
                 </div>
             </ng-container>
+            <ng-container *ngIf="!elements">
+                <div class="productos" *ngFor="let i of [0, 1, 2, 3, 4, 5, 6]">
+                    <section class="producto-inicio" [ngClass]="{'producto-inicio': carousel === 2, 'producto-en-similares': carousel === 3}">
+                        <div class="img-content imgGris">
+                            <img src="assets/img/categoria/pic-loading.svg" alt="Image">
+                        </div>
+                        <div class="informacion opaco">
+                            <h3>$ 0 <span>COP</span></h3>
+                            <section class="lineaUno"> </section>
+                            <section class="lineaDos"> </section>
+                        </div>
+                    </section>
+                </div>
+            </ng-container>
         </div>
-        <button class="boton next" (click)='Move(2)'><ng-icon name="heroChevronRightSolid"></ng-icon></button>
     </div>
 </div>

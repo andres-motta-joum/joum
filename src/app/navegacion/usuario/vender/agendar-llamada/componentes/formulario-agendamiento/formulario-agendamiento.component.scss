@@ -1,0 +1,74 @@
+form{
+    margin: 20px 30px 30px 60px; 
+    width: 80%;
+    section.datos{
+        display: flex;
+        flex-direction: column;
+        > div{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 28px;
+            label{
+                font-weight: 500;
+                font-size: 15px;
+                color: #606060;
+                letter-spacing: .4px;
+            }
+            input{
+                max-width: 550px;
+                border: none;
+                outline: none;
+                padding: 5px 10px 5px 0;
+                font-size: 15px;
+                border-bottom: 1px solid #d0d0d0;
+                color: #777;
+                &:focus{
+                    border-color: #777;
+                }
+                &::placeholder{
+                    color: #c0c0c0;
+                    font-size: 14px;
+                }
+            }
+            .invalid-field{
+                color: #ff4141 !important;
+                ~ input, ~ select{
+                    border-color: #ff6a6a !important; 
+                }
+            }
+        }
+        >div:nth-child(3){
+            input{
+                max-width: 488px;
+                padding-left: 62px;
+                letter-spacing: .9px;
+            }
+            img{
+                position: absolute;
+                top: 22px;
+                left: 0;
+                width: 20px;
+                height: 20px;
+            }
+            p{
+                position: absolute;
+                margin: 0;
+                left: 23px;
+                top: 23px;
+                color: #777;
+                font-size: 15.5px;
+                font-weight: 400;
+            }
+        }
+
+    }
+    @media (max-width: 600px) {
+        width: calc(100% - 110px);
+        margin-left: 55px;
+    }
+    @media (max-width: 500px) {
+        width: calc(100% - 80px);
+        margin-left: 40px;
+    }
+}

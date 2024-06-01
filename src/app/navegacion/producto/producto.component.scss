@@ -3,8 +3,14 @@
     min-height: 100vh;
     padding-bottom: 460px;
     background-color: #f8f8f8;
-    min-width:  1210px;
+    min-width:  375px;
     overflow: hidden;
+    @media (max-width: 900px) {
+        padding-bottom: 550px;
+	}
+	@media (max-width: 560px) {
+		padding-bottom: 850px;
+	}
 }
 .contenidoFotos{
     .sombra{
@@ -105,6 +111,56 @@
             cursor: pointer;
         }
     }
+    @media (max-width: 800px) {
+        .sombra{
+            background: rgba(0, 0, 0, 0.75);
+        }
+        .cuadro{
+            width: 100%;
+            height: 80vh;
+            left: 0;
+        }
+        .cantidadFotos{
+            top: 12vh;
+            border-radius: 4px;
+            transform: scale(1.35);
+            letter-spacing: 7px;
+        }
+        .x{
+            top: 12vh;
+            border-radius: 4px;
+            transform: scale(1.25);
+            left: calc(100% - 60px);
+        }
+        ng-icon{
+            position: fixed;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: rgba($color: #000, $alpha: .4);
+            backdrop-filter: blur(5px);
+            color: #fff;
+            font-size: 35px;
+            z-index: 602;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .1s;
+            &:hover{
+                background: rgba($color: #000, $alpha: .7)
+            }
+        }
+        ng-icon:nth-child(2){
+            top: 50vh;
+            left: 2%;
+        }
+        ng-icon:nth-child(4){
+            top: 50vh;
+            right: 2%;
+        }
+    }
+
 }
 .productoPropio {
     position: absolute;
@@ -135,17 +191,17 @@
 }
 
 
-.contenidoTotalProducto {  
+.contenidoTotalProducto-computador {  
     width: 1400px;
     margin: 20px auto 50px auto;
     padding: 0;
-    display: flex;
+    display: grid;
     position: relative;
     background: white;
     box-shadow: 0 -0.1px 2.6px rgba(0,0,0,0.14), 0 3.1px 2.3px rgba(0,0,0,0.04);
     border-radius: 5px;
     height: auto;
-
+    grid-template-columns: 1fr calc(3% + 420px);
     .encabezado{
         position: absolute;
         width: 100%;
@@ -155,13 +211,12 @@
     }
 
     .seccioIzquierda {
-        margin: 27px 2% 50px 2%;
-        width: 62%;
-
+        margin-top: 27px;
+        padding: 0 45px 0 28px;
         .corazon {
             border-radius: 50%;
             position: absolute;
-            right: 33.8%;
+            right: calc(430px + 3%);
             top: 52px;
             font-size: 32px;
             color: #ffad84;
@@ -180,7 +235,7 @@
 
         .corazon-full {
             position: absolute;
-            right: 33.85%;
+            right: calc(430px + 3%);
             top: 53px;
             font-size: 31px;
             color: #fff;
@@ -205,6 +260,9 @@
         .carrito-click {
             animation: carrito .4s;
             color: #84afff !important;
+        }
+        .carrito-click-over {
+            opacity: 0;
         }
 
         .carrito-full {
@@ -232,14 +290,207 @@
     }
 
     .seccioDerecha {
-        margin: 27px 2% 50px 1%;
-        width: 30%;
+        margin-top: 27px;
     }
 }
 
 @media (max-width: 1500px) {
-    .contenidoTotalProducto {
+    .contenidoTotalProducto-computador {
         width: 95%;
         margin: 20px 2.5% 50px 2.5%;
+    }
+}
+
+//-----------------  CELULAR ---------------------------
+@media (max-width: 1090px) {
+    .linea-Menu{
+        width: calc(100% - 90px) !important;
+        margin: 20px 45px !important;
+        border-bottom: 1px solid #ddd;
+    }
+}
+.contenidoTotalProducto-celular {  
+    width: 95%;
+    margin: 20px 2.5% 50px 2.5%;
+    padding: 0;
+    padding-bottom: 90px !important;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: white;
+    box-shadow: 0 -0.1px 2.6px rgba(0,0,0,0.14), 0 3.1px 2.3px rgba(0,0,0,0.04);
+    border-radius: 5px;
+    height: auto;
+    .encabezado{
+        position: absolute;
+        width: 100%;
+        height: 38px;
+        min-width: 765px;
+        border-radius: 5px 5px 0 0;
+        background-image: linear-gradient(to right, #efefef ,#f0f0f0, #f3f3f3);
+    }
+    .corazon {
+        border-radius: 50%;
+        position: absolute;
+        left: 45px;
+        transform: translate(2.6px, 17px);
+        font-size: 32px;
+        color: #ffad84;
+        cursor: pointer;
+        z-index: 5;
+
+        &:hover ~ .corazon-full {
+            color: #fff1ea;
+        }
+    }
+
+    .corazon-click {
+        animation: corazon .4s;
+        color: #ffad84 !important;
+    }
+
+    .corazon-full {
+        position: absolute;
+        transform: translate(3px, 17px);
+        left: 45px;
+        top: 60px;
+        font-size: 31px;
+        color: #fff;
+        z-index: 4;
+    }
+
+    .carrito {
+        border-radius: 50%;
+        position: absolute;
+        right: 45px;
+        top: 60px;
+        font-size: 32px;
+        color: #b8b8b8;
+        cursor: pointer;
+        z-index: 5;
+
+        &:hover {
+            color: #a4a4a4;
+        }
+    }
+
+    .carrito-click {
+        animation: carrito .4s;
+        color: #84afff !important;
+    }
+    .carrito-click-over {
+        opacity: 0;
+    }
+
+    .carrito-full {
+        position: absolute;
+        right: 45px;
+        top: 60px;
+        font-size: 31px;
+        color: #fff;
+        z-index: 4;
+    }
+    .titulos{
+        color: #5a5a5a;
+        font-size: 21px;
+        font-weight: 450;
+        margin: 0;
+        margin-bottom: 23px;
+        letter-spacing: .6px;
+        word-spacing: 1.4px;
+        padding-left: 45px;
+        padding-top: 30px;
+    }
+    .linea-Menu{
+        border-bottom: 1px solid #ddd;
+        margin:15px 6px 30px 6px;
+    }
+    .linea-general{
+        border-bottom: 1px solid #e3e3e3;
+        width: 100%;
+        margin:5px 0 20px 0;
+    }
+    .insignias{
+        display: grid;
+        width: calc(100% - 60px);
+        margin-left: 33px;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 15px;
+        column-gap: 30px;
+        img{
+            width: 100%;
+            max-width: 150px;
+            margin: auto;
+        }
+    }
+
+}
+
+@media (max-width: 800px) {
+    .contenidoTotalProducto-celular {  
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        height: auto;
+    }
+    .datosPrincipales{
+        margin-left: 30px;
+        .ventas {
+            color: #6a6a6a;
+            margin-top: 15px;
+            margin-bottom: 4px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            word-spacing: 1px;
+            font-weight: 420;
+        }
+
+        .tituloProducto {
+            margin-top: 0;
+            margin-bottom: 14px;
+            font-size: 18.5px;
+            color: #505050;
+            padding-right: 15px;
+            font-weight: 480;
+            letter-spacing: .3px;
+            word-spacing: .7px;
+        }
+        .masVendido{
+            margin: 0 0 14px 0;
+            transform: translateY(-2px);
+            font-size: 11.5px;
+            font-weight: 540;
+            letter-spacing: .6px;
+            background: #ff8e4d;
+            color: white;
+            display: inline-block;
+            padding: 4px 6px;
+            border-radius: 3px;
+        }
+    }
+    .corazon {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        transform: translateX(-18px) scale(0.95);
+        height: 0;
+    }
+    .corazon-full {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        transform: translateX(-18px) scale(0.95);
+        height: 0;
+    }
+    .titulos{
+        color: #5a5a5a !important;
+        font-size: 20.5px !important;
+        font-weight: 450 !important;
+        letter-spacing: .6px !important;
+        word-spacing: 1.4px !important;
+        padding-left: 30px !important;
+        border-top: 1px solid #e6e6e6;
+        margin-top: 0 !important;
     }
 }

@@ -21,7 +21,7 @@ export class AyudaGeneralComponent {
     if(url){
       this.selected = url
     }else{
-      this.selected = 'publicar-producto';
+      this.selected = 'cupones';
     }
     this.routeSubscription = this.router.events.subscribe( async event =>{
       if(event instanceof NavigationEnd){
@@ -29,7 +29,7 @@ export class AyudaGeneralComponent {
         if(url){
           this.selected = url
         }else{
-          this.selected = 'publicar-producto';
+          this.selected = 'cupones';
         }
       }
     })    

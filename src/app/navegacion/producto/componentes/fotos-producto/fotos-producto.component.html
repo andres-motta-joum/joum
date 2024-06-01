@@ -1,15 +1,37 @@
 <div class="contenidoTotal" > 
-    <div class="seccionIzquierda" (scroll)="onScroll($event)">
-        <ng-container *ngFor="let fotoUrl of fotos[estiloSelec]; let i = index">
+    <div class="seccionIzquierda" (scroll)="onScroll($event)" *ngIf="anchoPagina > 1090">
+        <ng-container *ngFor="let fotoUrl of fotos; let i = index">
             <div *ngIf="fotoUrl" (click)="index = i; cambiarImagen()" class="div">
-                <img [src]="fotoUrl">
+                <img src="assets/img/categoria/pic-loading.svg" *ngIf="!producto">
+                <img [src]="'assets/img/productos/'+ fotoUrl + '.png'" *ngIf="producto">
             </div>
         </ng-container>
-        <div *ngIf="fotos && fotos[estiloSelec] && fotos[estiloSelec].length > 5 && linea" class="linea">
+        <div *ngIf="fotos && fotos.length > 5 && linea" class="linea">
             <div class="sombra"></div>
         </div>
     </div>
-    <div class="seccionDerecha">
-        <div><img [src]="selectedImage" (click)="emitirSombra(); emitirIndex()"></div>
+    <div class="seccionDerecha" *ngIf="anchoPagina > 670">
+        <div>
+            <img src="assets/img/categoria/pic-loading.svg" *ngIf="!producto">
+            <img [src]="'assets/img/productos/'+ selectedImage + '.png'" (click)="emitirSombra(); emitirIndex()" *ngIf="producto">
+        </div>
+    </div>
+    <div class="seccionDerecha" *ngIf="anchoPagina <= 670" >
+        <div (touchend)="touchedScroll($event)" #scrollElement>
+            <ng-container *ngFor="let foto of producto.fotos; let i = index">
+                <img [src]="'assets/img/productos/'+ foto + '.png'" (click)="index = i; emitirSombra(); emitirIndex(i)">
+            </ng-container>
+        </div>
+    </div>
+    <div class="seccionBaja" (scroll)="onScrollBajo($event)" *ngIf="anchoPagina <= 1090">
+        <ng-container *ngFor="let fotoUrl of fotos; let i = index">
+            <div *ngIf="fotoUrl" (click)="index = i; cambiarImagen()" class="div">
+                <img src="assets/img/categoria/pic-loading.svg" *ngIf="!producto">
+                <img [src]="'assets/img/productos/'+ fotoUrl + '.png'" *ngIf="producto">
+            </div>
+        </ng-container>
+        <div *ngIf="(anchoPagina - 60) < (70 * fotos.length) && linea" class="linea">
+            <div class="sombra"></div>
+        </div>
     </div>
 </div>

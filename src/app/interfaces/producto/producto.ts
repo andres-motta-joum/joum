@@ -1,11 +1,3 @@
-import { DetallesCuadros } from "./categorias/detalles-cuadros";
-import { DetallesRepisas } from "./categorias/detalles-repisas";
-import { DetallesIluminacion } from "./categorias/detalles-iluminacion";
-import { DetallesMacetas } from "./categorias/detalles-macetas";
-import { DetallesRelojes } from "./categorias/detalles-relojes";
-import { DetallesDifusores } from "./categorias/detalles-difusores";
-import { DetallesVinilos } from "./categorias/detalles-vinilos";
-import { DetallesAdornos } from "./categorias/detalles-adornos";
 import { DocumentData, DocumentReference, Timestamp } from "@angular/fire/firestore";
 
 export interface Producto {
@@ -22,10 +14,20 @@ export interface Producto {
   marca: string,       /*--- Principales ---*/
   modelo: string,
 
-  estilos: DocumentReference<DocumentData>[],   /*--- visual ---*/
+  fotos: string[],   /*--- visual ---*/
+  conSabor: boolean;
+  sabor?: string;
+  sabores?: string[];
+  tamanios?: Tamanio[];
+  subCategoria?: string;
+  botonCompra?: {id: string, idDocumento: string, variante?: string};
+  soloPorHoy?: boolean;
+  masVendido: boolean;
+  colores?: {fotos:string[], color: string, idBoton: string, idBotonDocumento: string, variante: string }[];
+  estilos?: {fotos:string[], estilo: string, idBoton: string, idBotonDocumento: string, variante: string }[];
+  videos?: {titulo: string, url: string}[];
   
-
-  detalles?: DetallesCuadros | DetallesRepisas | DetallesIluminacion | DetallesMacetas | DetallesRelojes | DetallesDifusores | DetallesVinilos | DetallesAdornos,
+  detalles: string[],
 
   descripcion?: string,
 
@@ -41,9 +43,7 @@ export interface Producto {
   precioEnvio?: number,
   vistas: Vistas[],
   descuento?: boolean, 
-    porcentajeDescuento?: number,
-    diasDescuento?: number,
-    fechaDescuento?: Date,
+    precioComparacion?: number,
   opiniones: Opinion[],
     calificacion?: number,
 
@@ -52,24 +52,18 @@ export interface Producto {
 }
 
 export interface Opinion {
-  id?: string,
-  idUsuario: string,
-  idProducto: string,
   tituloProducto: string,
   foto: string,
   calificacion?: number,
   fecha: Timestamp,
   contenido?: string,
-  numVenta: number,
-  check: boolean,
+  check: boolean
 }
 
-export interface Estilo {
-  id: string;
-  nombre: string,
-  fotos: DocumentReference<DocumentData>[],
-  unidades: number,
-  sku?: string
+export interface Tamanio {
+  gramos: string,
+  precio: number,
+  seleccion: boolean
 }
 
 interface Vistas{

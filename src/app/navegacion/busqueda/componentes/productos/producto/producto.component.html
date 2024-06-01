@@ -1,4 +1,4 @@
-<div  *ngIf="listadoCuadradosInp" class="cuadro" (mouseenter) ="mostrarCorazon() "  (mouseleave) ="mostrarCorazon()">
+<div class="cuadro" (mouseenter) ="mostrarCorazon() "  (mouseleave) ="mostrarCorazon()">
     <div class="corazones">
         <div class="fondo-corazon" [ngClass]="{'corazon-visible': corazonOver == true || corazonClick == true }">
             <ng-icon class="corazon" name="heroHeart" (click)="agregarFavorito()"></ng-icon>
@@ -7,73 +7,16 @@
     </div>
     
     <div (click)="navegar(['prod/',producto.id], $event)" >
-        <picture>
-        <img [src]="foto">
-        </picture>
+        <div class="recuadroImg">
+            <img [src]="'assets/img/productos/'+ producto.fotos[0] + '.png'">
+        </div>
         <div style="height: 100px; position: relative;">
             <p class="titulo-producto">{{ producto.nombre }}</p>
-            <p *ngIf="producto.descuento" class="precio-anterior">$ {{ producto.precio | number: '1.0-0' }}</p>
-            <div class="precios" style="display: flex; margin: 0 0 6px 0">
-                <p class="precio-final" *ngIf='producto.porcentajeDescuento'>$ {{ producto.precio! - (producto.precio! * (producto.porcentajeDescuento! / 100)) | number:'1.0-0' }}</p>
-                <p class="precio-final" *ngIf='!producto.porcentajeDescuento'>$ {{ producto.precio | number:'1.0-0' }}
-                <p class="porcentaje-rebaja" *ngIf='producto.porcentajeDescuento'>{{ producto.porcentajeDescuento}}% OFF</p>
+            <p class="precio-final">$ {{ producto.precio | number:'1.0-0'}} <span>COP</span></p>
+            <div class="descuento" *ngIf="producto.descuento">
+                <p class="precio-anterior">$ {{ producto.precioComparacion | number: '1.0-0' }}</p>
+                <p class="oferta" *ngIf='producto.descuento'>Oferta</p>
             </div>
-            <div class="estrellas">
-                <div class="starts-over" [ngClass]="'starts-' + promedioCalificacion">
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                </div>
-                <div class="starts">
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                </div>
-            </div>
-            <p class="numVotos">({{producto.opiniones.length}})</p>
         </div>
     </div>
-</div>
-
-<div *ngIf="listadoLineadoInp" class="lineado" (mouseenter) ="mostrarCorazon() "  (mouseleave) ="mostrarCorazon()">
-
-    <div class="corazones-lin">
-        <div class="fondo-corazon-lin" [ngClass]="{'corazon-visible': corazonOver == true || corazonClick == true }">
-            <ng-icon class="corazon-lin" name="heroHeart" (click)="agregarFavorito()"></ng-icon>
-            <ng-icon class="corazon-full-lin" name="heroHeartSolid" [class.corazon-click] = "corazonClick == true"></ng-icon>
-        </div>
-    </div>
-    <picture (click)="navegar(['prod/', producto.id], $event)">
-    <img [src]="foto">
-    </picture>
-    <content (click)="navegar(['prod/MOTTAANDRES20221130093921'], $event)">
-        <div style="height: 100px;">
-            <p class="titulo-producto2">{{ producto.nombre }}</p>
-            <p class="precio-anterior2">$ {{ producto.precio | number:'1.0-0' }}</p>
-            <p class="precio-final2">$ {{ producto.precio | number:'1.0-0' }}</p>
-            <p  class="porcentaje-rebaja2">{{ producto.porcentajeDescuento | percent }} OFF</p>
-            <i [ngClass]="{'fa': true,  'heart1': true,}"></i>
-            <div class="estrellas-lineado">
-                <div class="starts-over">
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                </div>
-                <div class="starts">
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <ng-icon name="matStarRound"></ng-icon>
-                    <p class="numVotos">{{producto.opiniones.length}}</p>
-                </div>
-            </div>
-        </div>
-    </content>
 </div>

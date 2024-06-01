@@ -1,9 +1,9 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, doc, getDoc } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Firestore, getDoc } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import { Subscription, first } from 'rxjs';
-import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { Usuario, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { ProductosService } from 'src/app/servicios/productos/productos.service';
@@ -21,17 +21,14 @@ export class GuardadosComponent implements OnInit{
   guardados!: referenciaCompra[];
   productos: Producto[] = [];
   unidades: number[] = [];
-  fotos: string[] = [];
-  estilosId: string[] = [];
-  estilos: Estilo[] = [];
-  indexEstilos: number[] = [];
+  tamanios: (number | string)[] = [];
 
   public cantidadProductos = 0;
 
   verificacion = false;
   productosLenght!: number;
 
-  singuardados!: boolean;
+  sinGuardados!: boolean;
 
   ngOnInit() {
     this.auth.onAuthStateChanged(user => {
@@ -41,13 +38,13 @@ export class GuardadosComponent implements OnInit{
             this.usuario = usuario;
             this.guardados = usuario.guardados;
             this.obtenerProductos();
-            this.singuardados = false;
+            this.sinGuardados = false;
           }else{
-            this.singuardados = true;
+            this.sinGuardados = true;
           }
         })
       } else {
-        this.router.navigate(['cuenta/iniciar-sesion']);
+        this.router.navigate(['cuenta/crear-cuenta']);
       }
     });
   }
@@ -55,22 +52,18 @@ export class GuardadosComponent implements OnInit{
   async obtenerProductos() {
     if (this.usuario?.guardados) {
       const productosRef = await Promise.all(this.usuario?.guardados.map((ref:referenciaCompra) => getDoc(ref.producto)));
+      this.tamanios = this.usuario.guardados!.map((guardado)=>{
+        if( typeof guardado.tamanioIndex === 'number'){
+          return guardado.tamanioIndex
+        }else{
+          return 'false';
+        }
+      })
       await Promise.all(productosRef.map(async (productSnapshot, index) => {
         const prd = productSnapshot.data() as Producto;
         prd.id = productSnapshot.id;
         this.productos.push(prd);
-        this.estilosId.push(this.usuario.guardados![index].estilo!);
-        const estiloRef = doc(this.firestore, `productos/${prd.id}/estilos/${this.usuario.guardados![index].estilo!}`);
-        const estiloSnapshot = await getDoc(estiloRef);
-        const estilo = estiloSnapshot.data() as Estilo;
-        estilo.id = estiloSnapshot.id;
-        this.estilos.push(estilo);
       }));
-      this.indexEstilos = this.usuario.guardados!.map((guardado)=>{
-        const partes = guardado.estilo.split(':');
-        return Number(partes[0]) - 1;
-      })
-      this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, this.estilosId);
     }
     this.unidades = this.usuario.guardados!.map((guardados)=>{
       return guardados.unidades;
@@ -82,13 +75,11 @@ export class GuardadosComponent implements OnInit{
     this.guardados.splice(index, 1);
     this.productos.splice(index, 1);
     this.unidades.splice(index, 1);
-    this.fotos.splice(index, 1);
-    this.estilos.splice(index, 1);
-    this.indexEstilos.splice(index, 1);
+    this.tamanios.splice(index, 1);
     if(this.guardados.length !== 0){
-      this.singuardados = false;
+      this.sinGuardados = false;
     }else{
-      this.singuardados = true;
+      this.sinGuardados = true;
     }
   }
 

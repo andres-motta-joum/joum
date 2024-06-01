@@ -4,25 +4,46 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Fuse from 'fuse.js';
 import { ProductosService } from 'src/app/servicios/productos/productos.service';
+import { Usuario } from 'src/app/interfaces/usuario/usuario';
+import { Auth } from '@angular/fire/auth';
+import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { Firestore, collection, getDocs, orderBy, query } from '@angular/fire/firestore';
+import { provideIcons } from '@ng-icons/core';
+import { matSearch } from '@ng-icons/material-icons/baseline';
 
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
-  styleUrls: ['./busqueda.component.scss']
+  styleUrls: ['./busqueda.component.scss'],
+  viewProviders: provideIcons({matSearch})
 })
 export class BusquedaComponent implements OnDestroy {
+  constructor(private prdService: ProductosService,private route: ActivatedRoute,private router: Router, private prdsService: ProductosService, private auth: Auth, private authService: AuthService, private firestore: Firestore) {}
   public productos!: Producto[];
   private fuse!: Fuse<Producto>;
   public productosFiltrados!: Producto[];
+  public usuario!: Usuario | undefined;
+  registroHistorial: boolean = true;
+  datosCargados = false;
 
-  constructor(private prdService: ProductosService,private route: ActivatedRoute,private router: Router) {}
+  public url!: string;
 
   ngOnInit(): void {
-    this.busquedaNombre();
+    this.auth.onAuthStateChanged(async (usuario)=>{
+      if(usuario){
+        const miUsuario = await this.authService.getUsuarioIdPromise(usuario.uid);
+        this.usuario = miUsuario;
+      }else{
+        this.usuario = undefined;
+      }
+      this.busquedaNombre();
+    })
   }
 
   ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
+    if(this.routeSubscription){
+      this.routeSubscription.unsubscribe();
+    }
   }
 
   // --------------- Inicialización ---------------
@@ -41,62 +62,58 @@ export class BusquedaComponent implements OnDestroy {
     return resultados.map(resultado => resultado.item);
   }
 
-  // --------------- Filtros ---------------
-  filtroEnvioGratis(producto: Producto): boolean {
-    return producto.envioGratis!;
-  }
-
-  filtroPrecio(producto: Producto, precioMinimo: number, precioMaximo: number): boolean {
-    return producto.precio! >= precioMinimo && producto.precio! <= precioMaximo;
-  }
-
-  filtrarProductos(envioGratis: boolean, rangoPrecio: { min: number; max: number }): Producto[] {
-    return this.productos.filter(producto => {
-      let cumpleFiltros = true;
-
-      if (envioGratis) {
-        cumpleFiltros = cumpleFiltros && this.filtroEnvioGratis(producto);
-      }
-
-      if (rangoPrecio.min > 0 || rangoPrecio.max > 0) {
-        cumpleFiltros = cumpleFiltros && this.filtroPrecio(producto, rangoPrecio.min, rangoPrecio.max);
-      }
-
-      return cumpleFiltros;
-    });
-  }
-
   // --------------- Búsqueda de Nombre ---------------
-  private routeSubscription!: Subscription;
-  public busqueda!: string;
+  routeSubscription!: Subscription;
+  busqueda!: string;
   async busquedaNombre() {
     this.routeSubscription = this.route.paramMap.subscribe(async () => {
-      const url = this.router.url;
+      const url = this.router.url.split('?')[0];
       const decodedUrl = decodeURIComponent(url);
       const segments = decodedUrl.split('/');
       this.busqueda = segments[segments.length - 1];
 
       await this.obtenerProductos();
-      this.inicializarFuse();
-      this.productosFiltrados = this.buscarEnProductos(this.busqueda);
+      switch (this.busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()){
+        case 'cuadros':{
+          this.productosFiltrados = this.productos.filter((producto)=> producto.categoria == 'Cuadros');
+          break
+        }
+        case 'repisas':{
+          this.productosFiltrados = this.productos.filter((producto)=> producto.categoria == 'Repisas');
+          break
+        }
+        case 'iluminacion':{
+          this.productosFiltrados = this.productos.filter((producto)=> producto.categoria == 'Iluminación');
+          break
+        }
+        case 'macetas':{
+          this.productosFiltrados = this.productos.filter((producto)=> producto.categoria == 'Macetas');
+          break
+        }
+        case 'relojes':{
+          this.productosFiltrados = this.productos.filter((producto)=> producto.categoria == 'Relojes');
+          break
+        }
+        case 'difusores':{
+          this.productosFiltrados = this.productos.filter((producto)=> producto.categoria == 'Difusores');
+          break
+        }
+        case 'adornos':{
+          this.productosFiltrados = this.productos.filter((producto)=> producto.categoria == 'Adornos');
+          break
+        }
+        default: {
+          this.inicializarFuse();
+          this.productosFiltrados = this.buscarEnProductos(this.busqueda);
+        }
+      }
+      this.datosCargados = true;
     });
   }
 
   async obtenerProductos() {
-    await this.prdService.obtenerProductos().then((productos)=>{
-      this.productos = productos
-    })
-  }
-
-  //-------------------------- Funciones secundarias ------------------------------------
-  public listadoCuadrados = true;
-  public listadoLineado = false;
-
-  getCuadradoList(cuadradoList: boolean): void {
-    this.listadoCuadrados = cuadradoList;
-  }
-
-  getLineadoList(lineadoList: boolean): void {
-    this.listadoLineado = lineadoList;
+    const queri = query(collection(this.firestore, 'productos'), orderBy('enFavorito', 'desc'));
+    const snapshot = await getDocs(queri);
+    this.productos = snapshot.docs.map(doc => ({...doc.data(), id: doc.id} as Producto));
   }
 }

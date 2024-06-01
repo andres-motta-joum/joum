@@ -6,9 +6,9 @@ import { NgIconsModule } from '@ng-icons/core';
 import { InicioModule } from './navegacion/inicio/inicio.module';
 import { RegistroModule } from './navegacion/usuario/registro/registro.module';
 import { PerfilModule } from './navegacion/usuario/perfil/perfil.module';
-import { VenderModule } from './navegacion/usuario/vender/publicar/vender.module';
 import { BusquedaModule } from './navegacion/busqueda//busqueda.module';
 import { InformacionModule } from './navegacion/informacion/informacion.module';
+import { VenderModule } from './navegacion/usuario/vender/vender.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,13 +47,12 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
     AppRoutingModule,
     NgIconsModule.withIcons({}),
     BrowserAnimationsModule,
-    VenderModule,
     PerfilModule,
     ComponentesGeneralesModule,
     BusquedaModule,
     ProductoModule,
     ComprarModule,
-
+    VenderModule
   ],
   providers: [CurrencyPipe, FirebaseAppModule],
   bootstrap: [AppComponent]

@@ -1,0 +1,7 @@
+.botonCompraDiv{
+    max-width: 900px !important;
+    transition: .12s;
+    &:hover{
+        transform: scale(1.01);
+    }
+}

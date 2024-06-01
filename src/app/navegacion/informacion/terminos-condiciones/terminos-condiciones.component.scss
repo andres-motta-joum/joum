@@ -2,9 +2,15 @@
 	position: relative;
 	min-height: 100vh;
 	padding-bottom: 430px;
-	min-width: 900px;
+	min-width: 375px;
 	overflow: hidden;
 	background-color: #fafafa;
+    @media (max-width: 900px) {
+        padding-bottom: 550px;
+	}
+	@media (max-width: 560px) {
+		padding-bottom: 850px;
+	}
 }
 .contenido{
     width: 80%;

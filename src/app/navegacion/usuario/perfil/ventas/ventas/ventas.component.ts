@@ -50,6 +50,7 @@ export class VentasComponent implements OnInit, OnDestroy{
       this.ventas = ventasRef.map((productSnapshot)=>{
         return productSnapshot.data() as Venta;
       })
+      this.ventas = this.ventas.reverse();
       for (const venta of this.ventas) {
         const timestamp = venta.fechaVenta!;
         let date = new Date(timestamp.seconds * 1000);

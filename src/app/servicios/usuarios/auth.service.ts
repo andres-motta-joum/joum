@@ -133,8 +133,9 @@ export class AuthService {
       notificacionesRecibidas: { ofertasDecuentos: true, ventas: true, publicaciones: true, reclamos: true, mensajes: true},
       emailsRecibidos: { ofertas: true, mensajes: true, opiniones: true, ventas: true, publicacionesPorFinalizar: true, publicacionesFinalizadas: true, compras: true},
       fechaRegistro: new Date(),
+      direcciones: [],
       notificaciones: [{
-        foto: 'https://firebasestorage.googleapis.com/v0/b/joum-b86f6.appspot.com/o/joum%2Fbienvenido.png?alt=media&token=243366d0-8607-44af-9392-24fc39f806b8',
+        foto: 'https://firebasestorage.googleapis.com/v0/b/enerfull-c3272.appspot.com/o/ilustraciones%2Fnuevo.png?alt=media&token=b4b33465-1e39-448d-8a5c-9e6bbb2f2a18',
         titulo: '¡Bienvenid@!',
         contenido: `Estamos emocionados de tenerte aquí ${nombre.split(' ')[0]}. Marca el comienzo de un emocionante viaje creativo. `,
         fecha: new Date(),

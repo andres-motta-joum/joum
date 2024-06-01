@@ -2,7 +2,7 @@
     <div class="venta" *ngFor="let referencia of referencias; let index = index">
         <img [src]="referencia.foto">
         <div>
-            <p>{{referencia.tituloProducto}}</p>
+            <p>{{referencia.tituloProducto}} <span *ngIf="referencia.gramosTamanio !== 'false'">{{referencia.gramosTamanio}}</span></p>
             <p>#{{venta.numVenta}}</p>
             <p>$ {{referencia.precioProducto| number: '1.0-0'}}</p>
         </div>

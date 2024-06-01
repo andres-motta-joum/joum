@@ -12,6 +12,7 @@ nav{
 
 .btn-menu{
 	width: 80px;
+	min-width: 65px;
 	background: linear-gradient(to right, #494748 0%, #4c4c4b 50%, #494748 100%);
 	border: none;
 	color: white;
@@ -87,10 +88,20 @@ ng-icon.cart{
 			color: #444;
 		}
 	}
+	@media (max-width: 720px) {
+		display: flex;
+		margin-left: 14px;
+		&:hover{
+			background: #3f3e3d !important;
+		}
+		a:hover{
+			background: #4a4a4a;
+		}
+    }
 }
 .Buscador{
 	padding: 0 16px;
-	width: 600px;
+	width: 530px;
 	height: 35px;
 	margin: 11px 0px 10px 40px;
 	border: 1px solid #fff;
@@ -102,7 +113,7 @@ ng-icon.cart{
 	word-spacing: .8px;
 }
 .Buscador:focus{
-	border: 1px solid #FF9E57;
+	border: 1px solid #ff9e57;
 	outline: none;
 }
 .Buscador::placeholder{
@@ -110,10 +121,11 @@ ng-icon.cart{
 }
 .Buscar{
 	width: 54px;
+	min-width: 38px;
 	height: 35px;
 	margin: 11px 40px 10px 0;
-	background: #FF9E57;
-	border: 1px solid #FF9E57;
+	background: #FF9C53;
+	border: 1px solid #FF9C53;
 	border-radius: 0px 4px 4px 0px; 
 	font-size: 20px;
 	color: white;
@@ -122,7 +134,7 @@ ng-icon.cart{
 	justify-content: center;
 	cursor: pointer;
 	&:hover{
-		background-color: #f99b58;
+		background-color: #f9944c;
 	}
 }
 
@@ -206,7 +218,7 @@ ng-icon.cart{
 	border-radius: 5px;
 	font-size: 15px;
 	cursor: pointer;
-	background: #FF9E57;
+	background: #FF9C53;
 	color: white;
 	border: none;
 	transition: .3s;
@@ -214,8 +226,8 @@ ng-icon.cart{
 }
 #dos button:hover{
 	background: white;
-	color: #FF9E57;
-	border: 1px #FF9E57 solid;
+	color: #FF9C53;
+	border: 1px #FF9C53 solid;
 }
 .botones a{
 	cursor:default;
@@ -351,7 +363,7 @@ ng-icon.cart{
 	height: 30px;
 	position: relative;
 	z-index: 400;
-	min-width: 870px;
+	min-width: 375px;
 	border-top: 1px solid #777;
 	@media (max-width: 1400px) {
 		background-size: 125% 100%;
@@ -468,6 +480,19 @@ ng-icon.cart{
 			}		
 		}
 	}
+	@media (max-width: 800px) {
+		background: linear-gradient(to right, #7c7c7b 0%,#727171 5%, #666666 12%,#656565 50%,#666666 88%, #727171 95%, #7c7c7b 100%);
+		.menu2{
+			ul{
+				margin: 0;
+				margin-left: 30px;
+				padding: 0;
+				li:nth-child(1){
+					margin: 0;
+				}
+			}
+		}
+    }
 }
 
 
@@ -553,12 +578,51 @@ ng-icon.cart{
 		display: none;
 	}
 	.Buscador{
-		width: 440px;
+		width: 50%;
 	}
 }
 @media screen and (max-width: 900px){
 	#dos{
 	display: none;
+	}
+}
+@media screen and (max-width: 720px){
+	.logo{
+		transform: scale(0.95) translate( -3px, 1px );
+	}
+	.Buscador{
+		height: 32px;
+		margin: 13px 0px 12px 40px;
+	}
+	.Buscar{
+		height: 32px;
+		width: 32px;
+		margin: 13px 40px 12px 0;
+		ng-icon.search{
+			font-size: 21px;
+		}
+	}
+}
+@media screen and (max-width: 500px){
+	.sinLogo{
+		width: 5px;
+		overflow: hidden;
+		animation: logo 0.5s;
+	}
+
+	.logo{
+		transform: scale(0.95) translate( -3px, 1px );
+	}
+	.Buscador{
+		margin-left: 20px;
+	}
+}
+@keyframes logo {
+	0%{
+		width: 300px;
+	}
+	100%{
+		width: 3px;
 	}
 }
 
@@ -593,14 +657,14 @@ ng-icon.cart{
 			width: 100%;
 			border: none;
 			border-radius: 4px;
-			background: #fff5ec;
-			color: #fd9347;
+			background: #ecf9f2;
+			color: #2cc75d;
 			font-weight: 480;
 			letter-spacing: .4px;
 			word-spacing: 1px;
 			cursor: pointer;
 			&:hover{
-				background: #ffa15e;
+				background: #52d77c;
 				color: #fff;
 			}
 		}

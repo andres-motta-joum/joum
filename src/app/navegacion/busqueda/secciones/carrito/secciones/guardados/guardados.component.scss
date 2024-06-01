@@ -8,4 +8,24 @@
     app-producto-guardado:nth-child(1) div{
         border: none;
     }  
+    .sinGuardados{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fdfdfd;
+        border-radius: 7px;
+        height: 235px;
+        img{
+            width: 115px;
+        }
+        p{
+            margin-top: 17px;
+            font-size: 17.5px;
+            color: #888;
+            font-weight: 420;
+            letter-spacing: .5px;
+            word-spacing: 1px;
+        }
+    }
 }

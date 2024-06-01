@@ -1,0 +1,22 @@
+<form *ngIf="form" [formGroup]="form">
+    <section class="datos">
+        <div>
+            <label for="nombre" [ngClass]="{'invalid-field': invalid('nombre')}"> Nombre</label>
+            <input id="nombre" type="text" formControlName="nombre" maxlength="50" placeholder="Tu nombre"> 
+        </div>
+        <div>
+            <label for="apellido" [ngClass]="{'invalid-field': invalid('apellido')}"> Apellido(s)</label>
+            <input id="apellido" type="text" formControlName="apellido" maxlength="50" placeholder="Tus apellido(s)"> 
+        </div>
+        <div>
+            <label [ngClass]="{'invalid-field': invalid('telefono')}">Número de celular</label>
+            <input type="text" formControlName="telefono" class="inputTelefono" maxlength="10" placeholder="Tu numero de celular">
+            <p class="extensionNumero">+57</p>
+            <img src="assets/img/logo/colombia.png">
+        </div>
+        <div>
+            <label for="correo" [ngClass]="{'invalid-field': invalid('correo')}"> Correo electrónico</label>
+            <input id="correo" type="text" formControlName="correo" maxlength="50" placeholder="Tu correo electrónico"> 
+        </div>
+    </section>
+</form>

@@ -62,7 +62,7 @@ export class TicketComponent implements OnInit{
   }
 
   async obtenerTicket(ticketId: string, usuario?: boolean){
-    const ticketSnapshot = await getDoc(doc(this.firestore, `informacion/atencion-cliente/tickets/${ticketId}`));
+    const ticketSnapshot = await getDoc(doc(this.firestore, `ayuda/atencion-clientes/tickets/${ticketId}`));
     if(ticketSnapshot.exists()){
       this.ticket = ticketSnapshot.data() as Ticket;
       this.ticket.id = ticketSnapshot.id;
@@ -71,7 +71,7 @@ export class TicketComponent implements OnInit{
           this.tipoUsuario = 'usuario';
           if(this.ticket.respuesta && !this.ticket.respuesta.visto){
             this.ticket.respuesta.visto = true;
-            await updateDoc(doc(this.firestore, `informacion/atencion-cliente/tickets/${this.ticket.id}`), {respuesta: this.ticket.respuesta});
+            await updateDoc(doc(this.firestore, `ayuda/atencion-clientes/tickets/${this.ticket.id}`), {respuesta: this.ticket.respuesta});
           }
         }else{
           this.router.navigate(['']);
@@ -100,7 +100,7 @@ export class TicketComponent implements OnInit{
     if(!this.cargandoReporte){
       this.cargandoReporte = true;
       const usuarioRef = doc(this.firestore, `usuarios/${this.ticket.idUsuario}`);
-      const ricketRef = doc(this.firestore, `informacion/atencion-cliente/tickets/${this.ticket.id}`);
+      const ricketRef = doc(this.firestore, `ayuda/atencion-clientes/tickets/${this.ticket.id}`);
       const usuarioSnapshot = await getDoc(usuarioRef);
       const usuario = usuarioSnapshot.data() as Usuario;
       if(this.ticket.reportado){
@@ -213,7 +213,7 @@ export class TicketComponent implements OnInit{
       fotos: fotosLinks,
       visto: false
     }
-    const ticketRef = doc(this.firestore, `informacion/atencion-cliente/tickets/${this.ticket.id}`);
+    const ticketRef = doc(this.firestore, `ayuda/atencion-clientes/tickets/${this.ticket.id}`);
     await updateDoc(ticketRef, {respuesta: respuesta, estado: 'Finalizado'});
     await updateDoc(doc(this.firestore, `usuarios-internos/${this.ticket.idUsuarioInterno}`), {tickets: arrayRemove(ticketRef)});
     this.actualizacionExitosa = true;
@@ -242,7 +242,7 @@ export class TicketComponent implements OnInit{
   
   async si(){
     this.check = true;
-    await updateDoc(doc(this.firestore, `informacion/atencion-cliente/tickets/${this.ticket.id}`), {utilidad: 'util'});
+    await updateDoc(doc(this.firestore, `ayuda/atencion-clientes/tickets/${this.ticket.id}`), {utilidad: 'util'});
   }
 
   no(){
@@ -256,7 +256,7 @@ export class TicketComponent implements OnInit{
   async enviarEncuesta(){
     if(this.seleccionado){
       this.check = true;
-      await updateDoc(doc(this.firestore, `informacion/atencion-cliente/tickets/${this.ticket.id}`), {utilidad: this.seleccionado});
+      await updateDoc(doc(this.firestore, `ayuda/atencion-clientes/tickets/${this.ticket.id}`), {utilidad: this.seleccionado});
     }
   }
   

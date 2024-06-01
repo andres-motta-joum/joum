@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, HostListener, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
@@ -25,6 +25,12 @@ export class IniciarSesionComponent {
   public errorPassword = false;
   public requiredEmail = false;
   public requiredPassword = false;
+  anchoPagina: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.anchoPagina = event.target.innerWidth;
+  }
 
   ngOnInit(): void {
     this.initForm();

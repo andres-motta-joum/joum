@@ -14,12 +14,6 @@
                     <p>Compras</p>
                     <span class="linea"></span>
                 </div>
-                <div [ngClass]="{'seleccionado': categoria == 'ventas'}" (click)="navegar('ayuda/ventas')">
-                    <img src="assets/img/ayuda/iconos/preguntas-ventas.svg">
-                    <img [ngClass]="{ 'imagen-select': categoria == 'ventas'}" src="assets/img/ayuda/iconos/preguntas-ventas-color.svg">
-                    <p>Ventas</p>
-                    <span class="linea"></span>
-                </div>
                 <div [ngClass]="{'seleccionado': categoria == 'mis-datos'}" (click)="navegar('ayuda/mis-datos')">
                     <img src="assets/img/ayuda/iconos/preguntas-mis-datos.svg">
                     <img [ngClass]="{ 'imagen-select': categoria == 'mis-datos'}" src="assets/img/ayuda/iconos/preguntas-mis-datos-color.svg">

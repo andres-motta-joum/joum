@@ -39,7 +39,7 @@ export class SugerenciasComponent {
       if(this.descripcion){
         this.cargando = true;
         this.descripcionError = false;
-        await addDoc(collection(this.firestore, 'informacion/crecimiento/sugerencias'), {descripcion: this.descripcion});
+        await addDoc(collection(this.firestore, 'cookies/informacion/sugerencias'), {descripcion: this.descripcion});
         this.cargando = false;
         this.actualizacionExitosa = true;
         setTimeout(()=>{

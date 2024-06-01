@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 import { Direccion } from 'src/app/interfaces/usuario/subInterfaces/direccion';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
-import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { ProductosService } from 'src/app/servicios/productos/productos.service';
 import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
 
@@ -26,10 +26,8 @@ export class ResumenComponent implements OnInit{
   direccion!: Direccion;
   direccionString!: string;
   productos!: Producto[];
-  fotos!: string[];
   unidades!: number[];
-  indexEstilos!: number[];
-  estilos: Estilo[] = [];
+  tamanios: (number | string)[] = [];
   ngOnInit(): void {
     this.authService.getUsuarioId(this.auth.currentUser?.uid!).pipe(first()).subscribe((usuario)=>{
       if(usuario.direcciones && usuario.direcciones.length !== 0){
@@ -76,31 +74,30 @@ export class ResumenComponent implements OnInit{
   async obtenerProductos(){
     const referencias$ = this.comprarService.$obtenerReferencias;
     const referencias = await firstValueFrom(referencias$);
-    const estilos = await Promise.all(referencias.map(async (referencia)=>{
-      const estiloRef = doc(this.firestore, `productos/${referencia.producto.id}/estilos/${referencia.estilo}`);
-      const estiloSnapshot = await getDoc(estiloRef);
-      const estilo = estiloSnapshot.data() as Estilo;
-      estilo.id = estiloSnapshot.id;
-      this.estilos.push(estilo);
-      return referencia.estilo!
-    }));
-
+    this.tamanios = referencias.map((ref)=>{
+      if(typeof ref.tamanioIndex === 'number'){
+        return ref.tamanioIndex
+      }else{
+        return 'false';
+      }
+    });
     this.productos = await this.comprarService.obtenerProductos(referencias);
-    this.fotos = this.productos.map(()=> '');
+    this.tamanios = referencias.map((ref)=>{
+      if(typeof ref.tamanioIndex === 'number'){
+        return ref.tamanioIndex
+      }else{
+        return 'false';
+      }
+    });
     this.unidades = this.usuario.referenciaCompra!.map((referencia)=>{
       return referencia.unidades;
     })
-    this.indexEstilos = this.usuario.referenciaCompra!.map((referencia)=>{
-      const partes = referencia.estilo.split(':');
-      return Number(partes[0]) - 1;
-    })
-    this.fotos = await this.prdsService.obtenerFotosSegunEstilo(this.productos, estilos);
   }
 
-  async cambiarUnidad(accion: string, index: number, unidadesTotales: number){
+  async cambiarUnidad(accion: string, index: number){
     const userRef = doc(this.firestore, `usuarios/${this.usuario.id}`);
     if(accion === '+'){
-      if(this.unidades[index] < unidadesTotales){
+      if(this.unidades[index] < 59){
         const referencias = this.usuario.referenciaCompra;
         referencias![index].unidades += 1; 
         this.unidades[index] += 1;

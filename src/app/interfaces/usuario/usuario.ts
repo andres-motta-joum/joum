@@ -21,7 +21,7 @@ export interface Usuario {
   registroHistorial: boolean,
   fechaRegistro: Date,
   diasComoVendedor?: number,
-  direcciones?: Direccion[],
+  direcciones?: Direccion[] | [],
   documento?: number,
   tipoDocumento?: string,
   tickets?: DocumentReference<DocumentData>[],
@@ -71,13 +71,14 @@ export interface porComprar{
   skuEstilo: string,
   foto: string,
   unidades: number,
+  gramosTamanio: string,
   envioGratis: boolean,
-  precioEnvio: number,
-  tipoPublicacion: string
+  precioEnvio: number
 }
 
 export interface referenciaCompra {
   producto: DocumentReference<DocumentData>;
   estilo: string;
-  unidades: number
+  unidades: number;
+  tamanioIndex?: number
 }

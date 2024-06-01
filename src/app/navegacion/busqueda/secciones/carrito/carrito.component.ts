@@ -24,7 +24,7 @@ export class CarritoComponent {
           this.usuario = usuario;
         })
       } else {
-        this.router.navigate(['cuenta/iniciar-sesion']);
+        this.router.navigate(['cuenta/crear-cuenta']);
       }
     });
 

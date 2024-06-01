@@ -1,19 +1,16 @@
-
-  @mixin item-styles {
-	border: 1px solid #ddd;
-	height: 300px;
-	display: flex;
-	border-radius: 5px;
-	cursor: pointer;
-  }
-  
   .body {
 	position: relative;
 	min-height: 100vh;
-	min-width: 940px;
+	min-width: 375px;
 	padding-bottom: 430px;
 	overflow: hidden;
 	background-color: #f9f9f9;
+	@media (max-width: 900px) {
+        padding-bottom: 550px;
+	}
+	@media (max-width: 560px) {
+		padding-bottom: 850px;
+	}
   }
   
   #contenidoTotal {
@@ -24,9 +21,8 @@
 	  width: 90%;
 	  margin: auto;
 	}
-	@media screen and (max-width: 1000px) {
-		width: 900px;
-		margin: auto;
+	@media screen and (max-width: 550px) {
+		width: 93%;
 	}
   }
   
@@ -34,77 +30,150 @@
 	color: #606060;
 	font-size: 22px;
 	font-weight: 500;
-	margin: -10px 0 10px 0;
-	
+	margin: 0;
+	transform: translateY(-10px);
 	letter-spacing: 1px;
+	@media screen and (max-width: 570px) {
+		font-size: 18px;
+		color: #666;
+		letter-spacing: .5px;
+		height: 18px;
+	}
   }
   
   .Linea {
 	border-bottom: 1px solid #eee;
   }
-  
+
+
   .contenido-publicitario {
 	width: 100%;
-	display: flex;
-  
+	height: 295px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 20px;
+	@mixin item-styles {
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+		display: grid;
+		grid-template-columns: 53% 47%;
+		border-radius: 8px;
+		cursor: pointer;
+		overflow: hidden;
+	}
+
 	.item {
 	  @include item-styles;
-	  width: 49%;
 	}
   
 	.item-2 {
 	  @include item-styles;
-	  height: 300px;
-	  width: 400px;
-	  margin-left: 20px;
-	  width: 49%;
+	}
+  }
+
+  @media (max-width: 1420px) {
+	.contenido-publicitario {
+		height: 275px;
+	}
+  }
+  @media (max-width: 1330px) {
+	.contenido-publicitario {
+		height: 260px;
+	}
+  }
+  @media (max-width: 1260px) {
+	.contenido-publicitario {
+		height: 240px;
+	}
+  }
+  @media (max-width: 1160px) {
+	.contenido-publicitario {
+		height: 225px;
+	}
+  }
+  @media (max-width: 1120px) {
+	.contenido-publicitario {
+		height: 205px;
+	}
+  }
+  @media (max-width: 840px) {
+	.contenido-publicitario {
+		margin-top: 8px;
+		height: 270px;
+		grid-template-columns: 1fr;
+		column-gap: 0;
+	}
+  }
+  @media (max-width: 670px) {
+	.contenido-publicitario {
+		height: 240px;
+	}
+  }
+  @media (max-width: 600px) {
+	.contenido-publicitario {
+		height: 210px;
+	}
+  }
+  @media (max-width: 500px) {
+	.contenido-publicitario {
+		height: 190px;
+	}
+  }
+  @media (max-width: 440px) {
+	.contenido-publicitario {
+		height: 170px;
 	}
   }
   
   .item-text {
-	width: 31%;
-	background: #fff;
-	padding: 0 20px;
+	background: linear-gradient(to right, #fff, #EDEDED);
+	padding: 0 40px;
 	h1 {
-	  text-align: center;
-	  font-size: 25px;
-	  color: #666;
-	  line-height: 40px;
-	  margin-top: 40px;
-	  font-weight: 580;
-	  margin: 40 20px;
+	  text-align: left;
+	  font-size: 21px;
+	  color: #606060;
+	  line-height: 28px;
+	  font-weight: 540;
+	  margin-top: 30%;
+	  letter-spacing: .4px;
 	}
   
 	button {
-	  margin-top: 45px;
-	  margin-left: 25%;
 	  color: #ffffff;
-	  font-weight: 580;
+	  font-weight: 520;
 	  letter-spacing: 1px;
-	  width: 50%;
+	  width: 130px;
 	  height: 39px;
-	  background: #ff9e57;
+	  background: #FF9C53;
 	  border: none;
 	  cursor: pointer;
-	  border-radius: 6px;
+	  border-radius: 5px;
   
 	  &:hover {
-		background-color: #ff9939;
+		background-color: #FF9C53;
 	  }
 	}
+	@media (max-width: 550px) {
+		h1 {
+			font-size: 19px;
+		}
+	}
+	@media (max-width: 450px) {
+		h1 {
+			font-size: 17.5px;
+		}
+		button {
+			width: 120px;
+			height: 36px;
+		}
+	}
   }
-  
-  .item-img {
-	object-fit: cover;
-	width: 70%;
-	border-radius: 0 5px 5px 0;
-  }
-  
-  .Anuncio {
-	img {
-	  width: 100%;
-	  margin-top: 20px;
-	  border-radius: 8px;
+
+  .imagen{
+	position: relative;
+	img{
+		position: absolute;
+		width: 100%;
+		height: 100%;
 	}
   }
   
@@ -130,7 +199,7 @@
 			width: 100px;
 			height: 36px;
 			border: none;
-			background: #ff9e57;
+			background: #FF9C53;
 			border-radius: 6px;
 			color: #fff;
 			font-size: 16px;
@@ -139,7 +208,7 @@
 			cursor: pointer;
 			&:hover {
 				background: #fff;
-				color: #ff9e57;
+				color: #FF9C53;
 			}
 		}
 	}

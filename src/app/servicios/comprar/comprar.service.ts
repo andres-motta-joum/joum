@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { DocumentData, DocumentReference, Firestore, addDoc, arrayUnion, collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, arrayUnion, doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Direccion } from 'src/app/interfaces/usuario/subInterfaces/direccion';
 import { AuthService } from '../usuarios/auth.service';
 import { Observable, map } from 'rxjs';
 import { Usuario, porComprar, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
-import { Estilo, Opinion, Producto } from 'src/app/interfaces/producto/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { Venta } from 'src/app/interfaces/venta';
 @Injectable({
   providedIn: 'root'
@@ -34,45 +34,73 @@ export class ComprarService {
     );
   }
 //-----------------------------------------
-  async agregarReferenciaCompra(idProducto: string, idUsuario: string, estilo: string, unidades: number): Promise<void>{
+  async agregarReferenciaCompra(idProducto: string, idUsuario: string, unidades: number, tamanioI?: number): Promise<void>{
     const productoRef = doc(this.firestore, '/productos/' + idProducto);
     const usuarioRef = doc(this.firestore, '/usuarios/' + idUsuario);
-    await updateDoc(usuarioRef, {
-      referenciaCompra: [{
+    if(typeof tamanioI == 'number'){
+      await updateDoc(usuarioRef, {
+        referenciaCompra: [{
           producto: productoRef,
-          estilo: estilo,
+          unidades: unidades,
+          tamanioIndex: tamanioI
+        }]
+      })
+    }else{
+      await updateDoc(usuarioRef, {
+        referenciaCompra: [{
+          producto: productoRef,
           unidades: unidades
         }]
-    })
+      })
+    }
   }
-  async agregarReferenciaCarritoCompra(referencia: referenciaCompra[], idUsuario: string): Promise<void>{
+  async agregarReferenciaCarritoCompra(referencias: referenciaCompra[], idUsuario: string): Promise<void>{
     const usuarioRef = doc(this.firestore, '/usuarios/' + idUsuario);
     await updateDoc(usuarioRef, {
-      referenciaCompra: referencia
+      referenciaCompra: referencias
     })
   }
 
-  async agregarReferenciaCarrito(idProducto: string, idUsuario: string, estilo: string, unidades: number): Promise<void>{
+  async agregarReferenciaCarrito(idProducto: string, idUsuario: string, unidades: number, tamanioI?: number): Promise<void>{
     const productoRef = doc(this.firestore, '/productos/' + idProducto);
     const usuarioRef = doc(this.firestore, '/usuarios/' + idUsuario);
-    await updateDoc(usuarioRef, {
-      carrito: arrayUnion({
-        producto: productoRef,
-        estilo: estilo,
-        unidades: unidades
+    console.log(tamanioI);
+    if(typeof tamanioI == 'number'){
+      await updateDoc(usuarioRef, {
+        carrito: arrayUnion({
+          producto: productoRef,
+          unidades: unidades,
+          tamanioIndex: tamanioI
+        })
       })
-    })
+    }else{
+      await updateDoc(usuarioRef, {
+        carrito: arrayUnion({
+          producto: productoRef,
+          unidades: unidades
+        })
+      })
+    }
   }
-  async agregarReferenciaGuardado(idProducto: string, idUsuario: string, estilo: string, unidades: number): Promise<void>{
+  async agregarReferenciaGuardado(idProducto: string, idUsuario: string, unidades: number, tamanioI?: number): Promise<void>{
     const productoRef = doc(this.firestore, '/productos/' + idProducto);
     const usuarioRef = doc(this.firestore, '/usuarios/' + idUsuario);
-    await updateDoc(usuarioRef, {
-      guardados: arrayUnion({
-        producto: productoRef,
-        estilo: estilo,
-        unidades: unidades
+    if(typeof tamanioI == 'number'){
+      await updateDoc(usuarioRef, {
+        guardados: arrayUnion({
+          producto: productoRef,
+          unidades: unidades,
+          tamanioIndex: tamanioI
+        })
       })
-    })
+    }else{
+      await updateDoc(usuarioRef, {
+        guardados: arrayUnion({
+          producto: productoRef,
+          unidades: unidades
+        })
+      })
+    }
   }
 
 //---------------------
@@ -177,66 +205,10 @@ export class ComprarService {
       await updateDoc(clienteRef, {
         compras: arrayUnion(ventaRef)
       })
-      //--- opiniones
-      
-      let opiniones: Opinion[] | any = [];
-
-      for(let referencia of venta.referencias) {
-          const q = query(collection(this.firestore, "opiniones"), where("foto", "==", referencia.foto));
-          const querySnapshot = await getDocs(q);
-          if (querySnapshot.empty) {
-              opiniones.push({
-                  idUsuario: venta.idCliente,
-                  idProducto: referencia.idProducto,
-                  tituloProducto: referencia.tituloProducto,
-                  foto: referencia.foto,
-                  numVenta: venta.numVenta,
-                  fecha: new Date(),
-                  check: false
-              });
-          }
-      }
-
-      for(let opinion of opiniones){
-          const opinionRef = await addDoc(collection(this.firestore, "opiniones"), opinion);
-          await updateDoc(clienteRef, {opiniones: arrayUnion(opinionRef)});
-          await updateDoc(doc(this.firestore, `productos/${opinion.idProducto}`), {opiniones: arrayUnion(opinionRef)});
-      }
-      
-
-  
-      //---- modificar unidades
-      const productosSnapshot = await Promise.all(venta.referencias!.map(async (ref:porComprar) => {
-        return await getDoc(doc(this.firestore, `productos/${ref.idProducto}`));
-      }));
-      const productos: Producto[] = [];
-      const estilos: Estilo[] = [];
-      const estilosRef: DocumentReference<DocumentData>[] = [];
-      await Promise.all(productosSnapshot.map(async (productoSnapshot, index) => {
-        const prd = productoSnapshot.data() as Producto;
-        prd.id = productoSnapshot.id;
-        productos.push(prd);
-    
-        const estiloRef = doc(this.firestore, `productos/${prd.id}/estilos/${venta.referencias[index].idEstilo}`);
-        const estiloSnapshot = await getDoc(estiloRef);
-        const estilo = estiloSnapshot.data() as Estilo;
-        estilo.id = estiloSnapshot.id;
-        estilos.push(estilo);
-        estilosRef.push(estiloRef);
-      }));
-      for(let [index, producto] of productos.entries()){
-        const ref = doc(this.firestore, `productos/${producto.id}`);
-        const unidadEstilo = estilos[index].unidades! -= venta.referencias[index].unidades;
-        producto.ventas! += venta.referencias[index].unidades;
-        if(estilos[index].unidades == 0){
-          producto.estado = false;
-        }
-        await updateDoc(estilosRef[index], {unidades: unidadEstilo})
-        await updateDoc(ref, {
-          estilos: producto.estilos,
-          ventas: producto.ventas,
-          estado: producto.estado
-        });
+      if(venta.referencias.length !== 1){
+        await updateDoc(clienteRef, {
+          carrito: []
+        })
       }
       //--- agregar chat
       const chat = {

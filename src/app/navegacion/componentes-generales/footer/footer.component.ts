@@ -3,12 +3,13 @@ import { provideIcons } from '@ng-icons/core';
 import { aspectsSocialFacebook } from '@ng-icons/ux-aspects';
 import { aspectsSocialTwitter } from '@ng-icons/ux-aspects';
 import { aspectsSocialInstagram } from '@ng-icons/ux-aspects';
+import { ionLogoYoutube } from '@ng-icons/ionicons';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
-  viewProviders : [provideIcons({aspectsSocialFacebook,aspectsSocialTwitter,aspectsSocialInstagram})]
+  viewProviders : [provideIcons({aspectsSocialFacebook,aspectsSocialTwitter,aspectsSocialInstagram, ionLogoYoutube})]
 })
 export class FooterComponent implements OnInit, AfterViewInit{
 

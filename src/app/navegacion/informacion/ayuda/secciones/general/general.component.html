@@ -1,22 +1,6 @@
 <h1>Información general</h1>
 <div class="datos">
     <section> <!-- Parte izquierda -->
-        <div [ngClass]="{'selected': selected == 'publicar-producto'}" (click)="navegar('ayuda/general/publicar-producto')">
-            <h4>Publicar un producto</h4>
-            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
-        </div>
-        <div [ngClass]="{'selected': selected == 'modificar-publicacion'}" (click)="navegar('ayuda/general/modificar-publicacion')">
-            <h4>Modificar publicación</h4>
-            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
-        </div>
-        <div [ngClass]="{'selected': selected == 'seguidores'}" (click)="navegar('ayuda/general/seguidores')">
-            <h4>Seguidores</h4>
-            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
-        </div>
-        <div [ngClass]="{'selected': selected == 'promociones'}" (click)="navegar('ayuda/general/promociones')">
-            <h4>Promociones</h4>
-            <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>
-        </div>
         <div [ngClass]="{'selected': selected == 'cupones'}" (click)="navegar('ayuda/general/cupones')">
             <h4>Cupones</h4>
             <ng-icon class="row" name="iconoirNavArrowRight"></ng-icon>

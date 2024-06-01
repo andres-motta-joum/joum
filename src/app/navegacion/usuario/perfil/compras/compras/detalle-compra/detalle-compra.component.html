@@ -5,7 +5,11 @@
             <img src="assets/img/usuarios/user.svg" (click)="navegar([usuarioVendedor.usuario+'/perfil/informacion'], $event)">
             <div>
                 <h3>{{usuarioVendedor.nombre}}</h3>
-                <p>{{usuarioVendedor.tipoDocumento}} {{usuarioVendedor.documento}}</p>
+                <p>
+                    <span *ngIf="!compra.fechaEnCamino && !compra.entregado">En preparación</span>
+                    <span *ngIf="compra.fechaEnCamino && !compra.entregado">En camino</span>
+                    <span *ngIf="compra.entregado">Entregado</span>
+                </p>
             </div>
             <div>
                 <img src="assets/img/logo/iconos/Msg.svg">
@@ -14,32 +18,32 @@
         </div> 
         <app-producto [compra]="compra" [referencia]="referencia" *ngFor="let referencia of compra.referencias; let i = index"></app-producto>
         <div class="envio">
-            <h4 *ngIf="!compra.entregado">Día de entrega: Del 4 al 8 de Julio</h4>
+            <h4 *ngIf="!compra.entregado && !compra.enCamino">Entrega: {{entregaAprox}}</h4>
+            <h4 *ngIf="!compra.entregado && compra.enCamino">Entrega: Tu producto llegará hoy</h4>
             <h4 *ngIf="compra.entregado">Entregado</h4>
-            <span><ng-icon name="matQuestionMark"></ng-icon></span>
             <div class="info-entrega">
                 <ng-icon name="aspectsPlatformDropbox"></ng-icon>
                 <ng-icon [ngClass]="{'check': compra.enCamino, 'noCheck': !compra.enCamino}" name="heroTruckSolid"></ng-icon>
-                <ng-icon [ngClass]="{'check': compra.entregado, 'noCheck': !compra.enCamino}" name="heroCheckCircleSolid"></ng-icon>
+                <ng-icon [ngClass]="{'check': compra.entregado, 'noCheck': !compra.entregado}" name="heroCheckCircleSolid"></ng-icon>
 
                 <div class="linea"></div>
                 <div class="linea-color" [ngStyle]="{'width': compra.enCamino === true && compra.entregado === false ? '50%' : ( compra.entregado === true ? '100%' : '5%' )}"></div>
                 <div class="en-preparacion"></div>
-                <div class="en-camino" [ngStyle]="{'border-color': compra.enCamino === true ? '#ff9e57': '#bbb'}"></div>
-                <div class="entregado" [ngStyle]="{'border-color': compra.entregado === true ? '#ff9e57': '#bbb'}"></div>
+                <div class="en-camino" [ngStyle]="{'border-color': compra.enCamino === true ? '#FF9C53': '#bbb'}"></div>
+                <div class="entregado" [ngStyle]="{'border-color': compra.entregado === true ? '#FF9C53': '#bbb'}"></div>
             </div>
             <div class="textos">
                 <div>
                     <h5>En preparación</h5>
-                    <p>{{fecha | date:'d \' MMMM'}} 9:45</p>
+                    <p>{{fecha | date:'d \' MMMM'}} {{ fecha | date:'HH:mm' }}</p>
                 </div>
                 <div>
                     <h5 [ngStyle]="{'color': compra.enCamino === true ? '#606060': '#999', 'transform': compra.enCamino === true ? 'translateX(-10px)' : 'translateX(-32px)'}" >En camino</h5>
-                    <p *ngIf="compra.enCamino">{{compra.fechaVenta | date:'d \' MMMM'}} 14:24</p>
+                    <p *ngIf="compra.enCamino">{{fechaEnCamino | date:'d \' MMMM'}} {{ fechaEnCamino | date:'HH:mm' }}</p>
                 </div>
                 <div>
                     <h5 [ngStyle]="{'color': compra.entregado === true ? '#606060': '#999'}">Llegó</h5>
-                    <p *ngIf="compra.entregado">{{compra.fechaVenta | date:'d \' MMMM'}} 7:49</p>
+                    <p *ngIf="compra.entregado">{{fechaEntregado | date:'d \' MMMM'}} {{ fechaEntregado | date:'HH:mm' }}</p>
                 </div>
             </div>
         </div>
@@ -48,7 +52,7 @@
 
     <div class="right">
         <div class="encabezado">
-            <p *ngIf="!compra.entregado">Compra: 14 de julio 15:20</p>
+            <p *ngIf="!compra.entregado">Compra: {{fechaCompra}} {{ this.fecha| date:'HH:mm' }}</p>
             <p *ngIf="compra.entregado">Entregado</p>
         </div>
         <h5>Detalles de pago</h5>
@@ -59,8 +63,8 @@
             <ng-container *ngIf="cantidadUnidades !== 1">
                 <div>Productos ({{cantidadUnidades}})</div><div>$ {{precio | number: '1.0-0'}}</div>
             </ng-container>
-            <div>Envío</div><div>$ {{precioEnvio | number: '1.0-0'}}</div>
-            <div>Total</div><div>$ {{(precioEnvio + precio) | number: '1.0-0'}}</div>
+            <div>Envío</div><div>$ {{envio | number: '1.0-0'}}</div>
+            <div>Total</div><div>$ {{(envio + precio) | number: '1.0-0'}}</div>
         </div>
     </div>
 </div>

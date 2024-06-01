@@ -9,67 +9,60 @@
         <!-- CAROUSEL 1 -->
         <app-categorias></app-categorias>
         <!-- CAROUSEL 2 -->
-        <br><br>
-        <h3 class="titulos categoria">Lo más destacado hoy</h3>
-        <app-carrusel [carousel]='2' [elements]="productos"></app-carrusel>
-        <br><br><br>
+        <br>
+        <h3 class="titulos categoria">Lo más destacado</h3>
+        <app-carrusel [carousel]='2' [elements]="carruselUno"></app-carrusel>
+        <br *ngIf="anchoPagina > 510"><br *ngIf="anchoPagina > 566"><br *ngIf="anchoPagina > 860"> 
 
         <!-- PRIMER ITEM --> 
         <h3 class="titulos">Quiza te interese</h3>
         <div class="contenido-publicitario">
-            <div class="item">
+            <div class="item" (click)="link('busqueda/Difusores')" *ngIf="anchoPagina > 840">
                 <div class="item-text">
-                    <h1>Cuadros para tu sala</h1>
+                    <h1>DIFUSORES <br> DECORATIVOS</h1>
                     <button>Ver más</button>
                 </div>
-                <img src="../../../../assets/img/categoria/cuadros/6.jpg" class="item-img" ><br>
+                <div class="imagen">
+                    <img src="../../../assets/img/anuncios/difusores.png">
+                </div>
             </div>
-            <div class="item-2">
+            <div class="item-2" (click)="link('busqueda/Repisas')">
                 <div class="item-text">
-                    <h1>Iluminaciones decorativas</h1>
+                    <h1>ESTANTES <br> EN MADERA</h1>
                     <button>Ver más</button>
                 </div>
-                <img src="../../../../assets/img/categoria/iluminacion/10.jpg" class="item-img"><br>
+                <div class="imagen">
+                    <img src="../../../assets/img/anuncios/estantes.png">
+                </div>
             </div>
         </div>
 
         <!-- CAROUSEL 2 -->
-        <br><br><br><br>
-        <h3 class="titulos categoria">Lo más destacado hoy</h3>
-        <app-carrusel [carousel]='2' [elements]="productos"></app-carrusel>
+        <br><br><br><br *ngIf="anchoPagina > 566 && anchoPagina <= 840">
+        <h3 class="titulos categoria">Solo por hoy</h3>
+        <app-carrusel [carousel]='2' [elements]="carruselDos"></app-carrusel>
+        <br *ngIf="anchoPagina > 510 && anchoPagina <= 840"><br *ngIf="anchoPagina > 566 && anchoPagina <= 840">
 
-        <!-- ITEMS 2 -->
-        <br><br><br><br>
-        <h3 class="titulos">Quizá te interese</h3>
-        <div class="contenido-publicitario">
-            <div class="item">
+
+        <!-- PRIMER ITEM --> 
+        <h3 class="titulos" *ngIf="anchoPagina <= 840">Quiza te interese</h3>
+        <div class="contenido-publicitario" *ngIf="anchoPagina <= 840">
+            <div class="item" (click)="link('busqueda/difusores')">
                 <div class="item-text">
-                    <h1>Encuentra las mejores macetas</h1>
+                    <h1>DIFUSORES <br> DECORATIVOS</h1>
                     <button>Ver más</button>
                 </div>
-                <img src="../../../../assets/img/categoria/macetas/5.jpg" class="item-img"><br>
-            </div>
-            <div class="item-2">
-                <div class="item-text">
-                    <h1>Cuadros para tu sala</h1>
-                    <button>Ver más</button>
+                <div class="imagen">
+                    <img src="../../../assets/img/anuncios/difusores.png">
                 </div>
-                <img src="../../../../assets/img/categoria/cuadros/9.jpg" class="item-img" style="object-position: 0px -15px"><br>
             </div>
         </div>
+        <br><br><br><br *ngIf="anchoPagina > 566 && anchoPagina <= 840">
 
-        <!-- CAROUSEL 3 -->
-        <br><br><br><br>
-        <h3 class="titulos categoria">Ofertas para tu hogar</h3>
-        <app-carrusel [carousel]='2' [elements]="productos"></app-carrusel>
-        
-        <!-- CAROUSEL 4 -->
-        <br><br><br><br>
-        <h3 class="titulos categoria">Lo más destacado</h3>
-        <app-carrusel [carousel]='2' [elements]="productos"></app-carrusel>
-
+        <h3 class="titulos categoria" *ngIf="anchoPagina <= 840">Cuadros decorativos</h3>
+        <app-carrusel [carousel]='2' [elements]="carruselTres" *ngIf="anchoPagina <= 840"></app-carrusel>
+        <br *ngIf="anchoPagina > 510 && anchoPagina <= 840"><br *ngIf="anchoPagina > 566 && anchoPagina <= 840">
     </div>
-    <br>
 
     <div class="wave">
         <div class="text">

@@ -1,6 +1,7 @@
 .formulario{
     position: relative;
     width: 450px;
+    min-width: 375px;
     height: 320px;
     background: white;
     border-radius: 12px;
@@ -84,13 +85,23 @@
         cursor: pointer;
         border: none;
         color: #fff;
-        background-color: #ffa15d;
+        background-color: #FF9C53;
         font-weight: 500;
         letter-spacing: .5px;
         word-spacing: 1px;
         &:hover{
-            background-color: #ff9c56;
+            background-color: #FF9C53;
         }
+    }
+    @media (max-width: 475px) {
+        width: 100%;
+        height: calc(100vh - 60px);
+        border-radius: 0;
+        border: none;
+        transform: none;
+        margin: 0;
+        padding: 0;
+        left: 0;
     }
     
 }

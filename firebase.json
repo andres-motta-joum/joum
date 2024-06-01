@@ -1,7 +1,14 @@
 {
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
   "hosting": [
     {
-      "site": "joum",
+      "site": "joum-b86f6",
       "public": "dist/joum",
       "ignore": [
         "firebase.json",
@@ -20,23 +27,5 @@
       "source": ".",
       "frameworksBackend": {}
     }
-  ],
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "emulators": {
-    "auth": {
-      "port": 9099
-    },
-    "firestore": {
-      "port": 9098
-    },
-    "hosting": {
-      "port": 9097
-    },
-    "ui": {
-      "enabled": true,
-      "port": 9096
-    }
-  }
+  ]
 }

@@ -3,28 +3,33 @@ import { Auth } from '@angular/fire/auth';
 import { Firestore, doc, getDoc, increment, updateDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Subscription} from 'rxjs';
-import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { Direccion } from 'src/app/interfaces/usuario/subInterfaces/direccion';
 import { Usuario, porComprar, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
 import { ComprarService } from 'src/app/servicios/comprar/comprar.service';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
+import { provideIcons } from '@ng-icons/core';
+import { matCheck } from '@ng-icons/material-icons/baseline';
 
 @Component({
   selector: 'app-comprar',
   templateUrl: './comprar.component.html',
-  styleUrls: ['./comprar.component.scss']
+  styleUrls: ['./comprar.component.scss'],
+  providers: [provideIcons({matCheck})]
 })
 export class ComprarComponent implements OnInit, OnDestroy{
   constructor(private router: Router, private auth: Auth, private authService: AuthService, private comprarService: ComprarService, private firestore: Firestore){}
   private subscription!: Subscription;
-  private usuario!: Usuario;
+  usuario!: Usuario;
   productosLenght!: number;
   productos: Producto[] = [];
   precioProductos!: number;
   precioEnvios!: number;
   grupoReferencias: { [idUsuario: string]: porComprar[] } = {};
-
+  tamanios: (number | string)[] = [];
   cargando = false;
+  actualizacionExitosa = false;
+  compraExitosa = false;
 
   ngOnInit(): void {
     this.auth.onAuthStateChanged(async (user) => {
@@ -53,6 +58,13 @@ export class ComprarComponent implements OnInit, OnDestroy{
         this.productos.push(prd);
       });
       this.subscription = this.comprarService.$obtenerReferencias.subscribe(async (referencias)=>{
+        this.tamanios = referencias.map((ref)=>{
+          if(typeof ref.tamanioIndex === 'number'){
+            return ref.tamanioIndex
+          }else{
+            return 'false';
+          }
+        });
         this.obtenerPrecios(referencias);
         let productosLenght = 0;
         for(let referencia of referencias){
@@ -68,13 +80,21 @@ export class ComprarComponent implements OnInit, OnDestroy{
     let precioProductos = 0;
     let precioEnvios = 0;
     if(this.productosLenght == 1){
-      precioProductos = this.productos[0].precio!;
+      if(typeof this.tamanios[0] == 'number'){
+        precioProductos = this.productos[0].tamanios![this.tamanios[0]].precio;
+      }else{
+        precioProductos = this.productos[0].precio!;
+      }
       if(!this.productos[0].envioGratis){
         precioEnvios = this.productos[0].precioEnvio!;
       }
     }else{
       for (const [index, producto] of this.productos.entries()) {
-        precioProductos += producto.precio! * referencias[index].unidades;
+        if(typeof this.tamanios[index] == 'number'){
+          precioProductos = producto.tamanios![this.tamanios[index] as number].precio * referencias[index].unidades;
+        }else{
+          precioProductos += producto.precio! * referencias[index].unidades;
+        }
         if(!producto.envioGratis){
           precioEnvios += producto.precioEnvio!;
         }else{
@@ -96,7 +116,7 @@ export class ComprarComponent implements OnInit, OnDestroy{
         await this.agruparReferenciasPorVendedor(this.usuario);
         for(let idVendedor in this.grupoReferencias){
           //----- obtener numero de venta y sumarle 1 -----
-          const refVenta = doc(this.firestore, 'informacion/1');
+          const refVenta = doc(this.firestore, 'cookies/informacion');
           await updateDoc(refVenta, {
             ventas: increment(1)
           });
@@ -105,7 +125,6 @@ export class ComprarComponent implements OnInit, OnDestroy{
           //----------------------------------------------- definir valores -------
           const referencias = this.grupoReferencias[idVendedor];
           const numVenta = infoVentasRef.data()!;
-          const fechaActual = new Date();
           let direccion!: Direccion;
           for(let dir of direcciones!){
             if(dir.direccionPredeterminada){
@@ -118,15 +137,16 @@ export class ComprarComponent implements OnInit, OnDestroy{
             fechaVenta: new Date(),
             enCamino: false,
             entregado: false,
-            aproxEntrega: new Date(fechaActual.setDate(fechaActual.getDate() + 10)),
             idCliente: this.usuario.id!,
             idVendedor: idVendedor,
             datosEnvio: direccion,
             cancelada: false
           }
-
           await this.comprarService.agregarVenta(venta);
-          this.router.navigate(['']);
+          this.actualizacionExitosa = true;
+          setTimeout(()=>{
+            this.compraExitosa = true;
+          },1350)
         }
       }
     }
@@ -154,30 +174,25 @@ export class ComprarComponent implements OnInit, OnDestroy{
     return await Promise.all(referencias!.map( async(referencia: referenciaCompra) => {
       const productoSnapshot = await getDoc(referencia.producto);
       const producto = productoSnapshot.data() as Producto;
-
-      const estiloRef = doc(this.firestore, `productos/${productoSnapshot.id}/estilos/${referencia.estilo}`);
-      const estiloSnapshot = await getDoc(estiloRef);
-      const estilo = estiloSnapshot.data() as Estilo;
-
-      const fotoRef = doc(this.firestore, `productos/${productoSnapshot.id}/estilos/${estiloSnapshot.id}/fotos/${estilo.fotos[0].id}`);
-      const fotoSnapshot = await getDoc(fotoRef);
-      const foto = fotoSnapshot.data() as any;
+      await updateDoc(referencia.producto, {ventas: increment(1)});
+      const foto = producto.fotos[0];
       return {
         idProducto: referencia.producto.id,
         tituloProducto: producto.nombre,
         precioProducto: producto.precio,
-        nombreEstilo: estilo.nombre,
-        idEstilo: estiloSnapshot.id,
-        skuEstilo: estilo.sku ? estilo.sku : '',
-        foto: foto.url,
+        foto: foto,
         unidades: referencia.unidades,
         envioGratis: producto.envioGratis,
         precioEnvio: producto.precioEnvio,
-        tipoPublicacion: producto.tipoPublicacion
+        gramosTamanio: typeof referencia.tamanioIndex == 'number' ? producto.tamanios![referencia.tamanioIndex].gramos : 'false'
       } as porComprar
     }));
   }
 
+  navegar(ruta: any[]){
+    this.router.navigate(ruta);
+    window.scroll(0,0) 
+  }
   //-------------------------------------
   ngOnDestroy(): void {
     if(this.subscription){

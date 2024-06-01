@@ -1,0 +1,148 @@
+.header{
+    position: relative;
+    margin-top: 40px;
+    width: 100%;
+    height: 200px;
+    box-shadow: 0 -0.1px 2.8px rgba(0,0,0,0.065), 0 3.1px 2.5px rgba(0,0,0,0.025);
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+    >div{
+        width: calc(100% - 90px);
+        margin-left: 45px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        div:nth-child(2){
+            margin: 0;
+            min-width: 33%;
+            display: flex;
+            justify-content: center;
+            img{
+                transform: translateX(14px);
+                width: 250px;
+            }
+        }
+        
+        div{
+            margin-left: 20px;
+            h1{
+                position: relative;
+                margin-top: 0;
+                font-size: 27px;
+                font-weight: 480;
+                color: #5b5b5b;
+                letter-spacing: .4px;
+                word-spacing: .5px;
+                z-index: 1;
+                &::after{
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -7px;
+                    width: 410px;
+                    height: 3px;
+                    border-radius: 1.5px;
+                    background: linear-gradient(to right, #FF9C53, #ffb886);
+                }
+            }
+            p{
+                transform: translateY(5px);
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 28px;
+                color: #777;
+                letter-spacing: .4px;
+                word-spacing: 1px;
+            }
+        }
+        .circulo-uno{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #f6e2d3;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            transform: translate(-50%, -50%);
+        }
+        .circulo-dos{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #f6e2d3;
+            border-radius: 50%;
+            left: 58px;
+            top: -8px;
+        }
+    }
+    @media (max-width: 850px) {
+        h1{
+            font-size: 23px !important;
+            &::after{
+                width: 350px !important;
+            }
+        }
+        p{
+            font-size: 17px !important;
+        }
+	}
+    @media (max-width: 730px) {
+        h1{
+            font-size: 24px !important;
+            &::after{
+                width: 350px !important;
+            }
+        }
+        p{
+            font-size: 18px !important;
+        }
+        >div div:nth-child(2){
+            display: none !important;
+        }
+	}
+    @media (max-width: 630px) {
+        h1{
+            margin-top: 10px !important;
+            font-size: 21px !important;
+            &::after{
+                width: 325px !important;
+            }
+        }
+        p{
+            font-size: 16px !important;
+        }
+    }
+    @media (max-width: 500px) {
+        h1{
+            margin-top: 20px !important;
+            font-size: 19px !important;
+            &::after{
+                width: 300px !important;
+            }
+        }
+        p{
+            font-size: 16px !important;
+        }
+    }
+    @media (max-width: 445px) {
+        h1{
+            font-size: 18px !important;
+            &::after{
+                width: 280px !important;
+            }
+        }
+        p{
+            font-size: 15px !important;
+        }
+    }
+    @media (max-width: 425px) {
+        h1{
+            font-size: 17px !important;
+            &::after{
+                width: 270px !important;
+            }
+        }
+    }
+}

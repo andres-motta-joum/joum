@@ -5,6 +5,12 @@
 	min-width: 950px;
 	overflow: hidden;
 	background-color: #f8f8f8;
+	@media (max-width: 900px) {
+        padding-bottom: 550px;
+	}
+	@media (max-width: 560px) {
+		padding-bottom: 850px;
+	}
 }
 .content{
     width: 1400px;
@@ -258,7 +264,7 @@
 				letter-spacing: .4px;
 				&:hover{
 					cursor: pointer;
-					background-color: #ff9e57;
+					background-color: #FF9C53;
 				}
 				.sign{
 					min-width: 200px;
@@ -292,14 +298,14 @@
 							width: 100%;
 							border: none;
 							border-radius: 4px;
-							background: #fff5ec;
-							color: #fd9347;
+							background: #ecf9f2;
+							color: #2cc75d;
 							font-weight: 480;
 							letter-spacing: .4px;
 							word-spacing: 1px;
 							cursor: pointer;
 							&:hover{
-								background: #ffa15e;
+								background: #52d77c;
 								color: #fff;
 							}
 						}

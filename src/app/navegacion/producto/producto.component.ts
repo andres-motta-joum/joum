@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges, HostListener, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges, HostListener, OnChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, first, firstValueFrom } from 'rxjs';
 import { Usuario } from '../../interfaces/usuario/usuario';
-import { Estilo, Producto } from '../../interfaces/producto/producto';
+import { Producto } from '../../interfaces/producto/producto';
 import { provideIcons } from '@ng-icons/core';
 import { heroHeart } from '@ng-icons/heroicons/outline';
 import { heroHeartSolid } from '@ng-icons/heroicons/solid';
@@ -32,8 +32,6 @@ export class ProductoComponent implements OnInit{
   usuarioVendedor!: Usuario; //Proteger datos
   miUsuario!: Usuario; //Proteger datos
   productos!: Producto[];
-  estilos!: Estilo[];
-  fotos: string[][] = [['assets/img/categoria/pic-loading.svg']];
 
   enFavoritos: boolean = false;
   enCarrito: boolean = false;
@@ -41,11 +39,21 @@ export class ProductoComponent implements OnInit{
 
   sombraBool: boolean = false;
   indexFoto = 0;
-  estiloSelec = 0;
-  unidades = 1;
+  sombraOpinion: boolean = false;
+  indexOpinion = 0;
+  unidades: number = 1;
 
   productoCargado = false;
   productoPropio!: boolean; productoPropioFixed = false;
+  tamanioSelec: [boolean, number] = [false, 0];
+  ventas!: string;
+  
+  anchoPagina: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.anchoPagina = event.target.innerWidth;
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -54,11 +62,10 @@ export class ProductoComponent implements OnInit{
 
   async ngOnInit() {
     const urlSegments = (this.router.url).split('/');
-    const idProducto = urlSegments[urlSegments.length - 1];
-    this.prdService.obtenerProductos().then(productos => {this.productos = productos});
+    const idProducto = urlSegments[2].split('?')[0];
     const producto = await this.obtenerProducto(idProducto);
-    if(producto && producto.estado){
-      await this.obtenerEstilos(producto);
+    this.prdService.obtenerProductosSimilares(producto!.categoria, producto!.id!).then(productos => {this.productos = productos});
+    if(producto){
       this.productoPropio = false;
       if(this.auth.currentUser){
         this.authService.getUsuarioId(this.auth.currentUser?.uid!).pipe(first()).subscribe(usuario => {
@@ -69,7 +76,7 @@ export class ProductoComponent implements OnInit{
           this.definirCarrito(producto.id!);
           this.definirFavorito(usuario, producto.id!);
         });
-        if(producto.idUsuario == this.auth.currentUser.uid){
+        if(producto.idUsuario == this.auth.currentUser.uid || this.auth.currentUser.uid == '6qIaOVjTEiUFjMEhFfoKCZkCFCZ2' || this.auth.currentUser.uid == 'joEtHq7kc6f4YXBxsFz8RKyopBI2'){
           this.productoPropio = true;
         }else{
           this.agregarVista(producto);
@@ -78,8 +85,6 @@ export class ProductoComponent implements OnInit{
         this.agregarVista(producto);
       }
       this.producto = producto;
-      this.prdService.obtenerFotoUno(this.producto).then(fotos => {this.fotos = fotos});
-      this.obtenerFotos(this.producto).then((fotos)=> this.fotos = fotos);
       this.usuarioVendedor = await this.authService.getUsuarioIdPromise(this.producto.idUsuario!);
 
       this.productoCargado = true;
@@ -93,14 +98,12 @@ export class ProductoComponent implements OnInit{
     this.routerSubscription = this.router.events.subscribe(async (event) => {
       this.productoCargado = false;
       if (event instanceof NavigationEnd) {
-        this.estiloSelec = 0;
         this.indexFoto = 0;
+        this.indexOpinion = 0;
         const urlSegments = (event.urlAfterRedirects).split('/');
-        this.fotos = [['assets/img/categoria/pic-loading.svg']];
         const idProducto = urlSegments[urlSegments.length - 1];
         const producto = await this.obtenerProducto(idProducto);
-        if(producto && producto.estado){
-          await this.obtenerEstilos(producto);
+        if(producto){
           this.productoPropio = false;
           if(this.auth.currentUser){
             this.authService.getUsuarioId(this.auth.currentUser.uid!).pipe(first()).subscribe(usuario => {
@@ -111,7 +114,7 @@ export class ProductoComponent implements OnInit{
               this.definirCarrito(producto.id!);
               this.definirFavorito(usuario, producto.id!);
             });
-            if(producto.idUsuario == this.auth.currentUser.uid){
+            if(producto.idUsuario == this.auth.currentUser.uid || this.auth.currentUser.uid == '6qIaOVjTEiUFjMEhFfoKCZkCFCZ2' || this.auth.currentUser.uid == 'joEtHq7kc6f4YXBxsFz8RKyopBI2'){
               this.productoPropio = true;
             }else{
               this.agregarVista(producto);
@@ -121,9 +124,9 @@ export class ProductoComponent implements OnInit{
           }
           this.producto = producto;
           this.productos = [];
-          this.prdService.obtenerProductos().then(productos => {this.productos = productos});
-          this.prdService.obtenerFotoUno(this.producto).then(fotos => this.fotos = fotos);
-          this.obtenerFotos(this.producto).then((fotos)=> this.fotos = fotos);
+          this.tamanioSelec = [false, 0];
+          this.anchoPagina = window.innerWidth;
+          this.prdService.obtenerProductosSimilares(producto!.categoria, producto!.id!).then(productos => {this.productos = productos});
           this.usuarioVendedor = await this.authService.getUsuarioIdPromise(this.producto.idUsuario!);
           this.productoCargado = true;
           //---------------------------------- Cargado -------
@@ -133,20 +136,16 @@ export class ProductoComponent implements OnInit{
       }
     });
   }
-
-  async obtenerEstilos(producto: Producto){
-    this.estilos = await Promise.all(producto.estilos.map(async (estiloRef: any)=>{
-      const estiloSnapshot = await getDoc(estiloRef);
-      let estilo = estiloSnapshot.data() as Estilo;
-      estilo.id = estiloSnapshot.id;
-      return estilo;
-    }))
+  //-------------
+  asignarVentas(ventas: string){
+    this.ventas = ventas;
   }
+
   //-------------------------------------
 
   async agregarVista(producto: Producto){
     const fechaActual = new Date();
-    if(producto.vistas){
+    if(producto.vistas && producto.vistas.length !== 0){
       const timestamp = producto.vistas[producto.vistas.length - 1].fecha;
       const fechaFirestore = new Date(timestamp.seconds * 1000);
       if(this.sonMismoDia(fechaActual, fechaFirestore)){
@@ -181,12 +180,13 @@ export class ProductoComponent implements OnInit{
       fecha1.getDate() === fecha2.getDate();
   }
 
-  //-------------------------------------
-
-  cambioDeEstilo(event : number){
-    this.estiloSelec = event; this.indexFoto = 0;
-    this.definirCarrito(this.producto.id!);
+  seleccionarColor(index: number){
+    this.producto.fotos = this.producto.colores![index].fotos;
   }
+  seleccionarEstilo(index: number){
+    this.producto.fotos = this.producto.estilos![index].fotos;
+  }
+
   //------- definir carrito y favoritos ------
 
   async definirCarrito(productoId: string){
@@ -195,12 +195,16 @@ export class ProductoComponent implements OnInit{
     const usuario = snapshot.data() as Usuario;
     if( usuario.carrito){
       const carrito = usuario.carrito.filter(ref => ref.producto.id == productoId);
-      if(carrito){
-        const existe = carrito.find(ref => ref.estilo == this.estilos[this.estiloSelec].id);
-        if(existe){
+      if(carrito && carrito.length !== 0){
+        this.enCarrito = true;
+        if(carrito.length == 2 && typeof carrito[0].tamanioIndex == "number" ){
           this.enCarrito = true;
-        }else{
-          this.enCarrito = false;
+        }else if(carrito[0].tamanioIndex || carrito[0].tamanioIndex == 0){
+          if(carrito[0].tamanioIndex == this.tamanioSelec[1]){
+            this.enCarrito = true;
+          }else{
+            this.enCarrito = false;
+          }
         }
       }else{
         this.enCarrito = false;
@@ -231,9 +235,6 @@ export class ProductoComponent implements OnInit{
     }
   }
 
-  async obtenerFotos(producto: Producto): Promise<string[][]> {
-    return await this.prdService.obtenerFotosProducto(producto);
-  }
 
 //-------------------------- carrito y favoritos ------------------------
 
@@ -248,17 +249,16 @@ export class ProductoComponent implements OnInit{
           const usuario = snapshot.data();
           const index = usuario!['favoritos'].findIndex((referencia: DocumentReference<DocumentData>) => referencia.id == productoRef.id);
           usuario!['favoritos'].splice(index, 1);
-
-          this.prdService.eliminarFavorito(this.auth.currentUser.uid, usuario!['favoritos']);
+          this.prdService.eliminarFavorito(this.auth.currentUser.uid, usuario!['favoritos'], productoRef);
         }else{
-          this.router.navigate(['cuenta/iniciar-sesion']);
+          this.router.navigate(['cuenta/crear-cuenta']);
         }
       }else{
         if(this.auth.currentUser){ //Agregar
           this.enFavoritos = true;
           this.prdService.agregarFavorito(this.producto.id!, this.auth.currentUser.uid);
         }else{
-          this.router.navigate(['cuenta/iniciar-sesion']);
+          this.router.navigate(['cuenta/crear-cuenta']);
         }
       }
     }
@@ -280,12 +280,16 @@ export class ProductoComponent implements OnInit{
     if(this.auth.currentUser){
       if(this.producto.idUsuario !== this.auth.currentUser.uid){
         this.enCarrito = true;
-        this.comprarService.agregarReferenciaCarrito(this.producto.id!, this.auth.currentUser.uid, this.estilos![this.estiloSelec].id, Number(this.unidades));
+        if(this.tamanioSelec[0]){ //Verifica si el producto tiene tamaños disponibles
+          this.comprarService.agregarReferenciaCarrito(this.producto.id!, this.auth.currentUser.uid, Number(this.unidades), this.tamanioSelec[1] as number);
+        }else{  
+          this.comprarService.agregarReferenciaCarrito(this.producto.id!, this.auth.currentUser.uid, Number(this.unidades));
+        }
       }else{
         //Este es tu producto
       }
     }else{
-      this.router.navigate(['cuenta/iniciar-sesion']);
+      this.router.navigate(['cuenta/crear-cuenta']);
     }
   }
 
@@ -296,24 +300,18 @@ export class ProductoComponent implements OnInit{
       const usuarioRef = doc(this.firestore, `usuarios/${this.auth.currentUser.uid}`);
       const snapshot = await getDoc(usuarioRef);
       const usuario = snapshot.data() as Usuario;
-      const index = await this.obtenerIndice(usuario);
-      usuario['carrito']!.splice(index, 1);
+      const productosEnCarrito = usuario['carrito']?.filter((referencia)=>referencia.producto.id == this.producto.id);
+      if(productosEnCarrito!.length == 2 || typeof productosEnCarrito![0].tamanioIndex == 'number' ){
+        const index = usuario['carrito']?.findIndex((referencia)=>referencia.producto.id == this.producto.id && referencia.tamanioIndex == this.tamanioSelec[1]);
+        usuario['carrito']!.splice(index!, 1);
+      }else{
+        const index = usuario['carrito']?.findIndex((referencia)=>referencia.producto.id == this.producto.id);
+        usuario['carrito']!.splice(index!, 1);
+      }
       this.prdService.eliminarCarrito(this.auth.currentUser.uid, usuario['carrito']);
     }else{
-      this.router.navigate(['cuenta/iniciar-sesion']);
+      this.router.navigate(['cuenta/crear-cuenta']);
     }
-  }
-
-  async obtenerIndice(usuario: Usuario) {
-    for (let i = 0; i < usuario['carrito']!.length; i++) {
-      const referencia = usuario['carrito']![i];
-      if (referencia.producto.id == this.producto.id) {
-        if (Number(referencia.estilo.split(':')[0]) === (this.estiloSelec + 1)) {
-          return i;
-        }
-      }
-    }
-    return -1; // Devuelve -1 si no se encuentra el producto 
   }
   
   
@@ -324,16 +322,21 @@ export class ProductoComponent implements OnInit{
     this.sombraBool = newDato;
   }
 
+  mostrarOpinionFoto(index: number){
+    this.sombraOpinion = true;
+    this.indexOpinion = index;
+  };
+
   nuevoIndex(numero: number){ //Al recibir nuevo dato de componente Hijo
     this.indexFoto = numero;
   }
 
   fotoNex() {
-    this.indexFoto = (this.indexFoto + 1) % this.fotos[this.estiloSelec].length;
+    this.indexFoto = (this.indexFoto + 1) % this.producto.fotos.length;
   }
 
   fotoPrev() {
-    this.indexFoto = (this.indexFoto - 1 + this.fotos[this.estiloSelec].length) % this.fotos[this.estiloSelec].length;
+    this.indexFoto = (this.indexFoto - 1 + this.producto.fotos.length) % this.producto.fotos.length;
   }
 
   @HostListener('document:keydown', ['$event'])

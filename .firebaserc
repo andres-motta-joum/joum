@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "joum-b86f6"
+    "default": "joum-b86f6",
+    "joum": "joum-b86f6"
   },
   "targets": {
     "joum-b86f6": {

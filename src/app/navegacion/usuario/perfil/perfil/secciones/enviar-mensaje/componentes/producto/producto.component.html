@@ -1,8 +1,12 @@
 <div class="producto">
     <img [src]="referencia.foto">
     <div>
-        <p>{{referencia.tituloProducto}}</p>
-        <p>{{referencia.precioProducto | number:'1.0-0'}} x {{referencia.unidades}}u.</p>
+        <p>{{referencia.tituloProducto}} <span *ngIf="referencia.gramosTamanio !== 'false'">{{referencia.gramosTamanio}}</span></p>
+        <p *ngIf="referencia.gramosTamanio == 'false'">{{referencia.precioProducto | number:'1.0-0'}} <span>COP</span> x {{referencia.unidades}}u.</p>
+        <ng-container *ngIf="referencia.gramosTamanio !== 'false'">
+            <p *ngIf="referencia.gramosTamanio == '102 g'">{{201000 | number:'1.0-0'}} <span>COP</span> x {{referencia.unidades}}u.</p>
+            <p *ngIf="referencia.gramosTamanio == '51 g'">{{118000 | number:'1.0-0'}} <span>COP</span> x {{referencia.unidades}}u.</p>
+        </ng-container>
     </div>
 </div>
 

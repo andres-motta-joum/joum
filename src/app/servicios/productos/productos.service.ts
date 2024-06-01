@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { DocumentData, DocumentReference, Firestore, arrayUnion, collection, doc, docData, getDoc, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore, arrayUnion, collection, doc, docData, getDoc, getDocs, increment, orderBy, query, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Storage, getDownloadURL, listAll, ref } from '@angular/fire/storage';
 import { Observable, map } from 'rxjs';
-import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { Usuario } from 'src/app/interfaces/usuario/usuario';
 
 @Injectable({
@@ -11,19 +11,12 @@ import { Usuario } from 'src/app/interfaces/usuario/usuario';
 export class ProductosService {
   constructor(private firestore: Firestore, private storage: Storage) { }
 
-  async obtenerProductos(): Promise<Producto[]> {
-    const querySnapshot = await getDocs(collection(this.firestore, 'productos'));
-    const productos:Producto[] = [];
-  
-    querySnapshot.forEach((doc) => {
-      const producto = doc.data() as Producto;
-      producto['id'] = doc.id;
-      if(producto['estado']){
-        productos.push(producto);
-      } 
-    });
-    
-    return productos;
+  async obtenerProductosSimilares(categoria: string, idProducto: string): Promise<Producto[]> {
+    const queri = query(collection(this.firestore, 'productos'), orderBy('enFavorito', 'desc'));
+    const snapshot = await getDocs(queri);
+    const productos = snapshot.docs.map(doc => ({...doc.data(), id: doc.id} as Producto));
+    let filtro = productos.filter(producto => producto.categoria == categoria && producto.id !== idProducto);
+    return filtro;
   }
 
   obtenerProductoId(id: string): Observable<Producto | null> {
@@ -50,61 +43,25 @@ export class ProductosService {
       return null
     }
   }
-
-  async obtenerFotos(productos: Producto[]): Promise<string[]>{
-    return Promise.all(productos.map(async (producto:any) => {
-      const estiloSnapshot = await getDoc(producto.estilos[0]);
-      const estilo = await estiloSnapshot.data() as Estilo;
-      const imgRef = ref(this.storage, `productos/${producto.id}/${producto.estilos[0].id}/${estilo.fotos[0].id}`);
-      return await getDownloadURL(imgRef);
-    }));
-  }
-
-  async obtenerFotosSegunEstilo(productos: Producto[], estilos: string[]): Promise<string[]>{
-    return Promise.all(productos.map(async (producto:any, index: number) => {
-      const estiloRef = doc(this.firestore, `productos/${producto.id}/estilos/${estilos[index]}`);
-      const estiloSnapshot = await getDoc(estiloRef);
-      const estilo = estiloSnapshot.data() as Estilo;
-      const imgRef = ref(this.storage, `productos/${producto.id}/${estilos[index]}/${estilo.fotos[0].id}`);
-      const url = await getDownloadURL(imgRef);
-      return url;
-    }));
-  }
-
-
-  async obtenerFotosProducto(producto: Producto): Promise<string[][]>{
-    return Promise.all(producto.estilos.map(async (estiloRef: any)=>{
-      const estiloSnapshot = await getDoc(estiloRef);
-      const estilo = estiloSnapshot.data() as Estilo;
-      return Promise.all(estilo.fotos.map(async (urlRef)=>{
-        const imgRef = ref(this.storage, `productos/${producto.id}/${estiloRef.id}/${urlRef.id}`);
-        return await getDownloadURL(imgRef);
-      }))
-    }))
-  }
   
-  async obtenerFotoUno(producto: any): Promise<string[][]>{
-    const urlsArrays: string[][] = [['']];
-
-    const estiloSnapshot = await getDoc(producto.estilos[0]);
-    const estilo = await estiloSnapshot.data() as Estilo;
-    const imgRef = ref(this.storage, `productos/${producto.id}/${producto.estilos[0].id}/${estilo.fotos[0].id}`);
-    urlsArrays[0][0] =  await getDownloadURL(imgRef);
+  async obtenerFotoUno(producto: any): Promise<string[]>{
+    const urlsArrays: string[] = [''];
+    const imgRef = ref(this.storage, `productos/${producto.id}/${producto.fotos[0].id}`);
+    urlsArrays[0] =  await getDownloadURL(imgRef);
     return urlsArrays;
   }
 
   async agregarFavorito(productoId: string, usuarioId: string){
     const usuarioRef = doc(this.firestore, `usuarios/${usuarioId}`);
     const productoRef = doc(this.firestore, `productos/${productoId}`);
-    await updateDoc(usuarioRef, {
-      favoritos: arrayUnion(productoRef)
-    })
+    await updateDoc(usuarioRef, {favoritos: arrayUnion(productoRef)});
+    await updateDoc(productoRef, {enFavorito: increment(1)})
   }
 
-  async eliminarFavorito(usuarioId: string, favoritos: Usuario['favoritos']){
-    console.log(favoritos);
+  async eliminarFavorito(usuarioId: string, favoritos: Usuario['favoritos'], productoRef:  DocumentReference<DocumentData>){
     const usuarioRef = doc(this.firestore, `usuarios/${usuarioId}`);
     await setDoc(usuarioRef, {favoritos: favoritos}, {merge: true});
+    await updateDoc(productoRef, {enFavorito: increment(-1)});
   }
 
   async eliminarCarrito(usuarioId: string, carrito: Usuario['carrito']){

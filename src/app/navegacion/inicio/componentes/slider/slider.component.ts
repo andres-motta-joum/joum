@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, Input} from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, Input, HostListener} from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 
 import { heroChevronLeftSolid } from '@ng-icons/heroicons/solid';
@@ -24,8 +24,18 @@ export class SliderComponent implements OnInit {
     private renderer: Renderer2
     ) { }
 
+  anchoPagina: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.anchoPagina = event.target.innerWidth;
+  }
+
   ngOnInit(): void {
     this.slickWidth = 100;
+    setInterval(()=>{
+      this.Move(2)
+    },5500)
   }
 
   Move(value: number): void {
@@ -34,9 +44,13 @@ export class SliderComponent implements OnInit {
 
     this.leftPosition = this.track.nativeElement.style.left === '' ? 0 : (parseFloat(this.track.nativeElement.style.left) * -1);
 
-    if (this.leftPosition < (200) && value === 2) {
+    if (this.leftPosition < (100) && value === 2) {
+      this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition + this.slickWidth)}%`);
+    } else  if (this.leftPosition < (100) && value === 1) {
       this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition + this.slickWidth)}%`);
     } else if (this.leftPosition > 0 && value === 1) {
+      this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition - this.slickWidth)}%`);
+    } else if (this.leftPosition > 0 && value === 2) {
       this.renderer.setStyle(this.track.nativeElement, 'left', `${-1 * (this.leftPosition - this.slickWidth)}%`);
     }
   }

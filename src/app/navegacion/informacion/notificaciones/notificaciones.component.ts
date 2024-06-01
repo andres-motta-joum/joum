@@ -34,7 +34,7 @@ export class NotificacionesComponent implements OnInit, OnDestroy{
         this.usuarioRef = doc(this.firestore, `usuarios/${this.usuarioId}`);
         await setDoc(this.usuarioRef, {notificaciones: this.notificacionesVistas}, {merge: true});
       } else {
-        this.router.navigate(['']);
+        this.router.navigate(['cuenta/crear-cuenta']);
       }
     });
   }

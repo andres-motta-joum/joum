@@ -1,3 +1,7 @@
 <div class="contenedor">
-    <app-producto-guardado (eliminar)="eliminar($event)" [guardados]="guardados" [productoGuardado]="productoGuardado" [unidad]="unidades[i]" [foto]="fotos[i]" [estilo]="estilos[i]" [indice]="i" [indexEstilo]="indexEstilos[i]" *ngFor="let productoGuardado of productos; let i = index;" ></app-producto-guardado>
+    <app-producto-guardado (eliminar)="eliminar($event)" [guardados]="guardados" [productoGuardado]="productoGuardado" [unidad]="unidades[i]" [indice]="i" *ngFor="let productoGuardado of productos; let i = index;"  [tamanio]="tamanios[i]"></app-producto-guardado>
+    <div *ngIf="sinGuardados" class="sinGuardados">
+        <img src="assets/img/logo/iconos/car-empty.svg">
+        <p>Aún no tienes productos guardados</p>
+    </div>
 </div>

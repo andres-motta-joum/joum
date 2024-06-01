@@ -1,19 +1,21 @@
 
 <div class="body">
     <app-barra-menu></app-barra-menu>
-    <div class="contenidoTotal">
-        <div class="izquierda">
-            <app-seccion-izquierda></app-seccion-izquierda>
+    <div class="contenido">
+        <h1>Busqueda</h1>
+        <div class="encabezado">
+            <ng-icon name="matSearch"></ng-icon><p>{{busqueda}}</p>
         </div>
-        <div class="derecho">
-            <div class="encabezado">
-                <app-encabezado (listadoCuadradosOut)="getCuadradoList($event)" (listadoLineadoOut)="getLineadoList($event)"></app-encabezado>
-            </div>
-            <div class="productos">
-                <app-productos [listadoCuadradosInp]="listadoCuadrados" [listadoLineadoInp]="listadoLineado" [productos]="productosFiltrados"></app-productos>
-            </div>
+        <div class="productos" *ngIf="datosCargados && productosFiltrados.length !== 0">
+            <app-producto [producto]="producto" [index]="productos.length - 1 - index" *ngFor="let producto of productosFiltrados; let index = index" [usuario]="usuario"></app-producto>
         </div>
+        <section class="sinTickets" *ngIf="datosCargados && productosFiltrados.length == 0">
+            <img src="assets/img/logo/iconos/nothing-found.svg">
+            <section>
+                <h3>Nada por aquí</h3>
+                <p>No se encontraron resultados de tu busqueda</p>
+            </section>
+        </section>
     </div>
     <app-footer></app-footer>
 </div>
-

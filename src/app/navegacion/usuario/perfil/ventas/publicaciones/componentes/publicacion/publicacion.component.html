@@ -1,6 +1,6 @@
 <div class="content">
     <div class="contenedor" [ngClass]="{'masUnidades': unidades, 'pausada': !estado, 'masUnidadesDosFilas': unidadesMasEstilos}">
-        <img [src]="foto">
+        <img [src]="'assets/img/productos/'+ publicacion.fotos[0] + '.png'">
         <div>
             <p>{{publicacion.nombre}}</p>
             <p>#{{publicacion.id}}</p>
@@ -10,7 +10,7 @@
             <p>Publicación</p>
             <p>Gratuita</p>
             <p>Precio</p>
-            <p>$ {{publicacion.precio | number:'1.0-0'}}</p>
+            <p>$ {{publicacion.precio | number:'1.0-0'}} <span>COP</span></p>
         </div>
         <div>
             <p>Envío</p>
@@ -23,22 +23,13 @@
     
         <!------- SUB MENU UNIDADES------>
         <div class="linea"></div>
-        <div class="unidades">
-            <div *ngFor="let estilo of estilos; let i = index">
-                <img *ngIf="fotosEstilos" [src]='fotosEstilos[i]'>
-                <div>
-                    <p>{{estilo.nombre}} </p>
-                    <p>{{estilo.unidades}} unidad<span *ngIf="estilo.unidades !== 1">es</span></p>
-                </div>
-            </div>
-        </div>
+        
     </div>
     <div class="iconos">
         <img src="assets/img/logo/iconos/ver-mas.svg">
         <img (click)="desplegarSubMenu($event)"  src="assets/img/logo/iconos/ver-mas-full.svg">
     </div>
     <div *ngIf="subMenu" class="submenu">
-        <p (click)="editarProducto()">Editar</p>
         <p (click)="navegar(['prod/'+ publicacion.id],$event)">Ver publicación</p>
         <p>Eliminar</p>
     </div>  

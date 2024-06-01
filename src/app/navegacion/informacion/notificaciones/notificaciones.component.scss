@@ -5,6 +5,12 @@
 	min-width: 870px;
 	overflow: hidden;
 	background-color: #fafafa;
+    @media (max-width: 900px) {
+        padding-bottom: 550px;
+	}
+	@media (max-width: 560px) {
+		padding-bottom: 850px;
+	}
 }
 .contenido{
     width: 1400px;
@@ -81,7 +87,7 @@
                         }
                     }
                     .clicked {
-                        background: #FF9E57;
+                        background: #FF9C53;
                         .circle{
                             left: 24px;
                         }

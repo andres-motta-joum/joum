@@ -1,0 +1,91 @@
+.linea-general{
+    border-bottom: 1px solid #e4e4e4;
+    width: 100%;
+    margin:5px 0 20px 0;
+}
+h2{
+    color: #606060 !important;
+    font-size: 18.5px !important;
+    font-weight: 460 !important;
+    letter-spacing: .6px !important;
+    word-spacing: 1.4px !important;
+    padding-left: 30px !important;
+}
+.video-content{
+    position: relative;
+    margin: 10px 0 15px 30px;
+    margin-left: 30px;
+    width: calc(100% - 60px);
+    .play-pause-button {
+        position: absolute;
+        width: 105px;
+        height: 105px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba($color: #000, $alpha: .2);
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 1;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .play{
+        animation: play 1.4s;
+        display: none;
+    }
+    @keyframes play {
+        0%{
+            opacity: 1;
+            display: block;
+        }
+        100%{
+            opacity: 0;
+            display: none;
+        }
+    }
+}
+video{
+    position: relative;
+    width: 100%;
+    &::-webkit-media-controls-timeline {
+      display: none;
+    }
+    &::-webkit-media-controls-panel {
+      width: calc(100% + 24px);
+    }
+    
+    /* Oculta todos los botones predeterminados */
+    &::-webkit-media-controls-start-playback-button,
+    &::-webkit-media-controls-play-button,
+    &::-webkit-media-controls-pause-button,
+    &::-webkit-media-controls-rewind-button,
+    &::-webkit-media-controls-seek-back-button,
+    &::-webkit-media-controls-seek-forward-button,
+    &::-webkit-media-controls-toggle-closed-captions-button,
+    &::-webkit-media-controls-toggle-fullscreen-button {
+      display: none !important;
+    }
+    /* Oculta todos los controles predeterminados */
+    &::-webkit-media-controls {
+        display: none !important;
+    }
+
+    /* Oculta el icono de volumen */
+    &::-webkit-media-controls-volume-slider-container {
+        display: none !important;
+    }
+
+    /* Oculta los tres puntos de menú */
+    &::-webkit-media-controls-overflow-button {
+        display: none !important;
+    }
+
+    /* Oculta el tiempo del video */
+    &::-webkit-media-controls-current-time-display,
+    &::-webkit-media-controls-time-remaining-display {
+        display: none !important;
+    }
+}

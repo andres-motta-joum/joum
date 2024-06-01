@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Created with Vectornator (http://vectornator.io/) -->
-<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs>
-<path d="M0 512C0 229.23 229.23 0 512 0C794.77 0 1024 229.23 1024 512C1024 794.77 794.77 1024 512 1024C229.23 1024 0 794.77 0 512Z" id="Fill"/>
-<linearGradient gradientTransform="matrix(1 0 0 1 0 0)" gradientUnits="userSpaceOnUse" id="LinearGradient" x1="610.217" x2="853.494" y1="658.35" y2="946.917">
-<stop offset="0" stop-color="#f29957"/>
-<stop offset="1" stop-color="#ffa96a"/>
-</linearGradient>
-</defs>
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 472.413 472.413" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs/>
 <clipPath id="ArtboardFrame">
-<rect height="1024" width="1024" x="0" y="0"/>
+<rect height="472.413" width="472.413" x="0" y="0"/>
 </clipPath>
 <g clip-path="url(#ArtboardFrame)" id="Capa-1" vectornator:layerName="Capa 1">
-<use fill="#ffab6e" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.0959189" vectornator:layerName="Óvalo 4" xlink:href="#Fill"/>
+<path d="M0 236.207C0 105.753 105.753 0 236.207 0C366.66 0 472.413 105.753 472.413 236.207C472.413 366.66 366.66 472.413 236.207 472.413C105.753 472.413 0 366.66 0 236.207Z" fill="#55da90" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.0442513" vectornator:layerName="path"/>
+<g opacity="1" vectornator:layerName="path">
 <clipPath clip-rule="nonzero" id="ClipPath">
-<use xlink:href="#Fill"/>
+<path d="M0 236.207C0 105.753 105.753 0 236.207 0C366.66 0 472.413 105.753 472.413 236.207C472.413 366.66 366.66 472.413 236.207 472.413C105.753 472.413 0 366.66 0 236.207Z"/>
 </clipPath>
 <g clip-path="url(#ClipPath)">
-<path d="M546.128 1024C546.128 1024 907.795 1077.16 982.992 723.737L810.162 520.742L349.01 766.453L546.128 1024Z" fill="url(#LinearGradient)" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 3"/>
-<path d="M323.632 287.702L340.912 434.242C342.005 454.399 359.06 473.261 379.006 476.372L554.306 506.257C580.125 509.429 580.125 514.572 554.306 517.744L379.122 547.623C359.177 550.735 342.168 569.601 341.131 589.761L324.266 736.193C324.304 763.071 344.56 774.103 369.508 760.833L787.456 538.532C813.104 524.89 813.161 502.665 787.584 488.892L368.63 263.271C343.74 249.867 323.594 260.805 323.632 287.702Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.087336" vectornator:layerName="Curva 4"/>
+<path d="M251.951 472.413C251.951 472.413 418.803 496.938 453.495 333.89L373.761 240.24L161.013 353.596L251.951 472.413Z" fill="#4eca85" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Curva 3"/>
+<path d="M149.305 132.729L157.277 200.334C157.781 209.633 165.649 218.335 174.851 219.77L255.724 233.557C267.635 235.02 267.635 237.393 255.724 238.857L174.905 252.641C165.703 254.077 157.856 262.78 157.378 272.081L149.597 339.636C149.615 352.036 158.96 357.125 170.469 351.003L363.286 248.447C375.118 242.153 375.145 231.9 363.345 225.546L170.064 121.458C158.581 115.274 149.287 120.32 149.305 132.729Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="#dddddd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="0.0402917" vectornator:layerName="Curva 4"/>
+</g>
 </g>
 </g>
 </svg>

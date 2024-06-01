@@ -14,7 +14,7 @@
             <p>Administrar</p>
         </div>
         <div class="productos" *ngIf="productos">
-            <app-producto-historial (eliminarIndex)="eliminarProductoHistorial($event)" [producto]="producto" [foto]="fotos[index]" [index]="productos.length - 1 - index" *ngFor="let producto of productos; let index = index"></app-producto-historial>
+            <app-producto-historial (eliminarIndex)="eliminarProductoHistorial($event)" [producto]="producto" [index]="productos.length - 1 - index" *ngFor="let producto of productos; let index = index" [usuario]="usuario"></app-producto-historial>
         </div>
     </div>
     <app-footer></app-footer>

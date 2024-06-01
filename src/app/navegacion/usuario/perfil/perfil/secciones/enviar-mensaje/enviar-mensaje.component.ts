@@ -32,6 +32,10 @@ export class EnviarMensajeComponent implements OnInit, OnDestroy{
 
   isEditable: boolean = true;
   mensaje!: any;
+
+  fechaCompra!: Date;
+  fechaCompraString!: string;
+
   ngOnInit(){
     this.auth.onAuthStateChanged( user =>{
       if(user){
@@ -60,6 +64,7 @@ export class EnviarMensajeComponent implements OnInit, OnDestroy{
             await this.obtenerVenta(id);
             this.usuarioCliente = await this.authService.getUsuarioIdPromise(this.venta.idCliente);
             this.usuarioVendedor = await this.authService.getUsuarioIdPromise(this.venta.idVendedor);
+            this.fechaDeCompra()
           }else{
             this.router.navigate(['']);
           }
@@ -74,6 +79,13 @@ export class EnviarMensajeComponent implements OnInit, OnDestroy{
     const ventaRef = doc(this.firestore, `ventas/${id}`);
     const snapshot = await getDoc(ventaRef);
     this.venta = snapshot.data() as Venta;
+  }
+
+  fechaDeCompra(){
+    const timestamp = this.venta.fechaVenta!;
+    this.fechaCompra = new Date(timestamp.seconds * 1000);
+    let meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    this.fechaCompraString = `${this.fechaCompra.getDate()} de ${meses[this.fechaCompra.getMonth()]}`;
   }
 
   inputMensaje(){

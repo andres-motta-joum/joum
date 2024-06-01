@@ -49,26 +49,10 @@ import { Auth } from '@angular/fire/auth';
   ],
   providers: [provideIcons({heroChevronDown, heroShoppingCartSolid, heroUserCircleSolid, heroShoppingCart, heroStar, heroDocumentCheck, heroChatBubbleBottomCenterText, heroBanknotesMini,heroRectangleGroup, heroBell,heroBuildingStorefront, heroChatBubbleLeftRight, heroCurrencyDollar, heroCurrencyDollarSolid, heroArrowTrendingUp, heroChartPie, heroDocumentTextSolid})]
 })
-export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
+export class PerfilComponent implements OnDestroy, OnInit{
 
   constructor(private router: Router,private route: ActivatedRoute,private renderer: Renderer2,private changeDetector: ChangeDetectorRef,private zone: NgZone, private authService: AuthService, private auth: Auth) {}
   private routerSubscription!: Subscription;
-  private subscripciones: Subscription[] = [];
-  private listenMouseEnterMenu!: () => void;
-  private listenMouseLeaveMenu!: () => void;
-  private listenFooterSlide!: () => void;
-  @ViewChild('principalUL') principalUL!: ElementRef;
-  @ViewChild('body') body1!: ElementRef;
-
-  footer: any;
-  footerHeight: any;
-  footerSlide!: number;
-  fotosombra!: boolean;
-  mouseInMenu = false;
-  screenWidth: number = window.innerWidth;
-  screenHeight: number = window.innerHeight;
-  interruptor = true;
-  stateSubMenu: string[] = ['inactive', 'inactive', 'inactive'];
 
   miNombre!: string;
   miUsuario!: string;
@@ -113,7 +97,7 @@ export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
           }
           //---- en caso de estár en un perfil de otro usuario, sin cuenta iniciada
         }else{
-          this.router.navigate(['cuenta/iniciar-sesion']);
+          this.router.navigate(['cuenta/crear-cuenta']);
         }
       }
       
@@ -124,110 +108,9 @@ export class PerfilComponent implements AfterViewInit, OnDestroy, OnInit{
   //---------------------------------
 
   ngOnDestroy(): void {
-    this.listenMouseEnterMenu();
-    this.listenMouseLeaveMenu();
-    this.listenFooterSlide();
-    this.subscripciones.forEach(subs => subs.unsubscribe());
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
   }
-
-
-
-//----------------------------------------------------------- APARIENCIA DE LA PAGINA ----------------------------------------------------------------------------
-
-ngAfterViewInit(): void {
-  this.listenMouseEnterMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseenter', () => {
-    this.mouseInMenu = true;
-    this.changeDetector.detectChanges();
-  });
-  this.listenMouseLeaveMenu = this.renderer.listen(this.principalUL.nativeElement, 'mouseleave', () => {
-    this.mouseInMenu = false;
-    this.changeDetector.detectChanges();
-  });
-  this.listenFooterSlide = this.renderer.listen('window', 'load', () => {
-    this.footerSlide = (this.footer.nativeElement.getBoundingClientRect().top) - this.screenHeight;
-    this.interruptor = this.footerSlide > 0 ? true : false;
-  });
-}
-
-  desplegarSubmenu(i: number): any {
-    this.stateSubMenu[i] = this.stateSubMenu[i] === 'active' ? 'inactive' : 'active';
-  }
-
-  getFooter(element: any): any {
-    this.footer = element;
-  }
-
-  getFooterHeight(element: any): any {
-    this.footerHeight = element;
-  }
-
-  navegar(ruta: any[], event: Event): any {
-    event.preventDefault();
-    this.zone.run(() => {
-      try {
-        this.router.navigate(ruta);
-        window.scroll(0,0);
-
-      } catch (error) {
-        this.router.navigate(['/noHaySesion']);
-      }
-    });
-  }
-
-  submenuScroll(interruptor: boolean): any {
-    let numeroResta = 0;
-    const scroll = window.scrollY;
-    if (interruptor){
-      if (scroll >= 0 && scroll <= 32){
-        numeroResta = scroll;
-        this.renderer.setStyle(this.principalUL.nativeElement, 'position', 'fixed');
-        this.renderer.setStyle(this.principalUL.nativeElement, 'top', `${91 - numeroResta}px`);
-        this.renderer.setStyle(this.principalUL.nativeElement, 'height', `${window.innerHeight - 90 + numeroResta}px`);
-      } else if (scroll >= 32){
-        this.renderer.setStyle(this.principalUL.nativeElement, 'position', 'fixed');
-        this.renderer.setStyle(this.principalUL.nativeElement, 'top', '57px');
-        this.renderer.setStyle(this.principalUL.nativeElement, 'height', `${window.innerHeight - 58 + numeroResta}px`);
-      } else if (scroll < 32){
-        this.renderer.setStyle(this.principalUL.nativeElement, 'position', 'sticky');
-        this.renderer.setStyle(this.principalUL.nativeElement, 'top', '0px');
-        this.renderer.setStyle(this.principalUL.nativeElement, 'height', `${window.innerHeight - 90 + numeroResta}px`);
-        this.renderer.setStyle(this.principalUL.nativeElement, 'margin-top', '0');
-      }
-    }
-
-    if (interruptor === false){
-      this.renderer.setStyle(this.principalUL.nativeElement, 'position', 'absolute');
-      this.renderer.setStyle(this.principalUL.nativeElement, 'height', `${window.innerHeight - 58 + numeroResta}px`);
-      const heightMenu = this.principalUL.nativeElement.offsetHeight;
-      const footerHeight = this.footerHeight.nativeElement.offsetHeight;
-      const pageHeight = this.body1.nativeElement.offsetHeight;
-      const resultado = pageHeight - (footerHeight + heightMenu );
-      this.renderer.setStyle(this.principalUL.nativeElement, 'top', `${resultado}px`);
-    }
-    
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any): void {
-    this.screenWidth = window.innerWidth;
-    this.screenHeight = window.innerHeight;
-    this.footerSlide = (this.footer.nativeElement.getBoundingClientRect().top) - this.screenHeight;
-    this.interruptor = this.footerSlide > 0 ? true : false;
-    this.submenuScroll(this.interruptor);
-  }
-
-  @HostListener('window:scroll', ['$event']) onScroll(event: any): void {
-    this.scroll();
-  }
-
-  scroll(): void{
-    this.footerSlide = (this.footer.nativeElement.getBoundingClientRect().top) - this.screenHeight;
-    this.interruptor = this.footerSlide > 0 ? true : false;
-    this.submenuScroll(this.interruptor);
-  }
-
 
 }

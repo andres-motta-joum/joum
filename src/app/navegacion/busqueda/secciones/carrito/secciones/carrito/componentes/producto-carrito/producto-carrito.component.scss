@@ -14,25 +14,29 @@
             margin: 30px 0;
             width: 104px;
             height: 104px;
-            padding: 3px;
+            padding: 1px;
             border: 1px solid #ddd;
             border-radius: 7px;
             flex-shrink: 0;
-            &::before{
-                content: '';
-                width: calc(100% - 6px);
-                height: calc(100% - 6px);
-                border-radius: 5px;
-                background: linear-gradient(to right, #fafafa, #f0f0f0);
-                position: absolute;
-            }
+            display: flex;
+            justify-content: center;
             img{
+                object-fit: contain;
                 border-radius: 5px;
                 position: absolute;
                 cursor: pointer;
-                width: calc(100% - 6px);
-                height: calc(100% - 6px);
-                object-fit: contain;
+                max-width: calc(100% - 4px);
+                max-height: calc(100% - 4px);
+            }
+        }
+        .fondoVisible{
+            &::before{
+                content: '';
+                width: calc(100% - 5px);
+                height: calc(100% - 5px);
+                border-radius: 5px;
+                background: linear-gradient(to right, #fafafa, #f0f0f0);
+                position: absolute;
             }
         }
         >div:nth-child(2){

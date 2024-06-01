@@ -5,16 +5,18 @@
           <button (click)='menuLateral.animarMenu()' class="btn-menu" id="button-menu">
               <p><ng-icon class="menu-icon" name="heroBars3Solid"></ng-icon>
           </button>
-          <a (click)="navegar('')"><img src="assets/img/logo/logocompleto.svg" alt="" class="logo"></a>
-          <input class="Buscador" (keyup.enter)="buscarEnter(busqueda.value)" placeholder='Buscar' type="text" #busqueda [(ngModel)]="ultimoDatoUrl">
-          <div (click)="buscar(busqueda.value)" class="Buscar"><ng-icon class="search" name="heroMagnifyingGlassMini"></ng-icon></div>
+          <a (click)="navegar('')" [ngClass]="{'sinLogo': enBuscador}"><img src="../../../../assets/img/logo/logocompleto.svg" alt="" class="logo"></a>
+          <ng-container>
+            <input class="Buscador" (keyup.enter)="buscarEnter(busqueda.value)" placeholder='Buscar' type="text" #busqueda [(ngModel)]="ultimoDatoUrl" (focus)="enBuscador = true" (blur)="enBuscador = false">
+            <div (click)="buscar(busqueda.value)" class="Buscar" ><ng-icon class="search" name="heroMagnifyingGlassMini"></ng-icon></div>
+          </ng-container>
             
           <li class="ventas">
-            <div class="sign" [ngClass]="{'visible': sign == 'ventas'}" (click)="$event.stopPropagation()">
+            <div class="sign" [ngClass]="{'visible': sign == 'pedidos'}" (click)="$event.stopPropagation()">
               <section><ng-icon name="heroUserCircle"></ng-icon><p>Necesitas una cuenta</p><button (click)="navegar('cuenta/iniciar-sesion')">Iniciar sesión</button></section>
               <span class="triangulo"></span><span class="sombra"></span>
             </div>
-            <a (click)="navegar('ventas')"><ng-icon name="heroCurrencyDollarMini"></ng-icon><p>Ventas</p></a>
+            <a (click)="navegar('pedidos')"><ng-icon name="heroTruckSolid"></ng-icon><p>Mis pedidos</p></a>
           </li>
 
           <li id="dos" class="Interruptor">
@@ -42,47 +44,38 @@
                   </div>
                 </div>
                 <div  class="linea-Menu"></div>
+                <li>
+                  <a (click)='navegar(usuario?.usuario + "/perfil/informacion")'>
+                    <ng-icon name="heroUserCircle"></ng-icon> Perfil
+                  </a>
+                </li>
                 <li >
                   <a (click)='navegar(usuario?.usuario + "/compras")'>
                     <ng-icon name="heroShoppingCart"></ng-icon> Compras
                   </a>
                 </li>
                 <li>
-                  <a (click)='navegar(usuario?.usuario + "/opiniones")'>
-                    <ng-icon name="heroDocumentCheck"></ng-icon> Opiniones
-                  </a>
-                </li>
-
-                <div class="linea-Menu"></div>
-                <li>
                   <a (click)='navegar("vender")'>
                     <ng-icon name="heroBanknotes"></ng-icon> Vender
                   </a>
                 </li>
-                <li>
-                  <a (click)='navegar(usuario?.usuario + "/resumen")'>
-                    <ng-icon name="heroRectangleGroup"></ng-icon> Resumen
-                  </a>
-                </li>
-                <li>
-                  <a (click)='navegar(usuario?.usuario + "/novedades")'>
-                    <ng-icon name="heroBell"></ng-icon> Novedades
-                  </a>
-                </li>
-                <li>
+
+                <div class="linea-Menu" *ngIf="usuarioInterno"></div>
+                <li *ngIf="usuarioInterno">
                   <a (click)='navegar(usuario?.usuario + "/publicaciones")'>
                     <ng-icon name="heroBuildingStorefront"></ng-icon> Publicaciones
                   </a>
                 </li>
-
-                <div class="linea-Menu"></div>
-                <li>
-                  <a (click)='navegar(usuario?.usuario + "/facturacion/facturas-reportes")'>
-                    <ng-icon name="heroDocumentText"></ng-icon> Facturacion
+                <li *ngIf="usuarioInterno">
+                  <a (click)='navegar(usuario?.usuario + "/ventas")'>
+                    <ng-icon name="heroCurrencyDollar"></ng-icon> Ventas
                   </a>
                 </li>
-
-                <div class="linea-Menu" *ngIf="usuarioInterno"></div>
+                <li *ngIf="usuarioInterno">
+                  <a (click)='navegar(usuario?.usuario + "/metricas/negocio")'>
+                    <ng-icon name="heroChartPie"></ng-icon> Métricas
+                  </a>
+                </li>
                 <li *ngIf="usuarioInterno">
                   <a (click)="navegar('portal-empleado/' + usuario!.id)">
                     <ng-icon name="iconoirViewStructureUp"></ng-icon>Portal de empleado
@@ -100,7 +93,7 @@
             </ul>
             <nav class="menu4-gray2"></nav>
           </li>
-          <li class="tres">
+          <li class="tres" *ngIf="anchoPagina > 720">
             <a (click)="navegar(usuario?.usuario + '/carrito')"><p><ng-icon class="cart" name="matShoppingCart"></ng-icon><p class="text-tres">Carrito</p></a>
             <span class="cantidadEnCarrito" *ngIf="productosEnCarrito !== 0"><p>{{productosEnCarrito}}</p></span>
           </li>
@@ -114,12 +107,19 @@
   <div class="header2">
     <nav class="menu2">
       <ul>
-        <li>
+        <li *ngIf="anchoPagina > 520">
           <div class="sign" [ngClass]="{'visible': sign == 'direcciones'}" (click)="$event.stopPropagation()">
             <section><ng-icon name="heroUserCircle"></ng-icon><p>Necesitas una cuenta</p><button (click)="navegar('cuenta/iniciar-sesion')">Iniciar sesión</button></section>
             <span class="triangulo"></span><span class="sombra"></span>
           </div>
           <p (click)="direccionarDirecciones()">Agrega tu envío</p>
+        </li>
+        <li *ngIf="anchoPagina <= 520 ">
+          <div class="sign" [ngClass]="{'visible': sign == 'favoritos'}" (click)="$event.stopPropagation()">
+            <section><ng-icon name="heroUserCircle"></ng-icon><p>Necesitas una cuenta</p><button (click)="navegar('cuenta/iniciar-sesion')">Iniciar sesión</button></section>
+            <span class="triangulo"></span><span class="sombra"></span>
+          </div>
+          <p (click)="navegar('favoritos')">Favoritos</p>
         </li>
         <li><p (click)="navegar('ofertas-del-dia')">Ofertas</p></li>
         <li>
@@ -136,15 +136,15 @@
           </div>
           <p (click)="navegar('compras')">Mis compras</p>
         </li>
-        <li>
+        <li *ngIf="anchoPagina > 630 ">
           <div class="sign" [ngClass]="{'visible': sign == 'favoritos'}" (click)="$event.stopPropagation()">
             <section><ng-icon name="heroUserCircle"></ng-icon><p>Necesitas una cuenta</p><button (click)="navegar('cuenta/iniciar-sesion')">Iniciar sesión</button></section>
             <span class="triangulo"></span><span class="sombra"></span>
           </div>
           <p (click)="navegar('favoritos')">Favoritos</p>
         </li>
-        <li><p (click)="navegar('vender')">Vender</p></li>
-        <li><p (click)="navegar('ayuda')">Ayuda</p></li>
+        <li *ngIf="anchoPagina > 700"><p (click)="navegar('vender')">Vender</p></li>
+        <li *ngIf="anchoPagina > 450 "><p (click)="navegar('ayuda')">Ayuda</p></li>
         <div *ngIf="usuario && inUser" class="notificaciones" (mouseover)="mouseIn()" (mouseleave)="mouseOut()" (click)="navegar('notificaciones')">
           <ng-icon name="ionNotificationsOutline"></ng-icon>
           <ng-icon name="ionChevronDownOutline"></ng-icon>

@@ -15,7 +15,7 @@ export class EncuestaUtilidadComponent{
   
   async si(){
     const [seccion, informacion] = this.informacion.split('/');
-    await updateDoc(doc(this.firestore, `informacion/ayuda/${seccion}/${informacion}`), {util: increment(1)});
+    await updateDoc(doc(this.firestore, `ayuda/atencion-clientes/${seccion}/${informacion}`), {util: increment(1)});
     this.check = true;
   }
 
@@ -30,7 +30,7 @@ export class EncuestaUtilidadComponent{
   async enviarEncuesta(){
     if(this.seleccionado){
       const [seccion, informacion] = this.informacion.split('/');
-      await updateDoc(doc(this.firestore, `informacion/ayuda/${seccion}/${informacion}`), {[this.seleccionado]: increment(1)})
+      await updateDoc(doc(this.firestore, `ayuda/atencion-clientes/${seccion}/${informacion}`), {[this.seleccionado]: increment(1)})
       this.check = true;
     }
   }

@@ -60,6 +60,7 @@
                 </div>
                 <p>{{ fechas[index] | date:'d \'/\' MMMM \'/\' y' }}</p>
             </div>
+            <img *ngIf="opinion.foto" [src]="'assets/img/opiniones/'+ opinion.foto +'.png'" (click)="mostrarFoto(index)">
             <p class="texto-opinion">{{opinion.contenido}}</p>
             <div class="linea-opinion"></div>
         </div>

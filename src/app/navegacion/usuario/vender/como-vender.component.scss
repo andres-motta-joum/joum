@@ -1,0 +1,23 @@
+.body{
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 440px;
+    min-width: 375px;
+    overflow: hidden;
+	background-color: #f7f7f7;
+    @media (max-width: 900px) {
+        padding-bottom: 550px;
+	}
+	@media (max-width: 560px) {
+		padding-bottom: 850px;
+	}
+}
+.content{
+    width: 1400px;
+    margin: auto;
+    min-width: 375px;
+    @media screen and (max-width: 1450px) {
+        width: 90%;
+        margin: auto;
+    }
+}

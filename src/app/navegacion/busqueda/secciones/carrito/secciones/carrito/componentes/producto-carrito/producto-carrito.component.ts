@@ -1,7 +1,7 @@
-import { Component, EventEmitter, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, NgZone, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { Usuario, referenciaCompra } from 'src/app/interfaces/usuario/usuario';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
@@ -19,10 +19,8 @@ export class ProductoCarritoComponent implements OnInit, OnDestroy{
   @Input() carrito!: referenciaCompra[];
   @Input() productoCarrito!: Producto; 
   @Input() unidad!: number;
-  @Input() foto!: string;
-  @Input() estilo!: Estilo | undefined;
+  @Input() tamanio!: number | string;
   @Input() indice!: number;
-  @Input() indexEstilo!: number;
   private subscription!: Subscription;
   private usuario!: Usuario;
   userUsuario!: string;
@@ -40,11 +38,11 @@ export class ProductoCarritoComponent implements OnInit, OnDestroy{
       this.userUsuario = (await firstValueFrom(usuario$)).usuario!;
     });
   }
-  
-  async cambiarUnidad(accion: string, index: number, unidadesTotales: number){
+
+  async cambiarUnidad(accion: string, index: number){
     const userRef = doc(this.firestore, `usuarios/${this.auth.currentUser?.uid}`);
     if(accion === '+'){
-      if(this.unidad < unidadesTotales){
+      if(this.unidad < 60){
         this.carrito![index].unidades += 1; 
         this.unidad += 1;
         await setDoc(userRef, {carrito: this.carrito}, {merge: true});
@@ -59,15 +57,19 @@ export class ProductoCarritoComponent implements OnInit, OnDestroy{
     }
   }
   agregarGuardado(){
-    if(this.foto){
+    if(this.productoCarrito){
       this.eliminar.emit(this.indice);
       this.comprarService.eliminarReferenciaCarrito(this.usuario, this.indice);
-      this.comprarService.agregarReferenciaGuardado(this.productoCarrito.id!, this.auth.currentUser?.uid!, this.estilo!.id, this.unidad);
+      if(typeof this.tamanio == 'number'){
+        this.comprarService.agregarReferenciaGuardado(this.productoCarrito.id!, this.auth.currentUser?.uid!, this.unidad, this.tamanio as number);
+      }else{
+        this.comprarService.agregarReferenciaGuardado(this.productoCarrito.id!, this.auth.currentUser?.uid!, this.unidad);
+      }
     }
   }
 
   eliminarCarrito(){
-    if(this.foto){
+    if(this.productoCarrito){
       this.eliminar.emit(this.indice);
       this.comprarService.eliminarReferenciaCarrito(this.usuario, this.indice);
     }

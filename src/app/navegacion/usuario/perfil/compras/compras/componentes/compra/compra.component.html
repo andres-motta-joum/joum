@@ -3,13 +3,10 @@
         <img [src]="referencia.foto">
         <div>
             <h3>{{fecha | date:'d \'de\' MMMM \'.\' y'}}</h3>
-            <p>{{referencia.tituloProducto}}</p>
+            <p>{{referencia.tituloProducto}} <span *ngIf="referencia.gramosTamanio !== 'false'">{{referencia.gramosTamanio}}</span></p>
             <p (click)="navegar(['prod/' + referencia.idProducto], $event)">ver producto</p>
         </div>
         <div>
-            <div (click)="navegar([usuarioVendedor +'/perfil/informacion'], $event)">
-                <img src="assets/img/usuarios/user.svg"><p> {{nombreVendedor}}</p>
-            </div>
             <div (click)="navegar([usuarioVendedor+'/' + miUsuario +'/' + compra.numVenta +'/enviar-mensaje'], $event)">
                 <img src="assets/img/logo/iconos/Msg-full.svg"><p>Enviar mensaje</p>
             </div>

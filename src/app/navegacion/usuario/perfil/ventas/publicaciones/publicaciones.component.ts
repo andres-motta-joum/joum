@@ -21,7 +21,6 @@ export class PublicacionesComponent implements OnInit, OnDestroy{
   private routeSubscription!: Subscription;
   usuario!: Usuario;
   publicaciones!: Producto[];
-  fotos: string[] = [];
   datosCargados = false;
   
   ngOnInit() {
@@ -45,10 +44,12 @@ export class PublicacionesComponent implements OnInit, OnDestroy{
       const productosSnapshot = await Promise.all(this.usuario?.publicaciones.map((ref:any) => getDoc(ref)));
       this.publicaciones = productosSnapshot.map((productoSnapshot)=>{
         const prd = productoSnapshot.data() as Producto;
+        if(!prd){
+          console.log(productoSnapshot)
+        }
         prd.id = productoSnapshot.id;
         return prd
       })
-      this.fotos = await this.productosService.obtenerFotos(this.publicaciones);
     }
     this.datosCargados = true;
   }

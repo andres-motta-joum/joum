@@ -1,11 +1,10 @@
 .contenidoDatosProducto {
     margin-top: 30px;
     position: relative;
-    border: 1px solid #e1e0dd;
-    width: 100%;
+    border: 1px solid #e0dfdc;
+    width: 91%;
     transform: translateX(3%);
     border-radius: 5px;
-
     .contenido {
         position: relative;
         width: 86%;
@@ -33,8 +32,8 @@
             margin-top: 0;
             margin-bottom: 10px;
             font-size: 20px;
-            color: #333;
-            padding-right: 10%;
+            color: #444;
+            padding-right: 35px;
             font-weight: 550;
         }
 
@@ -94,107 +93,137 @@
 
         /* PRECIOS */
         .precio-descuento {
+            margin-top: 6px;
             display: flex;
             height: 18px;
-
-            div p:nth-child(1) {
-                color: #888;
-                font-size: 16px;
-                font-weight: 100;
-                text-decoration: line-through;
-                font-weight: 400;
+            .precio-anterior {
+                position: relative;
+                font-size: 19px;
+                font-weight: 430;
+                color: #808080;
                 margin: 0;
-                padding-left: 0;
-            }
-
-            p {
-                color: #1779ea;
-                margin-top: -2px;
-                padding-left: 10px;
-                letter-spacing: 1px;
-                font-weight: 480;
-                font-size: 17px;
+                letter-spacing: .6px;
+                &::after{
+                  content: "";
+                  position: absolute;
+                  left: 0;
+                  top: 57%;
+                  width: 100%;
+                  border-bottom: 1.5px solid rgba($color: #444, $alpha: 0.55);
+                }
+              }
+            .oferta {
+                font-size: 15px;
+                height: 21px;
+                line-height: 22px;
+                letter-spacing: .5px;
+                padding: 1px 10px;
+                background: #37c965;
+                color: #fff;
+                font-weight: 520;
+                margin: 0;
+                margin-left: 12px;
+                border-radius: 4px;
+                transform: translateY(-2px);
             }
         }
 
         h2 {
-            font-size: 33px;
-            margin: 5px 0 25px 0;
-            font-weight: 380;
-            letter-spacing: 1px;
-            color: #333;
+            font-size: 32.5px;
+            margin: 5px 0 18px 0;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            color: #404040;
+            span{
+                font-size: 26px;
+                font-weight: 450;
+                letter-spacing: .5px;
+                color: #606060;
+                transform: translateX(5px);
+            }
         }
 
         /* Recibelo entre */
         .recibelo {
             position: relative;
-            font-size: 15px;
-            margin-top: 15px;
+            font-size: 14.5px;
+            margin-top: 0;
             margin-bottom: 5px;
+            color: #555;
+            font-weight: 460;
+            letter-spacing: 1px;
 
             span {
                 top: 3px;
-                position: absolute;
                 font-weight: 500;
                 color: #1779ea;
-                letter-spacing: 0.5px;
+                letter-spacing: 1.4px;
+                font-size: 15px;
             }
 
             ng-icon {
                 color: #1779ea;
-                font-size: 21px;
-                padding-right: 6px;
+                font-size: 20px;
+                padding-right: 7px;
+                transform: translate(-1px,4px);
             }
         }
         /* Recibelo Gratis */
         .recibelo-gratis {
             position: relative;
-            font-size: 15px;
-            margin-top: 15px;
+            font-size: 14.5px;
+            margin-top: 0;
             margin-bottom: 5px;
+            color: #555;
+            font-weight: 460;
+            letter-spacing: 1px;
         
             span {
-            top: 3px;
-            position: absolute;
-            font-weight: 480;
-            color: #0cb16f;
-            letter-spacing: 0.8px;
+                top: 3px;
+                font-weight: 500;
+                color: #38b363;
+                letter-spacing: 1.4px;
+                font-size: 15px;
             }
         
             ng-icon {
-            color: #0cb16f;
-            font-size: 21px;
-            padding-right: 6px;
+                color: #33ae5e;
+                font-size: 20px;
+                padding-right: 7px;
+                transform: translate(-1px,4px);
             }
         }
 
         .entre {
-            font-size: 14px;
-            margin-top: 0;
-            color: #444;
-            font-weight: 500;
-            margin-bottom: 24px;
+            font-size: 14.5px;
+            margin-top: 5px;
+            color: #555;
+            font-weight: 460;
+            margin-bottom: 15px;
             letter-spacing: 1px;
-
             span {
-                font-weight: 600;
-                letter-spacing: 0;
+                font-weight: 500;
+                letter-spacing: 1.4px;
+                color: #404040;
+                padding-left: 2px;
+                font-size: 14.5px;
             }
         }
 
         .entre-gratis {
-            font-size: 14px;
-            margin-top: 0;
-            color: #444;
-            font-weight: 500;
-            margin-bottom: 24px;
+            font-size: 14.5px;
+            margin-top: 5px;
+            color: #555;
+            font-weight: 460;
+            margin-bottom: 15px;
             letter-spacing: 1px;
 
             span {
-                font-weight: 550;
-                letter-spacing: 0.8px;
-                color: #11b674;
+                font-weight: 500;
+                letter-spacing: 1.4px;
+                color: #38b363;
                 padding-left: 2px;
+                font-size: 14.5px;
             }
         }
 
@@ -204,23 +233,65 @@
             margin-bottom: 26px;
         }
 
-        .estilos {
+        .sabores {
+            position: relative;
+            margin-top: 27px;
+            label{
+                color: #444;
+                font-size: 15px;
+                font-weight: 420;
+                letter-spacing: .4px;
+            }
+            ng-icon{
+                font-size: 18px;
+                color: #777;
+                position: absolute;
+                right: 10px;
+                bottom: 21px;
+            }
             select {
-                margin: 5px 0 20px 0;
+                margin: 5px 0 10px 0;
                 width: 100%;
-                padding: 10px;
+                padding: 11.5px 10px;
                 border-radius: 5px;
-                border: 1px solid #b0b0b0;
+                border: 1px solid #b5b5b5;
+                background: white;
                 cursor: pointer;
-                color: #5a5a5a;
-                font-size: 13px;
-                font-weight: 400;
-                letter-spacing: 0.4px;
+                color: #505050;
+                font-size: 14px;
+                font-weight: 420;
+                letter-spacing: 0.6px;
                 word-spacing: 1px;
                 outline: none;
-
+                appearance: none;
                 &:focus {
                     border: 1px solid #888;
+                }
+            }
+        }
+
+        .tamanios{
+            p{
+                margin: 4px 0 7px 0;
+            }
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            section{
+                display: flex;
+                div{
+                    padding: 7px 16px;
+                    color: #444;
+                    border: 1px solid #bbb;
+                    border-radius: 5px;
+                    margin-right: 10px;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                .seleccion{
+                    background-color: #d1efff;
+                    border-color: #569ede;
+                    color: #3487d5;
                 }
             }
         }
@@ -245,6 +316,7 @@
                 cursor: pointer;
                 height: 18px;
                 outline: none;
+                background: white;
                 width: 90px;
             }
 
@@ -265,17 +337,76 @@
         /* PAGAR */
         .btnComprar {
             width: 100%;
-            height: 43px;
+            border: none;
             border-radius: 5px;
-            background: #ffa148;
-            margin: 15px auto 20px auto;
+            margin: 22px auto 15px auto;
             position: relative;
             cursor: pointer;
             transition: 0.2s;
-
+            background: #ff9e59;
+            padding: 10.5px 0 7px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             &:hover {
-                background: #ff9027;
+                background: #fb9852;
             }
+            ng-icon{
+                color: white;
+                font-size: 22px;
+                padding-right: 10px;
+                transform: translateY(1px);
+            }
+            p {
+                font-family: verdana;
+                transform: translateY(-4px);
+                color: white;
+                margin: 0;
+                position: relative;
+                display: inline-block;
+                letter-spacing: .8px;
+                font-size: 16.5px;
+                font-weight: 510;
+                word-spacing: -0.4px;
+            }
+        }
+        .stock{
+            margin: 0;
+            margin-top: 21px;
+            font-size: 15px;
+            font-weight: 440;
+            color: #535353;
+        }
+        .linea-botones{
+            position: relative;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            margin: 0;
+            padding-top: 20px;
+            &::after{
+                content: 'o';
+                background-color: white;
+                font-size: 18.5px;
+                color: #707070;
+                position: absolute;
+                transform: translateX(-50%);
+                left: 50%;
+                top: 8px;
+                width: 70px;
+                text-align: center;
+            }
+        }
+
+        .btnAgotado {
+            width: 100%;
+            height: 43px;
+            border-radius: 5px;
+            background: #ededed;
+            margin: 15px auto 20px auto;
+            position: relative;
+            transition: 0.2s;
+            letter-spacing: .5px;
+            cursor: default;
 
             p {
                 position: relative;
@@ -283,8 +414,8 @@
                 width: 100%;
                 text-align: center;
                 font-size: 17px;
-                color: white;
-                font-weight: 580;
+                color: rgb(251, 164, 164);
+                font-weight: 550;
                 word-spacing: 2px;
             }
         }
@@ -292,25 +423,26 @@
         .proteccionCompra {
             position: relative;
             font-size: 14px;
-            color: #6c6c6c;
+            color: #737373;
             letter-spacing: 0.5px;
             font-weight: 440;
             line-height: 20px;
             padding: 5px 5px 0 25px;
+            margin-top: 10px;
             margin-bottom: 22px;
             cursor: pointer;
 
             &:hover {
-                color: #606060;
+                color: #666;
 
                 ng-icon {
-                    color: #707070;
+                    color: #757575;
                 }
             }
 
             span {
-                color: #797979;
-                font-weight: 420;
+                color: #858585;
+                font-weight: 430;
                 font-size: 13.5px;
             }
 
@@ -319,13 +451,41 @@
                 left: 0;
                 top: 6px;
                 font-size: 20px;
-                color: #7d7d7d;
+                color: #7a7a7a;
             }
         }
 
         @for $i from 1 through 10 {
             .estrellas .starts-over.starts-#{$i * 10} {
                 width: #{$i * 10.15%};
+            }
+        }
+    }
+    //-----------------  CELULAR ---------------------------
+    @media (max-width: 1090px) {
+        margin-top: 20px;
+        width: calc(100% - 90px);
+        margin-left: 45px;
+        transform: translateX(0);
+        .tituloProducto {
+            padding-right: 10px;
+        }
+    }
+    @media (max-width: 800px) {
+        width: 100%;
+        margin-top: 25px;
+        padding-top: 0;
+        border-radius: 0;
+        margin-left: 0;
+        transform: translateX(0);
+        border: none;
+        .contenido {
+            position: relative;
+            width: calc(100% - 60px);
+            margin-left: 30px;
+            .contenidoPrecios h2{
+                font-weight: 420;
+                color: #3d3d3d;
             }
         }
     }

@@ -7,7 +7,7 @@
             <p *ngIf="!favoritos">0 favoritos</p>
         </div>
         
-        <app-favorito [favorito]="favorito" [foto]="fotos[index]" *ngFor="let favorito of favoritos; let index = index"></app-favorito>
+        <app-favorito (elimar)="eliminarFavorito($event)" [favorito]="favorito" *ngFor="let favorito of favoritos; let index = index"></app-favorito>
         
         <div class="sinFavoritos" *ngIf="!favoritos">
             <img src="assets/img/logo/iconos/favorites-empty.svg">

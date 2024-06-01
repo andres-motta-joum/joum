@@ -1,0 +1,24 @@
+<div class="agenda">
+    <h4>Selecciona fecha y hora</h4>
+    <section class="fechas" [ngClass]="fechaDias.length == 7 && anchoPagina > 580 ? 'fechaSieteCampos' : 'fechaSeisCampos'">
+        <ng-container *ngFor="let fecha of fechaDias; let index = index">
+            <div [ngClass]="{'seleccionado': index == fechaSeleccionada}" (click)="seleccionarFecha(index)">
+                <p>{{fecha[0]}}</p>
+                <p>{{fecha[1]}}</p>
+                <p>{{fecha[2]}}</p>
+            </div>
+        </ng-container>
+    </section>
+    <section class="horas">
+        <ng-container *ngFor="let hora of horas; let index = index">
+            <div [ngClass]="{'seleccionado': index == horaSeleccionada}" (click)="seleccionarHora(index)">
+                <p>{{hora}}</p>
+            </div>
+        </ng-container>
+    </section>
+    <p class="politicas">Al continuar estás aceptando nuestros <span>Términos y Condiciones</span> y la <span>Política de Privacidad</span></p>
+    <button (click)="submit()" [ngClass]="{'success': actualizacionExitosa}">
+        <span *ngIf="!actualizacionExitosa">Agendarme</span> 
+        <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+    </button>
+</div>

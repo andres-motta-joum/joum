@@ -22,6 +22,14 @@ export class SubMenuComponent implements OnInit{
   sign: boolean = false;
   usuario: boolean = false;
   user!: string;
+
+  anchoPagina: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.anchoPagina = event.target.innerWidth;
+  }
+  
   ngOnInit(): void {
     this.auth.onAuthStateChanged(async (user)=>{
       if(user){
@@ -29,10 +37,6 @@ export class SubMenuComponent implements OnInit{
         this.user = (await this.authService.getUsuarioIdPromise(user.uid)).usuario;
       }
     })
-  }
-  metodosPago(){
-    this.router.navigate(['quienes-somos']);
-    window.scroll(0,690);
   }
   navegar(ruta: string){
     if(ruta == 'favoritos'){

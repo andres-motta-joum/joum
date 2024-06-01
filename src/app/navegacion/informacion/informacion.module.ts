@@ -16,7 +16,6 @@ import { ComponentesGeneralesModule } from '../componentes-generales/componentes
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 import { TicketsComponent } from './atencion-cliente/componentes/tickets/tickets.component';
 import { AyudaComprasComponent } from './ayuda/secciones/compras/compras.component';
-import { AyudaVentasComponent } from './ayuda/secciones/ventas/ventas.component';
 import { AyudaMisDatosComponent } from './ayuda/secciones/mis-datos/mis-datos.component';
 import { AyudaGeneralComponent } from './ayuda/secciones/general/general.component';
 import { SinTicketsComponent } from './atencion-cliente/componentes/sin-tickets/sin-tickets.component';
@@ -39,7 +38,6 @@ import { SuccessComponent } from './quienes-somos/componentes/apoyos/success/suc
     NotificacionComponent,
     TicketsComponent,
     AyudaComprasComponent,
-    AyudaVentasComponent,
     AyudaMisDatosComponent,
     AyudaGeneralComponent,
     SinTicketsComponent,

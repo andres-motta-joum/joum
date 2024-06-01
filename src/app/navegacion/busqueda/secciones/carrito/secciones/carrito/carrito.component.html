@@ -1,6 +1,6 @@
 <div class="contenedor">
     <div >
-        <app-producto-carrito (eliminar)="eliminar($event)" [carrito]="carrito" [productoCarrito]="productoCarrito" [unidad]="unidades[i]" [foto]="fotos[i]" [estilo]="estilos[i]" [indice]="i" [indexEstilo]="indexEstilos[i]" *ngFor="let productoCarrito of productos; let i = index;" ></app-producto-carrito>
+        <app-producto-carrito (eliminar)="eliminar($event)" [carrito]="carrito" [productoCarrito]="productoCarrito" [unidad]="unidades[i]" [tamanio]="tamanios[i]" [indice]="i" *ngFor="let productoCarrito of productos; let i = index;" ></app-producto-carrito>
         <div *ngIf="sinCarrito" class="sinCarrito">
             <img src="assets/img/logo/iconos/car-empty.svg">
             <p>Tu carro de compras está vacío</p>

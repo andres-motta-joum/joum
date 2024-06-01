@@ -5,7 +5,6 @@ import { NgIconsModule } from '@ng-icons/core';
 import { FormsModule } from '@angular/forms';
 
 import { InformacionComponent } from './secciones/informacion/informacion.component';
-import { ProductosComponent } from './secciones/productos/productos.component';
 import { PerfilUsuarioComponent } from './perfil-usuario.component';
 import { ReactiveFormsModule}  from '@angular/forms';
 
@@ -13,7 +12,6 @@ import { RouterModule } from '@angular/router';
 /*---------- Componentes internos ---------*/
 import { TuDineroComponent } from './secciones/tu-dinero/tu-dinero.component';
 import { MovimientoDineroComponent } from './secciones/tu-dinero/componentes/movimiento-dinero/movimiento-dinero.component';
-import { ProductoComponent } from './secciones/productos/componentes/producto/producto.component';
 
 
 import { DatosPersonalesComponent } from './secciones/informacion/componentes/datos-personales/datos-personales.component';
@@ -33,11 +31,9 @@ import { EditarContrasenaComponent } from './secciones/informacion/componentes/s
 @NgModule({
   declarations: [
     InformacionComponent,
-    ProductosComponent,
     PerfilUsuarioComponent,
     MovimientoDineroComponent,
     TuDineroComponent,
-    ProductoComponent,
     DatosPersonalesComponent,
     SeguridadComponent,
     DireccionesComponent,
@@ -59,8 +55,7 @@ import { EditarContrasenaComponent } from './secciones/informacion/componentes/s
     RouterModule.forChild(routes)
   ],
   exports: [
-    InformacionComponent,
-    ProductosComponent
+    InformacionComponent
   ]
 })
 export class PerfilUsuarioModule { }

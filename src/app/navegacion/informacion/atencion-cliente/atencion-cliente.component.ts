@@ -150,7 +150,7 @@ export class AtencionClienteComponent implements OnInit{
       estado: 'En proceso',
       reportado: false
     }
-    const ticketRef = await addDoc(collection(this.firestore, 'informacion/atencion-cliente/tickets'), ticket);
+    const ticketRef = await addDoc(collection(this.firestore, 'ayuda/atencion-clientes/tickets'), ticket);
     await updateDoc(doc(this.firestore, `usuarios/${idUsaurio}`), {tickets: arrayUnion(ticketRef)});
     await updateDoc(doc(this.firestore, `usuarios-internos/${usuarioInterno.id}`), {tickets: arrayUnion(ticketRef)});
     this.restaurarDatos(textoDescripcion);

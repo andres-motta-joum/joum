@@ -1,0 +1,11 @@
+<div class="linea-general"></div>
+<h2 class="titulos">{{titulo}}</h2>
+<div class="video-content" (click)="togglePlayPause()">
+    <div class="play-pause-button" [ngClass]="{'play': videoPlay}">
+        <img src="../../../assets/img/logo/iconos/play.svg" *ngIf="!videoPlay">
+        <img src="../../../assets/img/logo/iconos/pause.svg" *ngIf="videoPlay">
+    </div> 
+    <video #videoPlayer id="singleVideo" preload="auto" controls>
+        <source [src]="'assets/img/videos/'+ url + '.mp4'" type="video/mp4">
+    </video>
+</div>

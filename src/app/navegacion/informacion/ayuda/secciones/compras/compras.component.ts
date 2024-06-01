@@ -20,7 +20,7 @@ export class AyudaComprasComponent implements OnInit{
     if(url){
       this.selected = url
     }else{
-      this.selected = 'compra-segura';
+      this.selected = 'pasos-compra';
     }
     this.routeSubscription = this.router.events.subscribe( async event =>{
       if(event instanceof NavigationEnd){
@@ -28,7 +28,7 @@ export class AyudaComprasComponent implements OnInit{
         if(url){
           this.selected = url
         }else{
-          this.selected = 'compra-segura';
+          this.selected = 'pasos-compra';
         }
       }
     })    

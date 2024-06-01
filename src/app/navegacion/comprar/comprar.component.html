@@ -1,11 +1,15 @@
 <app-menu-simple></app-menu-simple>
 <div class="body" *ngIf="productos.length !== 0">
-    <div class="contenido-compra">
+    <section class="contenido-compra" *ngIf="!compraExitosa">
         <div class="izquierda">
             <router-outlet></router-outlet>
         </div>
         <div class="derecha">
-            <button (click)="comprar()" [ngClass]="{'cargando': cargando}"><span *ngIf="!cargando">Procesar compra</span> <span class="loading" *ngIf="cargando"></span></button>
+            <button (click)="comprar()" [ngClass]="{'cargando': cargando, 'success': actualizacionExitosa}">
+                <span *ngIf="!cargando">Procesar compra</span> 
+                <span class="loading" *ngIf="cargando && !actualizacionExitosa"></span>
+                <ng-icon name="matCheck" *ngIf="actualizacionExitosa"></ng-icon>
+            </button>
             <div>
                 <p>Producto<span *ngIf="productosLenght !== 1">s ({{productosLenght}})</span></p><p>$ {{precioProductos | number: '1.0-0'}}</p>
             </div>
@@ -17,7 +21,12 @@
                 <p>Total</p><p>$ {{ (+precioProductos) + (+precioEnvios) | number: '1.0-0' }}</p>
             </div>
         </div>
-    </div>
+    </section>
+    <section *ngIf="compraExitosa" class="compra-exitosa">
+        <h1>¡Compra exitosa! Te notificaremos cuando enviemos tu producto.</h1>
+        <button (click)="navegar([usuario.usuario + '/compras'])">Ver mis compras</button>
+        <button (click)="navegar([''])">Inicio</button>
+    </section>
 
     <app-footer></app-footer>
 </div>

@@ -28,14 +28,16 @@ export class DetalleCompraComponent implements OnInit, OnDestroy{
   usuarioVendedor!: Usuario;
   cantidadUnidades: number = 0;
   fecha!: Date;
+  fechaEnCamino!: Date;
+  fechaEntregado!: Date;
   compra!: Venta;
 
   precio: number = 0;
   precioEnvio: number = 0;
+  envio: number = 0;
 
-  porPreparar = 0;
-  enCamino = 0;
-  finalizadas = 0;
+  entregaAprox!: string;
+  fechaCompra!: string;
 
   async ngOnInit() {
     const url = this.router.url.split('/');
@@ -44,9 +46,16 @@ export class DetalleCompraComponent implements OnInit, OnDestroy{
     if(this.usuario){
       await this.obtenerCompra();
       this.usuarioVendedor = await this.authService.getUsuarioIdPromise(this.compra.idVendedor);
+      this.fechaEntregas();
     }else{
       this.router.navigate(['']);
     }
+  }
+
+  fechaEntregas(){
+    let meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    this.entregaAprox = `Tu producto llegará entre el ${this.fecha.getDate() + 1} y ${this.fecha.getDate() + 2} de ${meses[this.fecha.getMonth()]}`;
+    this.fechaCompra = `${this.fecha.getDate()} de ${meses[this.fecha.getMonth()]}`;
   }
 
   async obtenerCompra() {
@@ -55,17 +64,35 @@ export class DetalleCompraComponent implements OnInit, OnDestroy{
     const snapshot = await getDoc(compraRef);
     this.compra = snapshot.data() as Venta;
     const timestamp = this.compra.fechaVenta!;
+    const timestampDos = this.compra.fechaEnCamino!;
+    const timestampTres = this.compra.fechaEntrega!;
     this.fecha = new Date(timestamp.seconds * 1000);
+    if(this.compra.enCamino){
+      this.fechaEnCamino = new Date(timestampDos.seconds * 1000);
+    }
+    if(this.compra.entregado){
+      this.fechaEntregado = new Date(timestampTres.seconds * 1000);
+    }
     this.obtenerprecios();
   }
 
 
   obtenerprecios(){
     for(let referencia of this.compra.referencias){
-      this.precio += (referencia.precioProducto * referencia.unidades);
+      if(referencia.gramosTamanio !== 'false'){
+        switch (referencia.gramosTamanio){
+          case '102 g': this.precio += (201000 * referencia.unidades); break;
+          case '51 g':this.precio += (118000 * referencia.unidades); break;
+        }
+      }else{
+        this.precio += (referencia.precioProducto * referencia.unidades);
+      }
       this.cantidadUnidades += referencia.unidades;
       if(referencia.envioGratis){
         this.precioEnvio += referencia.precioEnvio!;
+      }
+      if(!referencia.envioGratis){
+        this.envio += 10000
       }
     }
   }

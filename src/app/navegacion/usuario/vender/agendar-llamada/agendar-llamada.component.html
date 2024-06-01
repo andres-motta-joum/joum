@@ -1,0 +1,15 @@
+<div class="agendar-content">
+    <h2>Agenda tu asesoría gratuita</h2>
+    <div *ngIf="mostrarFormulario">
+        <section class="form">
+            <app-formulario-agendamiento (success)="success()"></app-formulario-agendamiento>
+        </section>
+        <section class="agenda">
+            <app-agenda-disponible (agendamiento)="agendar($event)"></app-agenda-disponible>
+        </section>
+    </div>
+    <div *ngIf="fechaAgendada" class="agendada">
+        <h1>Asesoría reservada. ¡Nos vemos pronto!</h1>
+        <img src="assets/img/logo/iconos/agenda-check.svg">
+    </div>
+</div>

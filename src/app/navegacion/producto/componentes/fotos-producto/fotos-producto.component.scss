@@ -4,11 +4,12 @@
     position: relative;
   
     .seccionIzquierda {
-      width: 77px;
+      width: 85px;
       max-height: 470px;
       z-index: 10;
       margin-top: 35px;
       margin-left: 5px;
+      margin-right: 5px;
       overflow-y: scroll;
       img {
         width: 65px;
@@ -37,7 +38,7 @@
         width: 93px;
         height: 16px;
         position: absolute ;
-        bottom: -1px;
+        bottom: 20px;
         left: -4px;
         overflow: hidden;
         .sombra{
@@ -52,15 +53,65 @@
       }
     }
   
+    .seccionBaja {
+      margin-top: 11px;
+      width: 103%;
+      margin-left: 7px;
+      height: 70px;
+      z-index: 10;
+      overflow: scroll;
+      background: red($color: #000000);
+      display: flex;
+      img {
+        width: 59.5px;
+        height: 59.5px;
+        margin-right: 10px;
+        background: white;
+        border-radius: 5px;
+        border: 1px solid #D6D6D6;
+        display: flex;
+        align-items: center;
+        object-position: center;
+        padding: 1.5px;
+        object-fit: contain;
+        opacity: 0.86;
+        &:hover{
+            cursor: pointer;
+            box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);
+        }
+      }
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      &::-webkit-scrollbar {
+        width: 0; /* Chrome, Safari, Opera */
+        display: none; /* Safari and Chrome mobile */
+      }
+      .linea{
+        width: 80px;
+        height: 16px;
+        position: absolute ;
+        bottom: 30px;
+        transform: rotate(270deg);
+        right: -53px;
+        overflow: hidden;
+        .sombra{
+          width: 100%;
+          height: 2px;
+          background-color: rgba($color: #000, $alpha: .22);
+          box-shadow: 0 0 13px 1px #222;
+          position: absolute ;
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+
     .seccionDerecha {
       width: 88%;
-      height: 470px;
+      height: 500px;
       position: relative;
       display: flex;
-      align-items: center;
-      object-position: center;
       margin-top: 25px;
-      margin-left: 6%;
   
       div {
         position: absolute;
@@ -78,13 +129,94 @@
           min-height: 90%;
           width: auto;
           height: auto;
-          object-fit: cover;
+          object-fit: contain;
           border-radius: 3px;
-          transform: translateX(-10%);
           cursor: zoom-in;
         }
       }
+      @media (max-width: 1174px) {
+        padding-bottom: 85%;
+        height: 0;
+        img{
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
     }
-
+  @media (max-width: 1090px) {
+    flex-direction: column;
+    margin-top: 38px;
+    width: calc(100% - 90px);
+    margin-left: 45px;
+    .seccionDerecha {
+      width: 100%;
+      padding-bottom: 0;
+      height: auto;
+      max-height: 600px;
+      div {
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        object-position: center;
+        justify-content: center;
+        right: 0;
+        img{
+          position: relative;
+          transform: scale(0.955);
+          border-radius: 8px;
+        }
+      }
+    }
+    
+  }
+  @media (max-width: 800px) {
+    margin-top: 0 !important;
+    width: calc(100% - 50px);
+    margin-left: 25px;
+    .seccionDerecha{
+      margin-top: 0 !important;
+    }
+  }
+  @media (max-width: 670px) {
+    .seccionDerecha {
+      width: 100%;
+      padding-bottom: 0;
+      height: auto;
+      max-height: 600px;
+      div {
+        justify-content: left;
+        overflow: scroll;
+        left: 0;
+        img{
+          position:relative;
+          min-width: 100% !important;
+          transform: scale(0.953);
+          border-radius: 8px;
+        }
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        &::-webkit-scrollbar {
+          width: 0; /* Chrome, Safari, Opera */
+          display: none; /* Safari and Chrome mobile */
+        }
+      }
+    }
+  }
 }
+
+@keyframes scrollAnimation {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.scroll-smooth {
+  animation: scrollAnimation 0.5s ease-in-out forwards;
+}
+
   

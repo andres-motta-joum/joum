@@ -12,19 +12,11 @@
               <div class="linea-Menu"></div>
               <li><a (click)="navegar([user + '/compras'],$event)"><ng-icon class="menu-icon" name="heroShoppingCart"></ng-icon>Compras</a></li>
               <li><a (click)="navegar([user + '/favoritos'],$event)"><ng-icon class="menu-icon" name="heroStar"></ng-icon>Favoritos</a></li>
-              <li><a (click)="navegar([user + '/opiniones'],$event)"><ng-icon class="menu-icon" name="heroDocumentCheck"></ng-icon>Opiniones</a></li>
-              <div class="linea-Menu"></div>
-              <li><a (click)="navegar([user + '/resumen'],$event)"><ng-icon class="menu-icon" name="heroRectangleGroup"></ng-icon>Resumen</a></li>
-              <li><a (click)="navegar([user + '/novedades'],$event)"><ng-icon class="menu-icon" name="heroBell"></ng-icon>Novedades</a></li>
-              <li><a (click)="navegar([user + '/publicaciones'],$event)"><ng-icon class="menu-icon" name="heroBuildingStorefront"></ng-icon>Publicaciones</a></li>
-              <li><a (click)="navegar([user + '/ventas'],$event)"><ng-icon class="menu-icon" name="heroCurrencyDollar"></ng-icon>Ventas</a></li>
-              <div class="linea-Menu"></div>
-              <li><a (click)="navegar([user + '/facturacion/facturas-reportes'],$event)"><ng-icon class="menu-icon" name="heroDocumentText"></ng-icon>Facturación</a></li>
               <div class="linea-Menu"></div>
               <li><a (click)="direccionarSeguridad()"><ng-icon class="menu-icon" name="heroFingerPrint"></ng-icon>Seguridad</a></li>
               <div class="linea-Menu"></div>
               <li  class="cerrarSesion">
-                <a (click)="navegar([''],$event)"><ng-icon class="menu-icon" name="heroArrowRightOnRectangle"></ng-icon>Salir</a>
+                <a (click)="navegar([''],$event); signOut()" ><ng-icon class="menu-icon" name="heroArrowRightOnRectangle"></ng-icon>Salir</a>
               </li>
 
             </ul>
@@ -33,20 +25,20 @@
           <a (click)='animarSubmenu(2)'><ng-icon class="menu-icon" name="heroSquares2x2Solid"></ng-icon>Categorías<ng-icon style="margin-left: 125px;" class="icono-next" name="heroChevronRightMini"></ng-icon></a>
           <ul [@submenu]='submenuState[2]' class="submenu">
             <li class="titulo"><ng-icon (click)='animarSubmenu(2)' name="heroArrowSmallLeft" class="atras"></ng-icon><ng-icon name="heroSquares2x2Solid"></ng-icon>Categorías</li>
-            <li><a (click)="navegar(['busqueda/vinilos'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>vinilos</a></li>
-            <li><a (click)="navegar(['busqueda/adornos-pequeños'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Difusores</a></li>
-            <li><a (click)="navegar(['busqueda/macetas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Macetas</a></li>
-            <li><a (click)="navegar(['busqueda/relojes'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Relojes</a></li>
-            <li><a (click)="navegar(['busqueda/lamprasas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>iluminacion</a></li>
-            <li><a (click)="navegar(['busqueda/repisas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>repisas</a></li>
-            <li style="margin-bottom: 40px;"><a (click)="navegar(['busqeuda/repisas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Cuadros</a></li>
+            <li><a (click)="navegar(['busqueda/Cuadros'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Cuadros</a></li>
+            <li><a (click)="navegar(['busqueda/Repisas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Repisas</a></li>
+            <li><a (click)="navegar(['busqueda/Iluminación'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Iluminación</a></li>
+            <li><a (click)="navegar(['busqueda/Macetas'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Macetas</a></li>
+            <li><a (click)="navegar(['busqueda/Relojes'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Relojes</a></li>
+            <li><a (click)="navegar(['busqueda/Difusores'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Difusores</a></li>
+            <li><a (click)="navegar(['busqueda/Adornos'],$event)"><ng-icon class="menu-icon" name="heroCheckCircle"></ng-icon>Adornos</a></li>
           </ul>
         </li>
         <li *ngIf="usuarioInterno"><a (click)="navegar(['portal-empleado/' + idUsuario],$event)"><ng-icon class="menu-icon" name="iconoirViewStructureUp"></ng-icon>Portal de empleado</a></li>
-        <li><a (click)="navegar([user + '/notificaciones'],$event)"><ng-icon class="menu-icon" name="ionNotificationsOutline"></ng-icon>Notificaciones</a></li>
-        <li><a (click)="navegar([user + '/carrito'],$event)"><ng-icon class="menu-icon" name="heroShoppingCart"></ng-icon>Carrito</a></li>
-        <li><a (click)="navegar([user + '/compras'],$event)"><ng-icon class="menu-icon" name="heroTruck"></ng-icon>Pedidos</a></li>
-        <li><a (click)="navegar([user + '/historial'],$event)"><ng-icon class="menu-icon" name="heroNewspaper"></ng-icon>Historial</a></li>
+        <li><a (click)="navegar([user ? 'notificaciones' : 'cuenta/crear-cuenta'],$event)"><ng-icon class="menu-icon" name="ionNotificationsOutline"></ng-icon>Notificaciones</a></li>
+        <li><a (click)="navegar([user ? user + '/carrito' : 'cuenta/crear-cuenta'],$event)"><ng-icon class="menu-icon" name="heroShoppingCart"></ng-icon>Carrito</a></li>
+        <li><a (click)="navegar([user ? user + '/compras' : 'cuenta/crear-cuenta'],$event)"><ng-icon class="menu-icon" name="heroTruck"></ng-icon>Pedidos</a></li>
+        <li><a (click)="navegar([user ? user + '/historial' : 'cuenta/crear-cuenta'],$event)"><ng-icon class="menu-icon" name="heroNewspaper"></ng-icon>Historial</a></li>
         <li><a (click)="navegar(['vender'],$event)"><ng-icon class="menu-icon" name="heroBanknotes"></ng-icon>Vender</a></li>
         <div class="linea-Menu"></div>
         <li><a (click)="navegar(['privacidad'],$event)"><ng-icon class="menu-icon" name="heroUsers"></ng-icon>Seguridad y privacidad</a></li>

@@ -47,6 +47,7 @@ export class ComprasComponent implements OnInit, OnDestroy{
       this.compras = comprasSnapshot.map((productSnapshot)=>{
         return productSnapshot.data() as Venta;
       })
+      this.compras = this.compras.reverse();
       for (const compra of this.compras) {
         const timestamp = compra.fechaVenta!;
         let date = new Date(timestamp.seconds * 1000);
@@ -56,10 +57,9 @@ export class ComprasComponent implements OnInit, OnDestroy{
     this.datosCargados = true;
   }
 
-  navegar(ruta: any[], event: Event){
-    event.preventDefault();
+  navegar(ruta: string){
     this.zone.run(()=>{
-      this.router.navigate(ruta);
+      this.router.navigate([ruta]);
       window.scroll(0,0)
     })
   }

@@ -12,10 +12,9 @@ export interface Venta {
     fechaVenta?: any; //= fecha preparación
     //---- estado -----
     enCamino?: boolean;
-        fechaEnCamino?: Date;
+        fechaEnCamino?: any;
     entregado?: boolean,
-        fechaEntrega?: Date;
-    aproxEntrega?: Date; // Si fechaEntrega = '';
+        fechaEntrega?: any;
 
     idCliente: string;
     idVendedor: string;

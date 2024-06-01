@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { DocumentData, DocumentReference, collection, getDoc, getDocs } from '@angular/fire/firestore';
-import { Estilo, Producto } from 'src/app/interfaces/producto/producto';
+import { Producto } from 'src/app/interfaces/producto/producto';
 import { Reclamo, Venta } from 'src/app/interfaces/venta';
 import { AuthService } from 'src/app/servicios/usuarios/auth.service';
 
@@ -35,16 +35,6 @@ export class StockComponent {
       const usuario = await this.authService.getUsuarioIdPromise(this.auth.currentUser.uid);
       const productosRef = usuario.publicaciones;
       const ventasRef = usuario.ventas;
-      if(usuario.publicaciones){
-        await Promise.all(usuario.publicaciones.map(async (publicacionRef)=>{
-          const estilosRef = collection(publicacionRef, "estilos");
-          const snapshotEstilos = await getDocs(estilosRef);
-          snapshotEstilos.forEach((docEstilo) => {
-              const estilo = docEstilo.data() as Estilo;
-              this.productos += estilo.unidades
-          });
-        }))
-      }
       if(ventasRef){
         await this.obtenerVentas(ventasRef);
       }

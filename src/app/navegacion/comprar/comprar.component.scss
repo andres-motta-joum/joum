@@ -6,6 +6,12 @@
     position: relative;
 	padding-bottom: 430px;
 	overflow: hidden;
+    @media (max-width: 900px) {
+        padding-bottom: 550px;
+	}
+	@media (max-width: 560px) {
+		padding-bottom: 850px;
+	}
 }
 
 .contenido-compra {
@@ -59,38 +65,12 @@
             letter-spacing: .4px;
             word-spacing: .8px;
             color:white; 
-            background-color:#ffa463; 
+            background-color:#56dd81; 
             border:none; 
             border-radius: 5px; 
             cursor: pointer; 
             &:hover{
-                background-color: #ff9e57;;
-            }
-        }
-        .cargando{
-            cursor: default !important;
-            background: #ffad72 !important;
-            &:hover{
-                background: #ffad72 !important;
-            }
-        }
-        .loading{
-            width: 22px;
-            height: 22px;
-            border: 3px solid white;
-            border-radius: 50%;
-            position: absolute;
-            left: calc(50% - 15px);
-            top: 7px;
-            border-left-color: transparent;
-            animation: load 1s ease infinite;
-        }
-        @keyframes load {
-            0%{
-                transform: rotate(0deg);
-            }
-            100%{
-                transform: rotate(360deg);
+                background-color: #40d36c;;
             }
         }
 
@@ -120,4 +100,127 @@
             border-bottom :1px solid #ddd; 
         }
     }
+}
+
+//---- Animaciones boton ----
+.cargando{
+	cursor: default !important;
+    background-color: #40d36c !important;
+	&:hover{
+		background: #40d36c !important;
+	}
+}
+.loading{
+	width: 19px;
+	height: 19px;
+	border: 3px solid white;
+	border-radius: 50%;
+	position: absolute;
+	left: calc(50% - 15px);
+	top: 8px;
+	border-left-color: transparent;
+	animation: load 1s ease infinite;
+}
+
+@keyframes load {
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
+.success{
+    background-color: #40d36c !important;
+    animation: botonCheck .5s;
+    &:hover{
+        background-color: #40d36c !important;
+    }
+    ng-icon{
+        margin-top: -5px;
+        font-size: 26px;
+        animation: check .8s;
+    }
+}
+@keyframes botonCheck {
+	0%{
+		transform: scale(.8);
+	}
+    65%{
+        transform: scale(1.05);
+    }
+	100%{
+		transform: scale(1);
+	}
+}
+@keyframes check {
+	0%{
+		transform: scale(.0);
+	}
+    40%{
+        transform: scale(.0);
+    }
+    80%{
+        transform: scale(1.3);
+    }
+	100%{
+		transform: scale(1);
+	}
+}
+
+
+//----- COMPRA EXITOSA -------
+.compra-exitosa {
+    position: relative;
+    max-width: 1200px;
+    width: 95%;
+    height: 330px;
+    margin: auto;
+    margin-top: 45px;
+    background: #FF9C53;
+    border-radius: 10px;
+    animation: compra .7s;
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h1{
+        font-size: 28px;
+        text-align: center;
+        margin: 35px 100px 15px 100px;
+        color: white;
+        font-weight: 550;
+        letter-spacing: 1px;
+        word-spacing: 1.5px;
+    }
+    button{
+        margin-top: 20px;
+        width: 180px;
+        line-height: 40px;
+        height: 40px;
+        border-radius: 4px;
+        background: #f0fbf4;
+        border: none;
+        color: #32c65e;
+        letter-spacing: .4px;
+        font-size: 14.5px;
+        font-weight: 450;
+        cursor: pointer;
+        &:hover{
+            background: white;
+        }
+    }
+}
+@keyframes compra {
+	0%{
+		transform: scale(.0);
+	}
+    70%{
+        transform: scale(1.08);
+    }
+	100%{
+		transform: scale(1);
+	}
 }

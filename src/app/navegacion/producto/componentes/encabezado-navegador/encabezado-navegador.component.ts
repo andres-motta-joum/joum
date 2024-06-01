@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Producto } from 'src/app/interfaces/producto/producto';
 import { provideIcons } from '@ng-icons/core';
 import { heroChevronRightMini } from '@ng-icons/heroicons/mini';
@@ -9,13 +9,18 @@ import { heroChevronRightMini } from '@ng-icons/heroicons/mini';
   styleUrls: ['./encabezado-navegador.component.scss'],
   providers: [provideIcons({heroChevronRightMini})]
 })
-export class EncabezadoNavegadorComponent implements OnInit{
+export class EncabezadoNavegadorComponent implements OnInit, OnChanges{
   @Input() producto!: Producto;
   navegacion: string[] = [];
   links: string[] = [];
   ngOnInit(): void {
-    this.navegacion.push(this.producto.categoria);
-    this.navegacion.push(this.producto.nombre)
+    this.navegacion = [this.producto.categoria, this.producto.nombre];
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['producto'] && changes['producto'].currentValue) {
+      this.navegacion = [this.producto.categoria, this.producto.nombre];
+    }
   }
 
 }

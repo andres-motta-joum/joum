@@ -58,17 +58,12 @@ export class InformacionComponent implements OnInit, OnDestroy{
       if(usuario){
         const miUsuario = await this.authService.getUsuarioIdPromise(usuario.uid);
         if(miUsuario.usuario == usuarioUrl){
-          this.usuarioDiferente = false;
-          this.subscription = this.authService.getUsuarioId(this.auth.currentUser!.uid).subscribe((usuario)=>{
-            if(miUsuario.usuario == usuarioUrl){
-              this.usuario = usuario
-            }
-          })
+          this.usuario = miUsuario;
         }else{
-          this.usuarioDiferente = true;
+          this.router.navigate(['']);
         }
       }else{
-        this.usuarioDiferente = true;
+        this.router.navigate(['']);
       }
       
       const user = await this.authService.getUsuarioUser(usuarioUrl);

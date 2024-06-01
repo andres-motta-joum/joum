@@ -1,4 +1,4 @@
-<div class="formulario">
+<div class="formulario" style="z-index: 1000;">
     <h1>Iniciar sesión</h1>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
@@ -26,4 +26,8 @@
             <p>Google</p>
         </div>
     </div>
+</div>
+<div class="welcome" *ngIf="anchoPagina <= 525">
+    <h2>Hola! <br> de nuevo</h2>
+    <div class="circulo"></div>
 </div>

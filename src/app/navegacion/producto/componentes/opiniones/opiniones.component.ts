@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges} from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { heroStarSolid } from '@ng-icons/heroicons/solid';
 import { Opinion, Producto } from 'src/app/interfaces/producto/producto';
@@ -11,6 +11,7 @@ import { Opinion, Producto } from 'src/app/interfaces/producto/producto';
 })
 export class OpinionesComponent {
   @Input() opiniones!: Producto['opiniones'];
+  @Output() sombraHijo = new EventEmitter<number>();
   fechas!: Date[];
   promedioCalificacion: number = 0;
   promedio!: number;
@@ -27,6 +28,10 @@ export class OpinionesComponent {
     if (changes['opiniones']) {
       this.inicializarDatos();
     }
+  }
+
+  mostrarFoto(index: number){
+    this.sombraHijo.emit(index);
   }
 
   inicializarDatos(){

@@ -73,7 +73,7 @@ export class TicketsComponent implements OnInit, OnDestroy{
   async eliminarTicket(ticket: Ticket, index: number){
     this.filtroTickets.splice(index, 1);
     await runTransaction(this.firestore, async (transaction) => {
-      const ticketRef = doc(this.firestore, `/informacion/atencion-cliente/tickets/${ticket.id}`);
+      const ticketRef = doc(this.firestore, `ayuda/atencion-clientes/tickets/${ticket.id}`);
       const usuarioRef = doc(this.firestore, `usuarios/${ticket.idUsuario}`);
       const usuarioInternoRef = doc(this.firestore, `usuarios-internos/${ticket.idUsuarioInterno}`);
       

@@ -1,10 +1,9 @@
-import { Routes } from '@angular/router'
-import { BusquedaComponent } from './busqueda.component'
-import { CarritoComponent } from './secciones/carrito/carrito.component'
-import { HistorialComponent } from './secciones/historial/historial.component'
-import { GuardadosComponent } from './secciones/carrito/secciones/guardados/guardados.component'
-import { CarritoSeccionComponent } from './secciones/carrito/secciones/carrito/carrito.component'
-import { OfertasDelDiaComponent } from './secciones/ofertas-del-dia/ofertas-del-dia.component'
+import { Routes } from '@angular/router';
+import { BusquedaComponent } from './busqueda.component';
+import { CarritoComponent } from './secciones/carrito/carrito.component';
+import { HistorialComponent } from './secciones/historial/historial.component';
+import { GuardadosComponent } from './secciones/carrito/secciones/guardados/guardados.component';
+import { CarritoSeccionComponent } from './secciones/carrito/secciones/carrito/carrito.component';
 
 export const routes: Routes = [
   {

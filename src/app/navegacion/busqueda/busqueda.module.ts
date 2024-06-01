@@ -6,9 +6,6 @@ import { NgIconsModule } from '@ng-icons/core';
 
 import { ComponentesGeneralesModule } from '../componentes-generales/componentes-generales.module';
 import { BusquedaComponent } from './busqueda.component';
-import { SeccionIzquierdaComponent } from './componentes/seccion-izquierda/seccion-izquierda.component';
-import { EncabezadoComponent } from './componentes/encabezado/encabezado.component';
-import { ProductosComponent } from './componentes/productos/productos.component';
 import { ProductoComponent } from './componentes/productos/producto/producto.component';
 import { CarritoModule } from './secciones/carrito/carrito.module';
 import { HistorialComponent } from './secciones/historial/historial.component';
@@ -19,9 +16,6 @@ import { OfertasDelDiaComponent } from './secciones/ofertas-del-dia/ofertas-del-
 @NgModule({
   declarations: [
     BusquedaComponent,
-    SeccionIzquierdaComponent,
-    EncabezadoComponent,
-    ProductosComponent,
     ProductoComponent,
     HistorialComponent,
     ProductoHistorialComponent,
@@ -35,7 +29,6 @@ import { OfertasDelDiaComponent } from './secciones/ofertas-del-dia/ofertas-del-
     RouterModule.forChild(routes)
   ],
   exports:[
-    ProductosComponent,
     ProductoComponent,
     HistorialComponent
   ]
